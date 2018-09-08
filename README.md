@@ -1,2 +1,3 @@
-# XEmines-datascience
-Cours de data science - School of Industrial Management - Emines - UM6P - Sept. 2018
+# ga_lessons
+
+Data Science Slides for Students - UM6P Sept 2018
