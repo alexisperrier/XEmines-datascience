@@ -13,3 +13,6 @@ pour une explication plus appropriée
 
 
 * demo de influence correlation entre les variables
+
+# 03
+Maximum de vraisemblance

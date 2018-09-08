@@ -6,9 +6,87 @@
 </description>
     <link>http://localhost:4001/</link>
     <atom:link href="http://localhost:4001/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 07 Sep 2018 20:49:19 -0400</pubDate>
-    <lastBuildDate>Fri, 07 Sep 2018 20:49:19 -0400</lastBuildDate>
+    <pubDate>Sat, 08 Sep 2018 13:46:25 -0400</pubDate>
+    <lastBuildDate>Sat, 08 Sep 2018 13:46:25 -0400</lastBuildDate>
     <generator>Jekyll v3.7.2</generator>
+    
+      <item>
+        <title>Biais, variance et gradient stochastique</title>
+        <description>&lt;section data-markdown=&quot;&quot;&gt;
+# Biais, variance et gradient stochastique
+## avec scikit-learn
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right;&quot;&gt;
+    &lt;h1&gt;Questions ?&lt;/h1&gt;
+
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &amp;lt;img src=/assets/04/questions_04.gif&amp;gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div data-markdown=&quot;&quot;&gt;
+# Cours précédent
+* Regression logistique
+* Approche stats vs approche ML
+* Matrice de confusion
+* ROC-AUC
+* One hot encoding
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+
+&lt;div style=&quot;float:right; width:40%&quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    ## Lab:
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div style=&quot;float:right; width:40%&quot;&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
+# Programme
+
+* Scikit-learn
+* Biais Variance
+* Stochastic Gradient Descent
+* Outliers, detection and impact
+* Skewness: Box cox and Kurtosis
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+* Scikit
+http://127.0.0.1:4000/06-scikit-linear-regression.html#/7
+    * related projects http://scikit-learn.org/stable/related_projects.html
+    * API http://127.0.0.1:4000/06-scikit-linear-regression.html#/11
+
+* proeprocessing with scikit
+    http://127.0.0.1:4000/09-classification-metrics-logistic-regression.html#/31
+    * One Hot Encoding http://127.0.0.1:4000/03-statistics-fundamentals.html#/41
+    http://fastml.com/converting-categorical-data-into-numbers-with-pandas-and-scikit-learn/
+
+* Biais Variance
+    http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/9
+    http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/11
+    http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/12
+* Data Split
+    train, test, valid http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/18
+    k-fold http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/20
+    http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/21
+    * stratified k-fold http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/22
+&lt;/section&gt;
+</description>
+        <pubDate>Mon, 01 Jan 2018 00:00:00 -0500</pubDate>
+        <link>http://localhost:4001/04-biais-variance-gradient-stochastique</link>
+        <guid isPermaLink="true">http://localhost:4001/04-biais-variance-gradient-stochastique</guid>
+        
+        
+      </item>
     
       <item>
         <title>Régression Logistique</title>
@@ -41,7 +119,8 @@
 
 &lt;div style=&quot;float:right;&quot;&gt;
     &lt;div data-markdown=&quot;&quot;&gt;
-    ## Lab: default sur credit
+    ## Lab: titanic
+    &amp;lt;img src=/assets/03/titanic_photo.jpg style='width:300px; border:0'&amp;gt;
     &lt;/div&gt;
 &lt;/div&gt;
 
@@ -52,15 +131,14 @@
 * odds ratio, log odds ratio
 * Maximum de vraisemblance
 * encoding categorical values
-* Metrique de classification
-* confusion matrix
-* AUC and ROC
+* Metriques de classification
+    * confusion matrix
+    * AUC and ROC
 * Outliers, detection and impact
 * Skewness: Box cox and Kurtosis
 
-&amp;lt;img src=/assets/03/titanic_photo.jpg style='width:300px; border:0'&amp;gt;
-
 &lt;/div&gt;
+
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
@@ -92,15 +170,32 @@ So classification specific models better!
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
+# Regression or Classification?
+Review the following situations and decide if each one is a regression problem, classification problem, or neither:
+
+* Using the total number of explosions in a movie, predict if the movie is by JJ Abrams or Michael Bay.
+* Determine how many tickets will be sold to a concert given who is performing, where, and the date and time.
+* Given the temperature over the last year by day, predict tomorrow's temperature outside.
+* Using data from four cell phone microphones, reduce the noisy sounds so the voice is crystal clear to the receiving phone.
+* With customer data, determine if a user will return or not in the next 7 days to an e-commerce website.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
 # Logistic regression
 
-Instead of predicting the class, we predict the probability that the outcome belongs to a class i.e.
+also known in the literature as logit regression, maximum-entropy classification (MaxEnt) or the log-linear classifier.
 
-$$ P(Y = 1/ X) $$
+Au lieu de prédire la categorie auquelle appartient la variable cible. on va predire la probabilité que cette variable appartienne a la category en question.
+
+
+
+
+$$ P(Y = 1 \bigg{/} X) $$
 
 which we note \\( p(X) \\)
 
-and similarly to Linear Regression we want a simple linear model for that probability
+and similarly to Linear Regression we want a **simple linear model** for that probability
 
 $$ P(Y=1 / X) =  p(X) = \beta_0 + \beta_1 X $$
 
@@ -108,55 +203,80 @@ but that still does not give us values between [0, 1]
 
 &lt;/section&gt;
 
-&lt;section data-markdown=&quot;&quot;&gt;
+&lt;section&gt;
+
+&lt;div style=&quot;float:right;&quot;&gt;
+&lt;h1&gt; Sigmoid function &lt;/h1&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
+&amp;lt;img src=/assets/03/sigmoid.svg style='width:300px; border:0'&amp;gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div data-markdown=&quot;&quot;&gt;
+
 # Logistic regression
 
 So instead we feed the linear model to the sigmoid function
 
 $$ f(z) = \frac{e^{z} }{1 + e^{z}} =  \frac{1 }{1 + e^{-z}} $$
 
+We feed $$ z = P(Y=1 / X) =  p(X) = \beta\_0 + \beta\_1 X $$ to the sigmoid function
 
-We feed \\( z = \beta\_0 + \beta\_1 X \\) to the sigmoid function
-
-$$ p(X) = \frac{e^{\beta\_0 + \beta\_1 X} }{1 + e^{\beta\_0 + \beta\_1 X}}  $$
+$$ p(X) = \frac{e^{(\beta\_0 + \beta\_1 X)} }{1 + e^{(\beta\_0 + \beta\_1 X)}}  $$
 
 because this function shrinks \\( \mathbb{R} \\)  to \\( [0,1] \\)
+&lt;/div&gt;
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
-# Sigmoid function
+# logistique regression en python
+avec statsmodel
 
-![sigmoid function](/assets/03/sigmoid.svg)
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# logistique regresison en python
-
-
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# applique au default dataset
+### appliqué au *default* dataset
 
 4 colonnes
 
-* etudiant
-* balance
-* income
+* student: étudiant?
+* balance: compte en banque
+* income: revenues
 
-prediction : va defaulter ou non
+prédiction : va défaulter sur son crédit ou non
 
+Using:
+
+1. default vs balance
+2. default vs balance, income and student
+
+* Calculate the probability of default for
+    * a student with a credit card balance of \\$1500 and income of \\$40k
+    * a non-student, same balance and income
+
+Why is the coefficient for student positive when student is the only factor and negative in the case of multilinomial logistic regression?
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Evenement et categorie
+
+Question de vocabulaire:
+On parle d'evenement le fait que la variable cible appartienne a une categorie.
+
+La probabilité que la variable cible soit dans la categorie 1 = probabilité de l'evenement 1
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
 # Odds ratio
 
-aussi appelé  rapport des chances, rapport des cotes1 ou risque relatif rapproché
+Aussi appelé  rapport des chances, rapport des cotes1 ou risque relatif rapproché
+
+Comment quantifier l'impact d'une variable predicteur sur la probabilité de la catégorie ?
+
+On a:
 
 $$ p(X) = \frac{e^{\beta\_0 + \beta\_1 X} }{1 + e^{\beta\_0 + \beta\_1 X}}  $$
 
-This is called the **odds ratio**: ratio of the probability the event happens over the probability it does not happen
+Le **odds ratio**: est le rapport entre la probabilité de l'evenement sur la probabilité du non evenement.
+
 $$
 \frac{p(X)}{ 1 -p(X)} = e^{\beta\_0 + \beta\_1*X}
 $$
@@ -169,7 +289,7 @@ $$
 
 &lt;section data-markdown=&quot;&quot;&gt;
 # Log-Odds ratio
-This is called the **log-odds ratio**: the log of the odds ratio
+Si on prends le log du *odds-ratio* on a le log odds ration
 
 $$
 log(\frac{p(X)}{ 1 -p(X)}) = \beta\_0 + \beta\_1 X
@@ -178,6 +298,275 @@ $$
 Increase in \\( \beta\_1 \\) =&amp;gt; results in increase in \\( p(X)\\).
 
 Not as direct and linear as in the case of linear regression.
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Log-Odds ratio: application
+Sur le data set default:
+
+* On accroit / décroit le compte en banque de 10k
+* On accroit / décroit le revenu de 10k
+
+## Exemple in the default dataset
+
+\\( p(X) = 0.2 \iff  \frac{0.2}{1 -0.2} = 0.25 \\)
+
+* 1/5 people with ods 1/4 will default
+
+\\( p(X) = 0.9 \iff  \frac{0.9}{1 -0.9} = 9 \\)
+
+* 9 out of 10 people (90%)  with ods 9 will default
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Maximum de vraisemblance
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right;&quot;&gt;
+    &lt;h1&gt;Metriques de classification&lt;/h1&gt;
+
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &amp;lt;img src=/assets/03/classification_metrics.png style='width:400px;border:0'&amp;gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div data-markdown=&quot;&quot;&gt;
+# Metriques de regression
+&amp;lt;img src=/assets/03/regression_metrics.png style='width:400px;'&amp;gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+
+&lt;div style=&quot;float:right;&quot;&gt;
+
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &amp;lt;img src=/assets/03/pregnant.jpg style='width:400px;border:0'&amp;gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div data-markdown=&quot;&quot;&gt;
+# Metrics
+Correctly identified:
+
+* TP = True Positive
+* TN = True Negatives
+
+Incorrectly identified:
+
+* FP = False Positive
+* FN = False Negatives
+## Accuracy
+
+How to you define accuracy?
+
+$$ Accuracy = \frac{ TP + TN  }{TP + FP + TN + FN}   $$
+
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Confusion matrix
+
+![confusion matrix](/assets/03/confusion_matrix.png)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+# ca se complique assez rapidement
+
+&amp;lt;img src=/assets/03/confusion_matrix_wikipedia.png style='border:0'&amp;gt;
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Confusion matrix
+Avec scikit:
+
+        from sklearn.metrics import confusion_matrix
+        y_true = [0,0,0,0,0,1,1,1,1,1]
+        y_pred = [0,0,0,1,1,0,1,1,1,1]
+        confusion_matrix(y_true, y_pred)
+
+&lt;/section&gt;
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:30%&quot;&gt;
+
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &amp;lt;img src=/assets/03/stats-vs_ml.jpeg&amp;gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div style=&quot;float:left;width:50%;&quot;&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
+
+
+# quittons les stats pour rejoindre sur le machine learning
+
+* Statsmodel est dans une approche statistique classique qui favorise l'interpretabilité
+
+* Scikit est dans une approche machine learning plus orientée robustesse et prediction
+
+    * une regression est un modele parmi d'autres
+
+Au niveau du modele, la difference est que scikit ajoute une contrainte sur le modele au niveau de la fonction de cout. cette contrainte est appelé regularization et sert a accroitre la capacité du modele a &quot;marcher&quot; sur des donnees nouvelles. On verra cela en detail dans 2 jours.
+
+On est donc dans une transition de la modelisation statistique vers la modelisation machine learning.
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+# Regression avec scikit-learn
+
+On va avoir des meta parametres. Par exemple:
+
+* acces a differents algo pour trouver les coefficients et un certain controle sur leur fonctionnement
+* differentes façon de traiter le multi-class: ovr, multinomial
+* differents mode de regularization
+
+et en output
+
+* un modele que l'on peut appliquer a de nouvelles donnees
+* les intervals de confiance
+* la ou les categories predites
+* les proba de prediction
+et surtout un model qye
+
+
+On n'aura plus:
+- les p-value
+- le R^2
+- les tests statistiques
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Scikit-learn LogisticRegression
+
+http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
+
+![scikit LogisticRegression](/assets/03/scikit-logistic-regression.png)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Demo Scikit-learn LogisticRegression
+
+* default dataset
+* score
+* plot proba hist
+* trouver le meilleur threshold (Acc, max P, min Neg, TPR, ...)
+Use predict_proba and a different threshold =&amp;gt; you should find a different confusion matrix
+
+
+* QQ plot residuals
+* matrice de confusion
+
+Essayer plusieurs regularization L2 et L1 avec differents C
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# AUX and ROC Curve
+
+* TPR = \\( \frac{  TP }{ P}  = \frac{  TP }{ TP + FN} \\) aka **Sensitivity** or **Recall**
+* FPR = \\( \frac{  FP }{ N}  = \frac{  FP }{ FP + TN} \\)  aka **Fall-out**
+
+Le TPR / recall et le FPR varient en fonction du seuil. on obtient donc
+
+### Receiver operating characteristic
+
+ROC = TPR vs FPR pour different seuils
+
+        sklearn.metrics.roc_curve returns TPR, FPR
+
+plot to get the ROC Curve
+
+### AUX and ROC Curve
+The AUX is Area under the Curve
+
+        sklearn.metrics.roc_auc_score
+
+So what's your best model LR according to AUC?
+
+voir aussi F1-score
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# One hot encoding
+
+Comment traduire les variables quantitative en variables numeriques
+
+Binaires
+* est ce un etudiant
+* fille / garcon
+*
+
+Multinomiales
+* liste de villes, pays, destinations,
+* tranche d'age
+* niveau d'etude
+* marques de voiture
+
+Par exemple: Audi, Renault, Ford, Fiat
+Si on assigne un numero arbitraire a chqaue marque de voitue on crée une hierarchie
+Audi =&amp;gt;1 , Renault =&amp;gt; 2, Ford =&amp;gt; 3, Fiat =&amp;gt; 4
+
+* chien,chat,souris,poulet =&amp;gt; {1,2,3,4}
+pourquoi le poulet est 4 fois le chien ? ca ne fait pas sense
+
+
+Mais parfois on peut quand meme assigner un chiffre a chaque categorie, catégories ordonnées
+
+* enfant, jeune, adulte, vieux =&amp;gt; {1,2,3,4}
+* negatif, neutre, positif =&amp;gt; {-1, 0, 1}
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# One hot encoding
+
+[One Hot Encoding](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html), ou pandas.get_dummies
+
+Si on a N classes, on crée N-1 variables binaires
+par exemple negatif, neutre, positif: est_neutre, est_positif (est_negatif est deduite des 2 autres variables pas besoin de la specifier)
+
+
+# LabelEncoder
+[LabelEncoder](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html) associe un chiffre a chaque classe, on garde l'ordonnancement
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Recap
+* regression logistique
+* approche stats vs approche ML
+* matrice de confusion
+* ROC-AUC
+* One hot encoding
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+# Resources
+* Logistic Regression: Why sigmoid function?
+https://github.com/rasbt/python-machine-learning-book/blob/master/faq/logistic-why-sigmoid.md
+
+* scikit-learn documentation: Logistic regression,
+http://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+
+* No, Machine Learning is not just glorified Statistics
+https://towardsdatascience.com/no-machine-learning-is-not-just-glorified-statistics-26d3952234e3
+
+* on stackexchange When to use One Hot Encoding vs LabelEncoder vs DictVectorizor? https://datascience.stackexchange.com/questions/9443/when-to-use-one-hot-encoding-vs-labelencoder-vs-dictvectorizor
+
 
 &lt;/section&gt;
 </description>

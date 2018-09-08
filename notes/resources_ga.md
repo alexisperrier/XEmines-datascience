@@ -142,7 +142,7 @@ https://github.com/alexisperrier/gads/blob/master/06_scikit_regression/py/L6%20L
 # Day 3: Regression logistique
 --------------------------------------------------------------------
 ## Cours
-* regression not adated to classifctaion http://127.0.0.1:4000/09-classification-metrics-logistic-regression.html#/6
+* regression not adapted to classifctaion http://127.0.0.1:4000/09-classification-metrics-logistic-regression.html#/6
 * Regression logistique
     * explication http://127.0.0.1:4000/09-classification-metrics-logistic-regression.html#/10
     * avantage: Advantages of Logistic Regression: Lots of ways to regularize your model, and you don’t have to worry as much about your features being correlated, like you do in Naive Bayes. You also have a nice probabilistic interpretation, and you can easily update your model to take in new data, Use it if you want a probabilistic framework  or if you expect to receive more training data in the future that you want to be able to quickly incorporate into your model.
@@ -190,7 +190,7 @@ admission dataset 2 cont + 1 cat => bnary classfication
 http://onlinestatbook.com/2/transformations/box-cox.html
 http://www.neural.cz/dataset-exploration-boston-house-pricing.html
 http://seaborn.pydata.org/tutorial/distributions.html
-skesness impact on regression lineaire
+skewness impact on regression lineaire
 https://www.quora.com/How-does-skewness-impact-regression-model
 --------------------------------------------------------------------
 # Day 4: sklearn, SGD, biais variance
@@ -286,6 +286,10 @@ http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/36
 https://www.coursera.org/lecture/machine-learning/learning-curves-Kont7
 http://www.ultravioletanalytics.com/2014/12/12/kaggle-titanic-competition-part-ix-bias-variance-and-learning-curves/
 http://www.astroml.org/sklearn_tutorial/practical.html
+
+Regularization in Logistic Regression: Better Fit and Better Generalization?
+By Sebastian Raschka
+https://github.com/rasbt/python-machine-learning-book/blob/master/faq/regularized-logistic-regression-performance.md
 
 --------------------------------------------------------------------
 # Day 6:

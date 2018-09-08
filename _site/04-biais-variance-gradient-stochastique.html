@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>
+      
+        Biais, variance et gradient stochastique | Emines - UM6P - Data Science
+      
+    </title>
+
+    <meta name="author" content="" />
+
+    <!-- Description -->
+    
+      <meta name="description" content="none" />
+    
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="/reveal.js/css/reveal.css"/>
+    
+      <link rel="stylesheet" href="/reveal.js/css/theme/white.css" id="theme"/>
+    
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="/reveal.js/lib/css/zenburn.css"/>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '/reveal.js/css/print/pdf.css' : '/reveal.js/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link rel="canonical" href="http://localhost:4001/04-biais-variance-gradient-stochastique">
+
+    <script src="https://cdn.mathjax.org/mathjax/2.4-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown="">
+# Biais, variance et gradient stochastique
+## avec scikit-learn
+</section>
+
+<section>
+<div style="float:right;">
+    <h1>Questions ?</h1>
+
+    <div data-markdown="">
+    &lt;img src=/assets/04/questions_04.gif&gt;
+    </div>
+</div>
+
+<div data-markdown="">
+# Cours précédent
+* Regression logistique
+* Approche stats vs approche ML
+* Matrice de confusion
+* ROC-AUC
+* One hot encoding
+</div>
+</section>
+
+<section>
+
+<div style="float:right; width:40%">
+    <div data-markdown="">
+    ## Lab:
+    </div>
+</div>
+
+<div style="float:right; width:40%">
+<div data-markdown="">
+# Programme
+
+* Scikit-learn
+* Biais Variance
+* Stochastic Gradient Descent
+* Outliers, detection and impact
+* Skewness: Box cox and Kurtosis
+
+</div>
+</div>
+
+</section>
+
+<section data-markdown="">
+* Scikit
+http://127.0.0.1:4000/06-scikit-linear-regression.html#/7
+    * related projects http://scikit-learn.org/stable/related_projects.html
+    * API http://127.0.0.1:4000/06-scikit-linear-regression.html#/11
+
+* proeprocessing with scikit
+    http://127.0.0.1:4000/09-classification-metrics-logistic-regression.html#/31
+    * One Hot Encoding http://127.0.0.1:4000/03-statistics-fundamentals.html#/41
+    http://fastml.com/converting-categorical-data-into-numbers-with-pandas-and-scikit-learn/
+
+* Biais Variance
+    http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/9
+    http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/11
+    http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/12
+* Data Split
+    train, test, valid http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/18
+    k-fold http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/20
+    http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/21
+    * stratified k-fold http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/22
+</section>
+
+      </div>
+    </div>
+
+    <script src="/reveal.js/lib/js/head.min.js"></script>
+    <script src="/reveal.js/js/reveal.js"></script>
+    <script>
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        width: 1200,
+        controls: true,
+        progress: true,
+        history: true,
+        center: false,
+        slideNumber: true,
+        
+          transition: 'slide',
+        
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '/reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '/reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: '/reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
