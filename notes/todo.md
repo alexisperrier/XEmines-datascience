@@ -16,3 +16,9 @@ pour une explication plus appropriée
 
 # 03
 Maximum de vraisemblance
+
+
+# missing
+* Outliers, detection and impact
+
+* Skewness: Box cox and Kurtosis
