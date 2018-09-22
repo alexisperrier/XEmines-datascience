@@ -596,8 +596,6 @@ Dans un terminal
 
 
 <section data-markdown>
-
-
 <div class=centerbox>
 <p class=top>Récapitulatif</p>
 <p class=top></p>

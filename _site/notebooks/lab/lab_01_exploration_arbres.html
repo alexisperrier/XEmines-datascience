@@ -1,0 +1,104 @@
+<h1 id="notebook-dexploration-et-dutilisation-de-pandas">Notebook d’exploration et d’utilisation de Pandas</h1>
+
+<p>Dans ce notebook vous aller étudier le dataset les-arbres.csv disponibles sur https://opendata.paris.fr/explore/dataset/les-arbres/</p>
+
+<p>Ce dataset comprend des informations sur 200k arbres dans Paris.</p>
+
+<ul>
+  <li>Espèces, genres, famille</li>
+  <li>Adresse, géolocalisation</li>
+  <li>Environnement: rue, jardin, …</li>
+  <li>Hauteur et circonférence</li>
+  <li>Arbres remarquables</li>
+</ul>
+
+<h1 id="but">But</h1>
+
+<p>Ecrire un notebook jupyter d’analyse de ce dataset qui comprenne:</p>
+
+<ul>
+  <li>des cellules explicatives en markdown sur votre démarche d’analyse</li>
+  <li>du code python</li>
+  <li>des graphs d’illustration</li>
+</ul>
+
+<p>Le but est de livrer une document qui permetrrait à une personne de comprendre et de refaire votre analyse sans connaissance au préalable du dataset.</p>
+
+<p>Le lab est composé de plusieurs parties</p>
+
+<h2 id="1-charger-le-dataset-dans-une-dataframe-pandas">1. charger le dataset dans une dataframe pandas</h2>
+
+<ul>
+  <li><code class="highlighter-rouge">df = pd.read_csv()</code></li>
+  <li>avant cela n’hesitez pas à ouvrir le fichier csv</li>
+  <li>attention au séparateur utilisé dans le csv</li>
+</ul>
+
+<h2 id="2-exploration">2. exploration:</h2>
+
+<ul>
+  <li>statistiques des variables numériques <code class="highlighter-rouge">df.describe()</code></li>
+  <li>occurences des catégories <code class="highlighter-rouge">df['DOMANIALITE'].value_counts()</code></li>
+  <li>visualisation des variables <code class="highlighter-rouge">df['HAUTEUR (m)'].hist(bins = 100)</code></li>
+</ul>
+
+<p>Cette exploration va vous permettre de trouver les outliers (les valeurs aberrantes) et de les enlever du dataset.</p>
+
+<h2 id="3-nature-des-arbres--par--arrondissement">3. nature des arbres  par  arrondissement</h2>
+<p>Vous aller ensuite analyser la nature des arbres par arrondissement, par espèces et par <em>domanialité</em>.</p>
+
+<ul>
+  <li>nombre d’arbres</li>
+  <li>nombre de variétés d’arbres</li>
+  <li>statistiques de la hauteur et de la circonférence des arbres</li>
+</ul>
+
+<p>Observe-t-on des différences significatives entre les arrondissements ?</p>
+
+<p>N’hesitez pas à illustrer vos analyses par des graphes matplotlib: scatterplot, boxplot ou barchart.</p>
+
+<h2 id="4-les-arbres-remarquables">4. les arbres remarquables</h2>
+
+<p>Certains arbres sont taggés comme étant remarquables.</p>
+<ul>
+  <li>Qu’est ce qui caractérise ces arbres par rapport aux autres? leur espèce ? leur taille ?</li>
+  <li>Comment gérer les valeurs manquantes de cette colonne <em>remarquable</em> ? S’agit-il d’une erreur ou peut-on supposer que quand la valeur manque l’arbre n’est en fait pas <em>remarquable</em>.</li>
+</ul>
+
+<h2 id="les-arrondissements-les-plus-verts">Les arrondissements les plus verts</h2>
+
+<p>On prends ensuite en compte le dataset arrondissement.csv qui contient la superficie de chaque arrondissement <em>intra muros</em>. Le but est de voir quel arrondissement a le plus d’arbres par rapport à sa superficie.</p>
+
+<p>Pour joindre les 2 datasets, il faut d’abord faire quelques modifications sur le dataframe des arbres.</p>
+
+<ul>
+  <li>créer une variable booléenne <code class="highlighter-rouge">dans_paris</code> qui indique si l’arrondissement est bien dans Paris</li>
+  <li>utiliser cette variable pour supprimer tous les arbres qui ne sont pas dans Paris</li>
+</ul>
+
+<p>Les arrondissements ne sont pas écrits de la meme façon dans les 2 datasets.</p>
+
+<p>D’un coté on a le code postale sous la forme 75112 et de l’autre un texte: PARIS 12E ARRDT.</p>
+
+<ul>
+  <li>
+    <p>écrire une  fonction qui prenne en entrée le texte de l’arrondissement et qui retourne le code postal</p>
+
+    <p>PARIS 11E ARRDT =&gt; 75112</p>
+  </li>
+  <li>
+    <p>utiliser cette fonction pour créer une nouvelle variable dans le dataset les arbres qui contienne le code postal. Eviter de préférence eviter de faire une boucle sur les 200k rangées du dataframe arbres. Utilisez plutot le pattern <code class="highlighter-rouge">df[var_cible] = df[var_source].apply(lambda d : fonction(d))</code> si vous la connaissez.</p>
+  </li>
+  <li>
+    <p>en utilisant <code class="highlighter-rouge">groupby()</code> et <code class="highlighter-rouge">count()</code>, créez une nouvelle dataframe qui contienne le nombre d’arbre par arrondissement. Cette dafarme doit avoir 20 rows.</p>
+  </li>
+  <li>
+    <p>joindre cette nouvelle dataframe avec la dataframe issue du fichier arrondissement en utilisant <code class="highlighter-rouge">df.merge()</code></p>
+  </li>
+</ul>
+
+<p>Illustrer le ratio</p>
+
+<p><em>nombre d’arbres</em> / <em>superficie</em></p>
+
+<p>par arrondissement par un graphe (barchart par exemple).</p>

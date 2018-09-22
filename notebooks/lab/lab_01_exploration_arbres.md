@@ -1,3 +1,22 @@
+---
+jupyter:
+  jupytext_format_version: '1.0'
+  kernelspec:
+    display_name: Python 3
+    language: python
+    name: python3
+  language_info:
+    codemirror_mode:
+      name: ipython
+      version: 3
+    file_extension: .py
+    mimetype: text/x-python
+    name: python
+    nbconvert_exporter: python
+    pygments_lexer: ipython3
+    version: 3.6.2
+---
+
 # Notebook d'exploration et d'utilisation de Pandas
 
 Dans ce notebook vous aller étudier le dataset les-arbres.csv disponibles sur https://opendata.paris.fr/explore/dataset/les-arbres/

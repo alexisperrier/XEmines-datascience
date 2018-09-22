@@ -16,49 +16,61 @@ Régression Linéaire
 </section>
 
 <section>
-<div style='float:right;'>
-    <h1>Questions ?</h1>
-
+<div style='float:right; width:45%;  '>
     <div data-markdown>
     <img src=/assets/04/questions_04.gif>
     </div>
 </div>
-
-<div data-markdown>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
 # Cours précédent
-* Supervisé vs non- Supervisé
-* Vue genérale de l'analyse predictive
-* Python
+
+* Révisions de python
+* Différence entre Data Science, Machine Learning et analyse prédictive
+* Approche statistique vs approche machine learning
+* Déroulement d'un projet de Data science
+* Supervisée vs non-supervisée
+* Régression vs Classification
+* Anaconda, Python et Jupyter
+
+    </div>
 </div>
 </section>
+
 
 <section>
 <div style='float:right; width:40%'>
     <div data-markdown>
-    ## Lab:
+    # Lab
+
+    Régression linéaire sur le dataset *advertising*
+
+    <img src=/assets/02/advertising.png>
+
+
+
     </div>
 </div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
+# Régression linéaire
 
-<div style='float:left; width:60%'>
-<div data-markdown>
-# Aujourd'hui
-
-* Régression ou classification ?
 * Régression linéaire
     * OLS, Moindres carrés
     * Modélisation
     * Univariable & multivariables
-* Interpretation
-* MSE
-* \\(R^2\\), \\(R^2_{adj}\\), P-value, Interval de confiance
-* Confonders et multi-collinearité
-* Hypothèses et verification
+* Interprétation des résultats
+    * Mean Square Error (MSE)
+    * P-value, Interval de confiance, \\(R^2\\), \\(R^2_{adj}\\)
+    * Confonders et multi-collinearité
+
+* Hypothèses et vérification
+    * Linéarité: Définition et tests
 
 * Statsmodel
-* Linéarité: Définition
-* Tests de linéarite
-* Régression polynomiale
-* Anscombe quartet
+
 * Kaggle projet
 
 </div>
@@ -73,14 +85,20 @@ Régression Linéaire
 ## Regression: Qualitatif
 
 La variable à prédire est **continue**
+
 * Age, taille, poids,
-* Salaire,
+
+* nombre d'appels, de clicks, volume de vente, consommation
+
+* Température, Salaire, ...
+
 * Probabilité d'une action
-* Temps
+
+* Temps, délai, retard
 
 </div>
 </div>
-
+<hr class='vline' />
 <div style='float:left; width:60%'>
 <div data-markdown>
 
@@ -106,29 +124,64 @@ La variable à prédire est **discrète**
 </div>
 </div>
 </section>
-<section data-markdown>
+
+
+<section data>
+
+<div style='float:right; width:40%'>
+    <div data-markdown>
 
 <img src=/assets/02/height_vs_weight.png style='float:right; width:400px;border:0px'>
+</div>
+</div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+<div data-markdown>
 
 ## Taille en fonction de l'age des enfants
 
-En réalité, la taille dépend de l'age et de bruit \\(\epsilon\\)
+On mesure la taille des enfants dans une ecole et leur age.
+La taille croit avec l'age. On peut écrire
 
-$$ \text{Taille} = f(\text{Age}) + \epsilon $$
+$$ \text{Taille} = f(\text{Age})  $$
 
 
 ## Regression univariable
-On suppose que l'on peut prédire la taille en fonction de l'age avec une relation lineaire:
+
+
+On modélise cette fonction par une relation linéaire de la forme:
 
 $$ \hat{\text{T}}\text{aille} = a * \text{Age} + b $$
 
-Et on cherche à connaitre les paramètres (a,b) qui donnent la meilleure approximation de la vrai relation.
+où \\(\hat{\text{T}}\text{aille}\\) est la taille estimée.
 
-Regression linéaire est aussi appelée regression Ordinary Least-Squares (OLS).
 
+On cherche à connaitre les paramètres \\((a,b)\\) qui donnent la meilleure approximation de la réalité entre la taille et l'age.
+
+Pour trouver ces paramètres on utilise une méthode dite des **moindres carrés**  ou  **Ordinary Least-Squares (OLS)**.
+
+</div>
+</div>
 </section>
 
-<section data-markdown>
+
+<section data>
+<div style='float:right; width:40%'>
+    <div data-markdown>
+Les résidus  \\( e_i  \\)  représentent une **distance** entre les vrais valeurs  \\( y_i  \\) et leur estimations \\( \hat{y_i}  \\). On veut réduire cette distance.
+
+Pour cela on chercher à minimiser la somme des carrés des résidus (aussi appelé norme  \\( L^2  \\).)
+
+$$  || y - \hat{y} ||^2 =  \sum_{i=0}^n (y_i - (a*x_i + b))^2   $$
+
+<img src=/assets/02/Ordinary_Least_Squares_OLS.jpg>
+
+
+    </div>
+</div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
 # Regression linéaire
 Nous avons \\( n  \\) échantillons:
 
@@ -140,13 +193,12 @@ On veut trouver les *meilleurs*  \\(a\\) et \\(b\\) pour lesquels
 
 $$ \hat{y_i} = a * x_i +b  $$
 
-de telle façon que l'erreur de prédiction \\( \vert y_i - \hat{y_i} \vert   \\)  soit minimale.
+l'erreur de prédiction \\( e_i  \\)  soit minimale:
 
-$$ e_i = y_i - \hat{y_i}  = y_i - (a * x_i +b) $$
+$$ e_i = \vert  y_i - \hat{y_i} \vert  = \vert  y_i - (a * x_i +b)\vert  $$
+</div>
+</div>
 
-Les résidus sont une **distance** entre les vrai valeurs  \\( y_i  \\) et leur estimations \\( \hat{y_i}  \\). On veut réduire cette distance. Pour cela on chercher à kinimiser la norme  \\( L^2  \\) des résidus
-
-$$  || y - \hat{y} ||^2 =  \sum_{i=0}^n (y_i - (a*x_i + b))^2   $$
 </section>
 
 <section data-markdown>
@@ -160,25 +212,67 @@ $$  |x| =  |x_1| + .... + |x_n|  $$
 
 ### Norme infinie \\( L^\infty  \\)
 
-$$  |x|_{\infty} =  max [ |x_1|, ... , |x_n| ]  $$
+$$  |x|\_{\infty} = max [ |x_1|, ... , |x_n| ] $$
 
 </section>
 
-<section data-markdown>
+<section>
+<div style='float:right; width:45%;  '>
+    <div data-markdown>
+
+Cela donne 2 équations à 2 inconnues  dont la solution exacte est:
+
+$$ \hat{\beta} =  (x^T.x)^{-1} x^T y   $$
+
+avec
+
+* \\( \hat{\beta} = \\{ a,b \\}^T \\)
+
+*  \\( x = [x_1, ... , x_n]  \\)
+
+*  \\( y = [y_1, ... , y_n]  \\)
+
+    </div>
+</div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
 # Fonction de cout
+
+On a ce qu'on appelle une **fonction de cout** \\(L(a,b) \\):
 
 $$ L(a,b)  = || y - \hat{y} ||^2 =  \sum_{i=0}^n [y_i - (a*x_i + b)]^2   $$
 
-* fonction convexe
-* pour trouver son minima il suffit de prendre la dérivé et de trouver les valeurs de \\( a \\) et \\( b \\) en \\( 0 \\).
-* Cela donne 2 équations  à 2 inconnues  dont la solution exacte est:
+C'est fonction quadratique donc convexe.
 
-$$ \hat{\beta} =  (x^T.x)^{-1} x^T y \quad \text{où}  \quad  \hat{\beta} = \\{ a,b \\}^T   $$
+Par conséquent pour trouver son minima, il faut trouver les valeurs de \\( a \\) et \\( b \\) qui annule la dérivée \\( 0 \\) .
 
+    </div>
+</div>
 </section>
 
-<section data-markdown>
-# Regression multinomial : plusieurs predicteurs
+<section>
+<div style='float:right; width:45%;  '>
+    <div data-markdown>
+On veut trouver les n+1 coefficients
+
+$$ \beta = [\beta_0, \beta_1, ...., \beta_n] $$
+
+qui minimisent la fonction de cout:
+
+$$  L(\beta) = || y - X\beta ||  $$
+
+La solution de cette équation est : $$ \hat{\beta} =  (X^T.X)^{-1} X^T y  $$
+    </div>
+</div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
+
+
+# Regression multinomial
+
+## plusieurs predicteurs
 
 On a  maintenant \\(m\\) predicteurs et toujours \\(n\\)  échantillons.
 
@@ -187,44 +281,84 @@ $$ \hat{y}_i  = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_m x_m $$
 ou plus simplement
 $$ \hat{y}  = \beta X  $$
 
-où \\(X\\) est une matrice de taille (\\(n\\) par \\(m\\))
+avec
 
-* \\( n\\) échantillons  \\( y = [y_1, ... , y_n]  \\)
-* \\( m\\) predicteurs \\( X = \[ (x_{i,j}) \]  \\)
+* \\( X = \[ (x_{i,j}) \]  \\) est une matrice de taille  \\(n\\) par \\(m\\)
+
+* \\( y = [y_1, ... , y_n]  \\) vecteur de \\( n\\) échantillons
 
 
-et on veut trouver les n+1 coefficients \\( \beta = [\beta_0, \beta_1, ...., \beta_n] \\) qui minimize
 
-$$  L(\beta) = || y - X\beta ||  $$
-
-La solution de cette équation est : $$ \hat{\beta} =  (X^T.X)^{-1} X^T y  $$
+    </div>
+</div>
 </section>
 
-<section data-markdown>
 
+<section>
+<div style='float:right; width:45%;  '>
+    <div data-markdown>
 # Python
 
+A)
 
-1. N samples avec M variables: \\( \hat{y}_i = \sum_k \beta_k * X[i,k]  + \sigma^2 \\)
+    X, y = make_regression(n_samples=N, n_features=M, noise =10)
 
-```X, y = make_regression(n_samples=N, n_features=M, noise =10)```
 
-2. Regression weights: \\( \quad \hat{\beta} = (X^T . X)^{-1} X^T y \\)
+B)
 
-```beta_hat = np.linalg.inv(X.T.dot(X)).dot(X.T).dot(y)```
+    beta_hat = np.linalg.inv(X.T.dot(X)).dot(X.T).dot(y)
 
-3. Prédiction
+C)
 
-```yhat = X[:, 0]* beta[0] + X[:,1] * beta[1]```
+    yhat = X[:, 0]* beta[0] + X[:,1] * beta[1]
+
 
 * ou si \\(M > 2\\):
 
-```yhat = [0 for i in range(N)]```
 
-```for k in range(M):
-        yhat += X[:, k]* beta[k]```
+    yhat = [0 for i in range(N)]
+
+    for k in range(M):
+        yhat += X[:, k]* beta[k]
+
+
+    </div>
+</div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
+
+# Regression linéaire
+
+
+A) N samples avec M variables:
+
+$$ y_i = \sum_k \beta_k * X[i,k]  + \sigma^2 $$
+
+$$ y =  \beta * X  + \sigma^2 $$
+
+B) Regression weights:
+
+$$\quad \hat{\beta} = (X^T . X)^{-1} X^T y $$
+
+C) Prédiction
+
+$$ \hat{y}_i = \sum_k \beta_k * X[i,k]  + \sigma^2 $$
+
+
+
+    </div>
+</div>
+</section>
+
+
+<section data-markdown>
+# Notebook - demo
+
+02 Linear Regression Exact.ipynb
 
 </section>
+
 
 <section data-markdown>
 # Metriques de scoring
@@ -232,99 +366,112 @@ La solution de cette équation est : $$ \hat{\beta} =  (X^T.X)^{-1} X^T y  $$
 
 Valeur absolue de la difference entre la prédiction et les vraies valeurs
 
-```e = np.mean( np.abs(y - yhat) )```
+
 $$  MAE = \sum\_{i=1}^n \| \hat{y\_i} - y\_i \| $$
 
+        e = np.mean( np.abs(y - yhat) )
 
 ## Erreur quadratique (MSE) (L2)
 
-```e = np.mean( (y - yhat)**2 )```
-
 $$  MSE = \sum_{i=1}^n (\hat{y_i} - y_i)^2 $$
+
+        ```e = np.mean( (y - yhat)**2 )
+        ```
 
 </section>
 
-<section data-markdown>
+<section>
 
-<img src=/assets/02/advertising.csv.png style='width:400px; float:right; '>
+<div style='float:right; width:45%;  '>
+    <div data-markdown>
+
+Sur un vrai dataset: **Mileage per gallon performances of various cars** disponible sur https://www.kaggle.com/uciml/autompg-dataset
+
+A prédire:
+* mpg: continuous
+
+Les variables
+
+* cylinders: multi-valued discrete
+* displacement: continuous
+* horsepower: continuous
+* weight: continuous
+* acceleration: continuous
+
+On ne prends pas en compte:
+
+* model year: multi-valued discrete
+* origin: multi-valued discrete
+* car name: string (unique for each instance)
+
+    </div>
+</div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
+# Régression linéaire avec Statsmodel
+
+On va estimer les coefficients non plus directement mais avec la méthode OLS.
 
 
-# Regression linéaire avec Statsmodel
 
-On va estimer les coefficients non plus directement mais avec une methode
-
-=> plus d'information sur les coefficients de regression:
+On aura plus d'information sur les coefficients de régression:
 
 * leur importance relative
 * leur fiabilité
 * leur impact quantitatif
 
-Sur un vrai dataset: [advertising](https://www.kaggle.com/ishaanv/ISLR-Auto), 200 échantillons
-* 3 variables: TV, Radio, Newspaper: sommes dépensées pour chaque média (k$)
-* Variable cible: Sales: ventes réalisées
-</div>
+On utilise la librairie
 
-</section>
-
-
-<section data-markdown>
-
-# Statsmodel
 * [Statsmodel](http://www.statsmodels.org/stable/index.html) librairie Python
 pour une approche statistique de l'analyse de données.
 
 * Intégrée avec pandas et numpy
 
+
+    </div>
+</div>
 </section>
+
 
 <section data-markdown>
 
 # Notebook python
+    import pandas as pd
+    import statsmodels.formula.api as smf
 
-[Regression lineaire sur le dataset advertising](https://github.com/alexisperrier/gads/blob/master/04_statistics_inference/py/Lesson%204%20-%20Notebook%202%20-%20Linear%20Regression%20for%20Causal%20Inference.ipynb)
-
-1. sales = f(TV)
-2. sales = f(TV + Radio + Newspaper)
-3. sales = f(Newspaper)
-2. sales = f(TV + TV^2)
-
-</section>
-
-<section data-markdown>
-
-# Explication de l'output smf.ols
-
-```lm = smf.ols(formula='Sales ~ TV', data=df).fit()```
-
-* R^2 et R^2 adjusted
-* Coefficients
-* p-value
+    df = pd.read_csv('../data/autos_mpg.csv')
+    lm = smf.ols(formula='mpg ~ cylinders + displacement + horsepower + weight + acceleration + origin ', data=df).fit()
+    lm.summary()
 
 </section>
 
-<section data-markdown>
 
-<img src=/assets/02/01_advsertising_results_01.png style=' width:600; '>
+<section>
+<div style='float:right; width:45%;  '>
+    <div data-markdown>
+# Résultats
+* **Dep. Variable**: La variable à prédire
+* **Model**: Le modèle
+* **Method**: La méthode utilisée
+* **No. Observations**: Le nombre d'observations / échantillons
+* **DF Residuals**: Degré de liberté des résidus = nombre d'échantillons - nombre de variables
+* **DF Model**: Nombre de prédicteurs
 
-
-```lm = smf.ols(formula='Sales ~ TV', data=df).fit()```
-
-* **Dep. Variable**: Which variable is the response in the model
-* **Model**: What model you are using in the fit
-* **Method**: How the parameters of the model were calculated
-* **No. Observations**: The number of observations (examples)
-* **DF Residuals**: Degrees of freedom of the residuals. Number of observations - number of parameters
-* **DF Model**: Number of parameters in the model (not including the constant term if present)
-
+    </div>
+</div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
+<img src=/assets/02/02_linreg_autompg_01-left.png>
+    </div>
+</div>
 </section>
 
-<section data-markdown>
-<img src=/assets/02/01_advsertising_results_02.png style='width:30%; float:right; clear: right;'>
-
-<div style='width:30%; float:left;'>
-
-The right part of the first table shows the goodness of fit
-
+<section>
+<div style='float:right; width:45%;  '>
+    <div data-markdown>
+# Goodness of fit
 
 * **R-squared**: The [coefficient of determination](http://en.wikipedia.org/wiki/Coefficient_of_determination). A statistical measure of how well the regression line approximates the real data points
 
@@ -339,8 +486,15 @@ The right part of the first table shows the goodness of fit
 * AIC: The [Akaike Information Criterion](http://en.wikipedia.org/wiki/Akaike_information_criterion). Adjusts the log-likelihood based on the number of observations and the complexity of the model.
 
 * BIC: The [Bayesian Information Criterion](http://en.wikipedia.org/wiki/Bayesian_information_criterion). Similar to the AIC, but has a higher penalty for models with more parameters.</td>
-</div>
 
+    </div>
+</div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
+<img src=/assets/02/02_linreg_autompg_01-right.png>
+    </div>
+</div>
 </section>
 
 <section data-markdown>
@@ -389,23 +543,22 @@ On ajuste pour prendre en compte la complexité du modele:
 
 $$ R^{2}_{adj} = {1-(1-R^{2}){n-1 \over n-p-1}} $$
 
-where p is the total number of explanatory variables in the model (not including the constant term), and n is the sample size.
+avec \\(p\\) le nombre de prédicteurs et n le nombre d'échantillons
 
 En accroissant le nombre de predicteurs, on accroit souvent R^2.
 
 Mais \\(R^{2}_{adj}\\) compense la complexité du modele
 
 </section>
-<section data-markdown>
 
-# Log likelihood
-</section>
+<section>
+<div style='float:right; width:45%;  '>
+    <div data-markdown>
 
-<section data-markdown>
+
 # Coefficients et p-value
 La deuxième partie des résultats porte sur les coefficients et leur fiabilité.
 
-<img src=/assets/02/01_advsertising_results_03.png style='width:800px;'>
 
 * **coef**: La valeur estimée des coefficients
 * **P &gt; |t|**: la probabilité que l'on observe cette estimation alors qu'en fait le coefficient est nulle (=0) .
@@ -413,66 +566,76 @@ La deuxième partie des résultats porte sur les coefficients et leur fiabilité
 * **std err**: l'erreur d'estimation
 * **t-statistic**: une mesure de l'importance (significant) statistique de chaque coefficient.
 
+    </div>
+</div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
+<img src=/assets/02/02_linreg_autompg_02.png>
+    </div>
+</div>
 </section>
+
+
 
 <section>
 <div style='float:right;width : 40%;'>
     <div data-markdown>
-    <img src=/assets/02/p_value.png  style='float:right; width:400px; margin:auto'>
 
-    **How do we test this hypothesis?**
+<img src=/assets/02/p_value.png height=250px >
 
-    The p-value represents the probability that the coefficient is actually zero
 
-    * if \\( P_{value} > 0.05 \\) then there more than 5% chance that the null hypothesis is true (a = 0)
-        * => can't reject
-    * if \\( P_{value} < 0.05 \\) then there's less than 5% chance that the null hypothesis is true
-        * =>  reject the null hypothesis
-        * => more than 95% chance the opposite is true
+The p-value represents the probability that the coefficient is actually zero
+
+* Si \\( P_{value} > 0.05 \\) alors il y a plus de 5% de chance que l'hypothèse NULL soit vraie:=> **on ne peut pas la rejeter**.
+
+* si \\( P_{value} < 0.05 \\) a lors il y a moins de 5% de chance pour que l'hypothèse NULL soit vraie: => **on  peut la rejeter**
     </div>
 </div>
-
-<div style='width:50%'>
-<div data-markdown>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
 # P-value
 
-* You start with a **null hypothesis** and an **alternative hypothesis** - a hypothesis that is the opposite of the null.
+On a 2 hypothèses:
 
-* Then, you check whether the data supports rejecting the null hypothesis or failing to reject the null hypothesis.
+1. [NULL] ce que l'on observe est du au hasard
+2. [ALT] ce que l'on observe n'est pas du au hasard (il y a une relation)
 
-As it relates to model coefficients, here is the conventional hypothesis test:
+La p-value est la probabilité que ce que l'on observe est du au hasard.
 
-* null hypothesis: There is no relationship between TV ads and Sales
-    * and thus a = 0 in \\( Sales = a * TV + b \\)
+Si la p-value est faible, on rejete l'hypothèse NULL.
 
-* alternative hypothesis: There is a relationship between TV ads and Sales (and thus a != 0 mais ca ne veut pas dire que a = la valeur du coefficient affichée, ca serait trop simple)
-
+Ce qui ne veut pas dire que la valeur du coefficient est la  bonne. (ca serait trop simple) mais simplement que il y a bien une relation entre le predicteur et la variable cible.
 
 </div>
 </div>
 </section>
 
-
-<section data-markdown>
+<section>
+<div style='float:right; width:45%;  '>
+    <div data-markdown>
 <img src=/assets/02/xkcd_p_value.png style='width:250px'>
-
-</section>
-
-<section data-markdown>
-<img src=/assets/02/xkcd_p_value_02.png style='width:400px'>
-
+    </div>
+</div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
+<img src=/assets/02/xkcd_p_value_02.png style='width:300px'>
+    </div>
+</div>
 </section>
 
 <section data-markdown>
 
 # Multinomiale
 
-=> Dans le notebook comparer differents modeles
+Que se passe t il quand on filtre certains predicteurs ?
 
 </section>
 <section data-markdown>
 # Conditions sur les données
-Pour qu'une regression linéaire soit possible et fiable, il faut que les données vérifient les conditions suivantes:
+Pour qu'une régression linéaire soit possible et fiable, il faut que les données vérifient les conditions suivantes:
 
 * **Linearite**: la relation entre les predicteurs et la cible est lineaire
     * On peut tester avec des scatter plots
@@ -502,23 +665,33 @@ check for little to no multicollinearity, why is multicollinearity a problem? :-
 </section>
 
 <section data-markdown>
-# Correlation
+<div class=centerbox>
+<p class=top>
+Correlation
+</p>
+</div>
+</section>
+
+<section data-markdown>
 # Rappel pearson coefficient
 
-Different ways to calculate correlation.
+Etudier la corrélation entre deux ou plusieurs variables aléatoires ou statistiques numériques, c’est étudier l'intensité de la liaison qui peut exister entre ces variables.
 
-Most common one is [Pearson Correlation](https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient)
+Il y a différentes façon de calculer la corrélation de 2 variables.
 
-formula for r is:
+La plus commune est [Pearson Correlation](https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient)
+
+Qui se calcule suivant :
 
 $$r=\frac{\sum\_{i=1}^{n} (x\_{i}-{\bar{x}}) (y\_{i}-{\bar{y}})} { {\sqrt {\sum\_{i=1}^{n}(x\_{i}-{\bar {x}})^{2}}}{\sqrt {\sum\_{i=1}^{n}(y\_{i}-{\bar {y}})^{2}}}}$$
 
-where:
-* \\(n\\)  is the sample size
+où :
 
-* \\(x\_{i},y\_{i}\\) are the individual sample points indexed with i
+* \\(n\\) nombre d'échantillons
 
-* \\( \bar{x} = \frac{1}{n} \sum\_{i=1}^{n} x\_{i} \\) (the sample mean); and analogously for  \\({\bar {y}}\\)
+* \\(x\_{i},y\_{i}\\) les échantillons
+
+* \\( \bar{x} = \frac{1}{n} \sum\_{i=1}^{n} x\_{i} \\) la moyenne; de meme pour  \\({\bar {y}}\\)
 
 </section>
 
@@ -533,16 +706,21 @@ where:
 
 On va regarder l'influence de la correlation entre les predicteurs
 
+    df.corr()
 
-Demo: Creer un exemple de relation lineaire bruité et rajouter une variable = coef de la premiere + bruit
+Les prédicteurs ```horsepower``` et ```weight``` sont très corrélés, ```displacement``` et ```cylinders``` aussi.
 
-comparer les coefficients
+<img src=/assets/02/autompg-correlation.png  height=400>
 
 </section>
 
 <section data-markdown>
 # Correlation \\(\neq\\) Causalité
 http://www.tylervigen.com/spurious-correlations
+
+<img src=/assets/02/spurious_correlations.png>
+
+
 </section>
 
 <section data-markdown>
@@ -564,13 +742,7 @@ Demonstrating and Quantifying Causation: Causal Inference: Not so easy
 
 => However most common strategy is to find not causality but correlation through linear regression which can be interpreted as causality under strong assumptions on the covariates.
 
-Works under VERY strong assumptions
-
-
-For regression coefficients to have a causal interpretation we need both that
-
-the linear regression assumptions hold: linearity, normality, independence, homoskedasticity
-and that all confounders of, e.g., the relationship between treatment A and Y be in the model.
+**Works under VERY strong assumptions**
 
 </section>
 
@@ -597,7 +769,16 @@ http://www.statisticshowto.com/experimental-design/confounding-variable/
 </section>
 
 <section data-markdown>
-# Conclusion, ce qu'il faut retenir
+<div class=centerbox>
+<p class=top>Récapitulatif</p>
+<p class=top></p>
+</div>
+</section>
+
+
+<section data-markdown>
+
+# Récapitulatif
 
 * Regression lineaire, simple et explicite
 * Attention a ce que les predicteurs soient decorrélés
@@ -607,15 +788,15 @@ http://www.statisticshowto.com/experimental-design/confounding-variable/
 
 <section data-markdown>
 # Lab de cette apres midi
-Regression lineaire sur le  housing dataset
+Regression lineaire sur le  dataset *advertising*
 
 </section>
 
 <section data-markdown>
 # Questions
 
-
 </section>
+
 <section data-markdown>
 # Liens et resources
 
@@ -623,4 +804,18 @@ Regression lineaire sur le  housing dataset
 
 * [OLS sur wikipedia](https://en.wikipedia.org/wiki/Ordinary_least_squares): tres complet
 
+</section>
+
+
+<section>
+<div style='float:right; width:45%;  '>
+    <div data-markdown>
+    </div>
+</div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
+
+    </div>
+</div>
 </section>
