@@ -94,7 +94,7 @@ body {
 .reveal ul {
   display: inline-block;
   text-align: left;
-  margin: 1em 0em 0.5em 1em; }
+  margin: 0em 0em 0.5em 1em; }
 
 .reveal ol {
   display: inline-block;
@@ -275,3 +275,39 @@ body {
   margin: 0 auto;
   display: block;
 }
+
+
+/*********************************************
+* Custom styles
+*********************************************/
+.reveal .centerbox {
+    display: table;
+    width: 80%;
+    height: 250px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid   #ccc;
+    margin: 100px auto ;
+    box-shadow: 5px 10px 8px #888888;
+ }
+.reveal .centerbox .top {
+    font-size: 44px;
+    margin: 50px     ;
+ }
+.reveal .centerbox .mitop {
+    font-size: 32px;
+    margin: 50px     ;
+ }
+
+
+ .vline
+ {
+     position:fixed;
+     top:50px;
+     left:50%;
+     bottom:20px;
+     margin:0;
+     border:none;
+     border-right:dashed 1px lightgrey;
+     z-index:10;
+ }

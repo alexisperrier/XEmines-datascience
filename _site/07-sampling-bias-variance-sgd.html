@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>
+      
+        Lesson 07 - Sampling, Bias - Variance and SGD | Emines - UM6P - Data Science
+      
+    </title>
+
+    <meta name="author" content="" />
+
+    <!-- Description -->
+    
+      <meta name="description" content="none" />
+    
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="/reveal.js/css/reveal.css"/>
+    
+      <link rel="stylesheet" href="/reveal.js/css/theme/white.css" id="theme"/>
+    
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="/reveal.js/lib/css/zenburn.css"/>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '/reveal.js/css/print/pdf.css' : '/reveal.js/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link rel="canonical" href="http://localhost:4000/07-sampling-bias-variance-sgd.html">
+
+    <script src="https://cdn.mathjax.org/mathjax/2.4-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-color="#000">
+    <h1 class="white" style="border-top: thin solid #DDD;border-bottom: thin solid #DDD;">
+        <img src="assets/ga_logo_black.png" style="float:left;top:0px;" />
+        General Assembly
+    </h1>
+    <p class="big_title">7: Sampling, Cross Validation, Bootstrapping, Bias Variance, Over/ Under fitting</p>
+</section>
+
+<section data-markdown="">
+# Lesson 7
+## LEARNING OBJECTIVES
+
+* Bias - Variance decomposition
+* Cross validation
+* Sampling, Boostrapping
+* Strategies to deal with Overfitting and Underfitting
+
+</section>
+
+<!-- Prework and review -->
+<section data-background-color="#DA0A13">
+    <h1>Lesson #6</h1>
+    <p class="big_title">Review of Lesson 6</p>
+</section>
+
+<section data-markdown="">
+# Last Lesson Review
+* Scikit: model, fit(), predict()
+* Linear regression
+* Loss function
+* Ridge, Lasso, Elastic
+* Polynomial regression
+</section>
+
+<section data-markdown="">
+# Last session
+### Any questions from last class?
+
+* What's a loss function?
+* What is Ridge?
+    * What's the impact of \\( \alpha \\)?
+* What is Polynomial regression?
+
+### and
+* Matlab vs Scikit / Matplotlib
+* Time spent on viz vs analysis
+* In depth understanding of the models needed? Where is the info?
+* Is there a prefered library for a given model such as OLS or do you change libraries?
+
+</section>
+
+<!-- Today -->
+<section data-background-color="#22c8c6">
+    <h1>Today</h1>
+    <p class="big_title">Making the most out of your data and Model selection</p>
+</section>
+
+<section data-markdown="">
+# Polynomial regression
+
+if you remember we had the following plots for polynomial regression:
+
+![polynomial regression](assets/07/polynomial_regression.png)
+
+The higher the degree of the polynomial, the better the fit
+
+How does it work with new data?
+</section>
+
+<!-- Over fitting / under fitting - Bias / Variance -->
+<section data-markdown="">
+# Over fitting / under fitting
+
+* Exercise: on housing dataset,  with linear and polynomial (N = 4, 16)
+* Split the dataset into 2 chunks. train set of 100 samples. the rest for the test set
+* Train 3 models on the train set with X= df.NOX and y = df.NIX
+* Estimate the prediction error on the test set with these 3 models
+* What's hapenning here?
+</section>
+
+<section data-markdown="">
+# Over fitting / under fitting
+
+[Notebook 1: Overfitting or Underfitting](http://localhost:8888/notebooks/gads/07_bias_variance/py/L7%20Overfitting%20or%20Underfitting.ipynb)
+
+* Housing dataset on df.NOX ~ df.DIS
+* with seaborn, sns.jointplot(df.NOX, df.DIS)
+* 3 different polynomial regression models: degree = 1 (linear), 4 and 16
+        poly = PolynomialFeatures(4)
+        X4 = poly.fit_transform(X)
+* split the datset in 2: train (first 100 rows) and test (the rest)
+        df = df[:100]
+        df_test = df[100:]
+* Plot the prediction (NOX) vs the predictors (DIS, DIS^4 and DIS ^16)
+* Calculate the MSE on the training set and test set for the different models
+* Although the MSE on training improves, the MSE on test gets worse
+</section>
+
+<section data-markdown="">
+# Bias Variance decomposition
+The prediction error of your model can be decomposed in 2 terms:
+
+* The bias
+* The Variance
+
+Total Error = Bias Error + Variance Error
+
+</section>
+
+<section data-markdown="">
+# Bias Variance decomposition
+
+**Error due to Bias**: Error due to bias is taken as the difference between the average prediction of our model and the correct value which we are trying to predict.
+
+Bias measures how far off in general your models' predictions are from the correct value.
+
+**Error due to Variance**: The error due to variance is taken as the variability of a model prediction for a given data point.
+
+The variance is how much the predictions for a given point vary between different realizations of the model.
+
+</section>
+
+<section data-markdown="">
+# Bias Variance decomposition
+![Bias-variance](assets/07/Bias-variance-targets.png)
+</section>
+
+<section data-markdown="">
+# Bias Variance decomposition
+
+$$ \operatorname{MSE}( \hat{Y} ) = \frac {1}{n} \sum_{i=1}^{n}( \hat{Y_i}-Y_i )^2  $$
+
+Which can be rewritten as
+$$ \operatorname{MSE}( \hat{Y} )= \mathbb{E} \big[ (\hat{Y} - Y)^2   \big]  =\mathbb{E}\left[\left(\hat{Y}-\mathbb{E}(\hat{Y})\right)^2\right] + \left(\mathbb{E}(\hat{Y})-Y\right)^2 $$
+
+$$ \operatorname{MSE}( \hat{Y} )= \operatorname{Var}(\hat{Y})+ \operatorname{Bias}(\hat{Y},Y)^2 $$
+
+with
+
+* \\( \operatorname{Var}(\hat{Y}) =  \mathbb{E}\left[\left(\hat{Y}-\mathbb{E}(\hat{Y})\right)^2\right] \\)
+* \\( \operatorname{Bias}(\hat{Y},Y)  = \mathbb{E}(\hat{Y})-Y  \\)
+</section>
+
+<section>
+$$
+\begin{align} \mathbb{E}((\hat{Y}-Y)^2)&amp;=
+ \mathbb{E}\left[\left(\hat{Y}-\mathbb{E}(\hat{Y})+\mathbb{E}(\hat{Y})-Y\right)^2\right]
+\\ &amp; =
+\mathbb{E}\left[\left(\hat{Y}-\mathbb{E}(\hat{Y})\right)^2 +2\left((\hat{Y}-\mathbb{E}(\hat{Y}))(\mathbb{E}(\hat{Y})-Y)\right)+\left( \mathbb{E}(\hat{Y})-Y \right)^2\right]
+\\ &amp; = \mathbb{E}\left[\left(\hat{Y}-\mathbb{E}(\hat{Y})\right)^2\right]+2\mathbb{E}\Big[(\hat{Y}-\mathbb{E}(\hat{Y}))(\overbrace{\mathbb{E}(\hat{Y})-Y}^{\begin{smallmatrix} \text{This is} \\  \text{a constant,} \\ \text{so it can be} \\  \text{pulled out.} \end{smallmatrix}}) \,\Big] + \mathbb{E}\Big[\,\overbrace{\left(\mathbb{E}(\hat{Y})-Y\right)^2}^{\begin{smallmatrix} \text{This is a} \\  \text{constant, so its} \\  \text{expected value} \\  \text{is itself.} \end{smallmatrix}}\,\Big]
+\\ &amp; = \mathbb{E}\left[\left(\hat{Y}-\mathbb{E}(\hat{Y})\right)^2\right]+2\underbrace{\mathbb{E}(\hat{Y}-\mathbb{E}(\hat{Y}))}_{=\mathbb{E}(\hat{Y})-\mathbb{E}(\hat{Y})=0}(\mathbb{E}(\hat{Y})-Y)+\left(\mathbb{E}(\hat{Y})-Y\right)^2
+\\ &amp; = \mathbb{E}\left[\left(\hat{Y}-\mathbb{E}(\hat{Y})\right)^2\right]+\left(\mathbb{E}(\hat{Y})-Y\right)^2
+\\ &amp; = \operatorname{Var}(\hat{Y})+ \operatorname{Bias}(\hat{Y},Y)^2
+\end{align}
+
+$$
+</section>
+
+<section data-markdown="">
+# Recap
+
+In order to minimize the Mean Squared Error, we have to reduce both the **Bias** and the **Variance**
+
+* High Bias &lt;-&gt; Underfitting
+    * Not a good estimator
+
+* High Variance &lt;-&gt; Overfitting
+    * too **sensitive** to training data
+    * no predictive power
+
+</section>
+
+<section data-markdown="">
+# Recap
+
+On data that has not been seen before by the model:
+
+![Bias-variance](assets/07/Bias_Variance_Under_Overfitting.png)
+
+</section>
+
+<!-- cross validation -->
+<section data-background-color="#22c8c6">
+    <h1>Cross Validation</h1>
+    <p class="big_title">Is your model good? is it predictive?</p>
+</section>
+<section data-markdown="">
+# meta parameters - tuning your model
+
+* \\(\alpha \\) in Ridge
+        class sklearn.linear_model.Ridge(alpha=1.0, fit_intercept=True, normalize=False, copy_X=True, max_iter=None, tol=0.001, solver='auto', random_state=None)
+
+* Degree in polynomial regression
+        class sklearn.preprocessing.PolynomialFeatures(degree=2, interaction_only=False, include_bias=True)
+
+* K in K-NN
+        class sklearn.neighbors.NearestNeighbors(n_neighbors=5, radius=1.0, algorithm='auto', leaf_size=30, metric='minkowski', p=2, metric_params=None, n_jobs=1, **kwargs)
+
+Meta parameters allow you to train several different models on a given set of data
+</section>
+
+<section data-markdown="">
+# Train, validation, test
+
+Split your data in 3 subsets: for instance: 60%, 20%, 20%
+
+1. **Training set** : This *training* dataset is used to *train* different prediction models with different hyper parameters.
+
+2. **Validation** set: Since this data has not yet been seen by the model we can use that validation set to assess the prediction power of our models.
+
+**Model selection**: select the model with the best performance.
+
+3. **Test set**: Reality check. how is our *best* model performing on totally new data?
+You obtain an idea of the real predictive power of your chosen model
+
+**Do not use the results obtained on your test data to further optimize your model.**
+</section>
+
+<section data-markdown="">
+# Train, validation, test
+### Exercise: Model selection on Housing data
+
+* Split your data in 3 subsets: train validation and test
+* Train 10 Ridge models with 10 different \\(\alpha \\)
+* Calculate MSE on the validation set for these 10 models
+* Pick the best one
+* Run the best one on the test set and calculate the resulting MSE
+* **Do not touch your model anymore**
+
+[L7 N2 - train, validation test split and model selection](http://localhost:8888/notebooks/gads/07_bias_variance/py/L7%20train%20validation%20test.ipynb)
+
+</section>
+
+<section data-markdown="">
+# K-fold cross validation
+
+Train, valid, test: You're wasting a lot of data
+
+### [K-fold cross validation](http://scikit-learn.org/stable/modules/classes.html#module-sklearn.cross_validation)
+
+1. Split your data into train (80%) / test (20%), leave the test alone
+
+2. Then further split your training set on K subsets (K = 4)
+    * train on 1,2,3, validate on 4
+    * train on 1,2,4, validate on 3
+    * train on 1,3,4, validate on 2
+    * train on 2,3,4, validate on 1
+
+The average of the errors obtained on the validations subsets is a better estimation on the performance of your model than if you had just one validation set.
+
+</section>
+
+<section data-markdown="">
+# K-fold cross validation
+![K-fold cross validation](assets/07/k-fold-cross-validation.png)
+</section>
+
+<section data-markdown="">
+# cross validation
+Many other ways to do [cross validation](http://scikit-learn.org/stable/modules/classes.html#module-sklearn.cross_validation) in Scikit learn.
+
+* Stratified K-Fold: preserving the percentage of samples for each class.
+* Leave one out:  Each sample is used once as a test set (singleton) while the remaining samples form the training set.
+* Shuffle Split: Random permutation cross-validation iterator. Yields indices.
+* cross_val_score, see [this example](http://scikit-learn.org/stable/auto_examples/exercises/plot_cv_digits.html#example-exercises-plot-cv-digits-py)
+
+</section>
+
+<section data-markdown="">
+# K-fold cross validation
+Exercise
+
+On the diabetes dataset, find the optimal regularization parameter alpha.
+
+Bonus: How much can you trust the selection of alpha?
+
+http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.KFold.html#sklearn.cross_validation.KFold
+
+http://scikit-learn.org/stable/auto_examples/exercises/plot_cv_diabetes.html#example-exercises-plot-cv-diabetes-py
+
+</section>
+
+<!-- Bootstraping -->
+<section data-background-color="#22c8c6">
+    <h1>Bootstraping</h1>
+    <p class="big_title">Don't let small datasets bring you down!</p>
+</section>
+
+<!-- Bootstraping -->
+<section data-background-color="#FED500">
+    <h1>Bootstraping</h1>
+    <p class="big_title">Now you can Get even More Data out of your Data with ...</p>
+</section>
+
+<!-- Bootstraping -->
+<section data-background-color="#DA0A13">
+    <h1>Bootstraping</h1>
+    <p class="big_title">BOOTSTRAPPING</p>
+    <p class="big_title">BOOTSTRAPPING</p>
+    <p class="big_title">BOOTSTRAPPING</p>
+    <p class="big_title">BOOTSTRAPPING</p>
+</section>
+
+<section data-markdown="">
+# Bootstrapping
+You have a small number of samples (N samples).
+You want a good understanding of some statictics / measure of the overall population: for instance the mean, or the Standard Deviation
+
+1. You calculate the mean on your whole sample
+
+Gives you one number but not much in terms of the reliability of this number.
+
+2. You run N experiments
+    * Each time you select half of your samples with replacement
+        Which means some samples are counted selevarl times
+    * You calculate the mean for each experiment
+You end up with a pretty solid estimation of the distribution of the mean of your population.
+
+[Bootstrapping animated](https://www.stat.auckland.ac.nz/~wild/BootAnim/)
+
+</section>
+
+<section data-markdown="">
+# Bootstrapping
+
+[Notebook - Boostrapping for the mean](http://localhost:8888/notebooks/07_bias_variance/py/L7%20Boostrapping%20the%20mean.ipynb#)
+
+</section>
+
+<section data-markdown="">
+# Bootstrapping for model selection
+Using [Scikit's Bootstrap](http://ogrisel.github.io/scikit-learn.org/sklearn-tutorial/modules/generated/sklearn.cross_validation.Bootstrap.html) or [resample](http://scikit-learn.org/stable/modules/generated/sklearn.utils.resample.html)
+
+Exercise: estimate the distribution of your linear regression coeffficients
+
+
+</section>
+
+<!-- Learning Curve -->
+<section data-background-color="#22c8c6">
+    <h1>Learning Curve</h1>
+    <p class="big_title">Is your model overfitting or under fitting</p>
+</section>
+<section data-markdown="">
+# Learning Curve
+
+* set aside a test set
+* train your model on increasing number of training samples
+* for each model, calculate the training error and the test error
+
+
+</section>
+
+<section data-markdown="">
+# Learning Curve in scikit
+
+[scikit example 1](http://scikit-learn.org/stable/modules/learning_curve.html#learning-curve)
+
+[scikit example 2](http://scikit-learn.org/stable/auto_examples/model_selection/plot_learning_curve.html#example-model-selection-plot-learning-curve-py)
+</section>
+
+<section data-markdown="">
+# Learning curve
+How you know if your model is over fitting or under fitting?
+
+The learning curve traces the error on training and the error on the validation set as the sample sizes increases.
+
+For small sample sizes, the model does not have enough data to learn and both the training error and the testing error are high.
+
+As the sample size increases the learning rate decreases. The model is learning the data. And the testing error is also decreasing. The model becomes a better predictor.
+
+As you increase the sample size, there comes a point where the training error keeps on decreasing but the testing error stops decreasing and may instead starts increasing.
+</section>
+<section data-markdown="">
+# Learning curve - Andrew NG
+
+https://www.coursera.org/learn/machine-learning/lecture/Kont7/learning-curves
+
+</section>
+
+<section data-markdown="">
+# Learning curve - links
+
+Good illustrations of learning curves
+
+* http://www.ultravioletanalytics.com/2014/12/12/kaggle-titanic-competition-part-ix-bias-variance-and-learning-curves/
+* http://www.astroml.org/sklearn_tutorial/practical.html
+
+</section>
+
+<section data-markdown="">
+# Over fitting or Under fitting?
+Exercise: polynomial with n = 3 on housing dataset
+
+Plot the learning curve
+
+        estimator = ...
+        X_train, y_train, X_test, y_test = split(X, y)
+        n_samples = X_train.shape[0]
+        train_scores, test_scores = [], []
+        for n in range(10, 10, n_samples):
+            estimator.fit(X_train[:n], y_train[n])
+            train_scores.append(estimator.score(X_train[:n], y_train[n]))
+            test_scores.append(estimator.score(X_test, y_test))
+        plot(range(10, 10, n_samples), train_scores)
+        plot(range(10, 10, n_samples), test_scores)
+
+</section>
+<!-- strategies -->
+<section data-background-color="#22c8c6">
+    <h1>Strategies</h1>
+    <p class="big_title">Strategies</p>
+</section>
+
+<section data-markdown="">
+# High Bias - Under fitting
+http://www.astroml.org/sklearn_tutorial/practical.html
+
+* Add more features. In our example of predicting home prices, it may be helpful to make use of information such as the neighborhood the house is in, the year the house was built, the size of the lot, etc. Adding these features to the training and test sets can improve a high-bias estimator
+* Use a more sophisticated model. Adding complexity to the model can help improve on bias. For a polynomial fit, this can be accomplished by increasing the degree d. Each learning technique has its own methods of adding complexity.
+
+* Decrease regularization. Regularization is a technique used to impose simplicity in some machine learning models, by adding a penalty term that depends on the characteristics of the parameters. If a model has high bias, decreasing the effect of regularization can lead to better results.
+
+</section>
+
+<section data-markdown="">
+# High Variance - Over fitting
+
+* Use fewer features. Using a feature selection technique may be useful, and decrease the over-fitting of the estimator.
+* Use more training samples. Adding training samples can reduce the effect of over-fitting, and lead to improvements in a high variance estimator.
+* Increase Regularization. Regularization is designed to prevent over-fitting. In a high-variance model, increasing regularization can lead to better results.
+* Bagging to reduce over fitting (average several overfitting models)
+https://class.coursera.org/datasci-001/lecture/157
+https://en.wikipedia.org/wiki/Bootstrap_aggregating
+
+</section>
+
+<!--
+
+* Context
+In this lesson we will focus on managing our data to assess, preserve and boost the predictive power of our model
+
+* Bias Variance decomposition
+    * Explanation
+    * Math
+
+* How to test the predictability potential of your model?
+    * Split train and validation / test
+    * Exercise: linear model prediction on ozone?
+    * Cross validation
+    * Exercise on housing.data.csv
+
+* Sampling for cross validation
+    * Bootstraping: random sampling with replacement
+    https://www.stat.auckland.ac.nz/~wild/BootAnim/
+    https://class.coursera.org/datasci-001/lecture/155
+    * Exercise: Estimate the mean see https://en.wikipedia.org/wiki/Bootstrapping_(statistics)
+    * Boostrap to estimate confidence interval of your results
+        * exercise: estimate the distribution of your linear regression coeffficients
+
+    * Leave one out
+
+* Learning curve?
+
+* Regularization to reduce over fitting
+
+* Bagging to reduce over fitting
+https://class.coursera.org/datasci-001/lecture/157
+https://en.wikipedia.org/wiki/Bootstrap_aggregating
+
+* Boosting:  favor the misclassified points
+
+* Stochastic Gradient Descent
+ -->
+
+<!-- Lesson Review 9:15 -->
+<section data-background-color="#22c8c6">
+    <h1>Lesson Review</h1>
+    <p class="big_title"> Lesson Review </p>
+</section>
+
+<section data-markdown="">
+# Lesson Review
+
+* Bias - Variance decomposition
+* Cross validation
+* Sampling, Boostrapping
+* Strategies to deal with Overfitting and Underfitting
+
+</section>
+
+<!-- Before Next Class -->
+<section data-background-color="#DA0A13">
+    <h1>Course</h1>
+    <p class="big_title">Before Next Class</p>
+</section>
+
+<!-- Q&A -->
+<section data-background-color="#FED500">
+    <h1>Q &amp; A</h1>
+    <p class="big_title">5 Questions about today</p>
+</section>
+
+<!-- Exit ticket -->
+<section data-background-color="#FC9CB4">
+    <h1>Exit ticket</h1>
+    <p class="big_title">Exit ticket</p>
+</section>
+
+      </div>
+    </div>
+
+    <script src="/reveal.js/lib/js/head.min.js"></script>
+    <script src="/reveal.js/js/reveal.js"></script>
+    <script>
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        width: 1200,
+        controls: true,
+        progress: true,
+        history: true,
+        center: false,
+        slideNumber: true,
+        
+          transition: 'slide',
+        
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '/reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '/reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: '/reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>

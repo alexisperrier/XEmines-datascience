@@ -1,0 +1,626 @@
+---
+layout: slide
+title: 2) Régression linéaire
+description: none
+transition: slide
+permalink: /2-regression-lineaire
+theme: white
+---
+
+<section data-markdown>
+<div class=centerbox>
+<p class=top>
+Régression Linéaire
+</p>
+</div>
+</section>
+
+<section>
+<div style='float:right;'>
+    <h1>Questions ?</h1>
+
+    <div data-markdown>
+    <img src=/assets/04/questions_04.gif>
+    </div>
+</div>
+
+<div data-markdown>
+# Cours précédent
+* Supervisé vs non- Supervisé
+* Vue genérale de l'analyse predictive
+* Python
+</div>
+</section>
+
+<section>
+<div style='float:right; width:40%'>
+    <div data-markdown>
+    ## Lab:
+    </div>
+</div>
+
+<div style='float:left; width:60%'>
+<div data-markdown>
+# Aujourd'hui
+
+* Régression ou classification ?
+* Régression linéaire
+    * OLS, Moindres carrés
+    * Modélisation
+    * Univariable & multivariables
+* Interpretation
+* MSE
+* \\(R^2\\), \\(R^2_{adj}\\), P-value, Interval de confiance
+* Confonders et multi-collinearité
+* Hypothèses et verification
+
+* Statsmodel
+* Linéarité: Définition
+* Tests de linéarite
+* Régression polynomiale
+* Anscombe quartet
+* Kaggle projet
+
+</div>
+</div>
+</section>
+
+<section data>
+
+<div style='float:right; width:40%'>
+    <div data-markdown>
+
+## Regression: Qualitatif
+
+La variable à prédire est **continue**
+* Age, taille, poids,
+* Salaire,
+* Probabilité d'une action
+* Temps
+
+</div>
+</div>
+
+<div style='float:left; width:60%'>
+<div data-markdown>
+
+## Classification: Quantitatif
+La variable à prédire est **discrète**
+
+### Cas binaire
+* Achat, resiliation, click
+* Survie, maladie, succes examen, admission,
+* Positif ou negatif
+* Spam, fraude
+
+### Multi class - multinomiale
+* Catégories, types (A,B,C),
+* Positif, neutre ou negatif
+* Espèces de plantes d'animaux, ...
+* Pays, planetes
+
+### Ordinale
+
+* Notes, satisfaction, ranking
+
+</div>
+</div>
+</section>
+<section data-markdown>
+
+<img src=/assets/02/height_vs_weight.png style='float:right; width:400px;border:0px'>
+
+## Taille en fonction de l'age des enfants
+
+En réalité, la taille dépend de l'age et de bruit \\(\epsilon\\)
+
+$$ \text{Taille} = f(\text{Age}) + \epsilon $$
+
+
+## Regression univariable
+On suppose que l'on peut prédire la taille en fonction de l'age avec une relation lineaire:
+
+$$ \hat{\text{T}}\text{aille} = a * \text{Age} + b $$
+
+Et on cherche à connaitre les paramètres (a,b) qui donnent la meilleure approximation de la vrai relation.
+
+Regression linéaire est aussi appelée regression Ordinary Least-Squares (OLS).
+
+</section>
+
+<section data-markdown>
+# Regression linéaire
+Nous avons \\( n  \\) échantillons:
+
+* Une variable prédictrice \\( x = [x_1, ... , x_n]  \\)
+
+* Et une variable cible \\( y = [y_1, ... , y_n]  \\)
+
+On veut trouver les *meilleurs*  \\(a\\) et \\(b\\) pour lesquels
+
+$$ \hat{y_i} = a * x_i +b  $$
+
+de telle façon que l'erreur de prédiction \\( \vert y_i - \hat{y_i} \vert   \\)  soit minimale.
+
+$$ e_i = y_i - \hat{y_i}  = y_i - (a * x_i +b) $$
+
+Les résidus sont une **distance** entre les vrai valeurs  \\( y_i  \\) et leur estimations \\( \hat{y_i}  \\). On veut réduire cette distance. Pour cela on chercher à kinimiser la norme  \\( L^2  \\) des résidus
+
+$$  || y - \hat{y} ||^2 =  \sum_{i=0}^n (y_i - (a*x_i + b))^2   $$
+</section>
+
+<section data-markdown>
+# Petit rappel des normes
+
+### Norme quadratique  \\( L^2  \\)
+$$  ||x|| = \sqrt{  x_1^2 + .... + x_n^2  } $$
+
+### Norme \\( L^1  \\) ou norme en valeur absolue
+$$  |x| =  |x_1| + .... + |x_n|  $$
+
+### Norme infinie \\( L^\infty  \\)
+
+$$  |x|_{\infty} =  max [ |x_1|, ... , |x_n| ]  $$
+
+</section>
+
+<section data-markdown>
+# Fonction de cout
+
+$$ L(a,b)  = || y - \hat{y} ||^2 =  \sum_{i=0}^n [y_i - (a*x_i + b)]^2   $$
+
+* fonction convexe
+* pour trouver son minima il suffit de prendre la dérivé et de trouver les valeurs de \\( a \\) et \\( b \\) en \\( 0 \\).
+* Cela donne 2 équations  à 2 inconnues  dont la solution exacte est:
+
+$$ \hat{\beta} =  (x^T.x)^{-1} x^T y \quad \text{où}  \quad  \hat{\beta} = \\{ a,b \\}^T   $$
+
+</section>
+
+<section data-markdown>
+# Regression multinomial : plusieurs predicteurs
+
+On a  maintenant \\(m\\) predicteurs et toujours \\(n\\)  échantillons.
+
+Pour chaque échantillon, on a la modélisation suivante:
+$$ \hat{y}_i  = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_m x_m $$
+ou plus simplement
+$$ \hat{y}  = \beta X  $$
+
+où \\(X\\) est une matrice de taille (\\(n\\) par \\(m\\))
+
+* \\( n\\) échantillons  \\( y = [y_1, ... , y_n]  \\)
+* \\( m\\) predicteurs \\( X = \[ (x_{i,j}) \]  \\)
+
+
+et on veut trouver les n+1 coefficients \\( \beta = [\beta_0, \beta_1, ...., \beta_n] \\) qui minimize
+
+$$  L(\beta) = || y - X\beta ||  $$
+
+La solution de cette équation est : $$ \hat{\beta} =  (X^T.X)^{-1} X^T y  $$
+</section>
+
+<section data-markdown>
+
+# Python
+
+
+1. N samples avec M variables: \\( \hat{y}_i = \sum_k \beta_k * X[i,k]  + \sigma^2 \\)
+
+```X, y = make_regression(n_samples=N, n_features=M, noise =10)```
+
+2. Regression weights: \\( \quad \hat{\beta} = (X^T . X)^{-1} X^T y \\)
+
+```beta_hat = np.linalg.inv(X.T.dot(X)).dot(X.T).dot(y)```
+
+3. Prédiction
+
+```yhat = X[:, 0]* beta[0] + X[:,1] * beta[1]```
+
+* ou si \\(M > 2\\):
+
+```yhat = [0 for i in range(N)]```
+
+```for k in range(M):
+        yhat += X[:, k]* beta[k]```
+
+</section>
+
+<section data-markdown>
+# Metriques de scoring
+## Erreur absolu (MAE) (L1)
+
+Valeur absolue de la difference entre la prédiction et les vraies valeurs
+
+```e = np.mean( np.abs(y - yhat) )```
+$$  MAE = \sum\_{i=1}^n \| \hat{y\_i} - y\_i \| $$
+
+
+## Erreur quadratique (MSE) (L2)
+
+```e = np.mean( (y - yhat)**2 )```
+
+$$  MSE = \sum_{i=1}^n (\hat{y_i} - y_i)^2 $$
+
+</section>
+
+<section data-markdown>
+
+<img src=/assets/02/advertising.csv.png style='width:400px; float:right; '>
+
+
+# Regression linéaire avec Statsmodel
+
+On va estimer les coefficients non plus directement mais avec une methode
+
+=> plus d'information sur les coefficients de regression:
+
+* leur importance relative
+* leur fiabilité
+* leur impact quantitatif
+
+Sur un vrai dataset: [advertising](https://www.kaggle.com/ishaanv/ISLR-Auto), 200 échantillons
+* 3 variables: TV, Radio, Newspaper: sommes dépensées pour chaque média (k$)
+* Variable cible: Sales: ventes réalisées
+</div>
+
+</section>
+
+
+<section data-markdown>
+
+# Statsmodel
+* [Statsmodel](http://www.statsmodels.org/stable/index.html) librairie Python
+pour une approche statistique de l'analyse de données.
+
+* Intégrée avec pandas et numpy
+
+</section>
+
+<section data-markdown>
+
+# Notebook python
+
+[Regression lineaire sur le dataset advertising](https://github.com/alexisperrier/gads/blob/master/04_statistics_inference/py/Lesson%204%20-%20Notebook%202%20-%20Linear%20Regression%20for%20Causal%20Inference.ipynb)
+
+1. sales = f(TV)
+2. sales = f(TV + Radio + Newspaper)
+3. sales = f(Newspaper)
+2. sales = f(TV + TV^2)
+
+</section>
+
+<section data-markdown>
+
+# Explication de l'output smf.ols
+
+```lm = smf.ols(formula='Sales ~ TV', data=df).fit()```
+
+* R^2 et R^2 adjusted
+* Coefficients
+* p-value
+
+</section>
+
+<section data-markdown>
+
+<img src=/assets/02/01_advsertising_results_01.png style=' width:600; '>
+
+
+```lm = smf.ols(formula='Sales ~ TV', data=df).fit()```
+
+* **Dep. Variable**: Which variable is the response in the model
+* **Model**: What model you are using in the fit
+* **Method**: How the parameters of the model were calculated
+* **No. Observations**: The number of observations (examples)
+* **DF Residuals**: Degrees of freedom of the residuals. Number of observations - number of parameters
+* **DF Model**: Number of parameters in the model (not including the constant term if present)
+
+</section>
+
+<section data-markdown>
+<img src=/assets/02/01_advsertising_results_02.png style='width:30%; float:right; clear: right;'>
+
+<div style='width:30%; float:left;'>
+
+The right part of the first table shows the goodness of fit
+
+
+* **R-squared**: The [coefficient of determination](http://en.wikipedia.org/wiki/Coefficient_of_determination). A statistical measure of how well the regression line approximates the real data points
+
+* **Adj. R-squared**: The above value adjusted based on the number of observations and the degrees-of-freedom of the residuals
+
+* F-statistic: A measure how significant the fit is. The mean squared error of the model divided by the mean squared error of the residuals
+
+* Prob (F-statistic): The probability that you would get the above statistic, given the null hypothesis that they are unrelated
+
+* Log-likelihood: The log of the likelihood function.
+
+* AIC: The [Akaike Information Criterion](http://en.wikipedia.org/wiki/Akaike_information_criterion). Adjusts the log-likelihood based on the number of observations and the complexity of the model.
+
+* BIC: The [Bayesian Information Criterion](http://en.wikipedia.org/wiki/Bayesian_information_criterion). Similar to the AIC, but has a higher penalty for models with more parameters.</td>
+</div>
+
+</section>
+
+<section data-markdown>
+# \\(R^2\\)
+
+proportion of the variance in the dependent variable that is predictable from the independent variable(s)
+
+$$ \bar{y} = \frac{1}{n} \sum\_{i} y_{i} $$
+
+
+The total sum of squares (proportional to the variance of the data):
+
+$$ SS\_{\text{tot}} = \sum\_{i} (y\_{i} - \bar{y} )^2 $$
+
+The regression sum of squares, also called the explained sum of squares:
+$$ SS\_{\text{reg}} = \sum\_{i} (f\_{i} - \bar{y} )^2 $$
+
+The sum of squares of residuals, also called the residual sum of squares:
+$$ SS\_{\text{res}} = \sum\_{i} (y\_{i} - f\_{i} )^2 = \sum\_{i}e\_{i}^{2} $$
+
+The most general definition of the coefficient of determination is
+
+$$ R^{2} = 1-{SS\_{\text{res}} \over SS\_{\text{tot}}}   $$
+
+</section>
+
+<section data-markdown>
+
+
+# R2 does not indicate whether:
+
+* the independent variables are a cause of the changes in the dependent variable;
+* omitted-variable bias exists;
+* the correct regression was used;
+* the most appropriate set of independent variables has been chosen;
+* there is collinearity present in the data on the explanatory variables;
+* the model might be improved by using transformed versions of the existing set of independent variables;
+* there are enough data points to make a solid conclusion.
+
+</section>
+
+<section data-markdown>
+# The adjusted R2 is defined as
+
+On ajuste pour prendre en compte la complexité du modele:
+
+$$ R^{2}_{adj} = {1-(1-R^{2}){n-1 \over n-p-1}} $$
+
+where p is the total number of explanatory variables in the model (not including the constant term), and n is the sample size.
+
+En accroissant le nombre de predicteurs, on accroit souvent R^2.
+
+Mais \\(R^{2}_{adj}\\) compense la complexité du modele
+
+</section>
+<section data-markdown>
+
+# Log likelihood
+</section>
+
+<section data-markdown>
+# Coefficients et p-value
+La deuxième partie des résultats porte sur les coefficients et leur fiabilité.
+
+<img src=/assets/02/01_advsertising_results_03.png style='width:800px;'>
+
+* **coef**: La valeur estimée des coefficients
+* **P &gt; |t|**: la probabilité que l'on observe cette estimation alors qu'en fait le coefficient est nulle (=0) .
+* **[95.0% Conf. Interval]**: l'interval de confiance de l'estimation du coefficient.
+* **std err**: l'erreur d'estimation
+* **t-statistic**: une mesure de l'importance (significant) statistique de chaque coefficient.
+
+</section>
+
+<section>
+<div style='float:right;width : 40%;'>
+    <div data-markdown>
+    <img src=/assets/02/p_value.png  style='float:right; width:400px; margin:auto'>
+
+    **How do we test this hypothesis?**
+
+    The p-value represents the probability that the coefficient is actually zero
+
+    * if \\( P_{value} > 0.05 \\) then there more than 5% chance that the null hypothesis is true (a = 0)
+        * => can't reject
+    * if \\( P_{value} < 0.05 \\) then there's less than 5% chance that the null hypothesis is true
+        * =>  reject the null hypothesis
+        * => more than 95% chance the opposite is true
+    </div>
+</div>
+
+<div style='width:50%'>
+<div data-markdown>
+# P-value
+
+* You start with a **null hypothesis** and an **alternative hypothesis** - a hypothesis that is the opposite of the null.
+
+* Then, you check whether the data supports rejecting the null hypothesis or failing to reject the null hypothesis.
+
+As it relates to model coefficients, here is the conventional hypothesis test:
+
+* null hypothesis: There is no relationship between TV ads and Sales
+    * and thus a = 0 in \\( Sales = a * TV + b \\)
+
+* alternative hypothesis: There is a relationship between TV ads and Sales (and thus a != 0 mais ca ne veut pas dire que a = la valeur du coefficient affichée, ca serait trop simple)
+
+
+</div>
+</div>
+</section>
+
+
+<section data-markdown>
+<img src=/assets/02/xkcd_p_value.png style='width:250px'>
+
+</section>
+
+<section data-markdown>
+<img src=/assets/02/xkcd_p_value_02.png style='width:400px'>
+
+</section>
+
+<section data-markdown>
+
+# Multinomiale
+
+=> Dans le notebook comparer differents modeles
+
+</section>
+<section data-markdown>
+# Conditions sur les données
+Pour qu'une regression linéaire soit possible et fiable, il faut que les données vérifient les conditions suivantes:
+
+* **Linearite**: la relation entre les predicteurs et la cible est lineaire
+    * On peut tester avec des scatter plots
+
+* **Normality**: Les variables ont une distribution normale
+    * test: [QQ plot](https://en.wikipedia.org/wiki/Q–Q_plot#Interpretation)
+    * ou Kolmogorov-Smirnov test
+    * correction: log ou box-cox
+
+* **Independence**: no or little multicollinearity between variables
+    * test: Correlation matrix
+
+* **Homoscedasticity**: for a given variable the low and high range have the same statistical properties with respect to the residuals
+    * test: Chunk data and Check Variance
+
+* All **Confounders** accounted for
+
+http://www.statisticssolutions.com/assumptions-of-linear-regression/
+
+https://www.analyticsvidhya.com/blog/2016/07/deeper-regression-analysis-assumptions-plots-solutions/
+
+https://www.kaggle.com/questions-and-answers/57571
+What does Linear Relationship means? :- You can check linearity with scatter plots, if there is little to no linearity in the scatter plot between your dependent and Independent variables then the assumption doesn't hold.
+Linearity regression assumption requires all variables to be normal, how to check? :- You can check this assumption with a Q-Q plot, if your data deviates substantially from the line on the Q-Q plot, then this assumption doesn't hold.
+check for little to no multicollinearity, why is multicollinearity a problem? :- Multicollinearity generally occurs when there are high correlations between two or more predictor variables. A principal danger of such data redundancy is that of overfitting in regression analysis models. The best regression models are those in which the predictor variables each correlate highly with the dependent (outcome) variable but correlate at most only minimally with each other. Such a model is often called "low noise" and will be statistically robust (that is, it will predict reliably across numerous samples of variable sets drawn from the same statistical population).
+
+</section>
+
+<section data-markdown>
+# Correlation
+# Rappel pearson coefficient
+
+Different ways to calculate correlation.
+
+Most common one is [Pearson Correlation](https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient)
+
+formula for r is:
+
+$$r=\frac{\sum\_{i=1}^{n} (x\_{i}-{\bar{x}}) (y\_{i}-{\bar{y}})} { {\sqrt {\sum\_{i=1}^{n}(x\_{i}-{\bar {x}})^{2}}}{\sqrt {\sum\_{i=1}^{n}(y\_{i}-{\bar {y}})^{2}}}}$$
+
+where:
+* \\(n\\)  is the sample size
+
+* \\(x\_{i},y\_{i}\\) are the individual sample points indexed with i
+
+* \\( \bar{x} = \frac{1}{n} \sum\_{i=1}^{n} x\_{i} \\) (the sample mean); and analogously for  \\({\bar {y}}\\)
+
+</section>
+
+<section data-markdown>
+# Correlation
+![Correlation](/assets/02/pearson-correlation-coefficient-illustration.png)
+
+</section>
+
+<section data-markdown>
+# Correlation
+
+On va regarder l'influence de la correlation entre les predicteurs
+
+
+Demo: Creer un exemple de relation lineaire bruité et rajouter une variable = coef de la premiere + bruit
+
+comparer les coefficients
+
+</section>
+
+<section data-markdown>
+# Correlation \\(\neq\\) Causalité
+http://www.tylervigen.com/spurious-correlations
+</section>
+
+<section data-markdown>
+
+# Regression and Causation:
+
+
+For regression coefficients to have a causal interpretation we need both that
+* the linear regression assumptions hold: linearity, normality,
+independence, homoskedasticity
+* and that all confounders of, e.g., the relationship between treatment A and Y be in the model.
+
+Not the same thing
+
+Calculating Correlation: easy
+
+Demonstrating and Quantifying Causation: Causal Inference: Not so easy
+
+
+=> However most common strategy is to find not causality but correlation through linear regression which can be interpreted as causality under strong assumptions on the covariates.
+
+Works under VERY strong assumptions
+
+
+For regression coefficients to have a causal interpretation we need both that
+
+the linear regression assumptions hold: linearity, normality, independence, homoskedasticity
+and that all confounders of, e.g., the relationship between treatment A and Y be in the model.
+
+</section>
+
+<section data-markdown>
+# Confonders
+
+facteurs potentiels de confusion
+
+https://www.r-bloggers.com/how-to-create-confounders-with-regression-a-lesson-from-causal-inference/
+
+http://www.statisticshowto.com/experimental-design/confounding-variable/
+
+![Confounders](/assets/02/confounder.png)
+
+* Relationship between **ice-cream consumption** and number of **drowning deaths** for a given period
+
+**Confounding: ?**
+</section>
+
+<section data-markdown>
+
+![xkcd](/assets/02/xkcd_correlation.png)
+
+</section>
+
+<section data-markdown>
+# Conclusion, ce qu'il faut retenir
+
+* Regression lineaire, simple et explicite
+* Attention a ce que les predicteurs soient decorrélés
+* R^2 ajusté au lieu de R^2
+
+</section>
+
+<section data-markdown>
+# Lab de cette apres midi
+Regression lineaire sur le  housing dataset
+
+</section>
+
+<section data-markdown>
+# Questions
+
+
+</section>
+<section data-markdown>
+# Liens et resources
+
+* [Régression linéaire en python](http://www.xavierdupre.fr/app/mlstatpy/helpsphinx/notebooks/regression_lineaire.html) sur le site de Xavier Dupré
+
+* [OLS sur wikipedia](https://en.wikipedia.org/wiki/Ordinary_least_squares): tres complet
+
+</section>

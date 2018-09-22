@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>
+      
+        Lesson 11 - SVM and Unbalanced datasets | Emines - UM6P - Data Science
+      
+    </title>
+
+    <meta name="author" content="" />
+
+    <!-- Description -->
+    
+      <meta name="description" content="none" />
+    
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="/reveal.js/css/reveal.css"/>
+    
+      <link rel="stylesheet" href="/reveal.js/css/theme/white.css" id="theme"/>
+    
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="/reveal.js/lib/css/zenburn.css"/>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '/reveal.js/css/print/pdf.css' : '/reveal.js/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link rel="canonical" href="http://localhost:4000/11-svm-unbalanced.html">
+
+    <script src="https://cdn.mathjax.org/mathjax/2.4-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-color="#000">
+    <h1 class="white" style="border-top: thin solid #DDD;border-bottom: thin solid #DDD;">
+        <img src="assets/ga_logo_black.png" style="float:left;top:0px;" />
+        General Assembly
+    </h1>
+    <p class="big_title">11. Support Vector Machines and imbalanced datasets</p>
+</section>
+
+<section data-markdown="">
+# Lesson 11
+## LEARNING OBJECTIVES
+
+* SVM
+* Imbalanced datasets
+
+</section>
+
+<!-- Prework and review -->
+<section data-background-color="#DA0A13">
+    <h1>Lesson #11</h1>
+    <p class="big_title">Review of Lesson 10</p>
+</section>
+
+<section data-markdown="">
+# Last Lesson Review
+
+* K-Means
+* PCA
+
+</section>
+
+<!-- Today -->
+<section data-background-color="#22c8c6">
+    <h1>Today</h1>
+    <p class="big_title">Support Vector Machines</p>
+</section>
+
+<section data-markdown="">
+
+
+# Hyperplane
+
+Classification separating an hyperplane
+
+* 1D =&gt; point
+* 2D =&gt; line
+* 3D =&gt; surface
+* etc ...
+
+A hyperplane in 2 dimension is defined by a line equation \\( \beta_0 + \beta_1 X_1 + \beta_2 X_2 = 0  \\)
+
+
+In **p dimensions** a hyperplane is defined by: $$\beta_0 + \beta_1 X_1 + ... + \beta_p X_p = 0 \qquad  p \gt 0 $$
+
+</section>
+
+<section data-markdown="">
+
+# Linearly separable
+
+We have n samples in p dimensions/features  \\( X = \\{ x_{i}  \\}  \quad i \in [1,n]  \\).
+
+These observations belong to two classes \\( y_i \in \\{-1, +1 \\} \\)
+
+The classes are **linearly separable**: there is an  hyperplane that fully separates the points according to their classes.
+
+All points \\( x_i \\) such that
+
+* \\( \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j}  &lt; 0 \\) belong to class -1
+* \\( \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j}  &gt; 0 \\) belong to class +1
+
+</section>
+
+<section data-markdown="">
+# Linear decision boundary
+We predict the class of a new point \\( x^{\prime} \\)
+
+by calculating
+$$ f(x^{\prime}) = \beta\_0+ \sum\_{j=1}^{n} \beta\_j x\_{j}^{\prime}  $$
+
+* \\( f(x^{\prime}) &gt;0 =&gt; +1 \\)
+* \\( f(x^{\prime}) &lt;0 =&gt; -1 \\)
+
+A classifier that is based on a separating hyperplane leads to a **linear decision boundary**.
+
+</section>
+
+<section data-markdown="">
+# One line
+
+Note that since
+
+* \\( y\_i \\)
+* \\( \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j}  \\)
+
+have the same sign
+
+$$ y\_i ( \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j} ) &gt; 0 $$
+
+</section>
+
+<section data-markdown="">
+# Infinity of Hyperplanes
+
+If our data is linearly separable then there exists an infinity of hyperplanes that can separate it
+
+![](assets/11/hyperplane-classification.png)
+
+
+=&gt; We need to introduce a margin to separate the classes
+
+Fig from [Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/getbook.html)
+</section>
+
+<section data-markdown="">
+# Maximal Margin Classifier
+
+We want to find the Hyperplane that will maximise the distance to all the points.
+Best separation of the classes
+
+![Maximal Margin Classifier](assets/11/Maximal_Margin_Classifier.png)
+
+Fig from [Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/getbook.html)
+</section>
+
+<section data-markdown="">
+# Maximal Margin Classifier
+
+Finding the largest margin that separates the classes is equivalent to solving
+
+$$ \max\_{\beta\_i} M \quad \text{such that} \quad y\_i ( \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j} ) &gt; M \quad \forall i \in [1,..,n] $$
+
+with \\( \sum\_{j=0}^{p}  \beta^2\_j = 1\\)
+
+</section>
+
+<section data-markdown="">
+# Support Vectors
+
+The observations that are on the margin lines are called **support vectors**
+
+They *support* the maximal margin hyperplane in the sense that if these points were moved slightly then the maximal margin hyper- plane would move as well.
+
+Interestingly, the maximal margin hyperplane depends directly on the support vectors, but not on the other observations: a movement to any of the other observations would not affect the separating hyperplane, provided that the observation’s movement does not cause it to cross the boundary set by the margin.
+
+A change in the support vector impacts the margin a lot =&gt; over fitting
+
+</section>
+
+<section data-markdown="">
+# Support Vector Classifier
+
+What if we allow some points to be either wrongly classified or at least within the margin boundaries?
+
+This is the case when the classes are not separable, we still want the best margin possible. But some points will be on the wrong side
+
+Add a tuning parameter C that dictates the severity of the violation of the margin
+
+The bigger C is the more points are
+
+* within the margin
+* or misclassified
+
+C is some budget for violation of the margin which is determined during cross validation
+
+Even in the case of linearly separable classes adding some flexibility to the margin will make the classfier more robust, more flexible (less overfitting)
+
+
+</section>
+
+<section data-markdown="">
+# Support Vector Classifier
+
+\\( C\\) is a non negative tuning parameter
+
+$$ \max\_{\beta\_i, \epsilon\_i} M \quad \text{such that} \quad y\_i ( \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j} ) &gt; M - \epsilon\_i \quad \forall i \in [1,..,n]  $$
+with
+
+* \\( \sum\_j  \beta^2\_j = 1 \\)
+* \\(   \epsilon\_i &gt; 0 \\)
+* \\( \sum\_{i} \epsilon\_i \leq C  \\)
+
+</section>
+
+<section data-markdown="">
+# LAB SVC
+
+[L11 N1 SVC.py]()
+
+</section>
+
+<section data-markdown="">
+# Support Vector Machine
+
+What if the data is not even close to be linearly separable?
+
+![](assets/11/non_linearly_separable.png)
+
+Fig from [Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/getbook.html)
+
+</section>
+
+<section data-markdown="">
+# Introducing Kernels
+
+The optimization equation for the linear support vector classifier can be rewritten as such
+
+$$ f(x) =  \beta\_0 + \sum\_{i=1}^{n} \alpha\_i \langle x, x\_i \rangle   $$
+$$ f(x) =  \beta\_0 + \sum\_{i=1}^{n} \alpha\_i K(x,x\_i)    $$
+
+with \\( K(x,x\_i) = \langle x, x\_i \rangle \\) the vector dot product.
+
+But we could use a different Kernel function
+
+
+**Note**:This involves \\(p * \frac{n(n-1)}{2} \\) multiplications! However only the support vectors are useful. So we can limit the sum to \\(S\\) support vectors.
+
+
+</section>
+
+<section data-markdown="">
+# Kernels
+
+Here are some classic Kernel functions
+
+* Linear Kernel \\( \quad K(x,x_i) = \langle x, x_i \rangle\\)
+* Polynomial Kernel (d): \\( \quad K(x,x\_i) =  (1 + \sum\_{j=1}^{p} x\_{j}x\_{i,j} )^d   \\)
+* Radial Kernel \\( \quad K(x,x\_i) =   \exp(-\gamma    \sum\_{j=1}^{p} (x\_{j} - x\_{i,j})^2 )   \\)
+
+</section>
+<section data-markdown="">
+# SVM Lab
+
+gads/11_svm_imbalanced/py/L11_N2_SVM.py
+</section>
+<section data-background-color="#22c8c6">
+    <h1>Today</h1>
+    <p class="big_title">Part II Imbalanced datasets</p>
+</section>
+
+<section data-markdown="">
+# Imbalanced datasets
+
+Caravan dataset: a few hundreds YES vs thousands of NO
+
+* Setting all predictions to No gives you a 94% prediction rate!
+
+Strategies
+
+* Collect more data
+* Accuracy is not always the best metric (Cohen's Kappa, F1 score, ...)
+* Oversample or Undersample
+* SMOTE
+* Penalized Models
+* Decision trees often perform well on imbalanced datasets
+
+</section>
+<section data-markdown="">
+# Over / Under Sample
+Yes is the minority class and No the majority class
+
+The idea is to balance the ratio of Yes vs No samples \\(  r = \frac{ n\_{Yes} }{n\_{No}} \ll 1 \\)
+
+### Under Sample
+
+Build a training dataset composed of n No samples and n Yes samples.
+
+$$ n\_{Yes} = n\_{No} \implies r = \frac{ n\_{Yes} }{n\_{No}} = 1 $$
+
+### Over Sample
+
+Copy the Yes samples k times and keep \\( k*n\_{Yes} \\) samples of the No class.
+
+$$ k* n\_{Yes} = n\_{No} \implies r = \frac{ n\_{Yes} }{n\_{No}} = 1 $$
+
+</section>
+
+<section data-markdown="">
+# SMOTE:
+
+[N. V. Chawla et al. (2002) "SMOTE: Synthetic Minority Over-sampling Technique", Volume 16, pages 321-357](http://www.jair.org/papers/paper953.html)
+
+SMOTE is an oversampling method that creates creates entries that are interpolations of the minority class, as well as undersamples the majority class.
+
+</section>
+
+<section data-markdown="">
+# Support Vector Machine
+
+![SVM](assets/11/simple-svm.gif)
+
+        class sklearn.svm.SVC( C=1.0, kernel='rbf',  ...)¶
+
+* C: Penalty on the error term. Level of samples within the margin
+* Kernel: The internal representation that models the boundaries: linear, polynomial, Gaussian (rbf), ...
+
+</section>
+
+<section data-markdown="">
+# Lab on Caravan
+
+In the next exercise we will use the Caravan dataset. Highly unbalanced.
+
+Compare the AUC score, the ROC Curve and the confusion matrix for each of the following strategies
+
+1. Dumb classifier: Accuracy Paradox
+2. [Support Vector Machine](http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC)
+3. Under Sample
+4. Over Sample
+5. SMOTE with [imbalanced-learn](https://github.com/scikit-learn-contrib/imbalanced-learn)
+
+
+[L11 Imbalanced Notebook](https://github.com/alexperrier/gads/blob/master/11_svm_imbalanced/py/Imbalanced%20Lab.ipynb)
+
+</section>
+
+<section data-markdown="">
+# Lab Caravan
+
+## 1. Accuracy Paradox
+Load the Caravan dataset
+
+Consider a simple classifier that always gives 'No' as the result.
+
+Accuracy?
+
+</section>
+
+<section data-markdown="">
+# Lab
+
+## 2. SVM
+
+* Split the dataset into train and test.
+
+Grid search an SVM on the train set.
+
+Accuracy? Confusion Matric, ROC Curve, AUC?
+
+
+Conclusion?
+
+**Keep the initial X_test and y_test**
+
+</section>
+
+<section data-markdown="">
+# Undersampling
+## 3. Under sample
+
+In the initial dataset we only have 348 samples in the Yes class.
+
+Build a dataframe with these 348 samples and a random selection of 348 No samples
+
+Grid Search an SVM (same params as last step)
+
+Score and confusion matrix on the original test set?
+
+</section>
+
+<section data-markdown="">
+# Over sampling
+## 4. Over sample
+
+Build a new dataframe by replicating the Yes set 4 times
+
+Grid Search an SVM (same params)
+
+Score and confusion matrix on the original test set?
+
+</section>
+
+<section data-markdown="">
+# SMOTE
+## 5. Synthetic Minority Oversampling TEchnique
+
+Install
+
+&gt; pip install -U imbalanced-learn
+
+
+&gt; from imblearn.over_sampling import SMOTE
+&gt; smo_X, smo_y = smote.fit_sample(X_train, y_train)
+
+results?
+
+
+</section>
+
+<section data-markdown="">
+# Links
+* [Tom Fawcett - Learning from Imbalanced Classes](http://www.svds.com/learning-imbalanced-classes/)
+* [Dealing with imbalanced data - R](http://www.marcoaltini.com/blog/dealing-with-imbalanced-data-undersampling-oversampling-and-proper-cross-validation)
+* [8 Tactics to Combat Imbalanced Classes in Your Machine Learning Dataset](http://machinelearningmastery.com/tactics-to-combat-imbalanced-classes-in-your-machine-learning-dataset/)
+
+</section>
+<section data-markdown="">
+# NLP in Healthcare
+
+</section>
+
+      </div>
+    </div>
+
+    <script src="/reveal.js/lib/js/head.min.js"></script>
+    <script src="/reveal.js/js/reveal.js"></script>
+    <script>
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        width: 1200,
+        controls: true,
+        progress: true,
+        history: true,
+        center: false,
+        slideNumber: true,
+        
+          transition: 'slide',
+        
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '/reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '/reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: '/reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>

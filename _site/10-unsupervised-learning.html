@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>
+      
+        Lesson 10 - Unsupervised Learning | Emines - UM6P - Data Science
+      
+    </title>
+
+    <meta name="author" content="" />
+
+    <!-- Description -->
+    
+      <meta name="description" content="none" />
+    
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="/reveal.js/css/reveal.css"/>
+    
+      <link rel="stylesheet" href="/reveal.js/css/theme/white.css" id="theme"/>
+    
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="/reveal.js/lib/css/zenburn.css"/>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '/reveal.js/css/print/pdf.css' : '/reveal.js/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link rel="canonical" href="http://localhost:4000/10-unsupervised-learning.html">
+
+    <script src="https://cdn.mathjax.org/mathjax/2.4-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-color="#000">
+    <h1 class="white" style="border-top: thin solid #DDD;border-bottom: thin solid #DDD;">
+        <img src="assets/ga_logo_black.png" style="float:left;top:0px;" />
+        General Assembly
+    </h1>
+    <p class="big_title">10. Unsupervised Learning </p>
+</section>
+
+<section data-markdown="">
+# Lesson 10
+## LEARNING OBJECTIVES
+
+* K-Means
+* PCA
+
+</section>
+
+<!-- Prework and review -->
+<section data-background-color="#DA0A13">
+    <h1>Lesson #10</h1>
+    <p class="big_title">Review of Lesson 9</p>
+</section>
+
+<section data-markdown="">
+# Last Lesson Review
+
+* Why not use a simple linear regression to predict classification?
+* Binomial Logistic Regression
+* Transformations in Scikit
+* Recap on encoding categorical values
+
+</section>
+
+<section data-markdown="">
+# Last session
+### Any Questions?
+
+* What's the sigmoid function?
+* Odds ratio
+* ...
+
+
+Note:
+Exit tickets
+</section>
+
+<!-- Today -->
+<section data-background-color="#22c8c6">
+    <h1>Today</h1>
+    <p class="big_title">Unsupervised Learning</p>
+</section>
+
+<section data-markdown="">
+
+
+# Unsupervised Learning
+
+Not interested in predictions
+
+We only have observations
+
+Can we discover patterns or subgroups, visualize the observations ?
+
+**PCA**: Principal Compenent analysis for data visualization or data preprocessing
+
+**Clustering**: for discovering sub groups in the data
+</section>
+
+<section data-markdown="">
+# Challenges
+
+* Often performed part of exploratory analysis
+* Subjective, no way to check
+* Difficult to assess the result
+* No labels
+
+</section>
+
+<section data-markdown="">
+# Clustering
+
+Looks for homogeneous subgroups in the data
+
+Market segmentation
+
+2 most common methods
+
+* [K-Means clustering](http://scikit-learn.org/stable/modules/clustering.html#k-means): find a predefined number of clusters / groups of equal variance
+* [Hierarchical clustering](http://scikit-learn.org/stable/modules/clustering.html#hierarchical-clustering): build nested clusters by merging or splitting them successively. This hierarchy of clusters is represented as a tree (or dendrogram).
+* [Other clustering algorithms](http://scikit-learn.org/stable/modules/clustering.html#overview-of-clustering-methods)
+
+</section>
+
+<section data-markdown="">
+# K-Means Clustering
+
+The number of clusters K is abitrary.
+
+Let \\( C_k  \text{ for } k \in [1,..,K] \\) be the list of K clusters.
+
+We make 2 assumptions:
+
+* All observations belong to at least one cluster \\( C_k\\)
+* No observations belong to 2 clusters
+
+And define good clustering as clustering for which the *within-cluster* variation is as small as possible.
+
+We want each clusters to have minimal variation between the observations that compose it.
+
+</section>
+
+<section data-markdown="">
+# K-Means Clustering
+A more formal definition is
+
+*The KMeans algorithm clusters data by trying to separate samples in **n groups of equal variance**, minimizing a criterion known as the **inertia**  *
+
+$$ Inertia = \sum\_{i=0}^{n} \min\_{\mu\_j \in C_K} (||x\_i - \mu\_j||^2) $$
+
+</section>
+
+<section data-markdown="">
+# K-Means Clustering
+
+* Choose K arbitrarily
+
+* [*Initialize*] Randomly assign a number 1 to K to each one of the samples
+
+Then Iterate until convergence
+1. For all clusters, calculate the center of all the points in the cluster.
+    This creates K points called centroids.
+2. Then reassign all the observations to the cluster that has the closest centroid
+3. Until convergence
+
+Using the Euclidian distance between points.
+
+*Until convergence*: no more changes or very little difference between iterations
+
+</section>
+
+<section data-markdown="">
+# K-Means Clustering: challenges
+We have a metric: **Inertia**! We can surely select the *Best* clustering! LOL
+
+* Dependent on the initialization =&gt; must run the clustering with several initializations and average
+* Choosing the number of clusters K is not an easy problem
+* Should you normalize your data?
+* In the end are you clustering the noise?
+* Will outliers skew your clusters?
+* Sensitive to perturbations!
+
+</section>
+
+<section data-markdown="">
+# Lab
+
+![](assets/10/cluster_datasets.png)
+
+
+[L10_N1_unsupervised-k-means.py](https://github.com/alexperrier/gads/tree/master/10_unsupervised/py/L10_N1_unsupervised-k-means.py)
+
+</section>
+
+<section data-markdown="">
+# Lab
+
+Make these 4 [datasets]:
+
+        n_samples = 1500
+        noisy_circles   = datasets.make_circles(n_samples=n_samples, factor=.5, noise=.05)
+        noisy_moons     = datasets.make_moons(n_samples=n_samples, noise=.05)
+        blobs           = datasets.make_blobs(n_samples=n_samples, random_state=8)
+        no_structure    = np.random.rand(n_samples, 2), None
+
+and check how these 3 algorithms perform on each
+
+        kmeans = cluster.KMeans(n_clusters=2)
+        dbscan = cluster.DBSCAN(eps=.2)
+        spectral = cluster.SpectralClustering(n_clusters=2, eigen_solver='arpack', affinity="nearest_neighbors")
+
+Explore the datasets objects you've created, and the [k-means](http://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html) scikit model
+
+Missing link :
+
+        X, y = blobs
+
+</section>
+
+<section data-markdown="">
+# K-means finding K
+
+Make classification with N clusters
+
+
+Plot the number of clusters against the average variance
+
+</section>
+<section data-markdown="">
+# More on Clustering
+
+[Demonstration of k-means assumption](http://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_assumptions.html#example-cluster-plot-kmeans-assumptions-py)
+
+[Vector Quantization](http://scikit-learn.org/stable/auto_examples/cluster/plot_face_compress.html#example-cluster-plot-face-compress-py)
+
+Very thorough article: [Cluster Analysis and Segmentation ](http://inseaddataanalytics.github.io/INSEADAnalytics/Report_s45.html)
+
+</section>
+
+<section data-markdown="">
+# part II Principal component analysis
+
+Principal component analysis (PCA):  Linear dimensionality reduction using **Singular Value Decomposition** of the data and keeping only the most significant singular vectors to project the data to a lower dimensional space.
+
+</section>
+
+<section data-markdown="">
+# PCA
+### Decomposition of the covariance matrix
+
+We have  \\( X\\) data (n x p) n samples, p features
+* Calculate the **Covariance Matrix**: \\(X. X^T\\) =&gt; n * n matrix =&gt; square =&gt; can be decomposed
+
+* There exists unique matrices \\( W \text{ and } \Lambda \text{ such that } X.X^T = W . \Lambda . W^T \\)
+where
+    * \\(\Lambda\\) is diagonal (composed of eigenvalues)
+    * W is triangular composed of the eigenvectors
+
+=&gt; all the vectors in W are decorrelated!!!
+
+Recall: \\(\lambda  \\) is an eigenvalue and \\(v  \\) an eigenvector  of a matrix A \\( \iff A.v = \lambda.v \\)
+
+
+</section>
+
+<section data-markdown="">
+# PCA Geometric interpretation
+
+* 1st component (vector) gets the max of the variance in the data
+* 2nd gets the rest
+* 3rd gets the rest ....
+
+and all these vectors are orthogonal
+
+
+* The data is projected first on the 1st vector =&gt; 1st element of the decomposition
+* Then on the 2nd direction =&gt; 2nd element
+
+</section>
+
+<section data-markdown="">
+# PCA For dimensionality reduction
+
+Not all lambdas are equal ... in fact the tend to decrease rather fast
+
+</section>
+
+<section data-markdown="">
+# Demo
+
+Find how many eigenvalues do you need to keep to retain 80% of the variation in the data?
+
+Caravan dataset
+
+        df = pd.read_csv('../../datasets/Caravan.csv', index_col = False)
+        X = df.values
+        scale = StandardScaler()
+        X = scale.fit_transform(X)
+
+        # Covariance matrix
+        covmat = X.T.dot(X)
+
+        # Eigenvalues
+        from scipy import linalg
+        evs, evmat = linalg.eig(covmat)
+        evs = evs.astype(float)
+
+</section>
+
+<section data-markdown="">
+# LAB 2
+
+And now with scikit PCA and the USArrests.csv dataset
+
+    df = pd.read_csv('../../datasets/USArrests.csv', index_col=0)
+
+Decompose with 4 dimensions
+
+Plot the states along the 2 first eigenvectors
+
+</section>
+
+<section data-markdown="">
+# Next Project
+
+[Project 3](https://github.com/alexperrier/gads/blob/master/project_03/README.md)
+</section>
+
+<section data-markdown="">
+# Links
+
+* PCA [by Sebastian Raschka](http://sebastianraschka.com/Articles/2015_pca_in_3_steps.html)
+
+</section>
+
+
+      </div>
+    </div>
+
+    <script src="/reveal.js/lib/js/head.min.js"></script>
+    <script src="/reveal.js/js/reveal.js"></script>
+    <script>
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        width: 1200,
+        controls: true,
+        progress: true,
+        history: true,
+        center: false,
+        slideNumber: true,
+        
+          transition: 'slide',
+        
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '/reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '/reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: '/reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>

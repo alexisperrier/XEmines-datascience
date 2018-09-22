@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>
+      
+        Lesson 05 - Data Visualization | Emines - UM6P - Data Science
+      
+    </title>
+
+    <meta name="author" content="" />
+
+    <!-- Description -->
+    
+      <meta name="description" content="none" />
+    
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="/reveal.js/css/reveal.css"/>
+    
+      <link rel="stylesheet" href="/reveal.js/css/theme/white.css" id="theme"/>
+    
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="/reveal.js/lib/css/zenburn.css"/>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '/reveal.js/css/print/pdf.css' : '/reveal.js/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link rel="canonical" href="http://localhost:4000/05-data-visualization-matplotlib-seaborn.html">
+
+    <script src="https://cdn.mathjax.org/mathjax/2.4-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-color="#000">
+    <h1 class="white" style="border-top: thin solid #DDD;border-bottom: thin solid #DDD;">
+        <img src="assets/ga_logo_black.png" style="float:left;top:0px;" />
+        General Assembly
+    </h1>
+    <p class="big_title">Data visualization, #Dataviz, Matplotlib, Seaborn, Bokeh &amp; Plotly, Edward Tufte, Pie charts</p>
+</section>
+
+<section data-markdown="">
+# Dataviz
+## LEARNING OBJECTIVES
+
+* Make a decent plot with Matplotlib
+* Use Seaborn for prettier plots
+* Use Seaborn for data insights
+* What makes a good #dataviz
+* Bokeh, Plot.ly
+
+
+</section>
+
+<!-- Prework and review -->
+<section data-background-color="#DA0A13">
+    <h1>Lesson #N</h1>
+    <p class="big_title">Pre Work &amp; Review</p>
+</section>
+
+<section data-markdown="">
+# Last Lesson Review
+
+* Correlation vs Causation
+* Linear regression
+* R^2, P-value, ...
+* Confounders / Causality
+</section>
+
+<section data-markdown="">
+# Last session
+### Questions regarding last class
+
+* When does correlation imply causation?
+* What is R-squared
+* Why use Adj. R-squared?
+* P-Value?
+* [4 Conditions for linear regression?](http://localhost:4000/04-statistics-review.html#/22)
+* Condition for causality?
+
+
+Note:
+Exit tickets
+</section>
+
+<!-- Today -->
+<section data-background-color="#22c8c6">
+    <h1>Today</h1>
+    <p class="big_title">The amazing world of Dataviz</p>
+</section>
+
+<section data-markdown="">
+# Today
+* Matplotlib
+* Seaborn
+
+Then
+
+* Bokeh
+* Plotly
+* Tableau
+
+## And a surprise!
+
+</section>
+
+<!-- Intro -->
+<section data-background-color="#22c8c6">
+    <h1>Intro</h1>
+    <p class="big_title">Matplotlib</p>
+</section>
+<section data-markdown="">
+# Matplotlib
+
+* Matplotlib is a plotting library for the Python
+* Matplotlib 1.5.x supports Python versions 2.7 through 3.5
+* [Matplotlib.org](http://matplotlib.org/)
+
+</section>
+
+<section data-markdown="">
+# To the Notebook!
+[Local notebook](http://localhost:8888/notebooks/05_visualization/py/Lesson%205%20Notebook%201%20Matplotlib.ipynb)
+
+Inspired from this [Matplotlib tutorial](http://www.labri.fr/perso/nrougier/teaching/matplotlib)
+
+[More matplotlib](http://localhost:8888/notebooks/05_visualization/py/Lesson%205%20Notebook%202%20More%20Matplotlib.ipynb)
+</section>
+
+<section data-markdown="">
+# Themes and colors
+
+### Colors
+http://matplotlib.org/examples/color/named_colors.html
+
+### Color palettes
+[list of color maps](http://matplotlib.org/users/colormaps.html)
+
+        my_cmap = matplotlib.cm.get_cmap('rainbow')
+        imshow(i, cmap=my_cmap)
+
+### Matplotlib themes
+https://raw.githubusercontent.com/rasbt/matplotlib-gallery/master/images/formatting_4.png
+
+        plt.style.use('fivethirtyeight')
+
+        print(plt.style.available)
+
+</section>
+
+<!-- What makes a nice plot? -->
+<section data-background-color="#22c8c6">
+    <h1>Principles of efficient Data Visualization</h1>
+    <p class="big_title">What makes a nice plot?</p>
+</section>
+
+<section data-markdown="">
+# Nicer plot anyone?
+
+## Less is more
+
+*Perfection is achieved not when there is nothing more to add, but when there is nothing left to take away.*
+
+Antoine de St Exupery
+
+* [Rules for better figures](http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/)
+* [Illustration: simplifying Excell](https://gfycat.com/ImprobableFemaleBasenji#?speed=0.5)
+
+</section>
+
+<section data-markdown="">
+# [Ten Simple Rules for Better Figures](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833)
+
+* Rule 1: Know Your Audience
+* Rule 2: Identify Your Message
+* Rule 3: Adapt the Figure to the Support Medium
+* Rule 4: Captions Are Not Optional
+* Rule 5: Do Not Trust the Defaults
+* Rule 6: Use Color Effectively
+* Rule 7: Do Not Mislead the Reader
+* Rule 8: Avoid “Chartjunk”
+* Rule 9: Message Trumps Beauty
+* Rule 10: Get the Right Tool
+
+</section>
+<section data-markdown="">
+# Edward Tufte
+
+American statistician and professor of political science, statistics, and computer science at Yale University
+
+1983 Edward Tufte, [The Visual Display of Quantitative Information](https://www.amazon.com/Visual-Display-Quantitative-Information/dp/0961392142/ref=sr_1_1?ie=UTF8&amp;qid=1467369373&amp;sr=8-1&amp;keywords=The+Visual+Display+of+Quantitative+Information)
+
+* Expert in Visual communication of information
+* Chartjunk: all visual elements in charts and graphs that are not necessary to comprehend the information represented on the graph, or that distract the viewer from this information
+
+</section>
+<section data-markdown="">
+# 6 principles of Edward Tufte
+
+1. The representation of numbers, as physically measured on the surface of the graphic itself, should be **directly proportional** to the numerical quantities represented.
+2. Clear, detailed, and thorough **labeling** should be used to defeat graphical distortion and ambiguity. Write out explanations of the data on the graphic itself. Label important events in the data.
+3. Show **data variation**, not design variation.
+4. In time-series displays of money, deflated and standardized units of monetary measurement are nearly always better than nominal units.
+5. The number of information-carrying (variable) dimensions depicted should not exceed the number of dimensions in the data.
+6. Graphics must not quote data **out of context**.
+
+</section>
+
+<section data-markdown="">
+# 6 principles Edward Tuftes
+
+[Principles of Information Display for Visualization Practitioners](http://www2.cs.uregina.ca/~rbm/cs100/notes/spreadsheets/tufte_paper.html)
+
+Examples:
+
+* http://www.npr.org/2011/07/03/137536111/by-the-numbers-todays-military
+* http://www.informationisbeautiful.net/visualizations/the-billion-dollar-gram/
+* https://www.technologyreview.com/s/425120/space-over-time/
+* https://upload.wikimedia.org/wikipedia/commons/2/29/Minard.png
+
+See also [Data Visualization Principles: Lessons from Tufte](https://moz.com/blog/data-visualization-principles-lessons-from-tufte)
+</section>
+
+<section data-markdown="">
+# Pie charts
+
+### Any opinion?
+
+* Pie charts are simple and efficient
+* Pie charts are confusing and should be avoided
+
+</section>
+
+<!-- <section data-markdown>
+# Pie charts
+![Pie chart](assets/05/rick_rolling.jpg)
+</section>
+ -->
+<section>
+<h1>Pie charts</h1>
+
+<img src="assets/05/rick_rolling.jpg" />
+<iframe src="https://embed.spotify.com/?uri=spotify%3Atrack%3A7GhIk7Il098yCjg4BQjzvb" width="300" height="190" frameborder="0" allowtransparency="true"></iframe>
+</section>
+
+<section data-markdown="">
+# Pie charts
+
+*Pie charts are evil.*
+
+*They represent much of what is wrong with the poor design of many websites and software applications. They're also innefective, misleading, and innacurate. Using a pie chart as your graph of choice to visually display important statistics and information demonstrates either a lack of knowledge, laziness, or poor design skills.*
+
+From [Countdown of Top 10 Reasons to Never Ever Use a Pie Chart
+](https://blogs.oracle.com/experience/entry/countdown_of_top_10_reasons_to_never_ever_use_a_pie_chart)
+
+### Why ?
+
+[The Worst Chart In The World](http://www.businessinsider.com/pie-charts-are-the-worst-2013-6)
+</section>
+
+<section data-markdown="">
+# Pie charts
+![pie chart](https://blogs.oracle.com/experience/resource/pacman-chart.jpg)
+
+See also [Save the Pies for Dessert](http://www.perceptualedge.com/articles/08-21-07.pdf) for more examples on the limitations of Pie charts.
+</section>
+
+<!-- Matplotlib lab -->
+<section data-background-color="#22c8c6">
+    <h1>Matplotlib lab</h1>
+    <p class="big_title">Matplotlib lab</p>
+</section>
+
+<section data-markdown="">
+# Matplotlib lab
+
+* Open this [notebook](http://localhost:8888/notebooks/05_visualization/py/Lesson%205%20Lab%201.ipynb)
+
+</section>
+
+<!-- Seaborn -->
+<section data-background-color="#22c8c6">
+    <h1>Seaborn</h1>
+    <p class="big_title">Seaborn</p>
+</section>
+
+<section data-markdown="">
+# Seaborn
+[Seaborn](https://web.stanford.edu/~mwaskom/software/seaborn/) is a library for making attractive and informative statistical graphics in Python.
+
+It is built on top of matplotlib and tightly integrated with the PyData stack, including support for numpy and pandas data structures and statistical routines from scipy and statsmodels.
+</section>
+
+<section data-markdown="">
+# Seaborn
+
+* [Gallery](https://web.stanford.edu/~mwaskom/software/seaborn/examples/index.html)
+
+
+    iris = sns.load_dataset("iris")
+    sns.pairplot(iris);
+
+* [Seaborn Datasets](https://github.com/mwaskom/seaborn-data)
+
+</section>
+<section data-markdown="">
+# The tips dataset
+
+One waiter recorded information about each tip he received over a period of a few months working in one restaurant.
+
+He collected the following  variables:
+
+
+* tip in dollars,
+* bill in dollars,
+* sex of the bill payer,
+* whether there were smokers in the party,
+* day of the week,
+* time of day,
+* size of the party
+
+In all he recorded 244 tips.
+</section>
+<section data-markdown="">
+# Lab 2 - Seaborn
+
+[Lab 2 - Seaborn](http://localhost:8888/notebooks/05_visualization/py/Lesson%205%20Notebook%203%20-%20Seaborn.ipynb)
+
+</section>
+
+<section data-background-color="#22c8c6">
+    <h1>Bokeh</h1>
+    <p class="big_title">Bokeh</p>
+</section>
+<section data-markdown="">
+# Bokeh
+[Bokeh](http://bokeh.pydata.org/en/latest/) is a Python interactive visualization library that targets modern web browsers for presentation. Its goal is to provide elegant, concise construction of novel graphics in the style of D3.js, and to extend this capability with high-performance interactivity over **very large** or **streaming datasets**
+
+[Demo](https://youtu.be/stMADOcmapo?t=1198)
+
+[Tutorial](http://bebi103.caltech.edu/2015/tutorials/r1_intro_to_bokeh.html)
+</section>
+
+<!-- Plotly -->
+<section data-background-color="#22c8c6">
+    <h1>Plotly</h1>
+    <p class="big_title">Plotly</p>
+</section>
+<section data-markdown="">
+# Plotly
+
+* Interactive
+* BI focused
+* Google drive for charts!
+* Excel, [Python](https://plot.ly/python/), R compatible
+* [Dashboards](https://plot.ly/dashboards/)
+
+* Matplotlib and Seaborn
+* [Example 1: scatter plots](https://plot.ly/python/scatterplot-matrix/)
+* [Example 2: Notebooks](https://plot.ly/python/ipython-notebook-tutorial/)
+
+</section>
+
+<!-- Lesson Review 9:15 -->
+<section data-background-color="#22c8c6">
+    <h1>Lesson Review</h1>
+    <p class="big_title"> Lesson Review </p>
+</section>
+<section data-markdown="">
+# project 2
+https://github.com/alexperrier/gads/tree/master/project_02
+Due Lesson 10
+
+Submission in the ga-students repo https://github.com/alexperrier/ga-students
+
+        git clone git@github.com:alexperrier/ga-students.git
+        add your nitebook file named: project02-firstname-lastname.ipynb
+        git commit -m "Project 02 your name"
+        git push origin master
+
+</section>
+<!-- Before Next Class -->
+<section data-background-color="#DA0A13">
+    <h1>Project 2</h1>
+    <p class="big_title">Project 2</p>
+</section>
+
+<!-- Q&A -->
+<section data-background-color="#FED500">
+    <h1>Q &amp; A</h1>
+    <p class="big_title">5 Questions about today</p>
+</section>
+
+<!-- Exit ticket -->
+<section data-background-color="#FC9CB4">
+    <h1>Exit ticket</h1>
+    <p class="big_title">Exit ticket</p>
+</section>
+
+<section data-markdown="">
+# Links
+
+[Tutorial | Basic Bokeh | EuroSciPy 2015 | Bryan Van de Ven](https://www.youtube.com/watch?v=-Y8XyrtYJzU)
+
+[Bokeh is here Interactive Visualization for Python by Fabio Pliger](https://www.youtube.com/watch?v=z1DWou61a-M)
+
+[A Simple Time Series Analysis Of The S&amp;P 500 Index](http://www.johnwittenauer.net/a-simple-time-series-analysis-of-the-sp-500-index/)
+
+</section>
+
+<!--
+
+# Bokeh?
+
+
+Multiple linear regression
+https://stanford.edu/~mwaskom/software/seaborn/examples/multiple_regression.html
+https://www.oreilly.com/learning/data-visualization-with-seaborn
+Advanced
+http://blog.insightdatalabs.com/advanced-functionality-in-seaborn/
+
+# Plotly
+
+# Tableau
+
+
+# Links
+* http://matplotlib.org/gallery.html
+* [Ten Simple Rules for Better Figures](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833)
+
+ https://stanford.edu/~mwaskom/software/seaborn/tutorial/regression.html#plotting-a-regression-in-other-contexts
+
+
+<section data-markdown>
+# Confidence intervals
+[Conf intervals](https://twitter.com/cdoyle43/status/746406852771053568/photo/1)
+</section>
+
+ -->
+
+      </div>
+    </div>
+
+    <script src="/reveal.js/lib/js/head.min.js"></script>
+    <script src="/reveal.js/js/reveal.js"></script>
+    <script>
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        width: 1200,
+        controls: true,
+        progress: true,
+        history: true,
+        center: false,
+        slideNumber: true,
+        
+          transition: 'slide',
+        
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '/reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '/reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: '/reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>

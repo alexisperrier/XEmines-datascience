@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>
+      
+        Lesson 18 - R & AWS ML | Emines - UM6P - Data Science
+      
+    </title>
+
+    <meta name="author" content="" />
+
+    <!-- Description -->
+    
+      <meta name="description" content="none" />
+    
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="/reveal.js/css/reveal.css"/>
+    
+      <link rel="stylesheet" href="/reveal.js/css/theme/white.css" id="theme"/>
+    
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="/reveal.js/lib/css/zenburn.css"/>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '/reveal.js/css/print/pdf.css' : '/reveal.js/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link rel="canonical" href="http://localhost:4000/18-r-and-aws-ml.html">
+
+    <script src="https://cdn.mathjax.org/mathjax/2.4-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-color="#000">
+    <h1 class="white" style="border-top: thin solid #DDD;border-bottom: thin solid #DDD;">
+        <img src="assets/ga_logo_black.png" style="float:left;top:0px;" />
+        General Assembly
+    </h1>
+    <p class="big_title">18. R and AWS ML</p>
+</section>
+
+<section data-markdown="">
+# Previously
+
+* Decomposition, Trending and seasonality
+* Stationarity, Dickey-Fuller test, Autocorrelation, partial auto correlation
+* AR(p), MA9q), ARIMA(p,d,q)
+
+</section>
+
+<section data-markdown="">
+# Today
+
+* R
+    * R studio
+    * packages
+    * essential code
+    * time series forecasting
+
+* AWS ML
+
+    * classification problem
+
+</section>
+
+<section data-markdown="">
+# R Packages
+
+* caret:  The caret package, short for classification and regression training, contains numerous tools for developing predictive models using the rich set of models available in R. The package focuses on simplifying model training and tuning across a wide variety of modeling techniques. It also includes methods for pre-processing training data, calculating variable importance, and model visualizations.
+* CRAN - Package e1071 - for Naive Bayes, SVMs, Latent Class Analysis
+* CRAN - Package randomForest - Random Forests
+* CRAN - Package gbm - Generalized boosting models
+
+and many more https://www.quora.com/What-are-the-best-machine-learning-packages-in-R
+</section>
+
+<section data-markdown="">
+# R Code
+
+Directory:
+
+* getwd() get working directory
+* setwd() set working directory
+
+Packages:
+
+* install.packages('forecast')
+* library('forecast')
+* installed.packages()
+
+help:
+
+* ?c
+* ?forecast
+
+data:
+
+* **x &lt;- 1 instead of x = 1**
+* a &lt;- c(1,2,3,4,5)
+* vector &lt;- c(apple = 1, banana = 2, "kiwi fruit" = 3, 4)
+* df &lt;- read.csv('iris.csv')
+
+Dataframe:
+
+* dim(df)
+* head(df)
+* colnames(df)
+* summary(df)
+
+plot:
+
+* plot(df)
+* hist(df$sepal_length)
+* boxplot(df$sepal_width)
+* plot(df$sepal_length, df$petal_width)
+* qqnorm(df$sepal_length)
+* qqline(df$sepal_length)
+
+ML on Iris
+
+* iris$target[iris$Species == 'setosa'] &lt;- 1
+* iris$target[iris$Species == 'versicolor'] &lt;- 2
+* iris$target[iris$Species == 'virginica'] &lt;- 3
+
+* fit &lt;- lm(target ~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width, data = iris )
+* coefficients(fit)
+* summary(fit)
+
+
+</section>
+
+<section data-markdown="">
+# Time series analysis in R
+
+dataset: [Stock Prices for Tui Ag from the Frankfurt Stock Exchange.](https://www.quandl.com/data/FSE/TUI1_X-Tui-TUI1_X)
+
+
+</section>
+
+<section data-markdown="">
+# Holt Winters
+
+The additive Holt-Winters prediction function (for time series with period length p) is
+
+Yhat[t+h] = a[t] + h * b[t] + s[t - p + 1 + (h - 1) mod p],
+
+where a[t], b[t] and s[t] are given by
+
+a[t] = α (Y[t] - s[t-p]) + (1-α) (a[t-1] + b[t-1])
+
+b[t] = β (a[t] - a[t-1]) + (1-β) b[t-1]
+
+s[t] = γ (Y[t] - a[t]) + (1-γ) s[t-p]
+
+The multiplicative Holt-Winters prediction function (for time series with period length p) is
+
+Yhat[t+h] = (a[t] + h * b[t]) * s[t - p + 1 + (h - 1) mod p],
+
+where a[t], b[t] and s[t] are given by
+
+a[t] = α (Y[t] / s[t-p]) + (1-α) (a[t-1] + b[t-1])
+
+b[t] = β (a[t] - a[t-1]) + (1-β) b[t-1]
+
+s[t] = γ (Y[t] / a[t]) + (1-γ) s[t-p]
+
+
+</section>
+
+<section data-markdown="">
+# Amazon Machine Learning
+
+https://console.aws.amazon.com/
+
+</section>
+<section data-markdown="">
+# Amazon Machine Learning
+
+* Datasources
+* Models
+* Evaluations and results
+
+</section>
+
+      </div>
+    </div>
+
+    <script src="/reveal.js/lib/js/head.min.js"></script>
+    <script src="/reveal.js/js/reveal.js"></script>
+    <script>
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        width: 1200,
+        controls: true,
+        progress: true,
+        history: true,
+        center: false,
+        slideNumber: true,
+        
+          transition: 'slide',
+        
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '/reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '/reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: '/reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>
+      
+        Lesson 06 - Linear regression in Scikit | Emines - UM6P - Data Science
+      
+    </title>
+
+    <meta name="author" content="" />
+
+    <!-- Description -->
+    
+      <meta name="description" content="none" />
+    
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="/reveal.js/css/reveal.css"/>
+    
+      <link rel="stylesheet" href="/reveal.js/css/theme/white.css" id="theme"/>
+    
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="/reveal.js/lib/css/zenburn.css"/>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '/reveal.js/css/print/pdf.css' : '/reveal.js/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link rel="canonical" href="http://localhost:4000/06-scikit-linear-regression.html">
+
+    <script src="https://cdn.mathjax.org/mathjax/2.4-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+      <div class="slides">
+        <!-- * Scikit
+* math basis for linear regression
+* Loss function, Residual error, Mean Squared Error (MSE)
+* Linear regression review: p_values, R-Squared
+* Multicollinearity
+
+* linear_models in scikit: Ridge, Lasso, Elastic
+* Polynomial regression using scikit-learn
+
+ -->
+<section data-background-color="#000">
+    <h1 class="white" style="border-top: thin solid #DDD;border-bottom: thin solid #DDD;">
+        <img src="assets/ga_logo_black.png" style="float:left;top:0px;" />
+        General Assembly
+    </h1>
+    <p class="big_title">The Math behind Linear regression, Scikit-learn
+        Regularization, Ridge, Lasso, Polynomial regression
+        </p>
+</section>
+
+<section data-markdown="">
+# Title
+## LEARNING OBJECTIVES
+
+* Scikit-learn
+* Math basis for linear regression
+* Loss function, Residual error, Mean Squared Error (MSE)
+* linear_models with regularization in scikit: Ridge, Lasso, Elastic
+* Linear regression review: p_values, R-Squared, confidence intervals
+* Multicollinearity
+* Polynomial regression using scikit-learn
+</section>
+
+<!-- Prework and review -->
+<section data-background-color="#DA0A13">
+    <h1>Lesson #N</h1>
+    <p class="big_title">Pre Work &amp; Review</p>
+</section>
+
+<section data-markdown="">
+# Last Lesson Review
+
+* Matplotlib
+* Seaborn
+* Bokeh, Seaborn, Plot.ly
+
+</section>
+
+<section data-markdown="">
+# Projects
+
+* [Final Project](https://github.com/alexperrier/gads/blob/master/final_project/Final%20Project%20Part%201%20Lightning%20Talk.md) part I due lesson 8
+* [Project 2](https://github.com/alexperrier/gads/tree/master/project_02), due lesson 10
+* Submission via new github repo [ga-students](https://github.com/alexperrier/ga-students/tree/master/unit-projects):
+
+</section>
+
+<section data-markdown="">
+# Last session
+### Any questions from last class?
+Note:
+Exit tickets
+</section>
+
+<!-- Today -->
+<section data-background-color="#22c8c6">
+    <h1>Today</h1>
+    <p class="big_title">Scikit-learn  </p>
+</section>
+
+<section data-markdown="">
+# Scikit-learn - Overview
+
+* Classification, Regression and Clustering algorithms
+* support vector machines, random forests, gradient boosting, k-means, and many others DBSCAN
+* is designed to interoperate with Python scientific libraries NumPy and SciPy.
+* Written in Python, with some core algorithms written in Cython
+
+As of 2016, [scikit-learn](http://scikit-learn.org) is under active development and is sponsored by [INRIA](http://www.inria.fr/en/), [Telecom ParisTech](http://www.telecom-paristech.fr/eng)
+
+* Excellent and extensive algorithm implementation
+* Simple conceptual API
+* Fantastic documentation
+* Super Efficient workflow
+
+</section>
+
+<section data-markdown="">
+# Scikit-learn - Overview
+
+* Classification: Identifying to which category an object belongs to.
+    * Applications: Spam detection, Image recognition.
+    * Algorithms: SVM, nearest neighbors, random forest, ...
+
+* Regression: Predicting a continuous-valued attribute associated with an object.
+    * Applications: Drug response, Stock prices.
+    *  Algorithms: SVR, ridge regression, Lasso, ...
+
+* Clustering: Automatic grouping of similar objects into sets.
+    * Applications: Customer segmentation, Grouping experiment outcomes
+    * Algorithms: k-Means, spectral clustering, mean-shift, ...
+
+</section>
+
+<section data-markdown="">
+# Scikit-learn - Overview
+* Dimensionality reduction: Reducing the number of random variables to consider.
+    * Applications: Visualization, Increased efficiency
+    * Algorithms: PCA, feature selection, non-negative matrix factorization.
+
+* Model selection: Comparing, validating and choosing parameters and models.
+    * Goal: Improved accuracy via parameter tuning
+    * Modules: grid search, cross validation, metrics.
+
+* Preprocessing: Feature extraction and normalization.
+    * Application: Transforming input data such as text for use with machine learning algorithms.
+    * Modules: preprocessing, feature extraction.
+
+</section>
+
+<section data-markdown="">
+# Scikit-learn
+
+### Extension - Ecosystem
+* [Extensions and associated projects](http://scikit-learn.org/stable/related_projects.html)
+
+
+</section>
+
+<section data-markdown="">
+# Scikit-learn - API
+
+Could not be simpler
+
+1. select a model
+for instance
+        regr = linear_model.LinearRegression( some model tuning params, the metric, ...)
+or
+
+2. Train the model to the data
+        regr.fit(X, y)
+
+3. Predict on new data
+        y_hat = regr.predict(Some New Data)
+
+4. Score
+        regr.score(X,y)
+
+</section>
+
+<section data-markdown="">
+# Scikit-learn - Documentation
+
+[Documentation of scikit-learn 0.17](http://scikit-learn.org/stable/documentation.html)
+
+[Linear models](http://scikit-learn.org/stable/modules/linear_model.html)
+
+</section>
+
+<!-- Today -->
+<section data-background-color="#22c8c6">
+    <h1>Linear regression </h1>
+    <p class="big_title">The underlying math</p>
+    <p class="big_title">Loss function</p>
+</section>
+
+<section data-markdown="">
+# Ordinary least squares (OLS)
+
+Given  \\(X\\) and \\(y\\) you want to find the best function \\(f\\) that minimizes
+    $$ \Vert y - f(X) \Vert^2 $$
+
+
+Ordinary least squares (OLS) is the simplest and thus most common estimator. It is conceptually simple and computationally straightforward.
+
+OLS estimates are commonly used to analyze both experimental and observational data.
+The OLS method minimizes the sum of squared residuals, and leads to a closed-form expression for the estimated value of the unknown parameter.
+
+The estimator is unbiased and consistent if the errors have finite variance and are uncorrelated with the regressors
+
+</section>
+<section data-markdown="">
+# OLS - 1 Dimension
+
+Let's say we have \\( n  \\) samples:
+
+* Variable \\( x = [x_1, ... , x_n]  \\)
+
+* Outcome \\( y = [y_1, ... , y_n]  \\)
+
+We want to find the *best* \\(a\\) and \\(b\\) such that for all \\( x_i  \\) and \\( y_i  \\)
+
+$$ \hat{y_i} = a * x_i +b $$
+
+Would work perfectly of the points \\(  (x_i, y_i) \\) were on a line.
+But they are not!
+</section>
+<section data-markdown="">
+# OLS - 1 Dimension
+
+So even for the best \\( a  \\) and \\( b  \\) possible we'll end up with some estimation \\( \hat{y_i} = a * x_i +b \\)
+
+
+* \\( \hat{y_i} \neq y_i  \\)
+
+* \\( \Vert y - \hat{y} \Vert  &gt; \varepsilon \\)
+</section>
+
+<section data-markdown="">
+# Residuals
+
+The residuals are
+
+$$ \varepsilon_i = y_i - \hat{y_i} $$
+$$ \varepsilon_i = y_i - (a * x_i +b) $$
+
+for  \\( i = [1, ... , n]  \\)
+
+The residuals are the **distance** between the **true** outcomes  \\( y_i  \\)  and their estimates  \\( \hat{y_i}  \\)
+
+We want to minimize the distance
+</section>
+
+<section data-markdown="">
+# Loss function
+
+We do so by minimizing the  \\( L^2  \\) norm of the residuals
+
+$$  || y - \hat{y} || =  || y - (ax +b) || $$
+
+
+$$  || y - \hat{y} ||^2 =  \sum_{i=0}^n [y_i - (a*x_i + b)]^2   $$
+
+</section>
+
+<section data-markdown="">
+
+# Norms
+###  \\( L^2  \\) norm
+$$  ||x|| = \sqrt{  x_1^2 + .... + x_n^2  } $$
+
+###  \\( L^1  \\) norm
+$$  |x| =  |x_1| + .... + |x_n|  $$
+
+###  \\( L^\infty  \\) norm
+
+$$  |x|_{\infty} =  max [ |x_1|, ... , |x_n| ]  $$
+
+</section>
+
+<section data-markdown="">
+# Loss function
+
+$$ L(a,b)  = || y - \hat{y} ||^2 =  \sum_{i=0}^n [y_i - (a*x_i + b)]^2   $$
+
+* **Convex** function
+* to find the minimum, set the derivative over a and b to \\( 0 \\)
+* that gives us 2 linear equations in a and b that we can solve
+
+[Wikipedia example](https://en.wikipedia.org/wiki/Linear_least_squares_(mathematics))
+
+</section>
+
+<section data-markdown="">
+# Multi dimensions
+
+* \\( m\\) target  \\( y = [y_1, ... , y_n]  \\)
+* \\( n\\) different variables \\( X = \[ (x_{i,j}) \]  \\)
+
+X is an (\\(m\\) by \\(n\\)) matrix
+
+You want to find the (n+1) weights \\( \beta = [\beta_0, \beta_1, ...., \beta_n] \\) that minimizes
+
+$$  L(\beta) = || y - X\beta ||  $$
+
+The closed form solution is
+
+$$ \hat{\beta} =  (X^T.X)^{-1} X^T y  $$
+
+</section>
+<section data-markdown="">
+# Let's python that: [Notebook - Linear Regression Algebra](http://localhost:8888/notebooks/06_scikit_regression/py/L6%20Linear%20Regression%20Algebra.ipynb)
+
+* 4 samples
+
+        input = np.array([ [1, 6], [2, 5], [3, 7], [4, 10] ])
+
+* Matrix of predictors
+
+        X = np.matrix([np.ones(m), input[:,0]]).T
+
+* Outcome vector
+
+        y = np.matrix(input[:,1]).T
+
+* estimated regression weights \\( \hat{\beta} = (X^T . X)^{-1} X^T y \\)
+
+        beta_hat = np.linalg.inv(X.T.dot(X)).dot(X.T).dot(y)
+
+* and plot it
+</section>
+<section data-markdown="">
+# And now with scikit
+
+=&gt; [Notebook: L6 Linear Regression Scikit](http://localhost:8888/notebooks/06_scikit_regression/py/L6%20Linear%20Regression%20Scikit.ipynb#)
+</section>
+
+<section data-markdown="">
+# Mean squared error
+
+A classic metric to assess your prediction is the [Mean Squared Error](http://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html) (MSE) defined as
+
+$$  MSE = \sum_{i=1}^n (\hat{y_i} - y_i)^2 $$
+
+Go back to the [notebook](http://localhost:8888/notebooks/06_scikit_regression/py/L6%20Linear%20Regression%20Scikit.ipynb#) and calculate the MSE for both the Ozone ~ Temp and Ozone ~ Wind
+
+        from sklearn.metrics import mean_squared_error
+        mean_squared_error(y_true, y_pred)
+
+[Other available metrics](http://scikit-learn.org/stable/modules/classes.html#module-sklearn.metrics)
+</section>
+
+<section data-markdown="">
+# R Squared and Multi colinearity
+
+Wind and Temp are negatively correlated
+
+        df.corr() gives a -0.49 correlation for Wind vs Temp
+
+Let's compare Ozone ~ Wind, Ozone ~ Temp and Ozone ~ Wind + Temp
+
+* MSE
+* \\(R^2 \\)
+        sklearn.metrics.r2_score
+* p-values
+        from sklearn import feature_selection, linear_model
+        pvals = feature_selection.f_regression(X, y)[1]
+* the model's coefficients
+
+Conclusion?
+
+</section>
+
+<section data-background-color="#22c8c6">
+    <h1>Other Linear regression models</h1>
+    <p class="big_title">Ridge</p>
+    <p class="big_title">Lasso</p>
+    <p class="big_title">Elastic</p>
+</section>
+<section data-markdown="">
+# The loss function
+
+The loss function for linear regression is defined as
+
+$$
+Loss(w) = \min_{w} \Vert ~ Xw - y ~ \Vert^2_2
+$$
+
+* \\(w\\) are the coefficients aka weights
+* \\(X\\) is the matrix of inputs
+* \\( \hat{y} = Xw \\)
+* y is the predictor
+* \\(\Vert x \Vert_2  \\) is the \\( L^2\\) Norm \\( \quad \Vert x \Vert_2^2 =  \sum x_i^2  \\)
+
+</section>
+
+<section data-markdown="">
+# Ridge
+
+By introducing a *Regularization* term in the loss function, we change the model
+
+### Ridge
+$$
+Loss(w) = \min_{w} \left\Vert ~ Xw - y ~ \right\Vert^2_2 + \alpha \Vert w \Vert_2^2
+$$
+
+* \\( \alpha \\) is typically a penalty on the complexity of the regression model's weights.
+* Makes the coefficients more robust to collinearity.
+* Imposes a sort of **Ockham's razor** constraint on the coefficients.
+
+</section>
+<section data-markdown="">
+# Ridge
+[Notebook - L6 OLS vs Ridge](http://localhost:8888/notebooks/06_scikit_regression/py/L6%20OLS%20vs%20Ridge.ipynb)
+
+    clf = Ridge()
+
+Use:
+    X, y, w = make_regression(n_samples=100, n_features=3, coef=True, random_state=88)
+
+</section>
+
+<section data-markdown="">
+# Lasso
+
+Instead of using the  \\(L^2 \\)  norm for the regularization term (Ridge) we use the \\(L^1 \\) norm (sum of absolute value)
+
+$$
+Loss(w) = \min_{w} \frac{1}{2n} \left\Vert ~ Xw - y ~ \right\Vert^2_2 + \alpha \vert w \vert_1
+$$
+
+* Reduces the number of weights
+
+</section>
+<section data-markdown="">
+# Elastic
+Combination of Ridge (\\(L^2 \\)) and Lasso (\\(L^1 \\)).
+
+The loss function is in this case
+$$
+Loss(w) = \min_{w} \frac{1}{2n} \left\Vert ~ Xw - y ~ \right\Vert^2_2 + \alpha \rho  \vert w \vert_1 + \frac{\alpha(1-\rho)}{2} \Vert w \Vert_2^2
+$$
+
+with 2 parameters \\(\alpha \\) and \\(\rho \\)
+
+* Reduced number of weights
+* Better robustness to multicolinearity - Less Variance
+
+</section>
+
+<section data-markdown="">
+# Influence of regularization in Ridge
+
+* Set the \\( \alpha \\) from \\( 10^{-6} \\) to \\( 10^{+6} \\)
+* Evolution of the estimated weights values
+* Evolution of Mean Squared Error of the weights
+
+[Notebook - L6 Ridge coefficients as a function of the L2 regularization](http://localhost:8888/notebooks/06_scikit_regression/py/L6%20Ridge%20coefficients%20as%20a%20function%20of%20the%20L2%20regularization.ipynb)
+
+</section>
+
+<section data-markdown="">
+#  Polynomial regression using scikit-learn
+
+* Load the polynomial.csv data
+        X = df.x.reshape(-1, 1)
+        y = df.y
+* plot it
+* fit a simple regression and plot the y_hat. What's the MSE?
+* fit a regression with x and \\( x^2\\) as features. What's the MSE?
+        from sklearn.preprocessing import PolynomialFeatures
+        poly = PolynomialFeatures(2)
+        X2 = poly.fit_transform(X)
+* Same thing with a 16 order polynomial. MSE? What's the problem?
+
+[Solution](http://localhost:8888/notebooks/06_scikit_regression/py/L6%20Polynomial%20regression%20-%20Solutions.ipynb)
+</section>
+
+<!-- Lesson Review 9:15 -->
+<section data-background-color="#22c8c6">
+    <h1>Lesson Review</h1>
+    <p class="big_title"> Lesson Review </p>
+</section>
+
+<section data-markdown="">
+# Lesson Review
+
+* math basis for linear regression
+* Loss function, Residual error, Mean Squared Error (MSE)
+* Linear regression review: p_values, R-Squared
+* Multicollinearity
+* linear_models in scikit: Ridge, Lasso, Elastic
+* Polynomial regression using scikit-learn
+
+</section>
+
+<!-- Before Next Class -->
+<section data-background-color="#DA0A13">
+    <h1>Course</h1>
+    <p class="big_title">Before Next Class</p>
+</section>
+
+<!-- Q&A -->
+<section data-background-color="#FED500">
+    <h1>Q &amp; A</h1>
+    <p class="big_title">5 Questions about today</p>
+</section>
+
+<!-- Exit ticket -->
+<section data-background-color="#FC9CB4">
+    <h1>Exit ticket</h1>
+    <p class="big_title">Exit ticket</p>
+</section>
+
+      </div>
+    </div>
+
+    <script src="/reveal.js/lib/js/head.min.js"></script>
+    <script src="/reveal.js/js/reveal.js"></script>
+    <script>
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        width: 1200,
+        controls: true,
+        progress: true,
+        history: true,
+        center: false,
+        slideNumber: true,
+        
+          transition: 'slide',
+        
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '/reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '/reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: '/reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>

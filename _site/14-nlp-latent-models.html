@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>
+      
+        Lesson 14 -15  - NLP - Latent Models | Emines - UM6P - Data Science
+      
+    </title>
+
+    <meta name="author" content="" />
+
+    <!-- Description -->
+    
+      <meta name="description" content="none" />
+    
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="/reveal.js/css/reveal.css"/>
+    
+      <link rel="stylesheet" href="/reveal.js/css/theme/white.css" id="theme"/>
+    
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="/reveal.js/lib/css/zenburn.css"/>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '/reveal.js/css/print/pdf.css' : '/reveal.js/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link rel="canonical" href="http://localhost:4000/14-nlp-latent-models.html">
+
+    <script src="https://cdn.mathjax.org/mathjax/2.4-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-color="#000">
+    <h1 class="white" style="border-top: thin solid #DDD;border-bottom: thin solid #DDD;">
+        <img src="assets/ga_logo_black.png" style="float:left;top:0px;" />
+        General Assembly
+    </h1>
+    <p class="big_title">14. Topic Modeling</p>
+</section>
+
+<section data-markdown="">
+# Lesson 14
+## LEARNING OBJECTIVES
+
+
+* Topic Modeling
+* Latent Semantic Analysis
+* Latent Dirichlet Allocation
+
+</section>
+
+<!-- Prework and review -->
+<section data-background-color="#DA0A13">
+    <h1>Lesson #14</h1>
+    <p class="big_title">Review of Lesson 13</p>
+</section>
+
+<section data-markdown="">
+# Last Lesson Review
+
+* Feature extraction from documents
+* Bag of words
+* TF-Idf
+* CountVectorizer, Tf-Idf Vectorizer, HashingVectorizer
+* Scikit Pipeline
+
+</section>
+<section data-markdown="">
+# Lab Review
+
+[Text Classification - Lab 20 mn](https://github.com/alexperrier/gads/blob/master/13-nlp/py/L13%20N3%20Text%20Classification.ipynb)
+
+</section>
+
+<!-- Today -->
+<section data-background-color="#22c8c6">
+    <h1>Today</h1>
+    <p class="big_title">Latent Variable Models - Topic Modeling</p>
+</section>
+
+<section data-markdown="">
+# Latent variable models
+
+Attempting to uncover structure or organization inherent in the text.
+
+
+Unsupervised learning techniques
+
+</section>
+
+<section data-markdown="">
+# Application
+
+### Topic Modeling
+
+These techniques are commonly used for recommending news articles or mining large troves of data data and trying to find commonalities.
+
+Topic modeling, is used in the [NY times recommendation engine](http://open.blogs.nytimes.com/2015/08/11/building-the-next-new-york-times-recommendation-engine/) by mapping the NYT articles to a **latent space of topics**.
+
+</section>
+
+<section data-markdown="">
+# latent space of topics
+ ![](assets/14/topic_modeling_goal.png)
+
+* Documents are about several topics at the same time. Topics are associated with different words.
+* Topics in the documents are expressed through the words that are used
+
+</section>
+<section data-markdown="">
+# Goal of Topic Modeling
+Fast and easy birds eye view of the large datasets.
+
+* What are the documents about?
+* What are the key themes?
+
+Very powerful when coupled with different covariates:  year of publication, author...
+
+* Longitudinal analysis: How the key themes change over time?
+* Focus of discussion: Who is focussing on one topic
+
+Examples:
+
+* [Topic Modeling in Presidential Debates](http://alexperrier.github.io/stm-visualization/index.html)
+
+</section>
+
+<section data-markdown="">
+# Mixture Model
+ ![](assets/14/lda-mixture-graphic.jpg)
+
+</section>
+
+<section data-markdown="">
+# Techniques
+
+Vector-based techniques:
+
+* Latent Semantic Analysis (LSA) (a.k.a Latent Semantic Indexing - LSI)
+
+Probabilistic techniques
+
+* Probabilistic Latent Semantic Analysis (pLSA)
+* Latent Dirichlet Allocation (LDA)
+    * Many LDA extensions
+    * [Hierachical Dirichlet Process](https://en.wikipedia.org/wiki/Hierarchical_Dirichlet_process)
+
+</section>
+
+<section data-markdown="">
+# Latent Semantic Analysis (LSA)
+
+This is our corpus
+
+* D1: *modem the steering linux. modem, linux the modem. steering the modem. linux!*
+* D2: *linux; the linux. the linux modem linux. the modem, clutch the modem. petrol.*
+* D3: *petrol! clutch the steering, steering, linux. the steering clutch petrol. clutch the petrol; the clutch.*
+* D4: *the the the. clutch clutch clutch! steering petrol; steering petrol petrol; steering petrol!!!!*
+
+</section>
+
+<section data-markdown="">
+# Preprocessed
+
+* D1: *modem the steering linux modem linux the modem steering the modem linux*
+* D2: *linux the linux the linux modem linux the modem clutch the modem petrol*
+* D3: *petrol clutch the steering steering linux the steering clutch petrol clutch the petrol the clutch*
+* D4: *the the the clutch clutch clutch steering petrol steering petrol petrol steering petrol*
+
+</section>
+
+<section data-markdown="">
+# Document Term Matrix
+
+![](assets/14/document_term_matrix.png)
+
+This matrix can be huge
+
+How can we reduce it and at the same time uncover the topics?
+
+</section>
+
+<section data-markdown="">
+# Latent Semantic Analysis
+
+Singular value decomposition (SVD) of the document-term matrix:
+
+Find three matrices \\( U, \Sigma, V \\)  so that:  \\( X = U \Sigma V^t \\)
+
+![](assets/14/lsa_decomposition.png)
+
+* [Cool Linear Algebra: Singular Value Decomposition](http://andrew.gibiansky.com/blog/mathematics/cool-linear-algebra-singular-value-decomposition/)
+
+</section>
+
+<section data-markdown="">
+# Latent Semantic Analysis
+
+### Dimension reduction
+
+For example with 5 topics, 1000 documents and 1000 word vocabulary
+
+* Original Document Term matrix: \\(1000 \times 1000 = 10^6 \\)
+* LSA representation: \\(5 \times 1000 + 5 + 5 \times 1000 ~ 10^4 \\)
+    * -&gt; 100 times less space
+
+</section>
+
+<section data-markdown="">
+# Latent Semantic Analysis
+
+![](assets/14/lsa_decomposition_example_01.png)
+
+</section>
+
+<section data-markdown="">
+# Latent Semantic Analysis
+
+Keep the 2 most important Eigenvalues (i.e topic importance)
+
+![](assets/14/lsa_decomposition_example_02.png)
+
+</section>
+
+<section data-markdown="">
+# Latent Semantic Analysis
+
+![](assets/14/lsa_decomposition_example_03.png)
+
+</section>
+
+<section data-markdown="">
+# Lab LSA
+
+### LSA with scikit
+
+[Latent Semantic Analysis - LAB](https://github.com/alexperrier/gads/blob/master/14_topic_modeling/py/lsa_topic_modeling.py)
+
+</section>
+
+<section data-markdown="">
+# Probabilistic LSA
+
+What is a topic?
+
+A list of probabilities for each of the possible words in a vocabulary.
+
+Example topic:
+
+* dog: 5%
+* cat: 5%
+* hamster: 3%
+* turtle: 1%
+* calculus: 0.000001%
+* analytics: 0.000001%
+
+</section>
+
+<section data-markdown="">
+# Probabilistic LSA
+
+![](assets/14/probabilistic_topic.png)
+
+</section>
+
+<section data-markdown="">
+# Probabilistic LSA
+
+Instead of finding lower-ranked matrix representation, we can try to find a **mixture** of
+*word -&gt; topic* &amp; *topic -&gt; documents* distributions that are most likely given the observed documents.
+
+* We define a statistical model of how the documents are being made (generated).
+* Then we try to find parameters of that model that best fit the observed data
+
+This is called a **generative process** in topic modeling terminology.
+
+</section>
+
+<section data-markdown="">
+# Generative Process
+
+We received a 50 word long document by our reporter John Doe.
+He is allowed to write only about one of the 6 possible topics, using only 6 words.
+
+* For the first word, he throws a dice that tells him what is the topic of the first word. Say it is topic 1 (IT)
+* Then he throws another dice to pick which word to use to describe topic 1. Say it is word 1 (linux)
+* The process is repeated for all 50 words in the document.
+* Dices are weighted!!!
+    * The first dice for picking topics puts more weight on IT topic that on the other 5 topics.
+    * Also, dice for IT topic, puts more weight on words 'linux' and 'modem'.
+    * Likewise dice for topic 2 (cars) puts more weight on word 'petrol' and 'steering'
+
+</section>
+
+<section data-markdown="">
+# Generative Process
+
+![](assets/14/generative_process_plsa.png)
+
+</section>
+
+<section data-markdown="">
+# Probabilistic LSA decomposition
+
+![](assets/14/probabilistic_plsa_decomposition.png)
+
+\\( P(word/document) = \sum\_{topics} p(topic/document) . p(word/topic) \\)
+
+</section>
+
+<section data-markdown="">
+# LDA: an extension to pLSA
+
+* pLSA: Binomial distribution
+
+* LDA: [Dirichlet distribution](https://en.wikipedia.org/wiki/Dirichlet_distribution)
+
+</section>
+
+<section data-markdown="">
+# LDA Assumptions
+
+In LDA, we encode our assumptions about the data. Two important assumptions:
+
+1. On average, how many topics are per document? more or less?
+2. On average, how are words distributed across topics?
+    Are topics strongly associated with more or less words?
+
+Those assumptions are defined by two vectors α and β:
+
+* α: K dimensional vector that defines how K topics are distributed across documents.
+Smaller **αs favor fewer topics** strongly associated with each document.
+
+* β: V dimensional vector that defines how V words are associated across topics.
+**Smaller βs favor fewer words** strongly associated with each topics
+
+</section>
+
+<section data-markdown="">
+# LDA
+
+We set K the number of topics
+
+We work backwards from the documents to the find the \\(\alpha\\) and \\(\beta\\)
+
+</section>
+
+<section data-markdown="">
+# Topic Modeling librairies
+
+Please install
+
+* gensim
+* pickle
+* NLTK
+    * nltk.download()
+* pyLDAVis
+
+and optional
+
+* feedparser
+
+
+</section>
+
+<section data-markdown="">
+# LDA Lab
+
+
+[Latent Dirichlet Allocation - Gensim](https://github.com/alexperrier/gads/blob/master/14_topic_modeling/py/lda_gensim_topic_modeling.py)
+
+</section>
+
+<section data-markdown="">
+# Hot Technology Topics
+
+https://github.com/alexperrier/gads/blob/master/14_topic_modeling/py/Hot%20Tech%20Topic%20Modeling.ipynb
+
+</section>
+
+<section data-markdown="">
+# Links
+
+* [Building the Next New York Times Recommendation Engine](http://open.blogs.nytimes.com/2015/08/11/building-the-next-new-york-times-recommendation-engine/)
+
+* [Topic Modeling in historical Newspapers](http://dl.acm.org/citation.cfm?id=2107649)
+
+* [Dissecting the Presidential Debates with an NLP Scalpel](https://www.opendatascience.com/blog/dissecting-the-presidential-debates-with-an-nlp-scalpel/)
+
+* [Clustering text documents using k-means](http://scikit-learn.org/stable/auto_examples/text/document_clustering.html)
+
+* [Topic Modeling of Twitter Followers](http://alexperrier.github.io/jekyll/update/2015/09/04/topic-modeling-of-twitter-followers.html)
+
+* [Dirichlet Distribution](https://www.youtube.com/watch?v=nfBNOWv1pgE)
+
+* [Topic Modeling in historical Newspapers](http://dl.acm.org/citation.cfm?id=2107649)
+* [Topic Modeling for the Social Sciences](http://vis.stanford.edu/files/2009-TopicModels-NIPS-Workshop.pdf)
+
+
+
+</section>
+
+<section data-markdown="">
+# Caravan
+
+* Feature engineering
+* Metric: [Kappa](http://scikit-learn.org/dev/modules/generated/sklearn.metrics.cohen_kappa_score.html)
+* Models: Random Forests, Naive Bayes, ...
+* Sampling: Under sampling, over sampling, Smote, ...
+* Feature Importance
+* Feature Reduction (PCA)
+
+
+
+</section>
+
+
+      </div>
+    </div>
+
+    <script src="/reveal.js/lib/js/head.min.js"></script>
+    <script src="/reveal.js/js/reveal.js"></script>
+    <script>
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        width: 1200,
+        controls: true,
+        progress: true,
+        history: true,
+        center: false,
+        slideNumber: true,
+        
+          transition: 'slide',
+        
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '/reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '/reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: '/reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>

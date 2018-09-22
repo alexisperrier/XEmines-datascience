@@ -4,21 +4,687 @@
     <title>Emines - UM6P - Data Science</title>
     <description>Cours de data science.
 </description>
-    <link>http://localhost:4001/</link>
-    <atom:link href="http://localhost:4001/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 10 Sep 2018 16:20:28 -0400</pubDate>
-    <lastBuildDate>Mon, 10 Sep 2018 16:20:28 -0400</lastBuildDate>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sat, 22 Sep 2018 11:48:57 +0200</pubDate>
+    <lastBuildDate>Sat, 22 Sep 2018 11:48:57 +0200</lastBuildDate>
     <generator>Jekyll v3.7.2</generator>
     
       <item>
-        <title>Biais, variance et gradient stochastique</title>
-        <description>&lt;section&gt;
-&lt;div style=&quot;display: table; height: 100px; width: 80%; text-align: center; border: 1px solid   #ccc; margin:auto; margin-top: 50px; box-shadow: 5px 10px 8px #888888; &quot;&gt;
-&lt;div style=&quot;margin: 100px 0 100px 0 ;&quot;&gt;
-&lt;p style=&quot;font-size:44px;&quot;&gt; Biais, variance et gradient stochastique&lt;/p&gt;
-&lt;p style=&quot;font-size:28px;&quot;&gt; avec scikit-learn&lt;/p&gt;
+        <title>1) Intro et Python</title>
+        <description>&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt; Data science&amp;lt;/p&amp;gt;
+&lt;p style=&quot;font-size:28px;&quot;&gt;Analyse prédictive et machine learning &lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot;font-size:28px;&quot;&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p style=&quot;font-size:28px;&quot;&gt;&amp;nbsp;&lt;/p&gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:center;&quot;&gt;
+
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &amp;lt;img src=/assets/01/ds_meme.jpg&amp;gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:center;&quot;&gt;
+
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &amp;lt;img src=/assets/01/presentation_alexis_perrier.png&amp;gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+* Concepts et Methodes
+    * biais, variance et overfitting
+    * transformations des données
+    * feature engineering et feature selection
+    * métriques et techniques de scoring
+
+* datasets
+    * iris, titanic, housing
+    * caravan, arbres, ...
+
+* Python
+    * notebook jupyter, anaconda
+    * pandas, numpy
+    * statsmodel et surtout scikit-learn
+    &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;hr class=&quot;vline&quot; /&gt;
+
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
+# Programme
+
+* Machine learning avec scikit-learn
+    * analyse prédictive
+    * classification et régression
+
+* Approches statistiques classiques:
+
+    * régression linéaire,
+    * régression logistique
+
+* Modélisation machine learning
+    * Random Forests, XGBoost
+    * Support vector machines
+    * Gradient stochastique
+    * Adaboost, perceptron
+    * Naive Bayes
+
 &lt;/div&gt;
 &lt;/div&gt;
+
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# Déroulement
+
+* Matin: théories, méthodes et démos
+
+* Après-midi: Lab, workshop =&amp;gt; notebooks jupyter
+
+* Quizzes
+
+* Projet final: Kaggle
+
+    * https://www.kaggle.com/c/house-prices-advanced-regression-techniques/
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;!-- &lt;div style='float:right; width:45%;  '&gt;
+    &lt;div data-markdown&gt;
+    # Régression linéaire
+
+    * p-value
+    * \\(R^2\\)
+    &lt;/div&gt;
+&lt;/div&gt; --&gt;
+
+
+
+&lt;div data-markdown=&quot;&quot;&gt;
+# Python
+
+* list comprehension
+
+```liste_a = [n for n in range(100) if n % 2 ==0 ]```
+
+
+* pandas dataframe
+
+``` df = pd.read_csv(filename) ```
+
+```df = df.groupby(by = 'age' ).reset_index(inplace = True)```
+
+```df = df.age.apply(lambda a : une_fonction(a) )
+```
+
+* notebook jupyter
+
+
+    &amp;gt; jupyter notebook
+
+
+* exemple
+
+[Python_Pandas_Demo.ipynb](Python_Pandas_Demo.ipynb)
+
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt;data science - machine learning - predictive analytics - intelligence artificielle - deep learning&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
+&amp;lt;img src=/assets/01/tweet_when_youre_fundraising.png width = 800&amp;gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+![data science sexiest job](/assets/01/data_science_sexiest_job.jpeg)
+![demand](/assets/01/data-scientist-demand.jpg)
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# data science - machine learning - predictive analytics - intelligence artificielle - deep learning
+
+* **Data Analysis, Data Mining** : Exploration, trouver les tendances, les evolutions, les anomalies, etudier les corrélations.
+
+* **Statistiques** : Trouver le modèle qui explique au mieux les données
+
+* **Machine learning** : Le modèle apprend automatiquement à partir des données. Dimension importante d'apprentissage, de training
+
+* **Analyse prédictive**: Construire ou entrainer des modèles qui peuvent *&quot;prédire&quot;* à partir de données passées.
+* **Deep Learning** : Analyse prédictive supervisée avec des réseaux de neurones
+
+
+[What is the difference between Data Analytics, Data Analysis, Data Mining, Data Science, Machine Learning, and Big Data?](https://www.quora.com/What-is-the-difference-between-Data-Analytics-Data-Analysis-Data-Mining-Data-Science-Machine-Learning-and-Big-Data-1)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Stats vs machine learning
+
+# A tiny drop of History
+
+Great article [Forbes: A Very Short History Of Data Science](http://www.forbes.com/sites/gilpress/2013/05/28/a-very-short-history-of-data-science/#bbea13569fd2)
+
+2001 Leo Breiman, Berkeley, publishes “[Statistical Modeling: The Two Cultures](https://projecteuclid.org/euclid.ss/1009213726)”:
+
+“*There are two cultures in the use of statistical modeling to reach conclusions from data. One assumes that the data are generated by a given stochastic data model. The other uses algorithmic models and treats the data mechanism as unknown. The statistical community has been committed to the almost exclusive use of data models.*
+
+*This commitment has led to irrelevant theory, questionable conclusions, and has kept statisticians from working on a large range of interesting current problems. Algorithmic modeling, both in theory and practice, has developed rapidly in fields outside statistics. It can be used both on large complex data sets and as a more accurate and informative alternative to data modeling on smaller data sets. If our goal as a field is to use data to solve problems, then we need to move away from exclusive dependence on data models and adopt a more diverse set of tools.*”
+
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
+# Data Science: skills
+&amp;lt;img src=/assets/01/ven_diagrams.png&amp;gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;img src=/assets/01/data_science_close_up.png width = 650&amp;gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Champs d'applications
+
+* **Predictions**: market, demand, supply prices, population, weather, earthquakes, ...
+
+* **Patterns**: customer behavior patterns
+
+* **Detection**: Spam, Fraud, Failures, Cyber attacks
+
+* **Extracting meaning** from large sets of data: handwritten health records, exoplanets
+
+* **NLP**: translation, speech to text, speech recognition, sentiment analysis, topic modeling, spell checking
+
+* **Recommender systems**: Netflix, Spotify, Amazon
+
+* **Ranking systems**: search results
+
+* **Autonomous systems** (reinforcement learning / AI): playing games, self driving cars, drones
+
+* **Time series**: algorithmic trading, signal processing, IoT
+* **Image / Video**: automatic captionning, face and object recognition, ...
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt; Data science workflow&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+
+![](/assets/01/predicsis_data_science_workflow.png)
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+## B) Machine Learning
+
+4) Outils et plateforme
+* Cloud (AWS, Google Cloud, Azure) ou local
+* python et scikit-learn ou R
+* Algos classiques ou deep learning (TF, Keras, ...)
+
+5) Modélisation
+
+* Choisir la bonne approche, le bon type de modèle
+* *Train* le modèle
+* Evaluer le modèle, scoring, ....
+* Sélectionner les meilleurs parametres du modèle
+
+
+
+6) Appliquer sur de nouvelles données
+
+## C) Nouvelle itération
+7) reprendre le problème au niveau des données
+* il en faut plus
+* il faut de nouvelles variables
+* ....
+
+## D) Mise en production
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+## A) Les données
+
+1.  Définir le problème
+    * De quelles données disposent-on ?
+    * Sont-elles accessibles ?
+    * Que veut-on améliorer ?
+    * Comment mesurer l'efficacité de la solution, du modèle ?
+    * **choix des métriques!**
+
+2. ETL: Extraction Transform Load
+
+    * Constituer le dataset
+    * Explorer et comprendre
+
+3. Travailler sur les variables
+    * Nettoyer et transformer : outliers, missing values, distributions, correlations, ...
+    * feature engineering
+    * feature selection
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Data science - machine learning - predictive analytics
+
+[Can I learn Machine Learning completely with Kaggle?](https://www.quora.com/Can-I-learn-Machine-Learning-completely-with-Kaggle)
+
+*While modeling is the sexy part of any machine learning project, it is also one of the parts that you will actually spend the least amount of time on.*
+
+*In a business environment 80–90% of the time will be spent on defining problems worthwhile solving, defining **evaluation metrics**, procuring access to the **raw data**, **understanding** the data, generating **features**, presenting findings, and working with engineers to deploy the model to production via API or other automated approaches.*
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Analyse prédictive
+
+![](/assets/01/predictive_analytics.png)
+
+[Predictive analytics](https://en.wikipedia.org/wiki/Predictive_analytics) : analyze current and historical facts to make predictions about **future or otherwise unknown events**. Predictive analytics provides a predictive score (probability).
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Non Supervisée
+
+Le dataset d'apprentissage n'inclut pas de variable cible. Il n'y a pas de **ground truth**
+
+* logique de clustering, de classification automatique des échantillons  sans connaitre a priori le nombre de classes
+* notion de similarité et de distance entre les échantillons
+* K-means, K-NN, ...
+
+
+&amp;lt;img src=/assets/01/ch1_unsupervised_learning.png&amp;gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Supervisée
+
+Le dataset d'apprentissage inclut la variable  à prédire  [cible]. On a un certain nombres d'exemples sur lesquels on peut entrainer un modèsle
+
+* logique de scoring, de classification et de prediction
+* Random forest, Regression lineaire ou logistique, SVM, ...
+* Classification: On connait le nombre de classes
+
+&amp;lt;img src=/assets/01/ch1_supervised_learning.png&amp;gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Classification
+
+La variable cible est discrete, une catégorie, une classe
+
+### Cas binaire
+* Achat, resiliation, click
+* Survie, maladie, succes examen, admission,
+* Positif ou negatif
+* Spam, fraude
+
+### Multi class - multinomiale
+* Catégories, types (A,B,C),
+* Positif, neutre ou negatif
+* Espèces de plantes d'animaux, ...
+* Pays, planetes
+
+### Ordinale
+
+* Notes, satisfaction, ranking
+
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Regression
+
+La variable cible est continue
+
+* Age, taille, poids,
+
+* nombre d'appels, de clicks, volume de vente, consommation
+
+* Température, Salaire, ...
+
+* Probabilité d'une action
+
+* Temps, délai, retard
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Classification à regression
+
+* Prédire une probabilité au lieu d'une classe
+
+$$
+0 &amp;lt; P( x \in A) &amp;lt; 1
+$$
+
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Regression à classification
+
+* discrétiser la variable
+
+Age =&amp;gt;
+
+* 0 - 12
+* 12 - 24
+* 25 - 49
+* 50 - 65
+* plus de 65
+
+
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt;Environnement&amp;lt;/p&amp;gt;
+&lt;p style=&quot;font-size:28px;&quot;&gt;Python, anaconda et jupyter &lt;/p&gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+&amp;lt;img src=/assets/01/Python-Logo-PNG-Image.png width=400&amp;gt;
+&amp;lt;img src=/assets/01/guidovanrossum.jpg width=400&amp;gt;
+
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Python
+
+* Beaucoup d’applications: web, data science, scientific, …
+
+* Créé en 1991 par Guido von Rossum! 30 ans déjà!
+
+* 130.000 packages et librairies
+
+* Duck typing, pas de compilation, pas de ; ou de {}
+
+* Indentation =&amp;gt; le code est lisible
+
+* Performances
+
+* Mais il y a des surprises, des incoherences, des idioms, …
+
+* Python 2.7 ou python 3.6
+
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;img src=/assets/01/python_projections_on_stackoverflow.png height=650&amp;gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Quel Python avez-vous?
+
+Dans un terminal
+
+```&amp;gt; python --version
+```
+
+![](/assets/01/python_version.png)
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+&amp;lt;img src=/assets/01/anaconda_logo.png&amp;gt;
+
+[https://www.anaconda.com/](https://www.anaconda.com/)
+
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Anaconda
+
+* Distribution Anaconda et package manager conda
+
+```conda install package_name
+```
+
+* Data science en python:
+
+    * Dataframe: pandas, dask
+
+    * Math, science: numpy, scipy, statsmodel,
+
+    * Dataviz: matplotlib, plot.ly, bokeh
+
+    * Deep learning: Tensorflow, Keras, Mxnet, …
+
+    * Text: Gensim, NLTK, Spacy.io
+
+    * scikit-learn: http://scikit-learn.org/
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# [http://jupyter.org/](http://jupyter.org/)
+&amp;lt;img src=/assets/01/jupyter_logo_ecosystem.png&amp;gt;
+&amp;lt;img src=/assets/01/jupyter_architecture.png&amp;gt;
+
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Jupyter notebook
+
+* Executer du code dans le navigateur
+* Partage et reproductabilité
+* Calcul et visualisation
+
+* Multilingue: R, python, ...
+* Local ou cloud
+    * $ Jupyter notebook
+    * AWS Sagemaker, Google datalab, Kaggle kernels
+* A base de cellules
+    * Documentation: markdown et latex
+    * Kernels: Python, R, Julia, Scala, …
+    * Shell terminal
+
+* Alt: Beaker, Apache zeppelin
+
+* Mais: Le code est séquentiel + State problems
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Editeurs de texte
+
+&amp;lt;img src=/assets/01/atom_io-card.png height=150px&amp;gt;
+
+&amp;lt;img src=/assets/01/sublime_text_logo.png height=150px&amp;gt;
+
+&amp;lt;img src=/assets/01/spyder_readme_banner.png height=150px&amp;gt;
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt;Récapitulatif&amp;lt;/p&amp;gt;
+&amp;lt;p class=top&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+# Récapitulatif
+
+* Programme des 2 semaines
+* Révisions de python
+* Différence entre Data Science, Machine Learning et analyse prédictive
+* Approche statistique vs approche machine learning
+* Déroulement d'un projet de Data science
+* Supervisée vs non-supervisée
+* Regression vs Classification
+* Anaconda, Python et Jupyter
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Notebook d'exploration et Pandas
+
+* load dataset dans une dataframe pandas
+* visualisation des variables
+* statistiques des variables numériques et occurences des catégories
+* trouver les outliers et les enlever
+
+Arrondissements:
+
+* quels arrondissements ont
+    * le plus d'arbres
+    * le plus de variétés d'arbres
+    * les arbres les plus hauts, les plus larges
+* hauteur et circonférence en fonctions des espèces d'arbres
+* Comment sont définis les arbres dit remarquables?
+    * comment traiter les valeurs manquantes de cette colonne
+
+Domanialité
+    * memes questions que pour les arrondissements: variétés, hauteur, ...
+
+En joignant le dataset arrondissement qui donne la superficie des arrondissements
+
+Creer une variable code_postale dans le dataset arbres, qui permette de joindre les 2 fichiers: PARIS 2E ARRDT =&amp;gt; 75102
+
+Joindre les 2 fichiers
+
+Calculer le nombre d'arbres par arrondissement en utilisant groupby et count()
+enlever les arrondissement qui ne sont pas dans Paris
+
+
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Lab
+
+2 datasets
+
+* 200.000 arbres de Paris
+    * Espèces, genres, famille
+    * Adresse, geolocalisation
+    * Environnement: rue, jardin, ..
+    * hauteur et circonférence
+
+* Arrondissement de Paris
+    * Superficie
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+</description>
+        <pubDate>Wed, 10 Jan 2018 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/1-intro-python</link>
+        <guid isPermaLink="true">http://localhost:4000/1-intro-python</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>2) Régression linéaire</title>
+        <description>&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt;
+Régression Linéaire
+&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
 &lt;/section&gt;
 
 &lt;section&gt;
@@ -32,12 +698,9 @@
 
 &lt;div data-markdown=&quot;&quot;&gt;
 # Cours précédent
-* Régression logistique
-* Approche statistique ou approche Machine Learning
-* Metrique de classification:
-    * Matrice de confusion
-    * ROC-AUC
-* One hot encoding
+* Supervisé vs non- Supervisé
+* Vue genérale de l'analyse predictive
+* Python
 &lt;/div&gt;
 &lt;/section&gt;
 
@@ -48,450 +711,599 @@
     &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div style=&quot;float:left; width:40%&quot;&gt;
+&lt;div style=&quot;float:left; width:60%&quot;&gt;
 &lt;div data-markdown=&quot;&quot;&gt;
 # Aujourd'hui
 
-* Scikit-learn
-* Biais - Variance
-* Stochastic Gradient Descent
-* Outliers, detection and impact
-* Skewness: Box cox and Kurtosis
+* Régression ou classification ?
+* Régression linéaire
+    * OLS, Moindres carrés
+    * Modélisation
+    * Univariable &amp;amp; multivariables
+* Interpretation
+* MSE
+* \\(R^2\\), \\(R^2_{adj}\\), P-value, Interval de confiance
+* Confonders et multi-collinearité
+* Hypothèses et verification
+
+* Statsmodel
+* Linéarité: Définition
+* Tests de linéarite
+* Régression polynomiale
+* Anscombe quartet
+* Kaggle projet
 
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/section&gt;
 
-&lt;section&gt;
-&lt;div style=&quot;float:right;&quot;&gt;
+&lt;section data=&quot;&quot;&gt;
+
+&lt;div style=&quot;float:right; width:40%&quot;&gt;
     &lt;div data-markdown=&quot;&quot;&gt;
-    &amp;lt;img src=/assets/04/logo-scikit.png style='width:300px;'&amp;gt;
 
-    * [scikit-learn.org](http://scikit-learn.org/stable/)
-    * [Eco-système](http://scikit-learn.org/stable/related_projects.html)
+## Regression: Qualitatif
 
+La variable à prédire est **continue**
+* Age, taille, poids,
+* Salaire,
+* Probabilité d'une action
+* Temps
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div style=&quot;float:left; width:60%&quot;&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
+
+## Classification: Quantitatif
+La variable à prédire est **discrète**
+
+### Cas binaire
+* Achat, resiliation, click
+* Survie, maladie, succes examen, admission,
+* Positif ou negatif
+* Spam, fraude
+
+### Multi class - multinomiale
+* Catégories, types (A,B,C),
+* Positif, neutre ou negatif
+* Espèces de plantes d'animaux, ...
+* Pays, planetes
+
+### Ordinale
+
+* Notes, satisfaction, ranking
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+
+&amp;lt;img src=/assets/02/height_vs_weight.png style='float:right; width:400px;border:0px'&amp;gt;
+
+## Taille en fonction de l'age des enfants
+
+En réalité, la taille dépend de l'age et de bruit \\(\epsilon\\)
+
+$$ \text{Taille} = f(\text{Age}) + \epsilon $$
+
+
+## Regression univariable
+On suppose que l'on peut prédire la taille en fonction de l'age avec une relation lineaire:
+
+$$ \hat{\text{T}}\text{aille} = a * \text{Age} + b $$
+
+Et on cherche à connaitre les paramètres (a,b) qui donnent la meilleure approximation de la vrai relation.
+
+Regression linéaire est aussi appelée regression Ordinary Least-Squares (OLS).
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Regression linéaire
+Nous avons \\( n  \\) échantillons:
+
+* Une variable prédictrice \\( x = [x_1, ... , x_n]  \\)
+
+* Et une variable cible \\( y = [y_1, ... , y_n]  \\)
+
+On veut trouver les *meilleurs*  \\(a\\) et \\(b\\) pour lesquels
+
+$$ \hat{y_i} = a * x_i +b  $$
+
+de telle façon que l'erreur de prédiction \\( \vert y_i - \hat{y_i} \vert   \\)  soit minimale.
+
+$$ e_i = y_i - \hat{y_i}  = y_i - (a * x_i +b) $$
+
+Les résidus sont une **distance** entre les vrai valeurs  \\( y_i  \\) et leur estimations \\( \hat{y_i}  \\). On veut réduire cette distance. Pour cela on chercher à kinimiser la norme  \\( L^2  \\) des résidus
+
+$$  || y - \hat{y} ||^2 =  \sum_{i=0}^n (y_i - (a*x_i + b))^2   $$
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Petit rappel des normes
+
+### Norme quadratique  \\( L^2  \\)
+$$  ||x|| = \sqrt{  x_1^2 + .... + x_n^2  } $$
+
+### Norme \\( L^1  \\) ou norme en valeur absolue
+$$  |x| =  |x_1| + .... + |x_n|  $$
+
+### Norme infinie \\( L^\infty  \\)
+
+$$  |x|_{\infty} =  max [ |x_1|, ... , |x_n| ]  $$
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Fonction de cout
+
+$$ L(a,b)  = || y - \hat{y} ||^2 =  \sum_{i=0}^n [y_i - (a*x_i + b)]^2   $$
+
+* fonction convexe
+* pour trouver son minima il suffit de prendre la dérivé et de trouver les valeurs de \\( a \\) et \\( b \\) en \\( 0 \\).
+* Cela donne 2 équations  à 2 inconnues  dont la solution exacte est:
+
+$$ \hat{\beta} =  (x^T.x)^{-1} x^T y \quad \text{où}  \quad  \hat{\beta} = \\{ a,b \\}^T   $$
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Regression multinomial : plusieurs predicteurs
+
+On a  maintenant \\(m\\) predicteurs et toujours \\(n\\)  échantillons.
+
+Pour chaque échantillon, on a la modélisation suivante:
+$$ \hat{y}_i  = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_m x_m $$
+ou plus simplement
+$$ \hat{y}  = \beta X  $$
+
+où \\(X\\) est une matrice de taille (\\(n\\) par \\(m\\))
+
+* \\( n\\) échantillons  \\( y = [y_1, ... , y_n]  \\)
+* \\( m\\) predicteurs \\( X = \[ (x_{i,j}) \]  \\)
+
+
+et on veut trouver les n+1 coefficients \\( \beta = [\beta_0, \beta_1, ...., \beta_n] \\) qui minimize
+
+$$  L(\beta) = || y - X\beta ||  $$
+
+La solution de cette équation est : $$ \hat{\beta} =  (X^T.X)^{-1} X^T y  $$
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+# Python
+
+
+1. N samples avec M variables: \\( \hat{y}_i = \sum_k \beta_k * X[i,k]  + \sigma^2 \\)
+
+```X, y = make_regression(n_samples=N, n_features=M, noise =10)```
+
+2. Regression weights: \\( \quad \hat{\beta} = (X^T . X)^{-1} X^T y \\)
+
+```beta_hat = np.linalg.inv(X.T.dot(X)).dot(X.T).dot(y)```
+
+3. Prédiction
+
+```yhat = X[:, 0]* beta[0] + X[:,1] * beta[1]```
+
+* ou si \\(M &amp;gt; 2\\):
+
+```yhat = [0 for i in range(N)]```
+
+```for k in range(M):
+        yhat += X[:, k]* beta[k]```
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Metriques de scoring
+## Erreur absolu (MAE) (L1)
+
+Valeur absolue de la difference entre la prédiction et les vraies valeurs
+
+```e = np.mean( np.abs(y - yhat) )```
+$$  MAE = \sum\_{i=1}^n \| \hat{y\_i} - y\_i \| $$
+
+
+## Erreur quadratique (MSE) (L2)
+
+```e = np.mean( (y - yhat)**2 )```
+
+$$  MSE = \sum_{i=1}^n (\hat{y_i} - y_i)^2 $$
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+&amp;lt;img src=/assets/02/advertising.csv.png style='width:400px; float:right; '&amp;gt;
+
+
+# Regression linéaire avec Statsmodel
+
+On va estimer les coefficients non plus directement mais avec une methode
+
+=&amp;gt; plus d'information sur les coefficients de regression:
+
+* leur importance relative
+* leur fiabilité
+* leur impact quantitatif
+
+Sur un vrai dataset: [advertising](https://www.kaggle.com/ishaanv/ISLR-Auto), 200 échantillons
+* 3 variables: TV, Radio, Newspaper: sommes dépensées pour chaque média (k$)
+* Variable cible: Sales: ventes réalisées
+&amp;lt;/div&amp;gt;
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+# Statsmodel
+* [Statsmodel](http://www.statsmodels.org/stable/index.html) librairie Python
+pour une approche statistique de l'analyse de données.
+
+* Intégrée avec pandas et numpy
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+# Notebook python
+
+[Regression lineaire sur le dataset advertising](https://github.com/alexisperrier/gads/blob/master/04_statistics_inference/py/Lesson%204%20-%20Notebook%202%20-%20Linear%20Regression%20for%20Causal%20Inference.ipynb)
+
+1. sales = f(TV)
+2. sales = f(TV + Radio + Newspaper)
+3. sales = f(Newspaper)
+2. sales = f(TV + TV^2)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+# Explication de l'output smf.ols
+
+```lm = smf.ols(formula='Sales ~ TV', data=df).fit()```
+
+* R^2 et R^2 adjusted
+* Coefficients
+* p-value
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+&amp;lt;img src=/assets/02/01_advsertising_results_01.png style=' width:600; '&amp;gt;
+
+
+```lm = smf.ols(formula='Sales ~ TV', data=df).fit()```
+
+* **Dep. Variable**: Which variable is the response in the model
+* **Model**: What model you are using in the fit
+* **Method**: How the parameters of the model were calculated
+* **No. Observations**: The number of observations (examples)
+* **DF Residuals**: Degrees of freedom of the residuals. Number of observations - number of parameters
+* **DF Model**: Number of parameters in the model (not including the constant term if present)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;img src=/assets/02/01_advsertising_results_02.png style='width:30%; float:right; clear: right;'&amp;gt;
+
+&lt;div style=&quot;width:30%; float:left;&quot;&gt;
+
+The right part of the first table shows the goodness of fit
+
+
+* **R-squared**: The [coefficient of determination](http://en.wikipedia.org/wiki/Coefficient_of_determination). A statistical measure of how well the regression line approximates the real data points
+
+* **Adj. R-squared**: The above value adjusted based on the number of observations and the degrees-of-freedom of the residuals
+
+* F-statistic: A measure how significant the fit is. The mean squared error of the model divided by the mean squared error of the residuals
+
+* Prob (F-statistic): The probability that you would get the above statistic, given the null hypothesis that they are unrelated
+
+* Log-likelihood: The log of the likelihood function.
+
+* AIC: The [Akaike Information Criterion](http://en.wikipedia.org/wiki/Akaike_information_criterion). Adjusts the log-likelihood based on the number of observations and the complexity of the model.
+
+* BIC: The [Bayesian Information Criterion](http://en.wikipedia.org/wiki/Bayesian_information_criterion). Similar to the AIC, but has a higher penalty for models with more parameters.&amp;lt;/td&amp;gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# \\(R^2\\)
+
+proportion of the variance in the dependent variable that is predictable from the independent variable(s)
+
+$$ \bar{y} = \frac{1}{n} \sum\_{i} y_{i} $$
+
+
+The total sum of squares (proportional to the variance of the data):
+
+$$ SS\_{\text{tot}} = \sum\_{i} (y\_{i} - \bar{y} )^2 $$
+
+The regression sum of squares, also called the explained sum of squares:
+$$ SS\_{\text{reg}} = \sum\_{i} (f\_{i} - \bar{y} )^2 $$
+
+The sum of squares of residuals, also called the residual sum of squares:
+$$ SS\_{\text{res}} = \sum\_{i} (y\_{i} - f\_{i} )^2 = \sum\_{i}e\_{i}^{2} $$
+
+The most general definition of the coefficient of determination is
+
+$$ R^{2} = 1-{SS\_{\text{res}} \over SS\_{\text{tot}}}   $$
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+
+# R2 does not indicate whether:
+
+* the independent variables are a cause of the changes in the dependent variable;
+* omitted-variable bias exists;
+* the correct regression was used;
+* the most appropriate set of independent variables has been chosen;
+* there is collinearity present in the data on the explanatory variables;
+* the model might be improved by using transformed versions of the existing set of independent variables;
+* there are enough data points to make a solid conclusion.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# The adjusted R2 is defined as
+
+On ajuste pour prendre en compte la complexité du modele:
+
+$$ R^{2}_{adj} = {1-(1-R^{2}){n-1 \over n-p-1}} $$
+
+where p is the total number of explanatory variables in the model (not including the constant term), and n is the sample size.
+
+En accroissant le nombre de predicteurs, on accroit souvent R^2.
+
+Mais \\(R^{2}_{adj}\\) compense la complexité du modele
+
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+
+# Log likelihood
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Coefficients et p-value
+La deuxième partie des résultats porte sur les coefficients et leur fiabilité.
+
+&amp;lt;img src=/assets/02/01_advsertising_results_03.png style='width:800px;'&amp;gt;
+
+* **coef**: La valeur estimée des coefficients
+* **P &amp;gt; |t|**: la probabilité que l'on observe cette estimation alors qu'en fait le coefficient est nulle (=0) .
+* **[95.0% Conf. Interval]**: l'interval de confiance de l'estimation du coefficient.
+* **std err**: l'erreur d'estimation
+* **t-statistic**: une mesure de l'importance (significant) statistique de chaque coefficient.
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right;width : 40%;&quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &amp;lt;img src=/assets/02/p_value.png  style='float:right; width:400px; margin:auto'&amp;gt;
+
+    **How do we test this hypothesis?**
+
+    The p-value represents the probability that the coefficient is actually zero
+
+    * if \\( P_{value} &amp;gt; 0.05 \\) then there more than 5% chance that the null hypothesis is true (a = 0)
+        * =&amp;gt; can't reject
+    * if \\( P_{value} &amp;lt; 0.05 \\) then there's less than 5% chance that the null hypothesis is true
+        * =&amp;gt;  reject the null hypothesis
+        * =&amp;gt; more than 95% chance the opposite is true
     &lt;/div&gt;
 &lt;/div&gt;
 
+&lt;div style=&quot;width:50%&quot;&gt;
 &lt;div data-markdown=&quot;&quot;&gt;
+# P-value
 
-# Scikit-learn
+* You start with a **null hypothesis** and an **alternative hypothesis** - a hypothesis that is the opposite of the null.
 
-* Open source, 2010
-* Basé sur numpy, scipy, …
-* Olivier Grisel, Andreas Muller, Gael Varoquaux, Jake Vanderplas
-* [INRIA](http://www.inria.fr), [Telecom ParisTech ](http://www.telecom-paristech.fr/), NYU
+* Then, you check whether the data supports rejecting the null hypothesis or failing to reject the null hypothesis.
 
-### Algorithmes et modèles:
-* Classification: Identifying to which category an object belongs to.
-    * Applications: Spam detection, Image recognition.
-    * Algorithms: SVM, nearest neighbors, random forest, ...
+As it relates to model coefficients, here is the conventional hypothesis test:
 
-* Regression: Predicting a continuous-valued attribute associated with an object.
-    * Applications: Drug response, Stock prices.
-    *  Algorithms: SVR, ridge regression, Lasso, ...
+* null hypothesis: There is no relationship between TV ads and Sales
+    * and thus a = 0 in \\( Sales = a * TV + b \\)
 
-* Clustering: Automatic grouping of similar objects into sets.
-    * Applications: Customer segmentation, Grouping experiment outcomes
-    * Algorithms: k-Means, spectral clustering, mean-shift, ...
-* Dimensionality reduction: Reducing the number of random variables to consider.
-    * Applications: Visualization, Increased efficiency
-    * Algorithms: PCA, feature selection, non-negative matrix factorization.
-&lt;/div&gt;
-&lt;/section&gt;
+* alternative hypothesis: There is a relationship between TV ads and Sales (and thus a != 0 mais ca ne veut pas dire que a = la valeur du coefficient affichée, ca serait trop simple)
 
-&lt;section&gt;
-&lt;div style=&quot;float:right;&quot;&gt;
-    &lt;div data-markdown=&quot;&quot;&gt;
-    &amp;lt;img src=/assets/04/logo-scikit.png style='width:300px;'&amp;gt;
 
-    * [scikit-learn.org](http://scikit-learn.org/stable/)
-    * [Eco-système](http://scikit-learn.org/stable/related_projects.html)
-
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;div data-markdown=&quot;&quot;&gt;
-
-# suite
-* Model selection: Comparing, validating and choosing parameters and models.
-    * Goal: Improved accuracy via parameter tuning
-    * Modules: grid search, cross validation, metrics.
-
-* Preprocessing: Feature extraction and normalization.
-    * Application: Transforming input data such as text for use with machine learning algorithms.
-    * Modules: preprocessing, feature extraction.
-
-* Fantastic documentation, plein d'exemples
-* Input: Images, text, numerique, ...
-
-&lt;/div&gt;
-&lt;/section&gt;
-
-&lt;section&gt;
-&lt;div style=&quot;float:right;&quot;&gt;
-    &lt;div data-markdown=&quot;&quot;&gt;
-    &amp;lt;img src=/assets/04/logo-scikit.png style='width:300px;'&amp;gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;div data-markdown=&quot;&quot;&gt;
-# scikit-learn API
-Could not be simpler
-
-1. Instancier un modèle
-Par exemple une regression linéaire:
-    * ```mdl = linear_model.LinearRegression( meta-params, loss)```
-2. Train le modèle
-    * ```mdl.fit(X, y)```
-3. Faire des predictions sur de nouvelles données
-    * ```y_hat = mdl.predict(Some New Data)```.
-    * ```y_hat = mdl.predict_proba(Some New Data)```
-4. Obtenir un score
-    * ```mdl.score(X,y)```
-
-&lt;/div&gt;
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# scikit-learn model input
-
-* les meta parametres du modele: \\(\alpha, \epsilon, \beta, \cdots \\) *learning_rate*
-* la regularization: *penalty, l1, l2*
-* la fonction de cout: *loss*
-* gestion des iterations: *max_iter, n_iter*
-* data processing: *normalize, shuffle*
-
-[![Lin reg params](/assets/04/scikit_linear_reg_params.png)](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression)
-[![SGD reg params](/assets/04/scikit_sgd_reg_params.png)](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor)
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Demo
-
-[linear_model.LogisticRegression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Part II Biais - Variance
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Bias Variance decomposition
-The prediction error of your model can be decomposed in 2 terms:
-
-* The bias
-* The Variance
-
-Total Error = Bias Error + Variance Error
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Bias Variance decomposition
-
-**Error due to Bias**: Error due to bias is taken as the difference between the average prediction of our model and the correct value which we are trying to predict.
-
-Bias measures how far off in general your models' predictions are from the correct value.
-
-**Error due to Variance**: The error due to variance is taken as the variability of a model prediction for a given data point.
-
-The variance is how much the predictions for a given point vary between different realizations of the model.
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Bias Variance decomposition
-![Bias-variance](assets/04/bias-variance-targets.png)
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Bias Variance and overfitting
-![Bias-variance](assets/04/bias_Variance_Under_overfitting.png)
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Bias Variance decomposition
-L'erreur quadritique est définie par:
-
-$$ \operatorname{MSE}( \hat{y} ) = \frac {1}{n} \sum_{i=1}^{n}( \hat{y_i}-y_i )^2  $$
-
-que l'on peut réecrire de la façon suivante:
-
-$$ \operatorname{MSE}( \hat{y} )= \mathbb{E} \big[ (\hat{y} - y)^2   \big]  =\mathbb{E}\left[\left(\hat{y}-\mathbb{E}(\hat{y})\right)^2\right] + \left(\mathbb{E}(\hat{y})-y\right)^2 $$
-
-Soit
-$$ \operatorname{MSE}( \hat{y} )= \operatorname{Var}(\hat{y})+ \operatorname{Bias}(\hat{y},y)^2 $$
-
-où
-
-* \\( \operatorname{Var}(\hat{y}) =  \mathbb{E}\left[\left(\hat{y}-\mathbb{E}(\hat{y})\right)^2\right] \\)
-* \\( \operatorname{Bias}(\hat{y},y)  = \mathbb{E}(\hat{y})-y  \\)
-&lt;/section&gt;
-
-&lt;section&gt;
-&lt;div data-markdown=&quot;&quot;&gt;
-# Le calcul
-&lt;/div&gt;
-$$
-\begin{align} \mathbb{E}((\hat{y}-y)^2)&amp;amp;=
- \mathbb{E}\left[\left(\hat{y}-\mathbb{E}(\hat{y})+\mathbb{E}(\hat{y})-y\right)^2\right]
-\\ &amp;amp; =
-\mathbb{E}\left[\left(\hat{y}-\mathbb{E}(\hat{y})\right)^2 +2\left((\hat{y}-\mathbb{E}(\hat{y}))(\mathbb{E}(\hat{y})-y)\right)+\left( \mathbb{E}(\hat{y})-y \right)^2\right]
-\\ &amp;amp; = \mathbb{E}\left[\left(\hat{y}-\mathbb{E}(\hat{y})\right)^2\right]+2\mathbb{E}\Big[(\hat{y}-\mathbb{E}(\hat{y}))(\overbrace{\mathbb{E}(\hat{y})-y}^{\begin{smallmatrix} \text{This is} \\  \text{a constant,} \\ \text{so it can be} \\  \text{pulled out.} \end{smallmatrix}}) \,\Big] + \mathbb{E}\Big[\,\overbrace{\left(\mathbb{E}(\hat{y})-y\right)^2}^{\begin{smallmatrix} \text{This is a} \\  \text{constant, so its} \\  \text{expected value} \\  \text{is itself.} \end{smallmatrix}}\,\Big]
-\\ &amp;amp; = \mathbb{E}\left[\left(\hat{y}-\mathbb{E}(\hat{y})\right)^2\right]+2\underbrace{\mathbb{E}(\hat{y}-\mathbb{E}(\hat{y}))}_{=\mathbb{E}(\hat{y})-\mathbb{E}(\hat{y})=0}(\mathbb{E}(\hat{y})-y)+\left(\mathbb{E}(\hat{y})-y\right)^2
-\\ &amp;amp; = \mathbb{E}\left[\left(\hat{y}-\mathbb{E}(\hat{y})\right)^2\right]+\left(\mathbb{E}(\hat{y})-y\right)^2
-\\ &amp;amp; = \operatorname{Var}(\hat{y})+ \operatorname{Bias}(\hat{y},y)^2
-\end{align}
-
-$$
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# En résumé
-![underfit - overfit](/assets/04/underfit_overfit.png)
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# En résumé
-Pour réduire l'erreur quadratique, il faut minimiser à la fois le **biais** et la **variance**.
-
-* Biais important &amp;lt;-&amp;gt; sous estimation - Underfitting
-    * L'estimateur, le modele est pas bon
-    * Mauvais score
-
-* Variance importante &amp;lt;-&amp;gt; Overfitting
-    * Le modele est trop **sensible** au training dataset
-    * pouvoir d'extrapolation faible, peu de capacité à etre appliqué sur des nouvelles données.
-    * comment détecter l'overfit ?
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# split: train vs test dataset
-
-* On entraine le modele sur un **dataset de training**
-* Mais le but est d'avoir un modele capable de traiter des **données nouvelles**, données qu'il n'a pas vu auparavant
-* et on veut surtout éviter **l'Overfit**: *Le modele est trop **sensible** au training dataset*
-
-Donc on va mettre de coté  une partie des données comme données nouvelles: dataset de test.
-&amp;lt;img src=/assets/04/split_train_test.png style='width: 500px;  margin:auto; ' &amp;gt;
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# train - test split
-
-&amp;gt; Demo sur iris dataset
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Comment detecter l'overfit - learning curves
-
-* set aside a test set
-* train your model on increasing number of training samples
-* for each model, calculate the training error and the test error
-
-[scikit example 1](http://scikit-learn.org/stable/modules/learning_curve.html#learning-curve)
-
-[scikit example 2](http://scikit-learn.org/stable/auto_examples/model_selection/plot_learning_curve.html#example-model-selection-plot-learning-curve-py)
-
-The learning curve traces the error on training and the error on the validation set as the sample sizes increases.
-
-* For small sample sizes, the model does not have enough data to learn and both the training error and the testing error are high.
-
-* As the sample size increases the learning rate decreases. The model is learning the data. And the testing error is also decreasing. The model becomes a better predictor.
-
-* As you increase the sample size, there comes a point where the training error keeps on decreasing but the testing error stops decreasing and may instead starts increasing.
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# detecter l'overfit -
-
-# TODO
-Demo sur ames housing avec SGD
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Que faire si on a peu de données
-
-test - train split ne laisse pas assez de données pour un bon train du modele
-
-=&amp;gt; validation croisée
-
-k-fold
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# K-fold
-
-
-# K-fold cross validation
-
-Train, valid, test: You're wasting a lot of data
-
-### [K-fold cross validation](http://scikit-learn.org/stable/modules/classes.html#module-sklearn.cross_validation)
-
-![K-fold cross validation](assets/04/k-fold-cross-validation.png)
-
-
-1. Split your data into train (80%) / test (20%), leave the test alone
-
-2. Then further split your training set on K subsets (K = 4)
-    * train on 1,2,3, validate on 4
-    * train on 1,2,4, validate on 3
-    * train on 1,3,4, validate on 2
-    * train on 2,3,4, validate on 1
-
-The average of the errors obtained on the validations subsets is a better estimation on the performance of your model than if you had just one validation set.
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-# cross validation
-Many other ways to do [cross validation](http://scikit-learn.org/stable/modules/classes.html#module-sklearn.cross_validation) in Scikit learn.
-
-* Stratified K-Fold: preserving the percentage of samples for each class.
-* Leave one out:  Each sample is used once as a test set (singleton) while the remaining samples form the training set.
-* Shuffle Split: Random permutation cross-validation iterator. Yields indices.
-* cross_val_score, see [this example](http://scikit-learn.org/stable/auto_examples/exercises/plot_cv_digits.html#example-exercises-plot-cv-digits-py)
-
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-# K-fold cross validation
-Exercise
-
-On the diabetes dataset, find the optimal regularization parameter alpha.
-
-Bonus: How much can you trust the selection of alpha?
-
-http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.KFold.html#sklearn.cross_validation.KFold
-
-http://scikit-learn.org/stable/auto_examples/exercises/plot_cv_diabetes.html#example-exercises-plot-cv-diabetes-py
-
-&lt;/section&gt;
-
-&lt;section&gt;
-&lt;div style=&quot;display: table; height: 100px; width: 80%; text-align: center; border: 1px solid   #ccc; margin:auto; margin-top: 50px; box-shadow: 5px 10px 8px #888888; &quot;&gt;
-&lt;div style=&quot;margin: 100px 0 100px 0 ;&quot;&gt;
-&lt;p style=&quot;font-size:44px;&quot;&gt;Gradient Stochastique - SGD&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
-# Gradient Stochastique aka SGD
-
-
-The SGD algorithm is low on computation, has good convergence behavior and is applicable to many different situations through its many available variants. The SGD is implemented in a wide variety of languages (python, R, Java, scala, matlab, ...) and platforms (weka, rapidminer, ...) as well as online services big (Amazon ML, Google, Azure) and small (Dataiku, ....)
-
- The idea of iterative stochastic approximation Robbins and Monro in 1951 in a seminal paper titled A Stochastic approximation Method
-
-The literature related to the SGD algorithm is abundant. With the resurgence of depp learning and neural networks, no less than 6000 academic papers about Stochastic Gradient Descent were published in 2016 according to google scholar (from around a few 100s in the early 2000s).
-
-&lt;section data-markdown=&quot;&quot;&gt;
-&lt;/section&gt;
-The general idea is to aproximate an unknown function through iterations of unbiased estimates of the function's gradient. Knowing that the expectation of the gradient estimates equal the gradient.
-
-
-Soit une function \\(f, {\bf w}_{t+1} = {\bf w}_t - \alpha_t \hat{\nabla} f({\bf x}_t) \\) given some condition on \\(\alpha_t  \text{and} \hat{\nabla} f\\), alors \\(w_t \text{converges vers} f\\).
-
-Dans notre contexte, la fonction \\(f\\) est une fonction de régression linéaire d'ordre N avec les coefficients \\(w_k \text{with} k \in [0..N]\\)
-
-$$f(x) = w_0 + w_1 x_1 + w_2 x_2 + \cdots + w_N x_N $$
-
-On veut donc minimiser l'erreur
-
-$$ e = Y - f(X) = Y - W^T X $$
-
-cette equation admet une solution exacte que l'on a vu precedemment
-
-$$\hat{W} = ()() $$
-On peut montrer que cette la solution de cette equation est l'esimateur le moins biaisé de tous le estimqteurs possibles! En d'autre termes il fit les donn´és d'entrainement du mieux possible.
-
-https://towardsdatascience.com/predicting-housing-prices-using-advanced-regression-techniques-8dba539f9abe
-According to the Gauss-Markov theorem, the model fit by the Ordinary Least Squares (OLS) is the least biased estimator of all possible estimators. In other words, it fits the data it has seen better than all possible models.
-
-Calculer la solution a partir de l'equation ci dessus est couteuse en calcul
-
-On va donc approximer la solution de facon iterative
-
-* on choisit un vercteor W_0 pour initialiser l'algo
-et a chaque iteration on corrige W par le gradient de la fonction de cout
-
-
-see [raschka](https://sebastianraschka.com/faq/docs/closed-form-vs-gd.html)
-The cost function J(⋅), the sum of squared errors (SSE), can be written as:
-
-The magnitude and direction of the weight update is computed by taking a step in the opposite direction of the cost gradient
-
-where η is the learning rate. The weights are then updated after each epoch via the following update rule:
-
-=&amp;gt; learning rate
-
-~[gradient as ball](/assets/04/gradient_ball.png)
-
-see file:///Users/alexis/amcp/packt-B05028/B05028_07_draft.html
-
-In case of very large datasets, using GD can be quite costly since we are only taking a single step for one pass over the training set – thus, the larger the training set, the slower our algorithm updates the weights and the longer it may take until it converges to the global cost minimum
-
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-
-La dimenion stichastique consiste a actualiser le W non plus avec l'integralité du gradient sur toutes les donnees mais avec une estimation du gradient echantillon par echantillon.
-Cela marche parce que dans notre contexte: E(gradient) = gradient
-
-Instead, we update the weights after each training sample:
-
-et on passe plusieurs fois sur le dataset en shufflant le dataset a chaque fois (epoch)
-
-“stochastic” comes from the fact that the gradient based on a single training sample is a “stochastic approximation” of the “true” cost gradient
-
-it has been shown that SGD almost surely converges to the global cost minimum if the cost function is convex (or pseudo-convex)
-
-
-## Mini-Batch Gradient Descent (MB-GD)
-milieu entre le GD et le SGD
-On utilise K echantillons pour estimer le gradient a chaque iteration
-
-Accroitre K entraine
-
-* on converge plus vite et plus directement. moins de zig zag
-* on converge moins profondement. le biais est plus important.
-
+&amp;lt;img src=/assets/02/xkcd_p_value.png style='width:250px'&amp;gt;
 
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
-# Outliers, detection and impact
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Skewness: Box cox and Kurtosis
+&amp;lt;img src=/assets/02/xkcd_p_value_02.png style='width:400px'&amp;gt;
 
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
 
-* Data Split
-    train, test, valid http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/18
-    k-fold http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/20
-    http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/21
-    * stratified k-fold http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/22
+# Multinomiale
+
+=&amp;gt; Dans le notebook comparer differents modeles
+
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# Conditions sur les données
+Pour qu'une regression linéaire soit possible et fiable, il faut que les données vérifient les conditions suivantes:
+
+* **Linearite**: la relation entre les predicteurs et la cible est lineaire
+    * On peut tester avec des scatter plots
+
+* **Normality**: Les variables ont une distribution normale
+    * test: [QQ plot](https://en.wikipedia.org/wiki/Q–Q_plot#Interpretation)
+    * ou Kolmogorov-Smirnov test
+    * correction: log ou box-cox
+
+* **Independence**: no or little multicollinearity between variables
+    * test: Correlation matrix
+
+* **Homoscedasticity**: for a given variable the low and high range have the same statistical properties with respect to the residuals
+    * test: Chunk data and Check Variance
+
+* All **Confounders** accounted for
+
+http://www.statisticssolutions.com/assumptions-of-linear-regression/
+
+https://www.analyticsvidhya.com/blog/2016/07/deeper-regression-analysis-assumptions-plots-solutions/
+
+https://www.kaggle.com/questions-and-answers/57571
+What does Linear Relationship means? :- You can check linearity with scatter plots, if there is little to no linearity in the scatter plot between your dependent and Independent variables then the assumption doesn't hold.
+Linearity regression assumption requires all variables to be normal, how to check? :- You can check this assumption with a Q-Q plot, if your data deviates substantially from the line on the Q-Q plot, then this assumption doesn't hold.
+check for little to no multicollinearity, why is multicollinearity a problem? :- Multicollinearity generally occurs when there are high correlations between two or more predictor variables. A principal danger of such data redundancy is that of overfitting in regression analysis models. The best regression models are those in which the predictor variables each correlate highly with the dependent (outcome) variable but correlate at most only minimally with each other. Such a model is often called &quot;low noise&quot; and will be statistically robust (that is, it will predict reliably across numerous samples of variable sets drawn from the same statistical population).
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Correlation
+# Rappel pearson coefficient
+
+Different ways to calculate correlation.
+
+Most common one is [Pearson Correlation](https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient)
+
+formula for r is:
+
+$$r=\frac{\sum\_{i=1}^{n} (x\_{i}-{\bar{x}}) (y\_{i}-{\bar{y}})} { {\sqrt {\sum\_{i=1}^{n}(x\_{i}-{\bar {x}})^{2}}}{\sqrt {\sum\_{i=1}^{n}(y\_{i}-{\bar {y}})^{2}}}}$$
+
+where:
+* \\(n\\)  is the sample size
+
+* \\(x\_{i},y\_{i}\\) are the individual sample points indexed with i
+
+* \\( \bar{x} = \frac{1}{n} \sum\_{i=1}^{n} x\_{i} \\) (the sample mean); and analogously for  \\({\bar {y}}\\)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Correlation
+![Correlation](/assets/02/pearson-correlation-coefficient-illustration.png)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Correlation
+
+On va regarder l'influence de la correlation entre les predicteurs
+
+
+Demo: Creer un exemple de relation lineaire bruité et rajouter une variable = coef de la premiere + bruit
+
+comparer les coefficients
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Correlation \\(\neq\\) Causalité
+http://www.tylervigen.com/spurious-correlations
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+# Regression and Causation:
+
+
+For regression coefficients to have a causal interpretation we need both that
+* the linear regression assumptions hold: linearity, normality,
+independence, homoskedasticity
+* and that all confounders of, e.g., the relationship between treatment A and Y be in the model.
+
+Not the same thing
+
+Calculating Correlation: easy
+
+Demonstrating and Quantifying Causation: Causal Inference: Not so easy
+
+
+=&amp;gt; However most common strategy is to find not causality but correlation through linear regression which can be interpreted as causality under strong assumptions on the covariates.
+
+Works under VERY strong assumptions
+
+
+For regression coefficients to have a causal interpretation we need both that
+
+the linear regression assumptions hold: linearity, normality, independence, homoskedasticity
+and that all confounders of, e.g., the relationship between treatment A and Y be in the model.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Confonders
+
+facteurs potentiels de confusion
+
+https://www.r-bloggers.com/how-to-create-confounders-with-regression-a-lesson-from-causal-inference/
+
+http://www.statisticshowto.com/experimental-design/confounding-variable/
+
+![Confounders](/assets/02/confounder.png)
+
+* Relationship between **ice-cream consumption** and number of **drowning deaths** for a given period
+
+**Confounding: ?**
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+![xkcd](/assets/02/xkcd_correlation.png)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Conclusion, ce qu'il faut retenir
+
+* Regression lineaire, simple et explicite
+* Attention a ce que les predicteurs soient decorrélés
+* R^2 ajusté au lieu de R^2
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Lab de cette apres midi
+Regression lineaire sur le  housing dataset
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Questions
+
+
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# Liens et resources
+
+* [Régression linéaire en python](http://www.xavierdupre.fr/app/mlstatpy/helpsphinx/notebooks/regression_lineaire.html) sur le site de Xavier Dupré
+
+* [OLS sur wikipedia](https://en.wikipedia.org/wiki/Ordinary_least_squares): tres complet
+
 &lt;/section&gt;
 </description>
-        <pubDate>Mon, 01 Jan 2018 00:00:00 -0500</pubDate>
-        <link>http://localhost:4001/04-biais-variance-gradient-stochastique</link>
-        <guid isPermaLink="true">http://localhost:4001/04-biais-variance-gradient-stochastique</guid>
+        <pubDate>Tue, 09 Jan 2018 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/2-regression-lineaire</link>
+        <guid isPermaLink="true">http://localhost:4000/2-regression-lineaire</guid>
         
         
       </item>
     
       <item>
-        <title>Régression Logistique</title>
+        <title>3) Régression Logistique</title>
         <description>&lt;section data-markdown=&quot;&quot;&gt;
 # Régression Logistique
 &lt;/section&gt;
@@ -972,603 +1784,2454 @@ https://towardsdatascience.com/no-machine-learning-is-not-just-glorified-statist
 
 &lt;/section&gt;
 </description>
-        <pubDate>Mon, 01 Jan 2018 00:00:00 -0500</pubDate>
-        <link>http://localhost:4001/03-regression-logistique</link>
-        <guid isPermaLink="true">http://localhost:4001/03-regression-logistique</guid>
+        <pubDate>Mon, 08 Jan 2018 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/3-regression-logistique</link>
+        <guid isPermaLink="true">http://localhost:4000/3-regression-logistique</guid>
         
         
       </item>
     
       <item>
-        <title>Regression lineaire</title>
+        <title>4) Biais, variance et gradient stochastique</title>
         <description>&lt;section data-markdown=&quot;&quot;&gt;
-# Régression Linéaire
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Cours précédent
-
-* Supervisé vs non- Supervisé
-* Vue genérale de l'analyse predictive
-* Python
-
-# Questions ?
-
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-# Programme
-Régression ou classification ?
-Régression linéaire
-OLS, Moindres carrés
-Modélisation
-Univariable &amp;amp; multivariables
-Interpretation
-MSE
-R^2, P-value, Interval de confidence
-Confounders et multi collinearité
-Hypotheses et leur verification
-
-Statsmodel
-Linéarité:
-Definition
-Tests de linearite
-Régression polynomiale
-Anscombe quartet
-Kaggle projet
-
-# Lab : régression sur le boston housing dataset
-
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-# Regression ou classification
-## Qualitatif
-Variable a predire est continue
-Age, taille, poids,
-Salaire,
-Notes,
-Probabilité d'une action
-
-## Quantitatif
-Variable a predire est discrete
-Binaire
-Achat, resiliation, click
-Survie, sexe, succes examen, admission,
-Positif ou negatif
-Spam
-Multi class
-Categories, types (A,B,C),
-Positif, neutre ou negatif
-Especes, ….
-Pays
-
-
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-
-&amp;lt;img src=/assets/02/height_vs_weight.png style='float:right; width:400px;border:0px'&amp;gt;
-
-# Taille en fonction de l'age des enfants
-
-En vrai
-
-$$ \text{Taille} = f(\text{Age}) + \epsilon $$
-
-
-Regression univariable
-On suppose que on peut predire la taille en fonction de l'age avec la relation lineaire suivante
-
-$$ \hat{\text{T}}\text{aille} = a * \text{Age} + b $$
-
-Et on cherche a connaitre les parametres (a,b) qui donnent la meilleure approximation de la vrai relation
-
-
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-# Intro
-Linear regression, also called Ordinary Least-Squares (OLS) Regression, is probably the most commonly used technique in Statistical Learning. It is also the oldest, dating back to the eighteenth century and the work of Carl Friedrich Gauss and Adrien-Marie Legendre. It is also one of the easier and more intuitive techniques to understand, and it provides a good basis for learning more advanced concepts and techniques.
-
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-Nous avons \\( n  \\) échantillons:
-
-* Une variable \\( x = [x_1, ... , x_n]  \\)
-
-* Et un outcome \\( y = [y_1, ... , y_n]  \\)
-
-On veut trouver les *meilleurs*  \\(a\\) et \\(b\\) pour lesquels
-&amp;lt;br \&amp;gt;
-
-$$ \hat{y_i} = a * x_i +b  $$
-
-de telle façon que l'erreur de prediction \\( \vert y_i - \hat{y_i} \vert   \\)  soit minimale.
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-Les residus sont:
-
-$$ e_i = y_i - \hat{y_i} $$
-$$ e_i = y_i - (a * x_i +b) $$
-
-pour  \\( i = [1, ... , n]  \\)
-
-Les residus sont une **distance** entre les vrai valeurs  \\( y_i  \\) et leur estimations \\( \hat{y_i}  \\). On veut reduire cette distance.
-
-Pour cela on chercher a reduire la norme  \\( L^2  \\) des residus
-
-$$  || y - \hat{y} || =  || y - (ax +b) || $$
-
-
-$$  || y - \hat{y} ||^2 =  \sum_{i=0}^n [y_i - (a*x_i + b)]^2   $$
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Petit rappel des normes
-
-### Norme quadratique  \\( L^2  \\)
-$$  ||x|| = \sqrt{  x_1^2 + .... + x_n^2  } $$
-
-### Norme \\( L^1  \\)
-$$  |x| =  |x_1| + .... + |x_n|  $$
-
-### Norme infinie \\( L^\infty  \\)
-
-$$  |x|_{\infty} =  max [ |x_1|, ... , |x_n| ]  $$
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Fonction de cout
-
-$$ L(a,b)  = || y - \hat{y} ||^2 =  \sum_{i=0}^n [y_i - (a*x_i + b)]^2   $$
-
-* fonction convexe
-* pour trouver son minima il suffit de prendre la dérivé et de trouver les valeurs de \\( a \\) et \\( b \\) en \\( 0 \\).
-* Cela donne 2 équations a 2 inconnues  dont la solution est
-
-$$ \hat{\beta} =  (x^T.x)^{-1} x^T y \quad \text{où}  \quad  \hat{\beta} = \\{ a,b \\}^T   $$
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Regression multinomial : plusieurs predicteurs
-
-On a \\(m\\) variables predicteurs et  \\(n\\)  échantillons.
-
-Pour chaque échantillon la relation suivante
-$$ \hat{y}_i  = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_m x_m $$
-
-On peut écrire ça de la façon suivante:
-
-* \\( n\\) échantillons  \\( y = [y_1, ... , y_n]  \\)
-* \\( m\\) predicteurs \\( X = \[ (x_{i,j}) \]  \\)
-
-où \\(X\\) est une matrice de taille (\\(n\\) par \\(m\\))
-
-et on veut trouver les n+1 coefficients \\( \beta = [\beta_0, \beta_1, ...., \beta_n] \\) qui minimize
-
-$$  L(\beta) = || y - X\beta ||  $$
-
-La solution de cette équation est : $$ \hat{\beta} =  (X^T.X)^{-1} X^T y  $$
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-
-# Python
-
-=&amp;gt; notebook
-Generer plusieurs datasets de [regression](http://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_regression.html#sklearn.datasets.make_regression)
-
-* N samples avec M variables: \\( \hat{y}_i = \sum_k \beta_k * X[i,k]  + \sigma^2 \\)
-
-        X, y = make_regression(n_samples=N,
-                                n_features=M,
-                                noise =10)
-
-* Regression weights: \\( \quad \hat{\beta} = (X^T . X)^{-1} X^T y \\)
-
-        beta_hat = np.linalg.inv(X.T.dot(X)).dot(X.T).dot(y)
-
-* prediction
-
-        yhat = X[:, 0]* beta[0] + X[:,1] * beta[1]
-
-* ou si \\(M &amp;gt; 2\\):
-
-        yhat = [0 for i in range(N)]
-        for k in range(M):
-            yhat += X[:, k]* beta[k]
-
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-
-# Erreur absolu (MAE) (L1)
-
-Valeur absolue de la difference entre la prédiction et les vraies valeurs
-
-$$  MAE = \sum_{i=1}^n \|\hat{y_i} - y_i \| $$
-
-```e = np.mean( np.abs(y - yhat) )```
-
-# Erreur quadratique (MSE) (L2)
-
-$$  MSE = \sum_{i=1}^n (\hat{y_i} - y_i)^2 $$
-
-```e = np.mean( (y - yhat)**2 )```
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-
-&amp;lt;img src=/assets/02/advertising.csv.png style='width:400px; float:right; '&amp;gt;
-
-
-# Next
-
-Maintenant on va estimer les coefficients avec une methode
-
-Obtenir  plus d'information sur les coefficients de regression:
-
-* leur importance relative
-* leur fiabilité
-* leur impact quantitatif
-
-Sur un vrai dataset: [advertising](https://www.kaggle.com/ishaanv/ISLR-Auto), 200 echantillons
-* 3 variables: TV, Radio, Newspaper: sommes dépenséee pour chaque média (k$)
-* outcome: Sales: ventes réalisées
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt; Biais, variance et gradient stochastique&amp;lt;/p&amp;gt;
+&lt;p style=&quot;font-size:28px;&quot;&gt; avec scikit-learn&lt;/p&gt;
 &amp;lt;/div&amp;gt;
-
-
-
 &lt;/section&gt;
 
-&lt;section data-markdown=&quot;&quot;&gt;
+&lt;section&gt;
+&lt;div style=&quot;float:right;&quot;&gt;
+    &lt;h1&gt;Questions ?&lt;/h1&gt;
 
-# Statsmodel
-* [Statsmodel](http://www.statsmodels.org/stable/index.html) is a Python library designed for more statistically-oriented approaches to data analysis, with an emphasis on econometric analyses.
-
-* It integrates well with the pandas and numpy libraries
-
-* It also has built in support for many of the statistical tests to check the quality of the fit
-
-* Dedicated set of plotting functions to visualize and diagnose the fit.
-
-* Scikit-learn also has support for linear regression but it lacks the rich set of statistical tests and diagnostics that have been developed for linear models.
-
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-
-# Notebook python
-
-[Regression lineaire sur le dataset advertising](https://github.com/alexisperrier/gads/blob/master/04_statistics_inference/py/Lesson%204%20-%20Notebook%202%20-%20Linear%20Regression%20for%20Causal%20Inference.ipynb)
-
-1. sales = f(TV)
-2. sales = f(TV + Radio + Newspaper)
-3. sales = f(Newspaper)
-2. sales = f(TV + TV^2)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-
-# Explication de l'output smf.ols
-
-```lm = smf.ols(formula='Sales ~ TV', data=df).fit()```
-
-* R^2 et R^2 adjusted
-* Coefficients
-* p-value
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-
-&amp;lt;img src=/assets/02/01_advsertising_results_01.png style=' width:600; '&amp;gt;
-
-
-```lm = smf.ols(formula='Sales ~ TV', data=df).fit()```
-
-* **Dep. Variable**: Which variable is the response in the model
-* **Model**: What model you are using in the fit
-* **Method**: How the parameters of the model were calculated
-* **No. Observations**: The number of observations (examples)
-* **DF Residuals**: Degrees of freedom of the residuals. Number of observations - number of parameters
-* **DF Model**: Number of parameters in the model (not including the constant term if present)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-&amp;lt;img src=/assets/02/01_advsertising_results_02.png style='width:30%; float:right; clear: right;'&amp;gt;
-
-&lt;div style=&quot;width:30%; float:left;&quot;&gt;
-&amp;lt;table width:40%&amp;gt;
-&lt;tr&gt;&lt;td&gt;
-The right part of the first table shows the goodness of fit
-
-
-* **R-squared**: The [coefficient of determination](http://en.wikipedia.org/wiki/Coefficient_of_determination). A statistical measure of how well the regression line approximates the real data points
-
-* **Adj. R-squared**: The above value adjusted based on the number of observations and the degrees-of-freedom of the residuals
-
-* F-statistic: A measure how significant the fit is. The mean squared error of the model divided by the mean squared error of the residuals
-
-* Prob (F-statistic): The probability that you would get the above statistic, given the null hypothesis that they are unrelated
-
-* Log-likelihood: The log of the likelihood function.
-
-* AIC: The [Akaike Information Criterion](http://en.wikipedia.org/wiki/Akaike_information_criterion). Adjusts the log-likelihood based on the number of observations and the complexity of the model.
-
-* BIC: The [Bayesian Information Criterion](http://en.wikipedia.org/wiki/Bayesian_information_criterion). Similar to the AIC, but has a higher penalty for models with more parameters.&lt;/td&gt;
-&amp;lt;/td&amp;gt;&lt;/tr&gt;&amp;lt;/table&amp;gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &amp;lt;img src=/assets/04/questions_04.gif&amp;gt;
+    &lt;/div&gt;
 &lt;/div&gt;
 
+&lt;div data-markdown=&quot;&quot;&gt;
+# Cours précédent
+* Régression logistique
+* Approche statistique ou approche Machine Learning
+* Métriques de classification:
+    * TP, TN, FP, FN
+    * Matrice de confusion
+    * ROC-AUC
+* One hot encoding
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:40%&quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    ## Lab:
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div style=&quot;float:left; width:60%&quot;&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
+# Aujourd'hui
+
+* Scikit-learn
+* Décomposition Biais - Variance
+* Gradient Stochastique; Stochastic Gradient Descent
+* Outliers, detection and impact
+* Skewness: Box cox and Kurtosis
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right;&quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &amp;lt;img src=/assets/04/logo-scikit.png style='width:300px;'&amp;gt;
+
+    * [scikit-learn.org](http://scikit-learn.org/stable/)
+    * [Eco-système](http://scikit-learn.org/stable/related_projects.html)
+
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div style=&quot;float:left; width:60%&quot;&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
+
+# Scikit-learn
+
+Libraries open source pour le machine learning créée 2010 dans le cadre du summer of code de Google
+* Librairie basée sur numpy, scipy
+* Contributeurs principaux :  Olivier Grisel, Andreas Muller, Gael Varoquaux, Jake Vanderplas =&amp;gt; [lien github](github.com)
+* Un projet soutenu par
+    * [INRIA](http://www.inria.fr),
+    * [Telecom ParisTech ](http://www.telecom-paristech.fr/),
+    * NYU
+* Largement utilisé dans la communauté ML
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right;&quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &amp;lt;img src=/assets/04/logo-scikit.png style='width:300px;'&amp;gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
+
+# Algorithmes et modèles:
+Grand choix d'algorithmes et de modèles
+
+## Supervisé
+* Classification:
+    * SVM, nearest neighbors, random forest, XGBoost, AdaBoost, ...
+
+* Regression:
+    * SVM, SGD, ridge et Lasso, regression lineaire, naive bayes, ...
+
+## Non supervisé
+* Clustering: Grouper des échantillons *similaires* ou *proches*
+    * k-Means, spectral clustering, mean-shift, ...
+
+* Reduction de dimension: Réduire le nombre de variables
+    * Applications: Visualization, Performance
+    * PCA, feature selection, non-negative matrix factorization.
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right;&quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &amp;lt;img src=/assets/04/logo-scikit.png style='width:300px;'&amp;gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div style=&quot;float:left; width:70%&quot;&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
+
+# Scikit learn
+
+Mais aussi :
+* Sélectionner les modèles: comparer, valider et choisir les paramètres et modèles
+    * But: trouver les paramètres qui offrent les meilleurs performances
+    * Modules: grid search, cross validation, metrics.
+
+* Pre-processing: Transformation des variables.
+    * But: Transformer les variables brutes pour améliorer leur pertinence et les numériser.
+    * Modules: preprocessing, feature extraction.
+
+* Documentation très complete avec de nombreux exemples
+* Capable de traiter différents types de données: images, textes, données numeriques
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right;&quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &amp;lt;img src=/assets/04/logo-scikit.png style='width:300px;'&amp;gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
+# scikit-learn API
+Simple et cohérente
+
+1. Instancier un modèle, par exemple une regression linéaire:
+    * ```from sklearn.Linear import LinearRegression```
+    * ```mdl = LinearRegression( meta-params, loss function, ...)```
+2. Entrainer le modèle
+    * ```mdl.fit(X, y)```
+3. Obtenir des prédictions sur de nouvelles données
+    * ```y_hat = mdl.predict(Nouveaux échantillons}```.
+    * ```y_hat = mdl.predict_proba(Nouveaux échantillons)```
+4. Obtenir un score
+    * ```mdl.score(X,y)```
+
+&lt;/div&gt;
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
-# R^2
+# paramétrer les modèles
 
-proportion of the variance in the dependent variable that is predictable from the independent variable(s)
+* les meta-paramètres du modèle: \\(\alpha, \epsilon, \beta, \gamma, \cdots \\)
+* la regularisation: *penalty, l1, l2*
+* la fonction de cout: *loss*
+* la gestion des itérations: *max_iter, n_iter*
+* data pre-processing: *normalize, shuffle, valeurs manquantes*
 
-$$ \bar{y} = \frac{1}{n} \sum\_{i} y_{i} $$
-
-
-The total sum of squares (proportional to the variance of the data):
-
-$$ SS\_{\text{tot}} = \sum\_{i} (y\_{i} - \bar{y} )^2 $$
-
-The regression sum of squares, also called the explained sum of squares:
-$$ SS\_{\text{reg}} = \sum\_{i} (f\_{i} - \bar{y} )^2 $$
-
-The sum of squares of residuals, also called the residual sum of squares:
-$$ SS\_{\text{res}} = \sum\_{i} (y\_{i} - f\_{i} )^2 = \sum\_{i}e\_{i}^{2} $$
-
-The most general definition of the coefficient of determination is
-
-$$ R^{2} = 1-{SS\_{\text{res}} \over SS\_{\text{tot}}}   $$
-
+[![Lin reg params](/assets/04/scikit_linear_reg_params.png)](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression)
+[![SGD reg params](/assets/04/scikit_sgd_reg_params.png)](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor)
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
+# Demo
 
-
-# R2 does not indicate whether:
-
-* the independent variables are a cause of the changes in the dependent variable;
-* omitted-variable bias exists;
-* the correct regression was used;
-* the most appropriate set of independent variables has been chosen;
-* there is collinearity present in the data on the explanatory variables;
-* the model might be improved by using transformed versions of the existing set of independent variables;
-* there are enough data points to make a solid conclusion.
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# The adjusted R2 is defined as
-
-On ajuste pour prendre en compte la complaexité du modele:
-
-$$ \bar{R}^{2} = {1-(1-R^{2}){n-1 \over n-p-1}} $$
-
-where p is the total number of explanatory variables in the model (not including the constant term), and n is the sample size.
-
-En accroissant le nombre de predicteurs, on accroit souvent R^2.
-
-Mais \\(\bar{R}^{2}\\) prendra en compte la cpmplexité du modele
-
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-
-# Log likelihood
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# coefficient, intervals et p-value
-
-![Info Generale](/assets/02/01_advsertising_results_03.png)
-
-The second table reports for each of the coefficients
-
-
-* **coef**: La valuer des coefficients
-* **std err**: l'erreur d'estimation
-* **t-statistic**: une mesure de la importance (significant) statistique de chaque coefficient.
-
-* &lt;strong&gt;P &amp;gt; |t|&lt;/strong&gt;: P-value that the null-hypothesis that the coefficient = 0 is true.
-
-* **[95.0% Conf. Interval]**: les limites lower and upper values of the 95% confidence interval
-
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-&amp;lt;img src=/assets/02/p_value.png  style='float:right; width:200px'&amp;gt;
-# P-value
-
-* You start with a **null hypothesis** and an **alternative hypothesis** - a hypothesis that is the opposite of the null.
-
-* Then, you check whether the data supports rejecting the null hypothesis or failing to reject the null hypothesis.
-
-As it relates to model coefficients, here is the conventional hypothesis test:
-
-* null hypothesis: There is no relationship between TV ads and Sales
-    * and thus a = 0 in \\( Sales = a * TV + b \\)
-
-* alternative hypothesis: There is a relationship between TV ads and Sales (and thus a != 0 mais ca ne veut pas dire que a = la valeur du coefficient affichée, ca serait trop simple)
-
-**How do we test this hypothesis?**
-
-The p-value represents the probability that the coefficient is actually zero
-
-* if \\( P_{value} &amp;gt; 0.05 \\) then there more than 5% chance that the null hypothesis is true (a = 0)
-    * =&amp;gt; can't reject
-* if \\( P_{value} &amp;lt; 0.05 \\) then there's less than 5% chance that the null hypothesis is true
-    * =&amp;gt;  reject the null hypothesis
-    * =&amp;gt; more than 95% chance the opposite is true
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-&amp;lt;img src=/assets/02/xkcd_p_value.png style='width:250px'&amp;gt;
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-&amp;lt;img src=/assets/02/xkcd_p_value_02.png style='width:400px'&amp;gt;
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-
-# Multinomiale
-
-=&amp;gt; Dans le notebook comparer differents modeles
-
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-# Conditions sur les données
-Pour qu'une regression linéaire soit possible et fiable, il faut que les données vérifient les conditions suivantes:
-
-* **Linearite**: la relation entre les predicteurs et la cible est lineaire
-    * On peut tester avec des scatter plots
-
-* **Normality**: Les variables ont une distribution normale
-    * test: [QQ plot](https://en.wikipedia.org/wiki/Q–Q_plot#Interpretation)
-    * ou Kolmogorov-Smirnov test
-    * correction: log ou box-cox
-
-* **Independence**: no or little multicollinearity between variables
-    * test: Correlation matrix
-
-* **Homoscedasticity**: for a given variable the low and high range have the same statistical properties with respect to the residuals
-    * test: Chunk data and Check Variance
-
-* All **Confounders** accounted for
-
-http://www.statisticssolutions.com/assumptions-of-linear-regression/
-
-https://www.analyticsvidhya.com/blog/2016/07/deeper-regression-analysis-assumptions-plots-solutions/
-
-https://www.kaggle.com/questions-and-answers/57571
-What does Linear Relationship means? :- You can check linearity with scatter plots, if there is little to no linearity in the scatter plot between your dependent and Independent variables then the assumption doesn't hold.
-Linearity regression assumption requires all variables to be normal, how to check? :- You can check this assumption with a Q-Q plot, if your data deviates substantially from the line on the Q-Q plot, then this assumption doesn't hold.
-check for little to no multicollinearity, why is multicollinearity a problem? :- Multicollinearity generally occurs when there are high correlations between two or more predictor variables. A principal danger of such data redundancy is that of overfitting in regression analysis models. The best regression models are those in which the predictor variables each correlate highly with the dependent (outcome) variable but correlate at most only minimally with each other. Such a model is often called &quot;low noise&quot; and will be statistically robust (that is, it will predict reliably across numerous samples of variable sets drawn from the same statistical population).
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Correlation
-# Rappel pearson coefficient
-
-Different ways to calculate correlation.
-
-Most common one is [Pearson Correlation](https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient)
-
-formula for r is:
-
-$$r=\frac{\sum\_{i=1}^{n} (x\_{i}-{\bar{x}}) (y\_{i}-{\bar{y}})} { {\sqrt {\sum\_{i=1}^{n}(x\_{i}-{\bar {x}})^{2}}}{\sqrt {\sum\_{i=1}^{n}(y\_{i}-{\bar {y}})^{2}}}}$$
-
-where:
-* \\(n\\)  is the sample size
-
-* \\(x\_{i},y\_{i}\\) are the individual sample points indexed with i
-
-* \\( \bar{x} = \frac{1}{n} \sum\_{i=1}^{n} x\_{i} \\) (the sample mean); and analogously for  \\({\bar {y}}\\)
+[linear_model.LogisticRegression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression)
 
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
-# Correlation
-![Correlation](/assets/02/pearson-correlation-coefficient-illustration.png)
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt;
+II: Biais - Variance
+&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right;&quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &amp;lt;img src=assets/04/bias-variance-targets.png style='width:500px;'&amp;gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div style=&quot;float:left; width:50%&quot;&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
+
+# Décomposition Biais - Variance
+L'erreur de prédiction peut etre décomposée en 2 termes
+
+$$
+\text{Erreur totale} = \text{Erreur du biais} + \text{Erreur de la variance}
+$$
+
+**Biais**: la différence entre les predictions du modele et la valeur cible. Le biais mesure la performance du modèle, la distance entre les predictions et les valeurs cibles.
+
+* **Underfitting**: Un biais important indique que le modele n'arrive pas  à comprendre les données qui lui sont fournies
+
+**Variance**: Il s'agit là de la variabilité des prédictions entre différentes *réalisations* du modèle pour un échantillon donné.
+
+* **Overfitting**: Une forte erreur de variance indique que le modèle ne pourra pas extrapoler ses prédictions sur des nouvelles données.
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:left; width:50%&quot;&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
+
+# Décomposition Bias Variance
+L'erreur quadratique est définie par:
+
+$$ \operatorname{MSE}( \hat{y} ) = \frac {1}{n} \sum_{i=1}^{n}( \hat{y_i}-y_i )^2 = \mathbb{E} \big[ (\hat{y} - y)^2   \big] $$
+
+
+Et on peut réécrire cette équation de la façon suivante:
+
+$$ \operatorname{MSE}( \hat{y} )   =\mathbb{E}\left[\left(\hat{y}-\mathbb{E}(\hat{y})\right)^2\right] + \left(\mathbb{E}(\hat{y})-y\right)^2 $$
+
+Soit
+$$ \operatorname{MSE}( \hat{y} )= \operatorname{Var}(\hat{y})+ \operatorname{Bias}(\hat{y},y)^2 $$
+
+avec
+
+$$ \operatorname{Var}(\hat{y}) =  \mathbb{E}\left[\left(\hat{y}-\mathbb{E}(\hat{y})\right)^2\right] $$
+$$ \operatorname{Bias}(\hat{y},y)  = \mathbb{E}(\hat{y})-y  $$
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
+# Le calcul
+&lt;/div&gt;
+$$
+\begin{align} \mathbb{E}((\hat{y}-y)^2)&amp;amp;=
+ \mathbb{E}\left[\left(\hat{y}-\mathbb{E}(\hat{y})+\mathbb{E}(\hat{y})-y\right)^2\right]
+\\ &amp;amp; =
+\mathbb{E}\left[\left(\hat{y}-\mathbb{E}(\hat{y})\right)^2 +2\left((\hat{y}-\mathbb{E}(\hat{y}))(\mathbb{E}(\hat{y})-y)\right)+\left( \mathbb{E}(\hat{y})-y \right)^2\right]
+\\ &amp;amp; = \mathbb{E}\left[\left(\hat{y}-\mathbb{E}(\hat{y})\right)^2\right]+2\mathbb{E}\Big[(\hat{y}-\mathbb{E}(\hat{y}))(\overbrace{\mathbb{E}(\hat{y})-y}^{\begin{smallmatrix} \text{This is} \\  \text{a constant,} \\ \text{so it can be} \\  \text{pulled out.} \end{smallmatrix}}) \,\Big] + \mathbb{E}\Big[\,\overbrace{\left(\mathbb{E}(\hat{y})-y\right)^2}^{\begin{smallmatrix} \text{This is a} \\  \text{constant, so its} \\  \text{expected value} \\  \text{is itself.} \end{smallmatrix}}\,\Big]
+\\ &amp;amp; = \mathbb{E}\left[\left(\hat{y}-\mathbb{E}(\hat{y})\right)^2\right]+2\underbrace{\mathbb{E}(\hat{y}-\mathbb{E}(\hat{y}))}_{=\mathbb{E}(\hat{y})-\mathbb{E}(\hat{y})=0}(\mathbb{E}(\hat{y})-y)+\left(\mathbb{E}(\hat{y})-y\right)^2
+\\ &amp;amp; = \mathbb{E}\left[\left(\hat{y}-\mathbb{E}(\hat{y})\right)^2\right]+\left(\mathbb{E}(\hat{y})-y\right)^2
+\\ &amp;amp; = \operatorname{Var}(\hat{y})+ \operatorname{Bias}(\hat{y},y)^2
+\end{align}
+
+$$
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# En résumé
+![underfit - overfit](/assets/04/underfit_overfit.png)
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# En résumé
+Pour réduire l'erreur quadratique, il faut minimiser à la fois le **biais** et la **variance**.
+
+* Biais important &amp;lt;-&amp;gt; sous estimation - Underfitting
+    * le modele n'est pas bon
+    * On obtient de mauvais score
+
+* Variance importante &amp;lt;-&amp;gt; Overfitting
+    * Le modele est trop **sensible** au training dataset
+    * pouvoir d'extrapolation faible, mauvaises performances sur des nouvelles données.
+
+Mais comment détecter l'overfit ?
 
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
-# Correlation
+# split: train vs test dataset
 
-On va regarder l'influence de la correlation entre les predicteurs
+* On entraine le modele sur un **dataset de training**
+* Mais le but est d'avoir un modele capable de traiter des **données nouvelles**, données qu'il n'a pas vu auparavant
+* et on veut surtout éviter **l'Overfit**: *Le modele est trop **sensible** au training dataset*
 
+Donc on va mettre de coté  une partie des données comme données nouvelles: dataset de test.
 
-Demo: Creer un exemple de relation lineaire bruité et rajouter une variable = coef de la premiere + bruit
+Typiquement : une répartition  80/20 ou 70/30
 
-comparer les coefficients
+&amp;lt;img src=/assets/04/split_train_test.png style='width: 500px;  margin:auto; ' &amp;gt;
 
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Correlation \\(\neq\\) Causalité
-http://www.tylervigen.com/spurious-correlations
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-
-# Regression and Causation:
-
-
-For regression coefficients to have a causal interpretation we need both that
-* the linear regression assumptions hold: linearity, normality,
-independence, homoskedasticity
-* and that all confounders of, e.g., the relationship between treatment A and Y be in the model.
-
-Not the same thing
-
-Calculating Correlation: easy
-
-Demonstrating and Quantifying Causation: Causal Inference: Not so easy
-
-
-=&amp;gt; However most common strategy is to find not causality but correlation through linear regression which can be interpreted as causality under strong assumptions on the covariates.
-
-Works under VERY strong assumptions
-
-
-For regression coefficients to have a causal interpretation we need both that
-
-the linear regression assumptions hold: linearity, normality, independence, homoskedasticity
-and that all confounders of, e.g., the relationship between treatment A and Y be in the model.
+Et c'est en évaluant le modele sur les données de test que l'on va pouvoir détecter l'overfit
 
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
-# Confonders
+# train - test split
 
-facteurs potentiels de confusion
+&amp;gt; Demo sur iris dataset
 
-https://www.r-bloggers.com/how-to-create-confounders-with-regression-a-lesson-from-causal-inference/
+&lt;/section&gt;
 
-http://www.statisticshowto.com/experimental-design/confounding-variable/
+&lt;section&gt;
+&lt;div style=&quot;float:right;&quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    [scikit example 1](http://scikit-learn.org/stable/modules/learning_curve.html#learning-curve)
 
-![Confounders](/assets/02/confounder.png)
+    [scikit example 2](http://scikit-learn.org/stable/auto_examples/model_selection/plot_learning_curve.html#example-model-selection-plot-learning-curve-py)
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div style=&quot;float:left; width:70%&quot;&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
 
-* Relationship between **ice-cream consumption** and number of **drowning deaths** for a given period
 
-**Confounding: ?**
+
+
+# Comment détecter l'overfit ?
+### Courbes d'apprentissages - Learning curves
+
+
+
+* On met de coté un set d'apprentissage (20% des données)
+* on entraine le modele sur un nombre croissant d'echantillons (10%, 20%, ...)
+* Pour chaque réalisation on calcule
+    * l'erreur sur le set d'apprentissage
+    * l'erreur sur le set de test
+
+* En accroissant le set d'apprentissage, le modele a de plus en plus d'info, le modele apprends le set d'apprentissage. On espere que ca va lui permettre de traiter aussi les données sur le set de test.
+
+Ce que l'on observe:
+* avec un set d'apprentissage petit, les 2 erreurs sont grandes
+* avec plus de données, l'erreur d'apprentissage décroit
+    * si l'erreur sur le set de test ne décroit pas: **overfit**!
+
+Si l'erreur sur le set de test ne décroit pas, alors cela veut dire que le modele n'est pas capable d'extrapoler sur des nouvelles données
+
+Note: si l'erreur ne décroit pas sur le set de training en premier lieu, alors cela veut dire que le modele est mauvais, que l'erreur de biais est forte.
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Illustration
+
+### learning curve
+
+* underfit
+* overfit
+
+
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# Detecter l'overfit -
+
+Demo sur ames housing avec SGD
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Validation croisée
+Si on a peu de données, le split train - test *gaspille* des données pour le test. Données qui pourraient etre utile pour l'apprentissage du modele.
+
+=&amp;gt; on va alterner le découpage train - test, 80% - 20%,
+
+C'est la validation croisée et plus particulièrement **K-FOLD cross validation**
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# K-fold cross-validation
+
+&amp;lt;img src=/assets/04/k-fold-cross-validation.png style='width: 600px;  margin:auto; float:right;' &amp;gt;
+
+1. Mélanger le dataset
+2. Puis découper le dataset en K (5) parties
+3. Faire K (5) experiences:
+    * apprentissage sur 1,2,3,4 et evaluation sur 5
+    * apprentissage sur 1,2,3,**5** et evaluation sur **4**
+    * ...
+    * apprentissage sur 2,3,4,5 et evaluation sur **1**
+
+La moyenne des scores obtenus ainsi est plus robuste qu'un score obtenu sur un unique découpage.
+
+[K-fold cross validation - scikit-learn](http://scikit-learn.org/stable/modules/classes.html#module-sklearn.cross_validation)
+
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# Autres méthodes de validation croisée
+
+* **Stratified K-Fold**: (classification) Chaque subset conserve la distribution des classes. Utile lorsque la repartition des classes est déséquilibrée.
+* **Leave one out**:  Chaque échantillon est utilisé à son tour comme echantillon de test. Tous les autres sont laissé dans le set d'apprentissage.
+* **Shuffle cross validation**: Decoupage aléatoire avec remise en place. rien n'oblige à fixer le découpage au début.
+
+
+### scikit-learn
+* [cross_val_score](http://scikit-learn.org/stable/auto_examples/exercises/plot_cv_digits.html#example-exercises-plot-cv-digits-py)
+* [cross validation](http://scikit-learn.org/stable/modules/classes.html#module-sklearn.cross_validation)
+
+
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# K-fold cross validation
+Exercise
+
+On the diabetes dataset, find the optimal regularization parameter alpha.
+
+Bonus: How much can you trust the selection of alpha?
+
+http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.KFold.html#sklearn.cross_validation.KFold
+
+http://scikit-learn.org/stable/auto_examples/exercises/plot_cv_diabetes.html#example-exercises-plot-cv-diabetes-py
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt;
+III: Gradient Stochastique
+&amp;lt;/p&amp;gt;
+&amp;lt;p class=mitop&amp;gt;
+Stochastic Gradient Descent
+&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Gradient Stochastique
+
+**1951!** Robbins - Monroe: A Stochastic approximation Method
+
+&amp;lt;img src=/assets/04/robins_monroe_1951.png style='width: 500px; margin: auto; float:right; '&amp;gt;
+
+The general idea is to aproximate an unknown function through iterations of unbiased estimates of the function's gradient. Knowing that the expectation of the gradient estimates equal the gradient.
+
+Soit une function \\(  f \\) que l'on souhaite approximer.
+Sous certaines conditions sur  \\(  \alpha \\) et \\(\hat{\nabla} f\\) (gradient de f), alors \\(  \\)
+
+$$  {\bf w}_{t+1} = {\bf w}_t - \alpha_t \hat{\nabla} f({\bf x}_t) $$
+$$ {\bf w}_t -&amp;gt; f  $$
+
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
 
-![xkcd](/assets/02/xkcd_correlation.png)
+Dans notre contexte, la fonction \\(f\\) est une fonction de régression linéaire d'ordre N avec les coefficients \\(w_k \text{with} k \in [0..N]\\)
+
+$$f(x) = w_0 + w_1 x_1 + w_2 x_2 + \cdots + w_N x_N $$
+
+On veut donc minimiser l'erreur
+
+$$ e = y - f(X) = t - W^T X $$
+
+Cette equation admet une solution exacte que l'on a vu precedemment
+
+$$\hat{W} = ()() $$
+
+Au lieu de calculer la solution directement on va l'estimer par la methode du gradient:
 
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
-# Conclusion, ce qu'il faut retenir
+# Methode du gradient
 
-* Regression lineaire, simple et explicite
-* Attention a ce que les predicteurs soient decorrélés
-* R^2 ajusté au lieu de R^2
+Equation
+
+Neanmoins cela necessite de calculer le gradient sur tous les echantillons disponibles a la fois. Pour un dataset grand, c'est couteux et long.
+
+Donc on va utiliser le fait que sous certaines conditions
+
+le gradient peut etre estimé par la moyenne des
+
+The SGD algorithm is low on computation, has good convergence behavior and is applicable to many different situations through its many available variants. The SGD is implemented in a wide variety of languages (python, R, Java, scala, matlab, ...) and platforms (weka, rapidminer, ...) as well as online services big (Amazon ML, Google, Azure) and small (Dataiku, ....)
+
+The idea of iterative stochastic approximation Robbins and Monro in 1951 in a seminal paper titled A Stochastic approximation Method
+
+The literature related to the SGD algorithm is abundant. With the resurgence of depp learning and neural networks, no less than 6000 academic papers about Stochastic Gradient Descent were published in 2016 according to google scholar (from around a few 100s in the early 2000s).
+
+
+
+According to the Gauss-Markov theorem, the model fit by the Ordinary Least Squares (OLS) is the least biased estimator of all possible estimators. In other words, it fits the data it has seen better than all possible models.
+
+Calculer la solution a partir de l'equation ci dessus est couteuse en calcul
+
+On va donc approximer la solution de facon iterative
+
+* on choisit un vercteor W_0 pour initialiser l'algo
+et a chaque iteration on corrige W par le gradient de la fonction de cout
+
+
+see [raschka](https://sebastianraschka.com/faq/docs/closed-form-vs-gd.html)
+The cost function J(⋅), the sum of squared errors (SSE), can be written as:
+
+The magnitude and direction of the weight update is computed by taking a step in the opposite direction of the cost gradient
+
+where η is the learning rate. The weights are then updated after each epoch via the following update rule:
+
+=&amp;gt; learning rate
+
+~[gradient as ball](/assets/04/gradient_ball.png)
+
+see file:///Users/alexis/amcp/packt-B05028/B05028_07_draft.html
+
+In case of very large datasets, using GD can be quite costly since we are only taking a single step for one pass over the training set – thus, the larger the training set, the slower our algorithm updates the weights and the longer it may take until it converges to the global cost minimum
+
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+
+La dimenion stichastique consiste a actualiser le W non plus avec l'integralité du gradient sur toutes les donnees mais avec une estimation du gradient echantillon par echantillon.
+Cela marche parce que dans notre contexte: E(gradient) = gradient
+
+Instead, we update the weights after each training sample:
+
+et on passe plusieurs fois sur le dataset en shufflant le dataset a chaque fois (epoch)
+
+“stochastic” comes from the fact that the gradient based on a single training sample is a “stochastic approximation” of the “true” cost gradient
+
+it has been shown that SGD almost surely converges to the global cost minimum if the cost function is convex (or pseudo-convex)
+
+
+## Mini-Batch Gradient Descent (MB-GD)
+milieu entre le GD et le SGD
+On utilise K echantillons pour estimer le gradient a chaque iteration
+
+Accroitre K entraine
+
+* on converge plus vite et plus directement. moins de zig zag
+* on converge moins profondement. le biais est plus important.
+
 
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
-# Lab de cette apres midi
-Regresison lineaire sur le  housing dataset
+# Outliers, detection and impact
 
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Skewness: Box cox and Kurtosis
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# resources
+https://towardsdatascience.com/predicting-housing-prices-using-advanced-regression-techniques-8dba539f9abe
+
+
+
+* Data Split
+    train, test, valid http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/18
+    k-fold http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/20
+    http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/21
+    * stratified k-fold http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/22
+&lt;/section&gt;
+</description>
+        <pubDate>Sun, 07 Jan 2018 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/4-biais-variance-gradient-stochastique</link>
+        <guid isPermaLink="true">http://localhost:4000/4-biais-variance-gradient-stochastique</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Lesson 18 - R &amp; AWS ML</title>
+        <description>&lt;section data-background-color=&quot;#000&quot;&gt;
+    &lt;h1 class=&quot;white&quot; style=&quot;border-top: thin solid #DDD;border-bottom: thin solid #DDD;&quot;&gt;
+        &lt;img src=&quot;assets/ga_logo_black.png&quot; style=&quot;float:left;top:0px;&quot; /&gt;
+        General Assembly
+    &lt;/h1&gt;
+    &lt;p class=&quot;big_title&quot;&gt;18. R and AWS ML&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Previously
+
+* Decomposition, Trending and seasonality
+* Stationarity, Dickey-Fuller test, Autocorrelation, partial auto correlation
+* AR(p), MA9q), ARIMA(p,d,q)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Today
+
+* R
+    * R studio
+    * packages
+    * essential code
+    * time series forecasting
+
+* AWS ML
+
+    * classification problem
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# R Packages
+
+* caret:  The caret package, short for classification and regression training, contains numerous tools for developing predictive models using the rich set of models available in R. The package focuses on simplifying model training and tuning across a wide variety of modeling techniques. It also includes methods for pre-processing training data, calculating variable importance, and model visualizations.
+* CRAN - Package e1071 - for Naive Bayes, SVMs, Latent Class Analysis
+* CRAN - Package randomForest - Random Forests
+* CRAN - Package gbm - Generalized boosting models
+
+and many more https://www.quora.com/What-are-the-best-machine-learning-packages-in-R
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# R Code
+
+Directory:
+
+* getwd() get working directory
+* setwd() set working directory
+
+Packages:
+
+* install.packages('forecast')
+* library('forecast')
+* installed.packages()
+
+help:
+
+* ?c
+* ?forecast
+
+data:
+
+* **x &amp;lt;- 1 instead of x = 1**
+* a &amp;lt;- c(1,2,3,4,5)
+* vector &amp;lt;- c(apple = 1, banana = 2, &quot;kiwi fruit&quot; = 3, 4)
+* df &amp;lt;- read.csv('iris.csv')
+
+Dataframe:
+
+* dim(df)
+* head(df)
+* colnames(df)
+* summary(df)
+
+plot:
+
+* plot(df)
+* hist(df$sepal_length)
+* boxplot(df$sepal_width)
+* plot(df$sepal_length, df$petal_width)
+* qqnorm(df$sepal_length)
+* qqline(df$sepal_length)
+
+ML on Iris
+
+* iris$target[iris$Species == 'setosa'] &amp;lt;- 1
+* iris$target[iris$Species == 'versicolor'] &amp;lt;- 2
+* iris$target[iris$Species == 'virginica'] &amp;lt;- 3
+
+* fit &amp;lt;- lm(target ~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width, data = iris )
+* coefficients(fit)
+* summary(fit)
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Time series analysis in R
+
+dataset: [Stock Prices for Tui Ag from the Frankfurt Stock Exchange.](https://www.quandl.com/data/FSE/TUI1_X-Tui-TUI1_X)
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Holt Winters
+
+The additive Holt-Winters prediction function (for time series with period length p) is
+
+Yhat[t+h] = a[t] + h * b[t] + s[t - p + 1 + (h - 1) mod p],
+
+where a[t], b[t] and s[t] are given by
+
+a[t] = α (Y[t] - s[t-p]) + (1-α) (a[t-1] + b[t-1])
+
+b[t] = β (a[t] - a[t-1]) + (1-β) b[t-1]
+
+s[t] = γ (Y[t] - a[t]) + (1-γ) s[t-p]
+
+The multiplicative Holt-Winters prediction function (for time series with period length p) is
+
+Yhat[t+h] = (a[t] + h * b[t]) * s[t - p + 1 + (h - 1) mod p],
+
+where a[t], b[t] and s[t] are given by
+
+a[t] = α (Y[t] / s[t-p]) + (1-α) (a[t-1] + b[t-1])
+
+b[t] = β (a[t] - a[t-1]) + (1-β) b[t-1]
+
+s[t] = γ (Y[t] / a[t]) + (1-γ) s[t-p]
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Amazon Machine Learning
+
+https://console.aws.amazon.com/
+
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# Amazon Machine Learning
+
+* Datasources
+* Models
+* Evaluations and results
+
+&lt;/section&gt;
+</description>
+        <pubDate>Thu, 01 Jan 2015 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/18-r-and-aws-ml.html</link>
+        <guid isPermaLink="true">http://localhost:4000/18-r-and-aws-ml.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Lesson 17 - Time Series Modeling</title>
+        <description>&lt;section data-background-color=&quot;#000&quot;&gt;
+    &lt;h1 class=&quot;white&quot; style=&quot;border-top: thin solid #DDD;border-bottom: thin solid #DDD;&quot;&gt;
+        &lt;img src=&quot;assets/ga_logo_black.png&quot; style=&quot;float:left;top:0px;&quot; /&gt;
+        General Assembly
+    &lt;/h1&gt;
+    &lt;p class=&quot;big_title&quot;&gt;17. Time Series Modeling and Forecasting&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Previously
+
+* Time series
+* Smoothing
+* Trending and seasonality
+* Stationarity, Dickey-Fuller test
+* Autocorrelation, partial auto correlation
+* Forecasting 101 &amp;amp; Metrics
+
+### Today
+
+* ARMA Modeling
+* ARMA Modeling
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Types of TS
+
+[Different types of TS](/assets/17/stationary_time_series.png)
+
+
+* White noise
+
+* Trend
+
+* Seasonality
+
+* Cycle
+
+* **Seasonality != Cycle**
+
+*Some cases can be confusing — a time series with cyclic behaviour (but not trend or seasonality) is NOT stationary. That is because the cycles are not of fixed length, so before we observe the series we cannot be sure where the peaks and troughs of the cycles will be.*
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Stationarity
+
+Required for most models.
+
+* Mean is constant \\(  \ \ \ \operatorname{E}[Y\_{t}]  = \mu \\)
+* Variance is constant  \\(  \ \ \ \operatorname{Var}(Y\_t) = \operatorname{E}[ (Y\_{t} - \mu)^2 ]  = \sigma^2 \\)
+* Autocorrelation is lag dependent
+
+$$  R(\tau) = \frac {\operatorname{E} [ (Y\_{t}-\mu )(Y\_{t+\tau }-\mu )]} {\sigma ^{2}} $$
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Testing for stationarity
+
+### Dickey-Fuller test
+
+**Null hypothesis**: TS is NOT stationary
+
+[Demo in Notebook](https://github.com/alexperrier/gads/blob/master/17_ts2/py/L17%20Time%20Series%20Demo.ipynb)
+
+* Dickey Fuller test does not test for seasonality stationarity
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# (Partial) Autocorrelation
+
+### ACF
+Correlation between \\( Y\_t \\) and  \\( Y\_{t-s} \\)
+
+### PACF
+
+Correlation between \\( Y\_t \\) and  \\( Y\_{t-s} \\)
+
+*  without the cumulative correlation between \\( Y\_t \\) and \\( Y\_{t-1} \cdots Y\_{t-s+1}  \\)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Simple Forecasting
+
+* next sample = last sample
+$$ \hat{Y}\_{t+1} = Y\_{t} $$
+* Moving average $$ \hat{Y}\_{t+1} = \frac{1}{n} \sum^{n}\_{i = 0} Y\_{t-1-i}  $$
+* EWMA $$ \ \ \ \ \hat{Y}\_{t}= \alpha \cdot Y\_{t}+(1-\alpha )\cdot \hat{Y}\_{t-1} $$
+* Linear Regression OLS
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Today
+
+* Transform TS  into a Stationary TS
+* Test is the TS predictable? Is it **white noise**?
+* Decomposition: Trend, Seasonality, Residuals
+* Is my forecast reliable?
+* Is the Dow Jones a **Random Walk**?
+* AutoRegressive modeling (AR) and Moving Average (MA)
+
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# Differencing
+
+Create a new TS by taking the difference shifted by 1
+
+$$  X\_t =  Y\_t - Y\_{t-1} $$
+
+! [Try it out](https://github.com/alexperrier/gads/blob/master/17_ts2/py/L17%20Time%20Series%20Demo.ipynb) on the milk production ts
+
+What happens to the seasonality? to the trend?
+
+What is the result of the Dickey Fuller test on the difference?
+Is the difference series stationary?
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# White noise
+
+### What is white noise?
+
+Time series data that shows **no auto correlation** is called **white noise**.
+
+Formally, \\( X(t) \\) is a white noise process if
+
+* \\( E[X(t)]=0 \\)
+* \\( E[X(t)^2]=\sigma^2  \\)
+* and  \\( E[X(t)X(h)]=0 \ \  \text{for} \ \ t \neq h \\)
+
+The autocorrelation matrix of a white noise TS is a diagonal matrix
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# How to detect white noise
+
+### 1. ACF and PACF
+
+Rule of thumb:
+
+* A Time series is white noise if 95% of the spikes in the Auto-correlation Function lie within  \\( \pm \frac{2}{ \sqrt{N} } \\) with N the length of the time series.
+
+=&amp;gt; Plot the PACF for the milk volume and difference TS and the tree rings series
+
+Which one is a white noise?
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Testing for white noise: the Ljung-Box test
+
+The Ljung–Box test may be defined as:
+
+* H0: The data are independently distributed
+* Ha: The data are not independently distributed; they exhibit serial correlation.
+
+The test statistic is
+
+$$ Q = n (n+2) \sum\_{k=1}^{h} \frac{ \hat{\rho }\_{k}^{2}}{n-k} $$
+
+where
+
+* n is the sample size,
+* \\( \hat{\rho }\_{k} \\) is the sample autocorrelation at lag k,
+* **h** is the number of lags being tested.
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# Testing for white noise: the Ljung-Box test
+
+[Rule of thumb](http://robjhyndman.com/hyndsight/ljung-box-test/) for h
+
+* h = 10 for non-seasonal data
+* h = 2m for seasonal data, where m is the period of seasonality.
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Residual diagnostics on forecasting
+A good forecasting method will yield residuals with the following properties:
+
+* The residuals are uncorrelated: *If there are correlations between residuals, then there is information left in the residuals which should be used in computing forecasts.*
+
+* The residuals have zero mean : *If the residuals have a mean other than zero, then the forecasts are biased.*
+
+It is useful to also have the following two properties which make the calculation of prediction intervals easier
+
+* The residuals have constant variance.
+* The residuals are normally distributed.
+
+These two properties make the calculation of **prediction intervals** easier
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Prediction Intervals
+
+95% prediction interval: \\( \ \ \ \hat{Y\_{t}}  \pm 1.96 \sigma^2 \ \ \ \\)  with \\(\sigma \\)  an estimate of the standard deviation of the forecast distribution.
+
+When the residuals are **normally distributed and uncorrelated** and when **forecasting one-step ahead**
+
+=&amp;gt;  the standard deviation of the *forecast distribution* is almost the same as the standard deviation of the *residuals*.
+
+When conditions are not met, there are more complex ways to estimate confidence intervals
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# TS Decomposition
+
+### Additive Model
+$$ Y\_t = S\_t + T\_t + E\_t $$
+
+where  \\( S\_t \\)  is the seasonal component,   \\( S\_t \\) is the trend-cycle component and  \\( E\_t \\) is the residual
+
+
+        import statsmodels.api as sm
+        res = sm.tsa.seasonal_decompose(milk_prod.volume, model = 'additive')
+        resplot = res.plot()
+
+### Multiplicative Model
+$$ Y\_t=S\_t \cdot T\_t \cdot E\_t $$
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+# Forecast with decomposition
+
+* forecast seasonality, trend and residuals separately
+* add back together
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# LAB:  IBM dataset
+Consider the daily closing IBM stock prices (data set ibmclose).
+
+https://datamarket.com/data/set/2322/ibm-common-stock-closing-prices-daily-17th-may-1961-2nd-november-1962#!ds=2322&amp;amp;display=line
+
+* Produce some plots of the data in order to become familiar with it.
+* Split the data into a training set of 300 observations and a test set of 69 observations.
+* Try various simple methods to forecast the training set and compare the results on the test set.
+* Which method did best?
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# LAB: House sales
+https://datamarket.com/data/set/22q8/monthly-sales-of-new-one-family-houses-sold-in-th-e-usa-since-1973#!ds=22q8&amp;amp;display=line
+
+Consider the sales of new one-family houses in the USA, Jan 1973 – Nov 1995 (data set hsales).
+
+* Produce some plots of the data in order to become familiar with it.
+* Split the data into a training set of 300 observations and a test set of 69 observations.
+* Try various simple methods to forecast the training set and compare the results on the test set.
+* Which method did best?
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Break 5mn
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Next session
+
+* R
+* SQL
+* AWS Machine Learning
+* ?
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# LAB Is the DJ a random walk?
+Why you cannot beat the market
+
+$$ \$\$\$ $$
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# What's a Random Walk
+When the differenced series is white noise, the model for the original series can be written as
+
+\\( y\_t−y\_{t−1}=e\_t \ \ \
+or  \ \ \  y\_t= y\_{t−1}+e\_t \\)
+
+A random walk model is very widely used for non-stationary data, particularly finance and economic data. Random walks typically have:
+
+* long periods of apparent trends up or down
+* sudden and unpredictable changes in direction.
+
+
+http://python-for-signal-processing.blogspot.com/2014/04/random-walks-and-stumbles.html
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+# Notebook: The Dow Jones is a random walk
+http://www.johnwittenauer.net/a-simple-time-series-analysis-of-the-sp-500-index/
+
+* plot DJ
+* plot diff
+* transform with log
+* plot rolling variance original + log
+* plot diff of log =&amp;gt; stationary time series model of daily changes to the S&amp;amp;P 500 index
+* lag variables scatter plot =&amp;gt; all centered and normal
+* acf and pacf =&amp;gt; no correlation =&amp;gt; increment is white noise =&amp;gt; we have a random walk
+* decomposition of diff =&amp;gt; look at the residuals white noise ?
+* AR model, look at the residuals =&amp;gt; much smaler values predicted than actual changes
+
+
+* look at histogram of residuals
+    * skewed =&amp;gt; not great for confidence intervals
+* autocorrelation plot of residuals
+* test with Ljung-Box
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# AR(p) model
+In an autoregression model, we forecast the variable of interest using a linear combination of past values of the variable.
+
+
+$$ AR(1): \ \ \  X\_{t}= c + \varphi X\_{t-1} + \varepsilon\_{t} $$
+$$ AR(p): \ \ \  X\_{t}= c + \sum\_{i=1}^{p} \varphi\_{i}X\_{t-i} + \varepsilon\_{t} $$
+
+
+where
+* \\( \varphi\_{i} \\) are the parameters of the model
+* \\(  \varepsilon\_{t} \\) is a white noise process with zero mean and constant variance \\( \sigma\_{\varepsilon }^{2}\\)
+* c is a constant
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Special cases
+For an AR(1) model:
+
+* When  \\( \varphi\_1 = 0, \ \ X\_t  \\) is equivalent to white noise.
+* When  \\( \varphi\_1 = 1, \ \ X\_t  \\) is equivalent to a random walk.
+* When  \\( \varphi\_1 = 0, c \neq 0 \ \ X\_t  \\)  is equivalent to a random walk with drift
+* When \\( \varphi\_1 \lt 0 \ \ X\_t \\)  tends to oscillate between positive and negative values.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# MA(q) models
+Rather than use past values of the forecast variable in a regression, a moving average model uses past forecast errors in a regression-like model.
+
+Moving Average model of order q:
+
+$$   X\_{t}=\mu + \varepsilon\_{t}+\theta\_{1}\varepsilon\_{t-1}+\cdots +\theta\_{q}\varepsilon\_{t-q} $$
+
+where
+
+* \\(\mu \\) is the mean of the series
+*  \\(\theta\_{1} \cdots \theta\_{q}\\) are the parameters of the model
+* \\( \varepsilon\_{t} \cdots \varepsilon\_{t-q} \\) are white noise error terms
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# ARIMA(p,d,q) model
+
+We combine the AR(p) and the MA(q) and add i^th differencing
+
+$$   X\_{t}=c + \sum\_{i=1}^{p} \varphi\_{i}X\_{t-i} + \varepsilon\_{t}+\theta\_{1}\varepsilon\_{t-1}+\cdots +\theta\_{q}\varepsilon\_{t-q} $$
+
+
+We call this an ARIMA(p,d,q) model, where
+
+* p: order of the autoregressive part;
+* d: degree of first differencing involved;
+* q: order of the moving average part.
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Estimating p, d, q
+
+The *squirrel* approach
+
+http://people.duke.edu/~rnau/411arim3.htm
+
+The ML approach: Brute Force and Grid Search
+
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# Criteria for model selection
+
+* Akaike Information Criterion (AIC)
+* Schwarz Bayesian Information Criterion (BIC)
+* Hannan-Quinn Information Criterion (HQIC)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# White Noise - Normality test
+### The Durbin Watson test
+
+The Durbin-Watson statistic ranges in value from 0 to 4.
+
+* A value near 2 indicates non-autocorrelation;
+
+* A value toward 0 indicates positive autocorrelation;
+
+* A value toward 4 indicates negative autocorrelation.
+
+### Agostino and Pearson for normality
+
+Null hypothesis: the sample comes from a normal distribution
+
+        scipy.stats.normaltest(ts)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Lab on sunspots
+
+[Wolf's Sunspot Numbers. 1700 – 1988](https://datamarket.com/data/set/22wg/wolfs-sunspot-numbers-1700-1988#!ds=22wg&amp;amp;display=line)
+
+from https://bicorner.com/2015/11/16/time-series-analysis-using-ipython/
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Time Series Classification and Clustering
+
+[Time Series Classification and Clustering](http://nbviewer.jupyter.org/github/alexminnaar/time-series-classification-and-clustering/blob/master/Time%20Series%20Classification%20and%20Clustering.ipynb)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+### Dickey Fuller test
+
+http://stats.stackexchange.com/questions/44647/which-dickey-fuller-test-should-i-apply-to-a-time-series-with-an-underlying-mode
+http://stats.stackexchange.com/questions/225087/seasonal-data-deemed-stationary-by-adf-and-kpss-tests
+
+
+
+### Random Walk
+
+http://python-for-signal-processing.blogspot.com/2014/04/random-walks-and-stumbles.html
+http://fedc.wiwi.hu-berlin.de/xplore/tutorials/xegbohtmlnode39.html
+
+### Ljung-Box test
+[Thoughts on the Ljung-Box test](http://robjhyndman.com/hyndsight/ljung-box-test/)
+http://stats.stackexchange.com/questions/18135/testing-normality-and-independence-of-time-series-residuals
+
+https://www.otexts.org/fpp/2/6
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Train Test and Cross validation
+https://www.otexts.org/fpp/2/5
+
+&lt;/section&gt;
+</description>
+        <pubDate>Thu, 01 Jan 2015 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/17-time-series-forecast.html</link>
+        <guid isPermaLink="true">http://localhost:4000/17-time-series-forecast.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Lesson 16 - Time Series</title>
+        <description>&lt;section data-background-color=&quot;#000&quot;&gt;
+    &lt;h1 class=&quot;white&quot; style=&quot;border-top: thin solid #DDD;border-bottom: thin solid #DDD;&quot;&gt;
+        &lt;img src=&quot;assets/ga_logo_black.png&quot; style=&quot;float:left;top:0px;&quot; /&gt;
+        General Assembly
+    &lt;/h1&gt;
+    &lt;p class=&quot;big_title&quot;&gt;16. Time series&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Previously
+
+* Topic Modeling
+* LDA, LSA
+* Gensim, NLTK
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Today
+
+![](assets/16/time-series-analysis.png)
+
+* Time series
+* Modeling
+* Stationarity
+* Trending and seasonality
+* Forecasting 101
+
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# Python
+
+* Python Koans https://github.com/gregmalcolm/python_koans
+* Hackerrank: https://www.hackerrank.com/domains
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Time Series [TS]
+
+A time series is a series of data points listed in time order.
+
+A sequence taken at successive equally spaced points in time.
+
+A sequence of **discrete-time data**.
+
+=&amp;gt; The **time interval** is key
+
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# Time Series [TS]
+
+Any domain of applied science and engineering which involves temporal measurements.
+
+* **IoT**
+* **econometrics**
+* mathematical finance / trading / markets
+* intelligent transport and trajectory forecasting
+* weather forecasting and Climate change research
+* earthquake prediction, astronomy
+* electroencephalography, control engineering, communications
+* **signal processing**
+
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# TS
+
+* Modeling
+* Forecasting
+* Pattern detection
+* Detection of a change in the parameters of a static or dynamic system
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Time vs Frequency domain: Fourier Transform
+
+The Fourier transform decomposes a function of time (a signal) into the frequencies that make it up. A Fourier transform takes a time series or a function of continuous time, and maps it into a frequency spectrum.
+
+* Jean-Baptiste Joseph Fourier, 1807 Treatise on the *propagation of heat in solid bodies*.
+
+![](assets/16/sFFT.png)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# So many TS!
+
+* [Great source of Time series](https://datamarket.com/data/list/?q=provider:tsdl)
+* [Google trends](https://www.google.com/trends/explore?date=all&amp;amp;q=data%20science,data%20mining,Machine%20learning)
+
+![](assets/16/TimeSeriesChart_1.jpg)
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# TS: Components
+
+* [Trend](https://datamarket.com/data/set/22s6/weekly-closing-price-of-att-common-shares-1979#!ds=22s6&amp;amp;display=line):
+    * Gradual long term evolution
+    * Easiest to detect
+
+* [Cycle](https://datamarket.com/data/set/235d/mean-daily-temperature-fisher-river-near-dallas-jan-01-1988-to-dec-31-1991#!ds=235d&amp;amp;display=line) or Seasonal Variation
+    * Up and down repetitive movement
+    * Repeats itself over a long period of time
+
+* Random Variations
+    * Erratic movements that do not follow a pattern
+    * Not predictable
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# TS: Examples
+
+
+
+* https://datamarket.com/data/set/22ox/monthly-milk-production-pounds-per-cow-jan-62-dec-75#!ds=22ox&amp;amp;display=line
+* https://datamarket.com/data/set/22vd/quarterly-production-of-clay-bricks-million-units-mar-1956-sep-1994#!ds=22vd&amp;amp;display=line
+* https://datamarket.com/data/set/235d/mean-daily-temperature-fisher-river-near-dallas-jan-01-1988-to-dec-31-1991#!ds=235d&amp;amp;display=line
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Loading and indexing in Pandas
+
+Simple loading
+
+        ts = pd.read_csv('../data/Dow-Jones.csv', parse_dates = ['Date'], infer_datetime_format = True)
+        ts[ts.Date &amp;gt; '2010-01-01']
+
+Make the date the index:
+
+        ts = pd.read_csv('../data/Dow-Jones.csv', parse_dates=['Date'], index_col='Date', infer_datetime_format = True)
+        ts['2010-12-31':'2010-01-01']
+        ts[:'2010-01-01']
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Forecasting 101
+
+* Smoothing the data
+* Simple forecasting technique
+* Tree rings dataset
+
+        ts = pd.read_csv('../data/tree-rings.csv', parse_dates = ['year'], index_col = 'year', infer_datetime_format = True)
+
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# plot the tree rings
+
+[Notebook - Smoothing and Forecast 101](https://github.com/alexperrier/gads/blob/master/16_time_series/py/Smoothing%20and%20Forecast%20101.ipynb)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Very simple forecasting technique
+
+$$ \hat{Y}\_{n+1} = Y\_n $$
+
+* load the ts
+* create a new column 1 period gap
+
+How good is that predictor?
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Ts metrics
+
+Forecasting error: \\( e\_i=y\_i−\hat{y}\_i \\)
+
+
+Metrics to compare TS techniques
+
+* Mean Absolute Error: \\( MAE=mean(|e\_i|) \\)
+* [Mean Absolute Deviation](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.mad.html): \\( MAD = \frac{1}{n} \sum\_{i=1}^{n}  | e\_i |  \\)
+* Root mean squared error: \\( RMSE = \sqrt{  mean(e\_i^2)  } \\)
+* Mean absolute percentage error: \\( MAPE = \frac{100}{n} \sum\_{i=1}^{n} \frac{ | e\_i | }{ y\_i } \\)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Moving Average
+
+
+Smoothed over a window of n samples
+
+$$ \begin{aligned} SMA = \frac{p\_{M} + p\_{M-1}+ \cdots +p\_{M-(n-1)}}{n} = \frac{1}{n} \sum\_{i=0}^{n-1}p\_{M-i}
+\end{aligned} $$
+
+and center
+
+$$ \begin{aligned} SMA = \frac{p\_{M+n/2} + \cdots +   p\_{M+1} +   p\_{M} + p\_{M-1}+ \cdots +p\_{M-(n/2)}}{n} = \frac{1}{n} \sum\_{i=-\frac{n}{2}}^{\frac{n}{2}}p\_{M+i}
+\end{aligned} $$
+
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Moving Average
+Use SMA to forecast
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Exponential weighted moving average
+
+
+![](assets/16/exponential_moving_average_weights.png)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Exponential weighted moving average
+Introduce a Decay
+
+The EWMA for a series Y may be calculated recursively:
+
+* \\( S\_{1}=Y\_{1} \\)
+* \\(      t&amp;gt;1, \ \ S\_{t}=\alpha \cdot Y\_{t}+(1-\alpha )\cdot S\_{t-1} \\)
+
+
+Where:
+
+* The coefficient α represents the degree of weighting decrease, a constant smoothing factor between 0 and 1. A higher α discounts older observations faster.
+* Yt is the value at a time period t.
+* St is the value of the EWMA at any time period t.
+
+http://pandas.pydata.org/pandas-docs/version/0.17.0/generated/pandas.ewma.html
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+# Auto Correlation
+
+A measure of how much is the current value influenced by the previous values in a time series.
+
+Autocorrelation measures the linear relationship between lagged values of a time series.
+
+        pandas autocorrelation_plot()
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+# Partial Auto Correlation
+
+Let's say you have a TS with a high correlation 1 sample apart
+
+* 1) \\( Y\_{n+1}  \\) very correlated with \\( Y\_{n}  \\)
+* 2) \\( Y\_{n}  \\) very correlated with \\( Y\_{n-1}  \\)
+* etc ...
+
+That correlation impacts the correlation between samples  that are further apart
+
+* \\( Y\_{n+1}  \\) appears very correlated with \\( Y\_{n-1}  \\) since 1_ and 2)
+
+The partial autocorrelation function (PACF) can be thought of as the correlation between two points that are separated by some number of periods n, BUT with the effect of the intervening correlations removed.
+
+The PACF removes the intervening correlation between the samples
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Statsmodels
+http://statsmodels.sourceforge.net/stable/tsa.html
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Properties: Stationarity
+
+The concept of **stationarity** is very important in modeling non-independent data
+
+Many results which holds for independent random variables (law of large numbers, central limit theorem, ...) hold for stationary random variables.
+
+
+A time serie is said to be stationnary if
+
+* **Constant mean**: The mean of the series should not be a function of time rather should be a constant.
+
+* **Constant variance**: Homoscedasticity: The variance of the series should not a be a function of time.
+
+* **Fix lagged covariance**: The covariance of the i th term and the (i + m) th term should only depend on i and not m.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Properties: Stationarity
+**Constant mean**
+
+![](assets/16/Mean_nonstationary.png)
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Properties: Stationarity
+
+**Constant variance**
+
+![](assets/16/Var_nonstationary.png)
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Properties: Stationarity
+**Fix lagged covariance**
+
+![](assets/16/Cov_nonstationary.png)
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Properties: Stationarity
+* Tree rings?
+* Dow Jones?
+* Average Water Temp?
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Stationarity test
+
+* Dickey-Fuller Test: This is one of the statistical tests for checking stationarity.
+* Here the null hypothesis is that the TS is non-stationary.
+
+* The test results comprise of a Test Statistic and some Critical Values for difference confidence levels.
+
+* If the ‘Test Statistic’ is less than the ‘Critical Value’, we can reject the null hypothesis and say that the series is stationary.
+
+    For instance: the Dickey-Fuller test statistic is less than the 10% critical value, thus the TS is stationary with 90% confidence.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Dickey Fuller test
+
+* from statsmodels.tsa.stattools import adfuller
+* dftest = adfuller(timeseries, autolag='AIC')
+
+Returns: ['Test Statistic','p-value','#Lags Used','Number of Observations Used']
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# How to make a TS stationary
+There are 2 major reasons behind non-stationarity of a TS:
+
+1. Trend – varying mean over time. On average, the number of passengers was growing over time.
+
+2. Seasonality – variations at specific time-frames. eg people might have a tendency to buy cars in a particular month because of pay increment or festivals.
+
+So remove trend and seasonality and apply prediction on resulting TS
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Trend
+
+Estimating &amp;amp; Eliminating Trend
+
+One of the first tricks to reduce trend can be transformations such as log, square root, cube root, etc. Lets take a log transform here for simplicity:
+
+### Notebook
+
+* Load the [Monthly milk production](https://datamarket.com/data/set/22sn/monthly-milk-production-pounds-per-cow-jan-62-dec-75-adjusted-for-month-length#!ds=22sn&amp;amp;display=line) dataset
+* Fit a linear regression line
+* Remove Moving Average
+* Fit a linear regression line
+* plot before after
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Differencing
+Differencing – taking the difference with a particular time lag
+
+One of the most common methods of dealing with both trend and seasonality is differencing. In this technique, we take the difference of the observation at a particular instant with that at the previous instant. This mostly works well in improving stationarity.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Decomposing
+Both trend and seasonality are modeled separately
+
+        from statsmodels.tsa.seasonal import seasonal_decompose
+        decomposition = seasonal_decompose(ts_log)
+
+        trend = decomposition.trend
+        seasonal = decomposition.seasonal
+        residual = decomposition.resid
+
+        # Then plot
+        plt.subplot(411)
+        plt.plot(ts_log, label='Original')
+        plt.legend(loc='best')
+        plt.subplot(412)
+        plt.plot(trend, label='Trend')
+        plt.legend(loc='best')
+        plt.subplot(413)
+        plt.plot(seasonal,label='Seasonality')
+        plt.legend(loc='best')
+        plt.subplot(414)
+        plt.plot(residual, label='Residuals')
+        plt.legend(loc='best')
+        plt.tight_layout()
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Transformations
+https://www.otexts.org/fpp/2/4
+
+* Mathematical: Box plot
+* Calendar Adjustments
+    monthly milk production on a farm,
+
+* Population adjustments
+    per 1000
+    you remove the effect of population changes by considering number of beds per thousand people
+* Inflation adjustments
+        for money related series
+         a price index is used. If ztzt denotes the price index and ytyt denotes the original house price in year tt, then xt=yt/zt∗z2000xt=yt/zt∗z2000 gives the adjusted house price at year 2000 dollar values. Price indexes are often constructed by government agencies. For consumer goods, a common price index is the Consumer Price Index (or CPI).
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Residuals
+
+A good forecasting method will yield residuals with the following properties:
+
+* The residuals are uncorrelated. If there are correlations between residuals, then there is information left in the residuals which should be used in computing forecasts.
+
+* The residuals have zero mean. If the residuals have a mean other than zero, then the forecasts are biased.
+
+In addition to these essential properties, it is useful (but not necessary) for the residuals to also have the following two properties.
+
+* The residuals have constant variance.
+
+* The residuals are normally distributed.
+
+Look at
+
+* Histograms of residuals
+* QQ plots
+* ACF of the residuals
+* Box-Pierce test
+* Ljung-Box
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Links
+
+* [Datasets](https://datamarket.com/data/list/?q=provider:tsdl)
+* [Seasonal ARIMA with Python](http://www.seanabu.com/2016/03/22/time-series-seasonal-ARIMA-model-in-python/)
+* [Time Series Analysis using iPython](https://bicorner.com/2015/11/16/time-series-analysis-using-ipython/)
+* [Complete guide to create a Time Series Forecast ](https://www.analyticsvidhya.com/blog/2016/02/time-series-forecasting-codes-python/)
+* [A Complete Tutorial on Time Series Modeling in R](https://www.analyticsvidhya.com/blog/2015/12/complete-tutorial-time-series-modeling/)
+* [A Simple Time Series Analysis Of The S&amp;amp;P 500 Index](http://www.johnwittenauer.net/a-simple-time-series-analysis-of-the-sp-500-index/)
+* [Identifying the order of differencing in an ARIMA model](http://people.duke.edu/~rnau/411arim2.htm)
+
+* [fecon235 : Computational data tools for financial economics](https://github.com/rsvp/fecon235)
+
+Others:
+
+* https://www.otexts.org/fpp/2/5
+
+&lt;/section&gt;
+
+</description>
+        <pubDate>Thu, 01 Jan 2015 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/16-time-series.html</link>
+        <guid isPermaLink="true">http://localhost:4000/16-time-series.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Lesson 14 -15  - NLP - Latent Models</title>
+        <description>&lt;section data-background-color=&quot;#000&quot;&gt;
+    &lt;h1 class=&quot;white&quot; style=&quot;border-top: thin solid #DDD;border-bottom: thin solid #DDD;&quot;&gt;
+        &lt;img src=&quot;assets/ga_logo_black.png&quot; style=&quot;float:left;top:0px;&quot; /&gt;
+        General Assembly
+    &lt;/h1&gt;
+    &lt;p class=&quot;big_title&quot;&gt;14. Topic Modeling&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Lesson 14
+## LEARNING OBJECTIVES
+
+
+* Topic Modeling
+* Latent Semantic Analysis
+* Latent Dirichlet Allocation
+
+&lt;/section&gt;
+
+&lt;!-- Prework and review --&gt;
+&lt;section data-background-color=&quot;#DA0A13&quot;&gt;
+    &lt;h1&gt;Lesson #14&lt;/h1&gt;
+    &lt;p class=&quot;big_title&quot;&gt;Review of Lesson 13&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Last Lesson Review
+
+* Feature extraction from documents
+* Bag of words
+* TF-Idf
+* CountVectorizer, Tf-Idf Vectorizer, HashingVectorizer
+* Scikit Pipeline
+
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# Lab Review
+
+[Text Classification - Lab 20 mn](https://github.com/alexperrier/gads/blob/master/13-nlp/py/L13%20N3%20Text%20Classification.ipynb)
+
+&lt;/section&gt;
+
+&lt;!-- Today --&gt;
+&lt;section data-background-color=&quot;#22c8c6&quot;&gt;
+    &lt;h1&gt;Today&lt;/h1&gt;
+    &lt;p class=&quot;big_title&quot;&gt;Latent Variable Models - Topic Modeling&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Latent variable models
+
+Attempting to uncover structure or organization inherent in the text.
+
+
+Unsupervised learning techniques
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Application
+
+### Topic Modeling
+
+These techniques are commonly used for recommending news articles or mining large troves of data data and trying to find commonalities.
+
+Topic modeling, is used in the [NY times recommendation engine](http://open.blogs.nytimes.com/2015/08/11/building-the-next-new-york-times-recommendation-engine/) by mapping the NYT articles to a **latent space of topics**.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# latent space of topics
+ ![](assets/14/topic_modeling_goal.png)
+
+* Documents are about several topics at the same time. Topics are associated with different words.
+* Topics in the documents are expressed through the words that are used
+
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# Goal of Topic Modeling
+Fast and easy birds eye view of the large datasets.
+
+* What are the documents about?
+* What are the key themes?
+
+Very powerful when coupled with different covariates:  year of publication, author...
+
+* Longitudinal analysis: How the key themes change over time?
+* Focus of discussion: Who is focussing on one topic
+
+Examples:
+
+* [Topic Modeling in Presidential Debates](http://alexperrier.github.io/stm-visualization/index.html)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Mixture Model
+ ![](assets/14/lda-mixture-graphic.jpg)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Techniques
+
+Vector-based techniques:
+
+* Latent Semantic Analysis (LSA) (a.k.a Latent Semantic Indexing - LSI)
+
+Probabilistic techniques
+
+* Probabilistic Latent Semantic Analysis (pLSA)
+* Latent Dirichlet Allocation (LDA)
+    * Many LDA extensions
+    * [Hierachical Dirichlet Process](https://en.wikipedia.org/wiki/Hierarchical_Dirichlet_process)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Latent Semantic Analysis (LSA)
+
+This is our corpus
+
+* D1: *modem the steering linux. modem, linux the modem. steering the modem. linux!*
+* D2: *linux; the linux. the linux modem linux. the modem, clutch the modem. petrol.*
+* D3: *petrol! clutch the steering, steering, linux. the steering clutch petrol. clutch the petrol; the clutch.*
+* D4: *the the the. clutch clutch clutch! steering petrol; steering petrol petrol; steering petrol!!!!*
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Preprocessed
+
+* D1: *modem the steering linux modem linux the modem steering the modem linux*
+* D2: *linux the linux the linux modem linux the modem clutch the modem petrol*
+* D3: *petrol clutch the steering steering linux the steering clutch petrol clutch the petrol the clutch*
+* D4: *the the the clutch clutch clutch steering petrol steering petrol petrol steering petrol*
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Document Term Matrix
+
+![](assets/14/document_term_matrix.png)
+
+This matrix can be huge
+
+How can we reduce it and at the same time uncover the topics?
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Latent Semantic Analysis
+
+Singular value decomposition (SVD) of the document-term matrix:
+
+Find three matrices \\( U, \Sigma, V \\)  so that:  \\( X = U \Sigma V^t \\)
+
+![](assets/14/lsa_decomposition.png)
+
+* [Cool Linear Algebra: Singular Value Decomposition](http://andrew.gibiansky.com/blog/mathematics/cool-linear-algebra-singular-value-decomposition/)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Latent Semantic Analysis
+
+### Dimension reduction
+
+For example with 5 topics, 1000 documents and 1000 word vocabulary
+
+* Original Document Term matrix: \\(1000 \times 1000 = 10^6 \\)
+* LSA representation: \\(5 \times 1000 + 5 + 5 \times 1000 ~ 10^4 \\)
+    * -&amp;gt; 100 times less space
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Latent Semantic Analysis
+
+![](assets/14/lsa_decomposition_example_01.png)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Latent Semantic Analysis
+
+Keep the 2 most important Eigenvalues (i.e topic importance)
+
+![](assets/14/lsa_decomposition_example_02.png)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Latent Semantic Analysis
+
+![](assets/14/lsa_decomposition_example_03.png)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Lab LSA
+
+### LSA with scikit
+
+[Latent Semantic Analysis - LAB](https://github.com/alexperrier/gads/blob/master/14_topic_modeling/py/lsa_topic_modeling.py)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Probabilistic LSA
+
+What is a topic?
+
+A list of probabilities for each of the possible words in a vocabulary.
+
+Example topic:
+
+* dog: 5%
+* cat: 5%
+* hamster: 3%
+* turtle: 1%
+* calculus: 0.000001%
+* analytics: 0.000001%
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Probabilistic LSA
+
+![](assets/14/probabilistic_topic.png)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Probabilistic LSA
+
+Instead of finding lower-ranked matrix representation, we can try to find a **mixture** of
+*word -&amp;gt; topic* &amp;amp; *topic -&amp;gt; documents* distributions that are most likely given the observed documents.
+
+* We define a statistical model of how the documents are being made (generated).
+* Then we try to find parameters of that model that best fit the observed data
+
+This is called a **generative process** in topic modeling terminology.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Generative Process
+
+We received a 50 word long document by our reporter John Doe.
+He is allowed to write only about one of the 6 possible topics, using only 6 words.
+
+* For the first word, he throws a dice that tells him what is the topic of the first word. Say it is topic 1 (IT)
+* Then he throws another dice to pick which word to use to describe topic 1. Say it is word 1 (linux)
+* The process is repeated for all 50 words in the document.
+* Dices are weighted!!!
+    * The first dice for picking topics puts more weight on IT topic that on the other 5 topics.
+    * Also, dice for IT topic, puts more weight on words 'linux' and 'modem'.
+    * Likewise dice for topic 2 (cars) puts more weight on word 'petrol' and 'steering'
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Generative Process
+
+![](assets/14/generative_process_plsa.png)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Probabilistic LSA decomposition
+
+![](assets/14/probabilistic_plsa_decomposition.png)
+
+\\( P(word/document) = \sum\_{topics} p(topic/document) . p(word/topic) \\)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# LDA: an extension to pLSA
+
+* pLSA: Binomial distribution
+
+* LDA: [Dirichlet distribution](https://en.wikipedia.org/wiki/Dirichlet_distribution)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# LDA Assumptions
+
+In LDA, we encode our assumptions about the data. Two important assumptions:
+
+1. On average, how many topics are per document? more or less?
+2. On average, how are words distributed across topics?
+    Are topics strongly associated with more or less words?
+
+Those assumptions are defined by two vectors α and β:
+
+* α: K dimensional vector that defines how K topics are distributed across documents.
+Smaller **αs favor fewer topics** strongly associated with each document.
+
+* β: V dimensional vector that defines how V words are associated across topics.
+**Smaller βs favor fewer words** strongly associated with each topics
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# LDA
+
+We set K the number of topics
+
+We work backwards from the documents to the find the \\(\alpha\\) and \\(\beta\\)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Topic Modeling librairies
+
+Please install
+
+* gensim
+* pickle
+* NLTK
+    * nltk.download()
+* pyLDAVis
+
+and optional
+
+* feedparser
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# LDA Lab
+
+
+[Latent Dirichlet Allocation - Gensim](https://github.com/alexperrier/gads/blob/master/14_topic_modeling/py/lda_gensim_topic_modeling.py)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Hot Technology Topics
+
+https://github.com/alexperrier/gads/blob/master/14_topic_modeling/py/Hot%20Tech%20Topic%20Modeling.ipynb
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Links
+
+* [Building the Next New York Times Recommendation Engine](http://open.blogs.nytimes.com/2015/08/11/building-the-next-new-york-times-recommendation-engine/)
+
+* [Topic Modeling in historical Newspapers](http://dl.acm.org/citation.cfm?id=2107649)
+
+* [Dissecting the Presidential Debates with an NLP Scalpel](https://www.opendatascience.com/blog/dissecting-the-presidential-debates-with-an-nlp-scalpel/)
+
+* [Clustering text documents using k-means](http://scikit-learn.org/stable/auto_examples/text/document_clustering.html)
+
+* [Topic Modeling of Twitter Followers](http://alexperrier.github.io/jekyll/update/2015/09/04/topic-modeling-of-twitter-followers.html)
+
+* [Dirichlet Distribution](https://www.youtube.com/watch?v=nfBNOWv1pgE)
+
+* [Topic Modeling in historical Newspapers](http://dl.acm.org/citation.cfm?id=2107649)
+* [Topic Modeling for the Social Sciences](http://vis.stanford.edu/files/2009-TopicModels-NIPS-Workshop.pdf)
+
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Caravan
+
+* Feature engineering
+* Metric: [Kappa](http://scikit-learn.org/dev/modules/generated/sklearn.metrics.cohen_kappa_score.html)
+* Models: Random Forests, Naive Bayes, ...
+* Sampling: Under sampling, over sampling, Smote, ...
+* Feature Importance
+* Feature Reduction (PCA)
+
+
+
+&lt;/section&gt;
+
+</description>
+        <pubDate>Thu, 01 Jan 2015 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/14-nlp-latent-models.html</link>
+        <guid isPermaLink="true">http://localhost:4000/14-nlp-latent-models.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Lesson 13 - Natural Language Processing</title>
+        <description>&lt;section data-background-color=&quot;#000&quot;&gt;
+    &lt;h1 class=&quot;white&quot; style=&quot;border-top: thin solid #DDD;border-bottom: thin solid #DDD;&quot;&gt;
+        &lt;img src=&quot;assets/ga_logo_black.png&quot; style=&quot;float:left;top:0px;&quot; /&gt;
+        General Assembly
+    &lt;/h1&gt;
+    &lt;p class=&quot;big_title&quot;&gt;13. Natural Language Processing&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Lesson 13
+## LEARNING OBJECTIVES
+
+
+* NLP Processing
+* Feature extraction
+* Pipeline in scikit
+* Hashing Trick
+
+&lt;/section&gt;
+
+&lt;!-- Prework and review --&gt;
+&lt;section data-background-color=&quot;#DA0A13&quot;&gt;
+    &lt;h1&gt;Lesson #13&lt;/h1&gt;
+    &lt;p class=&quot;big_title&quot;&gt;Review of Lesson 12&lt;/p&gt;
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# Last Lesson Review
+
+* Random Forests
+* SVM
+
+&lt;/section&gt;
+
+&lt;!-- Today --&gt;
+&lt;section data-background-color=&quot;#22c8c6&quot;&gt;
+    &lt;h1&gt;Today&lt;/h1&gt;
+    &lt;p class=&quot;big_title&quot;&gt;NLP&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+# HUGE DOMAIN
+
+* Classify documents,
+* Detect (depression, ...)
+* Translate, Summarize, ....
+* Named entity recognition
+* Survey analysis
+* Automatic Speech Recognition (Siri, Alexa, ...)
+* Unsupervised: infer sentiment or topics, find associations and links, summarize
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Feature Extraction
+
+From raw text (html) to vectors used by ML libraries
+
+
+* Tokenization
+* Counting occurences of words / frequencies
+* Numerical representation of documents
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Tokenize
+
+### Tokens
+Tokenization is the process of breaking a stream of text up into syllables, letters, words, n-grams, phrases, symbols, or other meaningful elements called tokens. The list of tokens becomes input for further processing such as parsing or text mining.
+
+
+### n-grams
+
+Contiguous sequence of n items from a given sequence of text or speech
+
+* unigram
+* bigram
+* n-gram
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Vectorizing text
+
+First we need to transform the raw text into vectors of numerical values
+
+Extract numerical features from text
+
+* tokenizing strings and giving an integer id for each possible token, for instance by using white-spaces and punctuation as token separators.
+* counting the occurrences of tokens in each document.
+* weighting with diminishing importance tokens that occur in the majority of samples / documents.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Text feature extraction
+
+Features and samples are defined as follows:
+
+* each individual token occurrence frequency is treated as a feature.
+* the vector of all the token frequencies for a given document is considered a multivariate sample.
+* A corpus of documents can thus be represented by
+    * a matrix with one row per document
+    * one column per token (e.g. word) occurring in the corpus.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Bag of Words
+
+Documents are described by word occurrences while completely ignoring the relative position information of the words in the document.
+
+This approach (tokenization, counting and normalization) is called the **Bag of Words
+or Bag of n-grams representation**.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# NLP Vocabulary
+
+* **Corpus**: ensemble of documents
+* **Token**: the element, the word, the atom
+* **Unigrams, bi-grams, n-grams**: sequence of 1, 2 or n words taken as the basic element
+* **Stopwords**: small words that are discarded as not meaningful: *a, an, the, my, get, ...*
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Lemmatization and Stemming
+
+Lemmatization and stemming are special cases of normalization.
+They identify a canonical representative for a set of related word forms. The purpose of both stemming and lemmatization is to reduce morphological variation
+
+'to walk' may appear as 'walk', 'walked', 'walks', 'walking'.
+
+### Stemming
+
+Crude direct approach that chops off the endings of the word to limit variations
+
+'walk', 'walked', 'walks', 'walking' =&amp;gt; walk
+
+[NLTK Stemmer](http://textanalysisonline.com/nltk-snowball-stemmer)
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+# Lemmatization
+
+Returns the closest meaningful *root* word.
+
+In [NLTK](http://textminingonline.com/dive-into-nltk-part-iv-stemming-and-lemmatization)
+
+        wordnet_lemmatizer.lemmatize(‘is’, pos=’v’)
+        ’be’
+        wordnet_lemmatizer.lemmatize(‘are’, pos=’v’)
+        ’be’
+
+        wordnet_lemmatizer.lemmatize(‘are’, pos=’n’)
+        ’are’
+
+[NLTK Lemmatizer](http://textanalysisonline.com/nltk-wordnet-lemmatizer)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# POS - Tagging
+
+Given a text, assigns roles to each word: noun, verb, article, adjective, preposition, pronoun, adverb, conjunction, and interjection.
+
+[Demo](http://parts-of-speech.info/)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Libraries
+
+* [NLTK](http://www.nltk.org/)
+* [Spacy](spacy.io/) (POS)
+* [Gensim](https://radimrehurek.com/gensim/) (Latent Dirichlet Allocation - Topic Modeling)
+
+and
+* [Scikit](http://scikit-learn.org/stable/tutorial/text_analytics/working_with_text_data.html)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Demo 1: Vectorizing a text
+
+[Vectoring a text](https://github.com/alexperrier/gads/blob/master/13-nlp/py/L13%20N1%20Feature%20Extraction.ipynb)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Normalizing: TF-IDF
+
+What if you have several documents and a word is very frequent in just one of them.
+It's relative frequency should not be important.
+
+TF-IDF: term frequency–inverse document frequency
+
+### TF:
+* Boolean *frequency*: \\(f\_{t,d} = 1\\) if t occurs in d and 0 otherwise;
+* Logarithmically scaled frequency: \\( f\_{t,d} = 1 + log f\_{t,d}\\), or zero if \\(f\_{t,d} = 0\\)  is zero;
+* Agmented frequency, to prevent a bias towards longer documents, e.g. raw frequency divided by the maximum raw frequency of any term in the document:
+$$ \mathrm{tf} (t,d)=0.5+0.5\cdot {\frac {f\_{t,d}}{\max\{f\_{t',d}:t'\in d\}}} $$
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# TF-IDF
+### IDF
+**inverse document frequency** is a measure of how much information the word provides, that is, whether the term is common or rare across all documents
+
+IDF = the total number of documents divided by the number of documents containing the term, and then taking the logarithm of that quotient.
+
+$$  \mathrm{idf}(t, D) =  \log \frac{N}{ 1+ |\{d \in D: t \in d\}|}$$
+
+* N: total number of documents in the corpus \\( N={|D|}\\)
+* \\( |\{d\in D:t\in d\}| \\)  : number of documents with term \\( t \\qquad \mathrm {tf} (t,d)\neq 0\\).
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# TF-IDF
+Then tf–idf is calculated as
+$$ \mathrm{tf-idf}(t,d,D)=\mathrm{tf} (t,d) \cdot \mathrm{idf}(t,D) $$
+
+### in Scikit
+[TfidfVectorizer](http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Hashing Trick
+
+* Documents don't have the same length
+* You may not have all the documents available (streaming)
+* Too many words =&amp;gt; too many dimensions
+* highly dimensional very sparse input matrix.
+
+=&amp;gt; Dimensionality reduction with **The Hashing Trick**
+
+
+
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# Hashing Trick
+Ex: Transform any sentences into value 0 to 99
+
+Simple Hash function:
+
+* *a* to 1, *b* to 2, *c* to 3 and so on, up to *z* being 26
+* result modulo 100
+
+
+Sentence: &quot;Beware the hobby that eats&quot;
+
+        * (beware) 2 + 5 + 23 + 1 + 18 + 5 +
+        * (the) 20 + 8 + 5 +
+        * (hobby) 8 + 15 + 2 + 2 + 25 +
+        * (that) 20 + 8 + 1 + 20 +
+        * (eats) 5 + 1 + 20 + 19
+        * = 233
+
+result = 33
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# Hashing Trick
+
+Good hash function
+
+* Uniformity: translate your input into each number in its output range with same probability
+* Cascading: a small change in your input data will cause a big change in the output
+
+=&amp;gt; limit collisions
+=&amp;gt; lose interpretability
+
+* [How do you build a language model with a million dimensions?](http://blog.someben.com/2013/01/hashing-lang/)
+* [HashingVectorizer](http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.HashingVectorizer.html)
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Install a few things
+
+* conda install BeautifulSoup4
+* nltk
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# 1st Lab predicting sentiment
+
+
+[N2 Imdb Reviews](https://github.com/alexperrier/gads/blob/master/13-nlp/py/L13%20N2%20Sentiment%20Prediction.ipynb)
+
+* Get the data
+* Clean up the text: remove punctuation, html markup, numbers, stop words, tokenize
+    and return one long paragraph per document
+* Process all the reviews, store into an array
+* Train a RF
+* Assess on the test set
+* AUC curve
+
+Use scikit CountVectorizer and Try to improve the score
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Pipeline in scikit
+
+The ability to chain operations
+
+For instance:
+* HashingVectorizer
+* Classifier
+
+Sequentially apply a list of transforms and a final estimator. Intermediate steps of the pipeline must be ‘transforms’, that is, they must implement fit and transform methods. The final estimator only needs to implement fit.
+
+[Example](http://scikit-learn.org/stable/auto_examples/plot_digits_pipe.html)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# 2nd lab: classification
+
+[Classification on the twenty Newsgroup dataset](https://github.com/alexperrier/gads/blob/master/13-nlp/py/L13%20N3%20Text%20Classification.ipynb)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Similarity between documents
+
+### Cosine similarity
+
+Given two vectors of attributes, A and B, the cosine similarity, cos(θ), is represented using a dot product and magnitude as
+
+![](assets/13/cosine_similarity.png)
+
+[ex in scikit learn](http://blog.christianperone.com/2013/09/machine-learning-cosine-similarity-for-vector-space-models-part-iii/)
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+#  Clustering
+* with HashingVectorizer
+* Silhouette Coefficient
+
+http://scikit-learn.org/stable/auto_examples/text/document_clustering.html
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Links
+
+* [Standford NLP Group](http://nlp.stanford.edu/)
+* [Kaggle - Bag of Words](https://www.kaggle.com/c/word2vec-nlp-tutorial/details/part-1-for-beginners-bag-of-words)
+* [How do you build a language model with a million dimensions?](http://blog.someben.com/2013/01/hashing-lang/)
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
@@ -1576,18 +4239,463 @@ Regresison lineaire sur le  housing dataset
 
 
 &lt;/section&gt;
+</description>
+        <pubDate>Thu, 01 Jan 2015 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/13-nlp.html</link>
+        <guid isPermaLink="true">http://localhost:4000/13-nlp.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Lesson 12 - SVM - Decision Trees - Random forests</title>
+        <description>&lt;section data-background-color=&quot;#000&quot;&gt;
+    &lt;h1 class=&quot;white&quot; style=&quot;border-top: thin solid #DDD;border-bottom: thin solid #DDD;&quot;&gt;
+        &lt;img src=&quot;assets/ga_logo_black.png&quot; style=&quot;float:left;top:0px;&quot; /&gt;
+        General Assembly
+    &lt;/h1&gt;
+    &lt;p class=&quot;big_title&quot;&gt;12. Support Vector Machines, Decision trees, Random Forests&lt;/p&gt;
+&lt;/section&gt;
+
 &lt;section data-markdown=&quot;&quot;&gt;
-# Liens et resources
+# Lesson 12
+## LEARNING OBJECTIVES
 
-* [Régression linéaire en python](http://www.xavierdupre.fr/app/mlstatpy/helpsphinx/notebooks/regression_lineaire.html) sur le site de Xavier Dupré
+* SVM
+* Decision Trees
+* Random Forests
 
-* [OLS sur wikipedia](https://en.wikipedia.org/wiki/Ordinary_least_squares): tres complet
+
+* Project 2 - Caravan Dataset =&amp;gt; Tuesday 8/2
+
+* [Final Project part 2 and 3](https://github.com/alexperrier/gads/blob/master/final_project/Final%20Project%20-%20Design%20Writeup%20and%20Data%20Exploration.md) - Design Writeup and Exploratory Data Analysis
+For =&amp;gt; Tuesday 8/9
+
+&lt;/section&gt;
+
+&lt;!-- Prework and review --&gt;
+&lt;section data-background-color=&quot;#DA0A13&quot;&gt;
+    &lt;h1&gt;Lesson #12&lt;/h1&gt;
+    &lt;p class=&quot;big_title&quot;&gt;Review of Lesson 11&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Last Lesson Review
+
+* Accuracy Paradox
+* Imbalanced datasets strategies
+    * 3 strategies we saw?
+
+&lt;/section&gt;
+
+&lt;!-- Today --&gt;
+&lt;section data-background-color=&quot;#22c8c6&quot;&gt;
+    &lt;h1&gt;Today&lt;/h1&gt;
+    &lt;p class=&quot;big_title&quot;&gt;Part I Support Vector Machines&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Hyperplane
+
+Classification separating an hyperplane
+
+* 1D =&amp;gt; point
+* 2D =&amp;gt; line
+* 3D =&amp;gt; surface
+* etc ...
+
+A hyperplane in 2 dimension is defined by a line equation \\( \beta_0 + \beta_1 X_1 + \beta_2 X_2 = 0  \\)
+
+
+In **p dimensions** a hyperplane is defined by a **linear** equation $$\beta_0 + \beta_1 X_1 + ... + \beta_p X_p = 0 \qquad  p \gt 0 $$
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+# Linearly separable
+
+We have n samples in p dimensions/features  \\( X = \\{ x_{i}  \\}  \quad i \in [1,n]  \\).
+
+These observations belong to two classes \\( y_i \in \\{-1, +1 \\} \\)
+
+The classes are **linearly separable**: there is an  hyperplane that fully separates the points according to their classes.
+
+* All \\( x\_i  \\) such that \\( \qquad \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j}  &amp;lt; 0  \qquad \\) belong to class -1
+* All \\( x\_i^\prime  \\) such that  \\( \qquad \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j}^\prime  &amp;gt; 0  \qquad \\) belong to class +1
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Linear decision boundary
+We predict the class of a new point \\( x \\)
+
+by calculating
+$$ f(x) = \beta\_0+ \sum\_{j=1}^{n} \beta\_j x\_{j}  $$
+
+* if \\( f(x) &amp;gt;0 =&amp;gt; +1 \\)
+* if \\( f(x) &amp;lt;0 =&amp;gt; -1 \\)
+
+A classifier that is based on a separating hyperplane has a **linear decision boundary**.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# One line
+
+Note that since \\( y\_i \\) and  \\( \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j}  \\) have the same sign:
+
+$$ y\_i ( \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j} ) &amp;gt; 0 $$
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Infinity of Hyperplanes
+
+If our data is linearly separable then there exists an infinity of hyperplanes that can separate it
+
+![](assets/11/hyperplane-classification.png)
+
+
+=&amp;gt; We need to introduce a margin to separate the classes
+
+Fig from [Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/getbook.html)
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Maximal Margin Classifier
+
+We want to find the Hyperplane that will maximise the distance to all the points.
+Best separation of the classes
+
+![Maximal Margin Classifier](assets/11/Maximal_Margin_Classifier.png)
+
+Fig from [Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/getbook.html)
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Maximal Margin Classifier
+
+Fnding a simple linear boundary is equivalent to solving
+$$ y\_i ( \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j} ) &amp;gt; 0 \quad \forall i \in [1,..,n] $$
+
+Finding **the largest margin** that separates the classes is equivalent to solving
+
+$$ \max\_{\beta\_i} M \quad \text{such that} \quad y\_i ( \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j} ) &amp;gt; M \quad \forall i \in [1,..,n] $$
+
+with \\( \sum\_{j=0}^{p}  \beta^2\_j = 1\\)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Support Vectors
+
+* The observations that are on the margin lines are called **support vectors**
+
+* They *support* the maximal margin hyperplane in the sense that if these points were moved slightly then the **maximal margin hyperplane** would move as well.
+
+* The maximal margin hyperplane depends directly on the support vectors, but not on the other observations.
+    A movement to any of the other observations would not affect the separating hyperplane, provided that the observation’s movement does not cause it to cross the boundary set by the margin.
+
+A change in the support vector impacts the margin a lot =&amp;gt; **over fitting**
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Support Vector Classifier
+
+What if we allow some points to be either wrongly classified or at least within the margin boundaries?
+
+### Non linearly separable
+This is the case when the classes are not separable, we still want the best margin possible. But some points will be on the wrong side
+
+Add a tuning parameter C that dictates the *severity of the violation* of the margin.
+
+The bigger C is the more points are **within the margin** or **misclassified**. C is some budget for violation of the margin which is determined during cross validation.
+
+
+=&amp;gt; Even in the case of linearly separable classes adding some flexibility to the margin will make the classfier more robust, more flexible (less overfitting)
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Support Vector Classifier
+
+\\( C\\) is a non negative tuning parameter
+
+$$ \max\_{\beta\_i, \epsilon\_i} M \quad \text{such that} \quad y\_i ( \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j} ) &amp;gt; M - \epsilon\_i \quad \forall i \in [1,..,n]  $$
+with
+
+* \\( \sum\_j  \beta^2\_j = 1 \\)
+* \\(   \epsilon\_i &amp;gt; 0 \\)
+* \\( \sum\_{i} \epsilon\_i \leq C  \\)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# LAB SVC
+
+[L12 N1 Support Vector Classifier - Linear Case.py](https://github.com/alexperrier/gads/blob/master/12_decision_trees/py/L12%20Support%20Vector%20Classifier%20-%20Linear.ipynb)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Support Vector Machine
+
+What if the data is not even close to be linearly separable?
+
+![](assets/11/non_linearly_separable.png)
+
+Fig from [Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/getbook.html)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Introducing Kernels
+
+The optimization equation for the linear support vector classifier can be rewritten as such
+
+$$ f(x) =  \beta\_0 + \sum\_{i=1}^{n} \alpha\_i \langle x, x\_i \rangle   $$
+$$ f(x) =  \beta\_0 + \sum\_{i=1}^{n} \alpha\_i K(x,x\_i)    $$
+
+with \\( K(x,x\_i) = \langle x, x\_i \rangle \\) the vector dot product.
+
+But we could use a different Kernel function
+
+
+**Note**:This involves \\(p * \frac{n(n-1)}{2} \\) multiplications! However only the support vectors are useful. So we can limit the sum to \\(S\\) support vectors.
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Kernels
+
+Here are some classic Kernel functions
+
+* Linear Kernel \\( \quad K(x,x_i) = \langle x, x_i \rangle\\)
+* Polynomial Kernel (d): \\( \quad K(x,x\_i) =  (1 + \sum\_{j=1}^{p} x\_{j}x\_{i,j} )^d   \\)
+* Radial Kernel \\( \quad K(x,x\_i) =   \exp(-\gamma    \sum\_{j=1}^{p} (x\_{j} - x\_{i,j})^2 )   \\)
+
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# SVM Lab
+[L12 N2 Support Vector Classifier - Non-Linear Case.py](https://github.com/alexperrier/gads/blob/master/12_decision_trees/py/L12%20Support%20Vector%20Machines.ipynb)
+
+&lt;/section&gt;
+
+&lt;section data-background-color=&quot;#22c8c6&quot;&gt;
+    &lt;h1&gt;Today&lt;/h1&gt;
+    &lt;p class=&quot;big_title&quot;&gt;Part II Decision Tree&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Decision Trees
+
+Decision Trees (DTs) are a non-parametric supervised learning method used for classification and regression. The goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features.
+
+Rule based models
+
+        if x &amp;lt; a
+            if y &amp;lt; c
+                ...
+            else
+                ...
+        elif x &amp;gt; a &amp;amp; a &amp;lt; b
+            ...
+        else
+            if z &amp;lt; d
+                ...
+            else
+                0
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Iris dataset
+
+![](assets/12/L12-tree-iris.png)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Decision Trees
+
+* Simple to understand and to interpret. Trees can be visualised.
+* Requires little data preparation. (missing values, scaling, dummy variables, ...)
+* Low  cost for prediction \\( O(log(n)) \\) with n number of data points used to train the tree.
+* Can handle both numerical and categorical data.
+* Uses a white box model. An observed situation can simply be explained by boolean logic.
+* Possible to validate a model using statistical tests.
+* Performs well even if its assumptions are somewhat violated by the true model from which the data were generated.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Decision Trees
+
+
+* high overfitting for over-complex trees that do not generalise the data well.
+* Decision trees can be unstable because small variations in the data might result in a completely different tree being generated.
+* no globally optimal decision tree
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Lab: Controlling the tree
+
+Set these params to control the tree complexity
+
+* max_depth
+* min_samples_split
+* min_samples_leaf
+* max_features
+
+
+Lab: [Simple Decision tree](https://github.com/alexperrier/gads/blob/master/12_decision_trees/py/L12%20Simple%20Decision%20Tree%20-%20Iris%20dataset.ipynb)
+
+Weak Learner: What if we forcefully prune the tree?
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Classification vs Regression
+
+Different Metric
+
+* MSE
+
+* Gini
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Bootstrap aggregation aka Bagging
+
+We used Boostrapping to estimate the mean of a sample.
+
+Sampling with replacement.
+
+The idea is the same with trees or any other classifier.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Bagging for trees
+
+* Generate B different bootstrapped training data sets.
+* Train a new tree on each training set
+
+The predictions of all the trees are averaged
+
+=&amp;gt; significantly reduces over fitting
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Out Of Bag - OOB
+
+When boostrapping, in each experiment will use only approx. 2/3rd of the available samples.
+
+Which leaves 1/3rd that we can use to estimate the validation error of each tree.
+
+This is called OOB Out of Bag error.
+
+It can be shown that with B sufficiently large, OOB error is virtually equivalent to leave-one-out cross-validation error.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Feature importance
+
+* When the *max_features &amp;lt; total number of features*.
+
+    =&amp;gt; Some features are left out of the splitting decision in each node.
+
+* Relative Feature importance can be deduced from the delta in MSE associated to the features included vs left out.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Bagging in scikit
+
+Use the [Bagging Classifier](http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.BaggingClassifier.html)
+
+A Bagging classifier is an ensemble meta-estimator that fits base classifiers each on random subsets of the original dataset and then aggregate their individual predictions (either by voting or by averaging) to form a final prediction.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Bagging in scikit
+Very flexible
+
+        bagging = BaggingClassifier(DecisionTreeClassifier(),  boostrap = True)
+
+
+class sklearn.ensemble.BaggingClassifier
+
+* base_estimator: The base estimator, decision tree by default
+* n_estimators: How many estimators will be ensembled
+* max_samples: The number of samples to draw from X to train each base estimator
+* max_features: The number of features to draw from X to train each base estimator
+* bootstrap: True / False
+* bootstrap_features: True / False
+* oob_score: True / False
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Bagging in scikit
+
+[Lab - bagging with Tree - regression](https://github.com/alexperrier/gads/blob/master/12_decision_trees/py/L12%20Bagging.ipynb)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Random Forests
+
+Extension of the bootstrapping to features
+
+* In random forests, each tree in the ensemble is built from a sample drawn with replacement (i.e., a bootstrap sample) from the training set.
+
+* In addition, when splitting a node during the construction of the tree, the split that is picked is the best split among **a random subset of the features**.
+
+=&amp;gt; The bias of the forest usually slightly increases (with respect to the bias of a single non-random tree) but, due to averaging, its variance also decreases, usually more than compensating for the increase in bias, hence yielding an overall better model.
+
+(see RandomForestClassifier and RandomForestRegressor classes),
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Random Forest Lab
+
+[Random Forests Lab](https://github.com/alexperrier/gads/blob/master/12_decision_trees/py/L12%20Random%20Forests.ipynb)
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# Recap
+
+* Support Vector Classifiers
+* Decision Trees
+* Bagging
+* Random Forests
+
+
+* Project 2 for next Tuesday
+* Final Project part 2 and 3 for 8/9
+
+
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# Questions
+
+### Questions?
 
 &lt;/section&gt;
 </description>
-        <pubDate>Mon, 01 Jan 2018 00:00:00 -0500</pubDate>
-        <link>http://localhost:4001/02-regression-lineaire</link>
-        <guid isPermaLink="true">http://localhost:4001/02-regression-lineaire</guid>
+        <pubDate>Thu, 01 Jan 2015 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/12-decision-trees-random-forests.html</link>
+        <guid isPermaLink="true">http://localhost:4000/12-decision-trees-random-forests.html</guid>
         
         
       </item>
