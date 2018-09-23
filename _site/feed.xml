@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 22 Sep 2018 18:39:40 +0200</pubDate>
-    <lastBuildDate>Sat, 22 Sep 2018 18:39:40 +0200</lastBuildDate>
+    <pubDate>Sun, 23 Sep 2018 14:57:59 +0200</pubDate>
+    <lastBuildDate>Sun, 23 Sep 2018 14:57:59 +0200</lastBuildDate>
     <generator>Jekyll v3.7.2</generator>
     
       <item>
@@ -1098,6 +1098,14 @@ pour une approche statistique de l'analyse de données.
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
+# statsmodel
+
+
+![](assets/02/statsmodel_functions.png)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
 
 # Notebook python
     import pandas as pd
@@ -1440,7 +1448,7 @@ http://www.statisticshowto.com/experimental-design/confounding-variable/
 # Récapitulatif
 
 * Regression lineaire, simple et explicite
-* Attention a ce que les predicteurs soient decorrélés
+* Attention à ce que les predicteurs soient decorrélés
 * R^2 ajusté au lieu de R^2
 
 &lt;/section&gt;
@@ -1448,6 +1456,8 @@ http://www.statisticshowto.com/experimental-design/confounding-variable/
 &lt;section data-markdown=&quot;&quot;&gt;
 # Lab de cette apres midi
 Regression lineaire sur le  dataset *advertising*
+
+![advertising](/assets/02/advertisingscatterplots.png)
 
 &lt;/section&gt;
 

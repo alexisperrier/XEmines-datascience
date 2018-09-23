@@ -435,6 +435,15 @@ pour une approche statistique de l'analyse de données.
 
 
 <section data-markdown>
+# statsmodel
+
+
+![](assets/02/statsmodel_functions.png)
+
+</section>
+
+
+<section data-markdown>
 
 # Notebook python
     import pandas as pd
@@ -781,7 +790,7 @@ http://www.statisticshowto.com/experimental-design/confounding-variable/
 # Récapitulatif
 
 * Regression lineaire, simple et explicite
-* Attention a ce que les predicteurs soient decorrélés
+* Attention à ce que les predicteurs soient decorrélés
 * R^2 ajusté au lieu de R^2
 
 </section>
@@ -789,6 +798,8 @@ http://www.statisticshowto.com/experimental-design/confounding-variable/
 <section data-markdown>
 # Lab de cette apres midi
 Regression lineaire sur le  dataset *advertising*
+
+![advertising](/assets/02/advertisingscatterplots.png)
 
 </section>
 
