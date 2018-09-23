@@ -7,10 +7,14 @@ permalink: /3-regression-logistique
 theme: white
 ---
 
-
 <section data-markdown>
-# Régression Logistique
+<div class=centerbox>
+<p class=top>
+Régression Logistique
+</p>
+</div>
 </section>
+
 
 <section>
 <div style='float:right;'>
@@ -29,7 +33,7 @@ theme: white
     * R^2
 
 * Correlation
-* Statsmodel python
+* Statsmodel
 </div>
 </section>
 
@@ -61,35 +65,34 @@ theme: white
 </section>
 
 <section data-markdown>
-# More on Classification vs Regression
+# Classification ou Régression
 
-Why not use linear regression to predict some medical condition such as
+Voici une variable à prédire, une condition médicale:
 
-* 0: Stroke,
-* 1: Epileptic seizure
+* 0: Attaque cardiaque
+* 1: Crise d'épilepsie
 * 2: Overdose
 
-Encoding it like that and using Linear Regression implies:
+Pourquoi ne pas utiliser une regression linéaire pour prédire cette variable ?
 
-* order of the encoding
-* equal distance between codes
+L'encodage de la variable (ordre et continuité) implique que
 
-# In the binary case:
+* il y a un ordre entre les catégories: Attaque < Crise < Overdose
+* Toutes ces catégories sont équidistantes
 
-* 0: Stroke,
-* 1: Epileptic seizure
+# Dans le cas binaire
 
+* 0: Attaque cardiaque
+* 1: Crise d'épilepsie
 
-Possible to use linear regression as a proxy for a probability
+On pourrait utiliser une regression lineaire comme substitut de probabilité mais on obtiendrait peut etre des valeurs en dehors de [0,1]
 
-* May end up with results outside the [0,1] range
-
-So classification specific models better!
+Donc utiliser des modèles de classification est plus approprié!
 
 </section>
 
 <section data-markdown>
-# Regression or Classification?
+# Regression ou Classification?
 Review the following situations and decide if each one is a regression problem, classification problem, or neither:
 
 * Using the total number of explosions in a movie, predict if the movie is by JJ Abrams or Michael Bay.
@@ -101,49 +104,53 @@ Review the following situations and decide if each one is a regression problem, 
 </section>
 
 <section data-markdown>
-# Logistic regression
-
-also known in the literature as logit regression, maximum-entropy classification (MaxEnt) or the log-linear classifier.
-
-Au lieu de prédire la categorie auquelle appartient la variable cible. on va predire la probabilité que cette variable appartienne a la category en question.
+# Régression Logistique
 
 
+Aussi appelée **logit regression**, **maximum-entropy classification (MaxEnt)** ou log-linear classifier.
+
+Au lieu de prédire la catégorie de la variable cible, on va prédire la probabilité que cette variable appartienne à la catégorie en question :
 
 
 $$ P(Y = 1 \bigg{/} X) $$
 
-which we note \\( p(X) \\)
+que l'on note \\( p(X) \\)
 
-and similarly to Linear Regression we want a **simple linear model** for that probability
+et comme pour la regression linéaire on vuet avoir un modlèle linéaire simple pour estimer cette probabilité.
 
 $$ P(Y=1 / X) =  p(X) = \beta_0 + \beta_1 X $$
 
-but that still does not give us values between [0, 1]
+mais pour que \\(p(X)\\) soit une probabilité il faut que ses valeurs soient comprises dans \\( [0, 1] \\) ce qui n
+est pas forcement le cas avec la formule ci-dessus.
 
 </section>
 
 <section>
 
-<div style='float:right;'>
-<h1> Sigmoid function </h1>
-<div data-markdown>
+<div style='float:right; width:45%; '>
+    <div data-markdown>
+    # Fonction Sigmoide
 <img src=/assets/03/sigmoid.svg style='width:300px; border:0'>
+
+Cette fonction réduit \\( \mathbb{R} \\)  à l'intervale \\( [0,1] \\)
+    </div>
 </div>
-</div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
 
-<div data-markdown>
+# Régression logistique
 
-# Logistic regression
-
-So instead we feed the linear model to the sigmoid function
+Le modèle linéaire \\(p(X) = \beta\_0 + \beta\_1 X\\)  est pris comme attribut de la fonction sigmoide.
 
 $$ f(z) = \frac{e^{z} }{1 + e^{z}} =  \frac{1 }{1 + e^{-z}} $$
 
-We feed $$ z = P(Y=1 / X) =  p(X) = \beta\_0 + \beta\_1 X $$ to the sigmoid function
+ce qui donne
 
 $$ p(X) = \frac{e^{(\beta\_0 + \beta\_1 X)} }{1 + e^{(\beta\_0 + \beta\_1 X)}}  $$
 
-because this function shrinks \\( \mathbb{R} \\)  to \\( [0,1] \\)
+
+</div>
 </div>
 </section>
 
@@ -162,34 +169,36 @@ avec statsmodel
 
 prédiction : va défaulter sur son crédit ou non
 
-Using:
+En utilisant :
 
 1. default vs balance
-2. default vs balance, income and student
+2. default vs balance, income et student
 
-* Calculate the probability of default for
-    * a student with a credit card balance of \\$1500 and income of \\$40k
-    * a non-student, same balance and income
+* calculer la probabilité de default pour
 
-Why is the coefficient for student positive when student is the only factor and negative in the case of multilinomial logistic regression?
+    * Un etudiant avec un solde debiteur de 1500 et un revenude 40000
+    * un non etudiant avec le meme solde et meme revenue
+
+Pourquoi est ce que le coefficient relatif a la variable student est positive quand student est la seule variable alors qu'elle est negative dans le cas multinomial ?
+
 
 </section>
 
 
 <section data-markdown>
-# Evenement et categorie
+# Catégorie et évènement
 
 Question de vocabulaire:
-On parle d'evenement le fait que la variable cible appartienne a une categorie.
 
-La probabilité que la variable cible soit dans la categorie 1 = probabilité de l'evenement 1
+* un évènement = la variable appartient à la catégorie
+
 </section>
 
 
 <section data-markdown>
 # Odds ratio
 
-Aussi appelé  rapport des chances, rapport des cotes1 ou risque relatif rapproché
+Aussi appelé  rapport des chances, **rapport des cotes** ou **risque relatif rapproché**
 
 Comment quantifier l'impact d'une variable predicteur sur la probabilité de la catégorie ?
 
@@ -197,29 +206,32 @@ On a:
 
 $$ p(X) = \frac{e^{\beta\_0 + \beta\_1 X} }{1 + e^{\beta\_0 + \beta\_1 X}}  $$
 
-Le **odds ratio**: est le rapport entre la probabilité de l'evenement sur la probabilité du non evenement.
+Le **odds ratio**: est le rapport entre la probabilité de l'évènement sur la probabilité du non évènement.
 
 $$
 \frac{p(X)}{ 1 -p(X)} = e^{\beta\_0 + \beta\_1*X}
 $$
 
 * Odds ratio  \\( \in [0, +\infty] \\)
-* Odds close to 0: low probability of the event happening
-* Odds close to \\( +\infty \\) : low probability of the event happening
+* Odds ratio proche de  0: probabilité faible que l'évènement survienne
+* Odds ratio s'approchant de  \\( +\infty \\) : probabilité forte que l'évènement survienne
 
 </section>
 
 <section data-markdown>
 # Log-Odds ratio
-Si on prends le log du *odds-ratio* on a le log odds ration
+Si on prends le log du *odds-ratio* on a le **log odds ratio**
 
 $$
 log(\frac{p(X)}{ 1 -p(X)}) = \beta\_0 + \beta\_1 X
 $$
 
-Increase in \\( \beta\_1 \\) => results in increase in \\( p(X)\\).
+Cela mesure l'influence d'une variable sur la cible.
 
-Not as direct and linear as in the case of linear regression.
+Si \\( \beta\_1 \\)  augmente, alors  \\( p(X)\\) augmente aussi.
+
+C'est moins direct que dans le cas de la régression linéaire.
+
 </section>
 
 <section data-markdown>
@@ -237,7 +249,7 @@ Sur le data set default:
 
 \\( p(X) = 0.9 \iff  \frac{0.9}{1 -0.9} = 9 \\)
 
-* 9 out of 10 people (90%)  with ods 9 will default
+* 9 out of 10 people (90%)  with odds 9 will default
 
 
 </section>
@@ -247,48 +259,52 @@ Sur le data set default:
 </section>
 
 <section>
-<div style='float:right;'>
-    <h1>Metriques de classification</h1>
-
+<div style='float:right; width:45%;  '>
     <div data-markdown>
-    <img src=/assets/03/classification_metrics.png style='width:400px;border:0'>
+# Métriques de classification
+<img src=/assets/03/classification_metrics.png style='width:450px;'>
     </div>
 </div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
+# Métriques de régression
+<img src=/assets/03/regression_metrics.png style='width:450px;'>
 
-<div data-markdown>
-# Metriques de regression
-<img src=/assets/03/regression_metrics.png style='width:400px;'>
+    </div>
 </div>
 </section>
 
 
 <section>
-
-<div style='float:right;'>
-
+<div style='float:right; width:45%;  '>
     <div data-markdown>
-    <img src=/assets/03/pregnant.jpg style='width:400px;border:0'>
+# Faux Positifs et Faux Négatifs
+<img src=/assets/03/pregnant.jpg style='width:400px;border:0'>
     </div>
 </div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
+# Métrique: Accuracy ou Précision
 
+Correctement identifiés
 
-<div data-markdown>
-# Metrics
-Correctly identified:
+* TP = True Positive - Vrai positif
+* TN = True Negatives  - Vrai négatifs
 
-* TP = True Positive
-* TN = True Negatives
-
-Incorrectly identified:
+Incorrectement identifiés
 
 * FP = False Positive
 * FN = False Negatives
+
 ## Accuracy
 
-How to you define accuracy?
+On définit la précision par
 
 $$ Accuracy = \frac{ TP + TN  }{TP + FP + TN + FN}   $$
 
+</div>
 </div>
 </section>
 
@@ -297,6 +313,9 @@ $$ Accuracy = \frac{ TP + TN  }{TP + FP + TN + FN}   $$
 # Confusion matrix
 
 ![confusion matrix](/assets/03/confusion_matrix.png)
+
+# TODO: ajouter matrice avec TP, TN, ...
++ cas de separation de cat and dog
 
 </section>
 
@@ -318,6 +337,18 @@ Avec scikit:
         confusion_matrix(y_true, y_pred)
 
 </section>
+
+
+<section data-markdown>
+<div class=centerbox>
+<p class=top>
+Machine learning
+</p>
+<p class=mitop>Au revoir les statistiques :)</p>
+</div>
+
+</section >
+
 <section >
 <div style='float:right; width:30%'>
 
@@ -330,17 +361,15 @@ Avec scikit:
 <div data-markdown>
 
 
-# quittons les stats pour rejoindre sur le machine learning
+# Des stats au machine learning
 
-* Statsmodel est dans une approche statistique classique qui favorise l'interpretabilité
+* Statsmodel est dans une approche **statistique classique** qui favorise l'interprétabilité et l'analyse des prédicteurs
 
-* Scikit est dans une approche machine learning plus orientée robustesse et prediction
+* Scikit-learn est dans une approche **machine learning** plus orientée vers la  robustesse et la prédiction
 
-    * une regression est un modele parmi d'autres
+Au niveau de l'implémentation dans les 2 librairies, la difference est que scikit ajoute une contrainte sur le modele au niveau de la fonction de cout. Cette contrainte est appelé **regularisation** et sert à accroitre la capacité du modele a extrapoler sur des donnees nouvelles. On verra cela en detail dans 2 jours.
 
-Au niveau du modele, la difference est que scikit ajoute une contrainte sur le modele au niveau de la fonction de cout. cette contrainte est appelé regularization et sert a accroitre la capacité du modele a "marcher" sur des donnees nouvelles. On verra cela en detail dans 2 jours.
-
-On est donc dans une transition de la modelisation statistique vers la modelisation machine learning.
+On est donc dans une transition de la modélisation statistique vers la modélisation machine learning.
 </div>
 </div>
 </section>
@@ -493,4 +522,18 @@ https://towardsdatascience.com/no-machine-learning-is-not-just-glorified-statist
 * on stackexchange When to use One Hot Encoding vs LabelEncoder vs DictVectorizor? https://datascience.stackexchange.com/questions/9443/when-to-use-one-hot-encoding-vs-labelencoder-vs-dictvectorizor
 
 
+</section>
+
+
+<section>
+<div style='float:right; width:45%;  '>
+    <div data-markdown>
+    </div>
+</div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
+
+    </div>
+</div>
 </section>

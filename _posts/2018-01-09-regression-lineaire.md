@@ -77,7 +77,13 @@ Régression Linéaire
 </div>
 </section>
 
-<section data>
+<section data-markdown>
+https://www.kaggle.com/c/house-prices-advanced-regression-techniques
+<img src=/assets/02/kaggle_competition.png height=600>
+
+</section>
+
+<section>
 
 <div style='float:right; width:40%'>
     <div data-markdown>
