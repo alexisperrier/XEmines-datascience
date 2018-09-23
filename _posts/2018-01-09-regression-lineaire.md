@@ -506,32 +506,47 @@ pour une approche statistique de l'analyse de données.
 </div>
 </section>
 
-<section data-markdown>
-# \\(R^2\\)
+<section>
+<div style='float:right; width:45%;  '>
+    <div data-markdown>
+    # Définition
 
-proportion of the variance in the dependent variable that is predictable from the independent variable(s)
+\\(R^2\\) est la proportion des variations de la variable cible qui est prédite grace aux prédicteurs.
 
-$$ \bar{y} = \frac{1}{n} \sum\_{i} y_{i} $$
-
-
-The total sum of squares (proportional to the variance of the data):
-
-$$ SS\_{\text{tot}} = \sum\_{i} (y\_{i} - \bar{y} )^2 $$
-
-The regression sum of squares, also called the explained sum of squares:
-$$ SS\_{\text{reg}} = \sum\_{i} (f\_{i} - \bar{y} )^2 $$
-
-The sum of squares of residuals, also called the residual sum of squares:
-$$ SS\_{\text{res}} = \sum\_{i} (y\_{i} - f\_{i} )^2 = \sum\_{i}e\_{i}^{2} $$
-
-The most general definition of the coefficient of determination is
+On définit  \\(R^2\\) par
 
 $$ R^{2} = 1-{SS\_{\text{res}} \over SS\_{\text{tot}}}   $$
 
+On a
+
+$$ 0 < R^2 < 1$$
+
+
+
+    </div>
+</div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
+    # \\(R^2\\)
+
+Soit la moyenne de la variable cible :
+
+$$ \bar{y} = \frac{1}{n} \sum\_{i} y_{i} $$
+
+et la somme des carrés de la variable cible centrée :
+
+$$ SS\_{\text{tot}} = \sum\_{i} (y\_{i} - \bar{y} )^2 $$
+
+La somme des carrés des résidus :
+$$ SS\_{\text{res}} = \sum\_{i}e\_{i}^{2} = \sum\_{i} (y\_{i} - \hat{y}\_{i} )^2  $$
+
+
+    </div>
+</div>
 </section>
 
 <section data-markdown>
-
 
 # R2 does not indicate whether:
 
@@ -543,22 +558,37 @@ $$ R^{2} = 1-{SS\_{\text{res}} \over SS\_{\text{tot}}}   $$
 * the model might be improved by using transformed versions of the existing set of independent variables;
 * there are enough data points to make a solid conclusion.
 
+et surtout
+* plus on ajoute de variable plus \\(R^2\\) augmente meme quand les variables ne sont pas vraiment significative.
+
 </section>
 
-<section data-markdown>
-# The adjusted R2 is defined as
+<section>
+<div style='float:right; width:45%;  '>
+    <div data-markdown>
+En accroissant le nombre de predicteurs, on accroit souvent R^2.
+
+Mais \\(R^{2}_{adj}\\) compense la complexité du modele
+    </div>
+</div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
+# \\(R^2_{adj}\\)
 
 On ajuste pour prendre en compte la complexité du modele:
 
 $$ R^{2}_{adj} = {1-(1-R^{2}){n-1 \over n-p-1}} $$
 
-avec \\(p\\) le nombre de prédicteurs et n le nombre d'échantillons
+avec
 
-En accroissant le nombre de predicteurs, on accroit souvent R^2.
+* \\(p\\) le nombre de prédicteurs
+* \\(n\\) le nombre d'échantillons
 
-Mais \\(R^{2}_{adj}\\) compense la complexité du modele
-
+    </div>
+</div>
 </section>
+
 
 <section>
 <div style='float:right; width:45%;  '>
