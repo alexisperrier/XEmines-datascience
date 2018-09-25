@@ -12,6 +12,7 @@ theme: white
 <p class=top>
 Régression Linéaire
 </p>
+<p style ='font-size:28px;'>et Python</p>
 </div>
 </section>
 
@@ -42,13 +43,9 @@ Régression Linéaire
 <section>
 <div style='float:right; width:40%'>
     <div data-markdown>
-    # Lab
+# Lab
 
-    Régression linéaire sur le dataset *advertising*
-
-    <img src=/assets/02/advertising.png>
-
-
+Lab pandas et exploration sur le dataset les-arbres.csv
 
     </div>
 </div>
@@ -71,7 +68,9 @@ Régression Linéaire
 
 * Statsmodel
 
-* Kaggle projet
+## Projet Kaggle
+
+## Python
 
 </div>
 </div>

@@ -19,7 +19,15 @@ jupyter:
 
 # Notebook d'exploration et d'utilisation de Pandas
 
-Dans ce notebook vous aller étudier le dataset les-arbres.csv disponibles sur https://opendata.paris.fr/explore/dataset/les-arbres/
+Dans ce notebook vous aller étudier le dataset **les-arbres.csv** et le croiser avec les données **arrondissement.csv** 
+
+Le fichier **les-arbres.csv** est dispo sur le drive:
+https://um6p-my.sharepoint.com/:t:/g/personal/alexis_perrier_emines_um6p_ma/EamAeWJzvy5AtjFpV8xrqPgBXNbYiAr2gkS7XppEKfBpug?e=NIe5I5
+
+Il provient de 
+https://opendata.paris.fr/explore/dataset/les-arbres/
+
+Le fichier **arrondissement.csv** est disponible sur le drive https://um6p-my.sharepoint.com/:x:/g/personal/alexis_perrier_emines_um6p_ma/ES5JKtIfEvdIlDVHJuwNGe4BOddIOPKRkmDxaL4Dfeb_zg?e=DpLHij
 
 
 Ce dataset comprend des informations sur 200k arbres dans Paris.
@@ -40,6 +48,13 @@ Ecrire un notebook jupyter d'analyse de ce dataset qui comprenne:
 
 Le but est de livrer une document qui permetrrait à une personne de comprendre et de refaire votre analyse sans connaissance au préalable du dataset.
 
+
+A la fin de votre analyse uploadez votre notebook dans le drive 
+https://um6p-my.sharepoint.com/:f:/g/personal/alexis_perrier_emines_um6p_ma/EjFRE2wiRbJMqxp5-0QibvIBMOjqWjQINrZCpyo1ge3bnA?e=QuOdQl
+
+**Surtout n'oubliez pas de mettre votre nom dans le nom du fichier**
+
+
 Le lab est composé de plusieurs parties
 
 ## 1. charger le dataset dans une dataframe pandas
@@ -47,12 +62,15 @@ Le lab est composé de plusieurs parties
 * ```df = pd.read_csv()```
 * avant cela n'hesitez pas à ouvrir le fichier csv
 * attention au séparateur utilisé dans le csv
+* utilisez le parametres ```error_bad_line = True ``` si le fichier a du mal a etre ouvert
+
+
 
 ## 2. exploration:
 
-* statistiques des variables numériques ```df.describe()```
-* occurences des catégories ```df['DOMANIALITE'].value_counts()```
-* visualisation des variables ```df['HAUTEUR (m)'].hist(bins = 100)```
+* Statistiques des variables numériques ```df.describe()```
+* Occurences des catégories, par exemple: ```df['DOMANIALITE'].value_counts()```
+* Visualisation des variables ```df['HAUTEUR (m)'].hist(bins = 100)```
 
 Cette exploration va vous permettre de trouver les outliers (les valeurs aberrantes) et de les enlever du dataset.
 
@@ -71,7 +89,9 @@ N'hesitez pas à illustrer vos analyses par des graphes matplotlib: scatterplot,
 
 Certains arbres sont taggés comme étant remarquables.
 * Qu'est ce qui caractérise ces arbres par rapport aux autres? leur espèce ? leur taille ?
-* Comment gérer les valeurs manquantes de cette colonne *remarquable* ? S'agit-il d'une erreur ou peut-on supposer que quand la valeur manque l'arbre n'est en fait pas *remarquable*.
+* Comment gérer les valeurs manquantes de cette colonne *remarquable* ? 
+
+Quand la valeur manque, s'agit-il d'une erreur ou peut-on supposer que l'arbre n'est en fait pas *remarquable*.
 
 ## Les arrondissements les plus verts
 
@@ -102,3 +122,6 @@ Illustrer le ratio
 *nombre d'arbres* / *superficie*
 
  par arrondissement par un graphe (barchart par exemple).
+
+
+
