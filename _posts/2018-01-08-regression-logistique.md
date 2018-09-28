@@ -308,23 +308,34 @@ $$ Accuracy = \frac{ TP + TN  }{TP + FP + TN + FN}   $$
 </div>
 </section>
 
-
-<section data-markdown>
+<section>
+<div style='float:right; width:45%;  '>
+    <div data-markdown>
 # Confusion matrix
 
 ![confusion matrix](/assets/03/confusion_matrix.png)
+    </div>
+</div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
 
-# TODO: ajouter matrice avec TP, TN, ...
-+ cas de separation de cat and dog
+# classification
+![cats and dogs](/assets/03/cats_dogs.png)
 
+
+    </div>
+</div>
 </section>
+
 
 <section data-markdown>
 
-# ca se complique assez rapidement
+# Ca se complique assez rapidement
 
 <img src=/assets/03/confusion_matrix_wikipedia.png style='border:0'>
 
+[https://en.wikipedia.org/wiki/Confusion_matrix](https://en.wikipedia.org/wiki/Confusion_matrix)
 </section>
 
 <section data-markdown>
@@ -367,7 +378,9 @@ Machine learning
 
 * Scikit-learn est dans une approche **machine learning** plus orientée vers la  robustesse et la prédiction
 
-Au niveau de l'implémentation dans les 2 librairies, la difference est que scikit ajoute une contrainte sur le modele au niveau de la fonction de cout. Cette contrainte est appelé **regularisation** et sert à accroitre la capacité du modele a extrapoler sur des donnees nouvelles. On verra cela en detail dans 2 jours.
+Au niveau de l'implémentation de la regression logistique dans les 2 librairies, la difference est que scikit ajoute une **contrainte** sur le modele au niveau de la fonction de cout.
+
+Cette contrainte est appelé **régularisation** et sert à accroitre la capacité du modele a extrapoler sur des donnees nouvelles. On verra cela en detail dans 2 jours.
 
 On est donc dans une transition de la modélisation statistique vers la modélisation machine learning.
 </div>
@@ -378,25 +391,27 @@ On est donc dans une transition de la modélisation statistique vers la modélis
 
 # Regression avec scikit-learn
 
-On va avoir des meta parametres. Par exemple:
+On va avoir des meta parametres.
 
-* acces a differents algo pour trouver les coefficients et un certain controle sur leur fonctionnement
-* differentes façon de traiter le multi-class: ovr, multinomial
-* differents mode de regularization
+Par exemple:
+
+* accès à differents algorithmes  pour trouver les coefficients + un certain controle sur leur fonctionnement
+* différentes façon de traiter le multi-class: ovr, multinomial
+* différents mode de régularisation
 
 et en output
 
 * un modele que l'on peut appliquer a de nouvelles donnees
 * les intervals de confiance
-* la ou les categories predites
-* les proba de prediction
-et surtout un model qye
+* la ou les categories prédites
+* les probabilités de prédiction (appartenance a la classe)
+
 
 
 On n'aura plus:
 - les p-value
-- le R^2
 - les tests statistiques
+- le R^2 (pas directement en tout cas)
 </section>
 
 
@@ -410,19 +425,44 @@ http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRe
 </section>
 
 <section data-markdown>
+![](/assets/03/sklearn_01.png)
+
+</section>
+
+<section data-markdown>
+![](/assets/03/sklearn_02.png)
+
+</section>
+
+<section data-markdown>
+![](/assets/03/iris_screen_shot_01.png)
+</section>
+
+<section data-markdown>
+![](/assets/03/iris_screen_shot_02.png)
+</section>
+
+<section data-markdown>
 # Demo Scikit-learn LogisticRegression
 
-* default dataset
-* score
-* plot proba hist
-* trouver le meilleur threshold (Acc, max P, min Neg, TPR, ...)
-Use predict_proba and a different threshold => you should find a different confusion matrix
+* Iris dataset
+* Score
+* ROC AUC
+* Trouver le meilleur threshold (Acc, max P, min Neg, TPR, ...)
+* Use predict_proba and a different threshold => you should find a different confusion matrix
 
 
-* QQ plot residuals
-* matrice de confusion
+    import pandas as pd
+    from sklearn import datasets, metrics
+    from sklearn.linear_model import LogisticRegression
 
-Essayer plusieurs regularization L2 et L1 avec differents C
+
+    iris = datasets.load_iris()
+    clf = LogisticRegression()
+    clf.fit(iris.data, iris.target)
+
+    metrics.accuracy_score(y_test, y_hat )
+
 
 </section>
 
@@ -453,15 +493,47 @@ voir aussi F1-score
 
 </section>
 
-<section data-markdown>
-# One hot encoding
+<section>
+<div style='float:right; width:45%;  '>
+    <div data-markdown>
+# Exemples
+
+* Marque de voiture: Audi, Renault, Ford, Fiat
+
+Si on assigne un numero arbitraire à chaque marque de voiture on crée une hiérarchie:
+
+Audi =>1 , Renault => 2, Ford => 3, Fiat => 4
+
+De meme:
+
+* chien, chat, souris, poulet => {1,2,3,4}
+
+pourquoi le poulet serait *4* fois le chien ? Ca ne fait pas sens.
+
+
+Parfois on peut quand meme assigner un chiffre à chaque categorie, catégories ordonnées
+
+* enfant, jeune, adulte, vieux => {1,2,3,4}
+* negatif, neutre, positif => {-1, 0, 1}
+
+
+    </div>
+</div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
+
+# One hot encoding et label encoding
 
 Comment traduire les variables quantitative en variables numeriques
 
 Binaires
-* est ce un etudiant
-* fille / garcon
-*
+* Oui / Non ; 1 /0
+* Homme / Femme
+* Spam / legit
+* Action: Achete, enregistre,
+* Identification
+
 
 Multinomiales
 * liste de villes, pays, destinations,
@@ -469,19 +541,8 @@ Multinomiales
 * niveau d'etude
 * marques de voiture
 
-Par exemple: Audi, Renault, Ford, Fiat
-Si on assigne un numero arbitraire a chqaue marque de voitue on crée une hierarchie
-Audi =>1 , Renault => 2, Ford => 3, Fiat => 4
-
-* chien,chat,souris,poulet => {1,2,3,4}
-pourquoi le poulet est 4 fois le chien ? ca ne fait pas sense
-
-
-Mais parfois on peut quand meme assigner un chiffre a chaque categorie, catégories ordonnées
-
-* enfant, jeune, adulte, vieux => {1,2,3,4}
-* negatif, neutre, positif => {-1, 0, 1}
-
+    </div>
+</div>
 </section>
 
 <section data-markdown>
@@ -489,12 +550,20 @@ Mais parfois on peut quand meme assigner un chiffre a chaque categorie, catégor
 
 [One Hot Encoding](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html), ou pandas.get_dummies
 
-Si on a N classes, on crée N-1 variables binaires
-par exemple negatif, neutre, positif: est_neutre, est_positif (est_negatif est deduite des 2 autres variables pas besoin de la specifier)
+Si on a **N** classes, on crée **N-1** variables binaires:
 
+par exemple la variable ```animal_type: chien, chat, souris, poulet``` sera transformée en 3 variables binaires
+
+* est_ce_chien : 1/0
+* est_ce_chat : 1/0
+* est_ce_souris : 1/0
+
+La variable *est_ce_poulet* étant redondante et automatiquement déduite des 3 autres.
 
 # LabelEncoder
 [LabelEncoder](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html) associe un chiffre a chaque classe, on garde l'ordonnancement
+
+* enfant, jeune, adulte, vieux => {1,2,3,4}
 
 </section>
 

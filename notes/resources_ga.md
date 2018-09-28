@@ -237,7 +237,7 @@ https://datascience.stackexchange.com/questions/9443/when-to-use-one-hot-encodin
 * Regularisation
 
 * Lasso Ridge
-    * Norm L1, L2, distance de minkozsky http://127.0.0.1:4000/08-classification-knn.html#/20
+    * Norm L1, L2, distance de minkowsky http://127.0.0.1:4000/08-classification-knn.html#/20
     * ridge http://127.0.0.1:4000/06-scikit-linear-regression.html#/28
     * lasso http://127.0.0.1:4000/06-scikit-linear-regression.html#/30
     * elastic http://127.0.0.1:4000/06-scikit-linear-regression.html#/31

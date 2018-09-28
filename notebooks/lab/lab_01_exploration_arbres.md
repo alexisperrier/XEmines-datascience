@@ -125,3 +125,130 @@ Illustrer le ratio
 
 
 
+
+```python
+import pandas as pd
+```
+
+```python
+
+df = pd.read_csv('les-arbres.csv', sep = ';', error_bad_lines =False)
+
+```
+
+```python
+df.shape
+
+```
+
+```python
+cd data/
+```
+
+```python
+pwd
+```
+
+```python
+
+```
+
+```python
+pwd
+```
+
+```python
+?pd.read_csv()
+```
+
+
+
+# Titre
+
+## sous titre
+
+* bullet point
+
+**en gras** et *en italique*
+
+un [lien](http://twitter.com)
+
+
+
+
+```python
+df['ARRONDISSEMENT'].describe()
+```
+
+```python
+df['ARRONDISSEMENT'].value_counts()
+```
+
+```python
+df.columns
+```
+
+```python
+print("avant {}".format(df.shape))
+condition = (df['HAUTEUR (m)'] < 100) & (df['HAUTEUR (m)'] > 0)
+print("apres {}".format(df[condition].shape))
+
+
+```
+
+```python
+
+df[ df['HAUTEUR (m)'] > 500  ].shape
+
+```
+
+```python
+df['REMARQUABLE'].value_counts( dropna = True  )
+```
+
+```python
+df['REMARQUABLE'].value_counts( dropna = False  )
+```
+
+```python
+vc = df['LIBELLEFRANCAIS'].value_counts()
+mes_arbres = list(vc.head().keys())
+```
+
+```python
+mes_arbres
+```
+
+```python
+condition = df['LIBELLEFRANCAIS'].isin(mes_arbres) 
+```
+
+```python
+df[condition]['LIBELLEFRANCAIS'].value_counts()
+```
+
+```python
+# prendre seulement les especes qui ont plus de 4000 arbres
+
+vc = df['LIBELLEFRANCAIS'].value_counts()
+
+vc[vc > 4000]
+
+```
+
+```python
+mes_arbres = vc[vc > 4000].keys()
+mes_arbres
+```
+
+```python
+df['ARRONDISSEMENT'].value_counts()
+
+condition  = df['ARRONDISSEMENT'].str.contains('PARIS')
+
+df[condition]['ARRONDISSEMENT'].value_counts()
+```
+
+```python
+
+```

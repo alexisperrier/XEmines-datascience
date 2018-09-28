@@ -119,3 +119,103 @@ https://um6p-my.sharepoint.com/:f:/g/personal/alexis_perrier_emines_um6p_ma/EjFR
 
 <p>par arrondissement par un graphe (barchart par exemple).</p>
 
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'les-arbres.csv'</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">';'</span><span class="p">,</span> <span class="n">error_bad_lines</span> <span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cd</span> <span class="n">data</span><span class="o">/</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pwd</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pwd</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">?</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h1 id="titre">Titre</h1>
+
+<h2 id="sous-titre">sous titre</h2>
+
+<ul>
+  <li>bullet point</li>
+</ul>
+
+<p><strong>en gras</strong> et <em>en italique</em></p>
+
+<p>un <a href="http://twitter.com">lien</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="s">'ARRONDISSEMENT'</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="s">'ARRONDISSEMENT'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">"avant {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">condition</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'HAUTEUR (m)'</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'HAUTEUR (m)'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"apres {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">condition</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">df</span><span class="p">[</span> <span class="n">df</span><span class="p">[</span><span class="s">'HAUTEUR (m)'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">500</span>  <span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="s">'REMARQUABLE'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span> <span class="n">dropna</span> <span class="o">=</span> <span class="bp">True</span>  <span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="s">'REMARQUABLE'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span> <span class="n">dropna</span> <span class="o">=</span> <span class="bp">False</span>  <span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">vc</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'LIBELLEFRANCAIS'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">mes_arbres</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">vc</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mes_arbres</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">condition</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'LIBELLEFRANCAIS'</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">mes_arbres</span><span class="p">)</span> 
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="n">condition</span><span class="p">][</span><span class="s">'LIBELLEFRANCAIS'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># prendre seulement les especes qui ont plus de 4000 arbres</span>
+
+<span class="n">vc</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'LIBELLEFRANCAIS'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+<span class="n">vc</span><span class="p">[</span><span class="n">vc</span> <span class="o">&gt;</span> <span class="mi">4000</span><span class="p">]</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mes_arbres</span> <span class="o">=</span> <span class="n">vc</span><span class="p">[</span><span class="n">vc</span> <span class="o">&gt;</span> <span class="mi">4000</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">mes_arbres</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="s">'ARRONDISSEMENT'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+<span class="n">condition</span>  <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'ARRONDISSEMENT'</span><span class="p">]</span><span class="o">.</span><span class="nb">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s">'PARIS'</span><span class="p">)</span>
+
+<span class="n">df</span><span class="p">[</span><span class="n">condition</span><span class="p">][</span><span class="s">'ARRONDISSEMENT'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>

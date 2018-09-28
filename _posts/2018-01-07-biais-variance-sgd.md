@@ -48,10 +48,8 @@ theme: white
 # Aujourd'hui
 
 * Scikit-learn
-* Décomposition Biais - Variance
 * Gradient Stochastique; Stochastic Gradient Descent
-* Outliers, detection and impact
-* Skewness: Box cox and Kurtosis
+* Décomposition Biais - Variance
 
 </div>
 </div>
@@ -146,6 +144,7 @@ Mais aussi :
     <img src=/assets/04/logo-scikit.png style='width:300px;'>
     </div>
 </div>
+
 <div data-markdown>
 # scikit-learn API
 Simple et cohérente
@@ -178,16 +177,9 @@ Simple et cohérente
 </section>
 
 <section data-markdown>
-# Demo
-
-[linear_model.LogisticRegression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression)
-
-</section>
-
-<section data-markdown>
 <div class=centerbox>
 <p class=top>
-II: Biais - Variance
+III: Biais - Variance
 </p>
 </div>
 </section>
@@ -214,6 +206,8 @@ $$
 
 **Variance**: Il s'agit là de la variabilité des prédictions entre différentes *réalisations* du modèle pour un échantillon donné.
 
+La variance mesure la sensibilité du modèle aux données d'apprentissages
+
 * **Overfitting**: Une forte erreur de variance indique que le modèle ne pourra pas extrapoler ses prédictions sur des nouvelles données.
 </div>
 </div>
@@ -221,10 +215,20 @@ $$
 
 
 <section >
-<div style='float:left; width:50%'>
+<div style='float:right; width : 45%;'>
+    <div data-markdown>
+
+* **Biais**: L'espérance de  l'erreur de prédiction
+
+* **Variance**: Variance des prédictions.
+
+    </div>
+</div>
+
+<div style='float:left; width:45%'>
 <div data-markdown>
 
-# Décomposition Bias Variance
+# Décomposition Biais - Variance
 L'erreur quadratique est définie par:
 
 $$ \operatorname{MSE}( \hat{y} ) = \frac {1}{n} \sum_{i=1}^{n}( \hat{y_i}-y_i )^2 = \mathbb{E} \big[ (\hat{y} - y)^2   \big] $$
@@ -284,6 +288,37 @@ Pour réduire l'erreur quadratique, il faut minimiser à la fois le **biais** et
 Mais comment détecter l'overfit ?
 
 </section>
+
+<section>
+<div style='float:right; width:45%;  '>
+    <div data-markdown>
+# Underftiing
+
+
+* Ajouter des predicteurs
+* Rendre le modele plus complexe
+* Attenuer la regularisation.
+    </div>
+</div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
+
+# Overfitting
+
+* Reduire le nombre de predicteurs
+* Utiliser plus de données d'apprentissage
+* Accroitre la reguilarisation
+* Moyenner plusieurs modèles
+
+    </div>
+</div>
+</section>
+
+
+
+
+
 
 <section data-markdown>
 # split: train vs test dataset
@@ -435,14 +470,89 @@ Stochastic Gradient Descent
 </div>
 </section>
 
+<section>
+<div style='float:right; width:45%;  '>
+    <div data-markdown>
+
+# Illustration
+<img src=/assets/04/robins_monroe_1951.png style='width: 500px; margin: auto; float:right; '>
+
+    </div>
+</div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
+# Methode du gradient
+
+**1951!** Robbins - Monroe: A Stochastic approximation Method
+
+Soit une function \\(  f \\) dont on souhaite trouver le minimum.
+
+Sous certaines conditions sur  \\(  \alpha \\) et \\(\hat{\nabla} f\\) (gradient de f), alors
+
+$$  {\bf w}_{t+1} = {\bf w}_t - \alpha_t \hat{\nabla} f({\bf x}_t) $$
+
+si \\(  \alpha \\) assez petit et si f est différentiable
+
+Alors \\( {\bf w}_t  \\) converge vers le / un minima de \\(f\\)
+
+*decreases fastest in the direction of the negative gradient of f*
+
+$$ f(\mathbf {w}\_{0})\geq f(\mathbf {w}\_{1}) \geq f(\mathbf {w}\_{2})\geq \cdots , $$
+
+    </div>
+</div>
+</section>
+
+
+
 <section data-markdown>
-# Gradient Stochastique
+# En python
+
+On veut trouver le minimum de la fonction  \\( f(x) =   \\)
+
+    cur_x       = 6 # The algorithm starts at x=6
+    gamma       = 0.01 # step size multiplier
+    max_iters   = 10000 # maximum number of iterations
+    iters       = 0 #iteration counter
+    precision   = 0.00001
+    previous_step_size = 1
+
+    # dérivée de la fonction à minimiser
+
+    fct = lambda x: 4 * x**3 - 9 * x**2
+    x = []
+    while (previous_step_size > precision) & (iters < max_iters):
+        x.append(cur_x)
+        prev_x = cur_x
+        cur_x -= gamma * fct(prev_x)
+        print(cur_x, previous_step_size)
+        previous_step_size = abs(cur_x - prev_x)
+        iters+=1
+
+    print("Le minimum est {:.4f}", cur_x)
+
+    print("En x = {:.4f}, la valeur de la fonction est {:.4f}  ".format(cur_x, fct(cur_x)) )
+
+
+</section>
+
+<section data-markdown>
+# Stochastic Gradient
+
+The general idea is to aproximate an unknown function through iterations of **unbiased estimates of the function's gradient.**
+
+Knowing that the expectation of the gradient estimates equal the gradient.
+
+</section>
+
+<section data-markdown>
+# Gradient Descent
 
 **1951!** Robbins - Monroe: A Stochastic approximation Method
 
 <img src=/assets/04/robins_monroe_1951.png style='width: 500px; margin: auto; float:right; '>
 
-The general idea is to aproximate an unknown function through iterations of unbiased estimates of the function's gradient. Knowing that the expectation of the gradient estimates equal the gradient.
 
 Soit une function \\(  f \\) que l'on souhaite approximer.
 Sous certaines conditions sur  \\(  \alpha \\) et \\(\hat{\nabla} f\\) (gradient de f), alors \\(  \\)
@@ -475,7 +585,7 @@ Au lieu de calculer la solution directement on va l'estimer par la methode du gr
 
 Equation
 
-Neanmoins cela necessite de calculer le gradient sur tous les echantillons disponibles a la fois. Pour un dataset grand, c'est couteux et long.
+Neanmoins cela nécessite de calculer le gradient sur tous les échantillons disponibles a la fois. Pour un dataset grand, c'est couteux et long.
 
 Donc on va utiliser le fait que sous certaines conditions
 
@@ -515,6 +625,8 @@ see file:///Users/alexis/amcp/packt-B05028/B05028_07_draft.html
 In case of very large datasets, using GD can be quite costly since we are only taking a single step for one pass over the training set – thus, the larger the training set, the slower our algorithm updates the weights and the longer it may take until it converges to the global cost minimum
 
 </section>
+
+
 <section data-markdown>
 
 La dimenion stichastique consiste a actualiser le W non plus avec l'integralité du gradient sur toutes les donnees mais avec une estimation du gradient echantillon par echantillon.
@@ -562,4 +674,18 @@ https://towardsdatascience.com/predicting-housing-prices-using-advanced-regressi
     k-fold http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/20
     http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/21
     * stratified k-fold http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/22
+</section>
+
+
+<section>
+<div style='float:right; width:45%;  '>
+    <div data-markdown>
+    </div>
+</div>
+<hr class='vline' />
+<div style='float:left; width:45%;  '>
+    <div data-markdown>
+
+    </div>
+</div>
 </section>

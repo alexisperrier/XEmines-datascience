@@ -9,6 +9,12 @@ Ce dataset est composé de 200 échantillons et des variables suivantes:
 
 Le but de ce TD est de trouver le modèle qui minimise le plus l'erreur quadratique (MSE). L'erreur quadratique est définie comme le carrée de la différence entre les predictions et les vraies valeurs.
 
+Vous utiliserez la librarie ```statsmodels```.
+
+# Delivrable
+
+Un notebook jupyter comprennant vos explications, illustrations et code python,
+
 
 # 1. Exploration du dataset
 
@@ -21,7 +27,7 @@ Le but de ce TD est de trouver le modèle qui minimise le plus l'erreur quadrati
 
 # 2. Modeles univariables
 
-Pour chacun des predicteurs (TV, Radio, Newspaper) creer un modèle univariable.
+Pour chacun des predicteurs (TV, Radio, Newspaper) créez un modèle univariable.
 
     import statsmodels.formula.api as smf
     lm = smf.ols(formula='Sales ~ Radio ', data=df).fit()

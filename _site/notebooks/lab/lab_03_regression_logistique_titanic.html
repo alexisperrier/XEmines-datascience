@@ -1,0 +1,136 @@
+<h1 id="td-03-régression-logistique-sur-le-titanic">TD 03: Régression logistique sur le Titanic</h1>
+
+<p>Vous allez travailler sur le dataset du <strong>Titanic</strong>, un grand classique.</p>
+
+<p>Ce dataset fait l’objet d’une compétition kaggle.</p>
+
+<p>https://www.kaggle.com/c/titanic</p>
+
+<p>Contrairement aux données sur Kaggle qui sont séparées en 2 datasets training et testing, vous aller travailler sur tout le dataset.</p>
+
+<p>Le but du TD est de construire un modele de régression logistique avec la librairie scikit-learn. Le modèle est décrit sur la page http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html.</p>
+
+<p>Il vous faut trouver le meilleur modèle au sens des métriques:</p>
+
+<ul>
+  <li>Accuracy</li>
+  <li>AUC</li>
+</ul>
+
+<h1 id="le-dataset">Le dataset</h1>
+
+<p>Vous avez des information sur 1300 passagers</p>
+
+<ul>
+  <li>survival:	Survival	0 = No, 1 = Yes</li>
+  <li>pclass:	Ticket class	1 = 1st, 2 = 2nd, 3 = 3rd</li>
+  <li>sex:	Sex</li>
+  <li>Age:	Age in years</li>
+  <li>sibsp:	# of siblings / spouses aboard the Titanic</li>
+  <li>parch:	# of parents / children aboard the Titanic</li>
+  <li>ticket:	Ticket number</li>
+  <li>fare:	Passenger fare</li>
+  <li>cabin:	Cabin number</li>
+  <li>embarked:	Port of Embarkation	C = Cherbourg, Q = Queenstown, S = Southampton</li>
+</ul>
+
+<p>et la variable a prédire est une variable binaire: Survived</p>
+
+<h1 id="1-exploration">1. Exploration</h1>
+
+<p>Chargez le dataset dans une dataframe .</p>
+
+<ul>
+  <li>
+    <p>Explorez et analysez les différentes variables.</p>
+  </li>
+  <li>
+    <p>Regardez (histogram) en particulier la relation entre les variables <code class="highlighter-rouge">age</code> et <code class="highlighter-rouge">Gender</code> avec la cible <code class="highlighter-rouge">Survived</code>. Qu’en conclure ?</p>
+  </li>
+</ul>
+
+<h1 id="1-prédicteurs-numeriques">1. Prédicteurs numeriques</h1>
+
+<p>En ne prennant en compte que les variables numériques, construisez un modèle de prédiction avec le modele  <a href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html">sklearn.linear_model.LogisticRegression</a></p>
+
+<p>Pour démarrer:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from sklearn.linear_model import LogisticRegression
+....
+</code></pre></div></div>
+
+<ul>
+  <li>quel est le score (accuracy et AUC) du modele ?</li>
+  <li>matrice de confusion ?</li>
+</ul>
+
+<h1 id="2-valeurs-manquantes">2. Valeurs manquantes</h1>
+<p>Une des caractéristique de ce dataset est l’absence de nombreuses valeurs pour la variable Age.
+On va tester 3 methodes de remplacement</p>
+
+<ol>
+  <li>remplacez les valeurs manquantes par la moyenne de l’age sur tous les autres echantillons</li>
+  <li>Calculer la moyenne pour les femmes et une pour les hommes et remplacer les valeurs manquantes par la moyenne appropriée</li>
+  <li>utiliser la moyenne harmonique</li>
+</ol>
+
+<h1 id="3-variables-catégorielles">3. Variables catégorielles</h1>
+
+<p>Certaines variables sont des catégories: notamment “Embarked”. “Gender” et “Destination”.</p>
+
+<p>Choisissez une des methodes vues dans le cours pour numeriser ces variables : one hot encoding et LabelEncoder.</p>
+
+<p>et ajoutez ces variables en tant que predictuers dans le modèle</p>
+
+<h1 id="4-regularization">4. Regularization</h1>
+
+<p>Faites varier les parametres du modele</p>
+<ul>
+  <li>penalty: l1, l2</li>
+  <li>C: 0.1, 1, 10</li>
+</ul>
+
+<p>Qu’observez vous ?</p>
+
+<h1 id="5-extraire-les-infos-du-noms">5. extraire les infos du noms</h1>
+
+<p>Il est possible d’extraire le titre du nom du passager avec une expression régulière.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df['title'] = df.Name.apply(lambda x: re.search(' ([A-Z][a-z]+)\.', x).group(1))
+</code></pre></div></div>
+
+<p>Une fois le titre extrait, traitez cette variable comme une categorie,  l’encoder et l’ajouter en tant que prédicteur.</p>
+
+<ul>
+  <li>Accuracy et AUC ?</li>
+  <li>Matrice de confusion</li>
+</ul>
+
+<p>Voit-on une amélioration ?</p>
+
+<h1 id="6-prediction-sur-de-nouvelles-données">6. prediction sur de nouvelles données</h1>
+
+<p>Construisez a la main un dictionnaire  corresponde a un nouveau passager</p>
+
+<p>Par exemple</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+    'pclass': 1,
+    'sex': male,
+    'age': 30,
+    'fare': 112,
+    'sibsp' : 0,
+    'parch' : 1,
+    'title' : Mr,
+    'home.dest': Montreal, PQ,
+    'embarked': S
+}
+</code></pre></div></div>
+
+<p>Transformer ce dictionnaire passager en vecteur numerique (de la bonne taille) et calculez sa probabilité de survie.</p>
+
+<h1 id="6-sgd-classifier">6. SGD classifier</h1>
+
+<p>Utilisez maintenant le <a href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier">SGDClassifier</a> avec comme fonction de cout : logloss</p>
+
+<p>Quel modele performe le mieux ?</p>

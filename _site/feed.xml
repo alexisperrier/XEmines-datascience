@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 25 Sep 2018 13:08:18 +0100</pubDate>
-    <lastBuildDate>Tue, 25 Sep 2018 13:08:18 +0100</lastBuildDate>
+    <pubDate>Fri, 28 Sep 2018 07:44:14 +0100</pubDate>
+    <lastBuildDate>Fri, 28 Sep 2018 07:44:14 +0100</lastBuildDate>
     <generator>Jekyll v3.7.2</generator>
     
       <item>
@@ -1925,22 +1925,33 @@ $$ Accuracy = \frac{ TP + TN  }{TP + FP + TN + FN}   $$
 &lt;/div&gt;
 &lt;/section&gt;
 
-&lt;section data-markdown=&quot;&quot;&gt;
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
 # Confusion matrix
 
 ![confusion matrix](/assets/03/confusion_matrix.png)
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
 
-# TODO: ajouter matrice avec TP, TN, ...
-+ cas de separation de cat and dog
+# classification
+![cats and dogs](/assets/03/cats_dogs.png)
 
+
+    &lt;/div&gt;
+&lt;/div&gt;
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
 
-# ca se complique assez rapidement
+# Ca se complique assez rapidement
 
 &amp;lt;img src=/assets/03/confusion_matrix_wikipedia.png style='border:0'&amp;gt;
 
+[https://en.wikipedia.org/wiki/Confusion_matrix](https://en.wikipedia.org/wiki/Confusion_matrix)
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
@@ -1982,7 +1993,9 @@ Machine learning
 
 * Scikit-learn est dans une approche **machine learning** plus orientée vers la  robustesse et la prédiction
 
-Au niveau de l'implémentation dans les 2 librairies, la difference est que scikit ajoute une contrainte sur le modele au niveau de la fonction de cout. Cette contrainte est appelé **regularisation** et sert à accroitre la capacité du modele a extrapoler sur des donnees nouvelles. On verra cela en detail dans 2 jours.
+Au niveau de l'implémentation de la regression logistique dans les 2 librairies, la difference est que scikit ajoute une **contrainte** sur le modele au niveau de la fonction de cout.
+
+Cette contrainte est appelé **régularisation** et sert à accroitre la capacité du modele a extrapoler sur des donnees nouvelles. On verra cela en detail dans 2 jours.
 
 On est donc dans une transition de la modélisation statistique vers la modélisation machine learning.
 &lt;/div&gt;
@@ -1993,25 +2006,27 @@ On est donc dans une transition de la modélisation statistique vers la modélis
 
 # Regression avec scikit-learn
 
-On va avoir des meta parametres. Par exemple:
+On va avoir des meta parametres.
 
-* acces a differents algo pour trouver les coefficients et un certain controle sur leur fonctionnement
-* differentes façon de traiter le multi-class: ovr, multinomial
-* differents mode de regularization
+Par exemple:
+
+* accès à differents algorithmes  pour trouver les coefficients + un certain controle sur leur fonctionnement
+* différentes façon de traiter le multi-class: ovr, multinomial
+* différents mode de régularisation
 
 et en output
 
 * un modele que l'on peut appliquer a de nouvelles donnees
 * les intervals de confiance
-* la ou les categories predites
-* les proba de prediction
-et surtout un model qye
+* la ou les categories prédites
+* les probabilités de prédiction (appartenance a la classe)
+
 
 
 On n'aura plus:
 - les p-value
-- le R^2
 - les tests statistiques
+- le R^2 (pas directement en tout cas)
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
@@ -2024,19 +2039,44 @@ http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRe
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
+![](/assets/03/sklearn_01.png)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+![](/assets/03/sklearn_02.png)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+![](/assets/03/iris_screen_shot_01.png)
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+![](/assets/03/iris_screen_shot_02.png)
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
 # Demo Scikit-learn LogisticRegression
 
-* default dataset
-* score
-* plot proba hist
-* trouver le meilleur threshold (Acc, max P, min Neg, TPR, ...)
-Use predict_proba and a different threshold =&amp;gt; you should find a different confusion matrix
+* Iris dataset
+* Score
+* ROC AUC
+* Trouver le meilleur threshold (Acc, max P, min Neg, TPR, ...)
+* Use predict_proba and a different threshold =&amp;gt; you should find a different confusion matrix
 
 
-* QQ plot residuals
-* matrice de confusion
+    import pandas as pd
+    from sklearn import datasets, metrics
+    from sklearn.linear_model import LogisticRegression
 
-Essayer plusieurs regularization L2 et L1 avec differents C
+
+    iris = datasets.load_iris()
+    clf = LogisticRegression()
+    clf.fit(iris.data, iris.target)
+
+    metrics.accuracy_score(y_test, y_hat )
+
 
 &lt;/section&gt;
 
@@ -2067,15 +2107,47 @@ voir aussi F1-score
 
 &lt;/section&gt;
 
-&lt;section data-markdown=&quot;&quot;&gt;
-# One hot encoding
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Exemples
+
+* Marque de voiture: Audi, Renault, Ford, Fiat
+
+Si on assigne un numero arbitraire à chaque marque de voiture on crée une hiérarchie:
+
+Audi =&amp;gt;1 , Renault =&amp;gt; 2, Ford =&amp;gt; 3, Fiat =&amp;gt; 4
+
+De meme:
+
+* chien, chat, souris, poulet =&amp;gt; {1,2,3,4}
+
+pourquoi le poulet serait *4* fois le chien ? Ca ne fait pas sens.
+
+
+Parfois on peut quand meme assigner un chiffre à chaque categorie, catégories ordonnées
+
+* enfant, jeune, adulte, vieux =&amp;gt; {1,2,3,4}
+* negatif, neutre, positif =&amp;gt; {-1, 0, 1}
+
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+# One hot encoding et label encoding
 
 Comment traduire les variables quantitative en variables numeriques
 
 Binaires
-* est ce un etudiant
-* fille / garcon
-*
+* Oui / Non ; 1 /0
+* Homme / Femme
+* Spam / legit
+* Action: Achete, enregistre,
+* Identification
+
 
 Multinomiales
 * liste de villes, pays, destinations,
@@ -2083,19 +2155,8 @@ Multinomiales
 * niveau d'etude
 * marques de voiture
 
-Par exemple: Audi, Renault, Ford, Fiat
-Si on assigne un numero arbitraire a chqaue marque de voitue on crée une hierarchie
-Audi =&amp;gt;1 , Renault =&amp;gt; 2, Ford =&amp;gt; 3, Fiat =&amp;gt; 4
-
-* chien,chat,souris,poulet =&amp;gt; {1,2,3,4}
-pourquoi le poulet est 4 fois le chien ? ca ne fait pas sense
-
-
-Mais parfois on peut quand meme assigner un chiffre a chaque categorie, catégories ordonnées
-
-* enfant, jeune, adulte, vieux =&amp;gt; {1,2,3,4}
-* negatif, neutre, positif =&amp;gt; {-1, 0, 1}
-
+    &lt;/div&gt;
+&lt;/div&gt;
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
@@ -2103,12 +2164,20 @@ Mais parfois on peut quand meme assigner un chiffre a chaque categorie, catégor
 
 [One Hot Encoding](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html), ou pandas.get_dummies
 
-Si on a N classes, on crée N-1 variables binaires
-par exemple negatif, neutre, positif: est_neutre, est_positif (est_negatif est deduite des 2 autres variables pas besoin de la specifier)
+Si on a **N** classes, on crée **N-1** variables binaires:
 
+par exemple la variable ```animal_type: chien, chat, souris, poulet``` sera transformée en 3 variables binaires
+
+* est_ce_chien : 1/0
+* est_ce_chat : 1/0
+* est_ce_souris : 1/0
+
+La variable *est_ce_poulet* étant redondante et automatiquement déduite des 3 autres.
 
 # LabelEncoder
 [LabelEncoder](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html) associe un chiffre a chaque classe, on garde l'ordonnancement
+
+* enfant, jeune, adulte, vieux =&amp;gt; {1,2,3,4}
 
 &lt;/section&gt;
 
@@ -2200,10 +2269,8 @@ https://towardsdatascience.com/no-machine-learning-is-not-just-glorified-statist
 # Aujourd'hui
 
 * Scikit-learn
-* Décomposition Biais - Variance
 * Gradient Stochastique; Stochastic Gradient Descent
-* Outliers, detection and impact
-* Skewness: Box cox and Kurtosis
+* Décomposition Biais - Variance
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2298,6 +2365,7 @@ Mais aussi :
     &amp;lt;img src=/assets/04/logo-scikit.png style='width:300px;'&amp;gt;
     &lt;/div&gt;
 &lt;/div&gt;
+
 &lt;div data-markdown=&quot;&quot;&gt;
 # scikit-learn API
 Simple et cohérente
@@ -2330,16 +2398,9 @@ Simple et cohérente
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
-# Demo
-
-[linear_model.LogisticRegression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
 &amp;lt;div class=centerbox&amp;gt;
 &amp;lt;p class=top&amp;gt;
-II: Biais - Variance
+III: Biais - Variance
 &amp;lt;/p&amp;gt;
 &amp;lt;/div&amp;gt;
 &lt;/section&gt;
@@ -2366,16 +2427,28 @@ $$
 
 **Variance**: Il s'agit là de la variabilité des prédictions entre différentes *réalisations* du modèle pour un échantillon donné.
 
+La variance mesure la sensibilité du modèle aux données d'apprentissages
+
 * **Overfitting**: Une forte erreur de variance indique que le modèle ne pourra pas extrapoler ses prédictions sur des nouvelles données.
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/section&gt;
 
 &lt;section&gt;
-&lt;div style=&quot;float:left; width:50%&quot;&gt;
+&lt;div style=&quot;float:right; width : 45%;&quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+* **Biais**: L'espérance de  l'erreur de prédiction
+
+* **Variance**: Variance des prédictions.
+
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div style=&quot;float:left; width:45%&quot;&gt;
 &lt;div data-markdown=&quot;&quot;&gt;
 
-# Décomposition Bias Variance
+# Décomposition Biais - Variance
 L'erreur quadratique est définie par:
 
 $$ \operatorname{MSE}( \hat{y} ) = \frac {1}{n} \sum_{i=1}^{n}( \hat{y_i}-y_i )^2 = \mathbb{E} \big[ (\hat{y} - y)^2   \big] $$
@@ -2434,6 +2507,32 @@ Pour réduire l'erreur quadratique, il faut minimiser à la fois le **biais** et
 
 Mais comment détecter l'overfit ?
 
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Underftiing
+
+
+* Ajouter des predicteurs
+* Rendre le modele plus complexe
+* Attenuer la regularisation.
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+# Overfitting
+
+* Reduire le nombre de predicteurs
+* Utiliser plus de données d'apprentissage
+* Accroitre la reguilarisation
+* Moyenner plusieurs modèles
+
+    &lt;/div&gt;
+&lt;/div&gt;
 &lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
@@ -2584,14 +2683,87 @@ Stochastic Gradient Descent
 &amp;lt;/div&amp;gt;
 &lt;/section&gt;
 
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+# Illustration
+&amp;lt;img src=/assets/04/robins_monroe_1951.png style='width: 500px; margin: auto; float:right; '&amp;gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Methode du gradient
+
+**1951!** Robbins - Monroe: A Stochastic approximation Method
+
+Soit une function \\(  f \\) dont on souhaite trouver le minimum.
+
+Sous certaines conditions sur  \\(  \alpha \\) et \\(\hat{\nabla} f\\) (gradient de f), alors
+
+$$  {\bf w}_{t+1} = {\bf w}_t - \alpha_t \hat{\nabla} f({\bf x}_t) $$
+
+si \\(  \alpha \\) assez petit et si f est différentiable
+
+Alors \\( {\bf w}_t  \\) converge vers le / un minima de \\(f\\)
+
+*decreases fastest in the direction of the negative gradient of f*
+
+$$ f(\mathbf {w}\_{0})\geq f(\mathbf {w}\_{1}) \geq f(\mathbf {w}\_{2})\geq \cdots , $$
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
 &lt;section data-markdown=&quot;&quot;&gt;
-# Gradient Stochastique
+# En python
+
+On veut trouver le minimum de la fonction  \\( f(x) =   \\)
+
+    cur_x       = 6 # The algorithm starts at x=6
+    gamma       = 0.01 # step size multiplier
+    max_iters   = 10000 # maximum number of iterations
+    iters       = 0 #iteration counter
+    precision   = 0.00001
+    previous_step_size = 1
+
+    # dérivée de la fonction à minimiser
+
+    fct = lambda x: 4 * x**3 - 9 * x**2
+    x = []
+    while (previous_step_size &amp;gt; precision) &amp;amp; (iters &amp;lt; max_iters):
+        x.append(cur_x)
+        prev_x = cur_x
+        cur_x -= gamma * fct(prev_x)
+        print(cur_x, previous_step_size)
+        previous_step_size = abs(cur_x - prev_x)
+        iters+=1
+
+    print(&quot;Le minimum est {:.4f}&quot;, cur_x)
+
+    print(&quot;En x = {:.4f}, la valeur de la fonction est {:.4f}  &quot;.format(cur_x, fct(cur_x)) )
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Stochastic Gradient
+
+The general idea is to aproximate an unknown function through iterations of **unbiased estimates of the function's gradient.**
+
+Knowing that the expectation of the gradient estimates equal the gradient.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Gradient Descent
 
 **1951!** Robbins - Monroe: A Stochastic approximation Method
 
 &amp;lt;img src=/assets/04/robins_monroe_1951.png style='width: 500px; margin: auto; float:right; '&amp;gt;
 
-The general idea is to aproximate an unknown function through iterations of unbiased estimates of the function's gradient. Knowing that the expectation of the gradient estimates equal the gradient.
 
 Soit une function \\(  f \\) que l'on souhaite approximer.
 Sous certaines conditions sur  \\(  \alpha \\) et \\(\hat{\nabla} f\\) (gradient de f), alors \\(  \\)
@@ -2624,7 +2796,7 @@ Au lieu de calculer la solution directement on va l'estimer par la methode du gr
 
 Equation
 
-Neanmoins cela necessite de calculer le gradient sur tous les echantillons disponibles a la fois. Pour un dataset grand, c'est couteux et long.
+Neanmoins cela nécessite de calculer le gradient sur tous les échantillons disponibles a la fois. Pour un dataset grand, c'est couteux et long.
 
 Donc on va utiliser le fait que sous certaines conditions
 
@@ -2664,6 +2836,7 @@ see file:///Users/alexis/amcp/packt-B05028/B05028_07_draft.html
 In case of very large datasets, using GD can be quite costly since we are only taking a single step for one pass over the training set – thus, the larger the training set, the slower our algorithm updates the weights and the longer it may take until it converges to the global cost minimum
 
 &lt;/section&gt;
+
 &lt;section data-markdown=&quot;&quot;&gt;
 
 La dimenion stichastique consiste a actualiser le W non plus avec l'integralité du gradient sur toutes les donnees mais avec une estimation du gradient echantillon par echantillon.
@@ -2712,10 +2885,553 @@ https://towardsdatascience.com/predicting-housing-prices-using-advanced-regressi
     http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/21
     * stratified k-fold http://127.0.0.1:4000/07-sampling-bias-variance-sgd.html#/22
 &lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
 </description>
         <pubDate>Sun, 07 Jan 2018 00:00:00 +0000</pubDate>
         <link>http://localhost:4000/4-biais-variance-gradient-stochastique</link>
         <guid isPermaLink="true">http://localhost:4000/4-biais-variance-gradient-stochastique</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>4) Gradient, Stochastique,  Biais, Variance</title>
+        <description>&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt; Biais, variance et gradient stochastique&amp;lt;/p&amp;gt;
+&lt;p style=&quot;font-size:28px;&quot;&gt; avec scikit-learn&lt;/p&gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right;&quot;&gt;
+    &lt;h1&gt;Questions ?&lt;/h1&gt;
+
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &amp;lt;img src=/assets/04/questions_04.gif&amp;gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div data-markdown=&quot;&quot;&gt;
+# Cours précédent
+* Régression logistique
+* Approche statistique ou approche Machine Learning
+* Métriques de classification:
+    * TP, TN, FP, FN
+    * Matrice de confusion
+    * ROC-AUC
+* One hot encoding
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right;&quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &amp;lt;img src=/assets/04/logo-scikit.png style='width:300px;'&amp;gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt;
+I: Rapide Rappel Scikit-learn
+&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+
+
+&lt;div data-markdown=&quot;&quot;&gt;
+# scikit-learn API
+Simple et cohérente
+
+1. Instancier un modèle, par exemple une regression linéaire:
+    * ```from sklearn.Linear import LinearRegression```
+    * ```mdl = LinearRegression( meta-params, loss function, ...)```
+2. Entrainer le modèle
+    * ```mdl.fit(X, y)```
+3. Obtenir des prédictions sur de nouvelles données
+    * ```y_hat = mdl.predict(Nouveaux échantillons}```.
+    * ```y_hat = mdl.predict_proba(Nouveaux échantillons)```
+4. Obtenir un score
+    * ```mdl.score(X,y)```
+
+&lt;/div&gt;
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# paramétrer les modèles
+
+* les meta-paramètres du modèle: \\(\alpha, \epsilon, \beta, \gamma, \cdots \\)
+* la regularisation: *penalty, l1, l2*
+* la fonction de cout: *loss*
+* la gestion des itérations: *max_iter, n_iter*
+* data pre-processing: *normalize, shuffle, valeurs manquantes*
+
+[![Lin reg params](/assets/04/scikit_linear_reg_params.png)](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression)
+[![SGD reg params](/assets/04/scikit_sgd_reg_params.png)](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor)
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:40%&quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    ## Lab: Titanic la suite
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div style=&quot;float:left; width:60%&quot;&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
+# Aujourd'hui
+
+* Gradient et Gradient Stochastique;
+* Décomposition Biais - Variance
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;hr /&gt;
+&lt;hr /&gt;
+&lt;hr /&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt;
+III: Biais - Variance
+&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right;&quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &amp;lt;img src=assets/04/bias-variance-targets.png style='width:500px;'&amp;gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div style=&quot;float:left; width:50%&quot;&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
+
+# Décomposition Biais - Variance
+L'erreur de prédiction peut etre décomposée en 2 termes
+
+$$
+\text{Erreur totale} = \text{Erreur du biais} + \text{Erreur de la variance}
+$$
+
+**Biais**: la différence entre les predictions du modele et la valeur cible. Le biais mesure la performance du modèle, la distance entre les predictions et les valeurs cibles.
+
+* **Underfitting**: Un biais important indique que le modele n'arrive pas  à comprendre les données qui lui sont fournies
+
+**Variance**: Il s'agit là de la variabilité des prédictions entre différentes *réalisations* du modèle pour un échantillon donné.
+
+La variance mesure la sensibilité du modèle aux données d'apprentissages
+
+* **Overfitting**: Une forte erreur de variance indique que le modèle ne pourra pas extrapoler ses prédictions sur des nouvelles données.
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width : 45%;&quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+* **Biais**: L'espérance de  l'erreur de prédiction
+
+* **Variance**: Variance des prédictions.
+
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div style=&quot;float:left; width:45%&quot;&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
+
+# Décomposition Biais - Variance
+L'erreur quadratique est définie par:
+
+$$ \operatorname{MSE}( \hat{y} ) = \frac {1}{n} \sum_{i=1}^{n}( \hat{y_i}-y_i )^2 = \mathbb{E} \big[ (\hat{y} - y)^2   \big] $$
+
+
+Et on peut réécrire cette équation de la façon suivante:
+
+$$ \operatorname{MSE}( \hat{y} )   =\mathbb{E}\left[\left(\hat{y}-\mathbb{E}(\hat{y})\right)^2\right] + \left(\mathbb{E}(\hat{y})-y\right)^2 $$
+
+Soit
+$$ \operatorname{MSE}( \hat{y} )= \operatorname{Var}(\hat{y})+ \operatorname{Bias}(\hat{y},y)^2 $$
+
+avec
+
+$$ \operatorname{Var}(\hat{y}) =  \mathbb{E}\left[\left(\hat{y}-\mathbb{E}(\hat{y})\right)^2\right] $$
+$$ \operatorname{Bias}(\hat{y},y)  = \mathbb{E}(\hat{y})-y  $$
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
+# Le calcul
+&lt;/div&gt;
+$$
+\begin{align} \mathbb{E}((\hat{y}-y)^2)&amp;amp;=
+ \mathbb{E}\left[\left(\hat{y}-\mathbb{E}(\hat{y})+\mathbb{E}(\hat{y})-y\right)^2\right]
+\\ &amp;amp; =
+\mathbb{E}\left[\left(\hat{y}-\mathbb{E}(\hat{y})\right)^2 +2\left((\hat{y}-\mathbb{E}(\hat{y}))(\mathbb{E}(\hat{y})-y)\right)+\left( \mathbb{E}(\hat{y})-y \right)^2\right]
+\\ &amp;amp; = \mathbb{E}\left[\left(\hat{y}-\mathbb{E}(\hat{y})\right)^2\right]+2\mathbb{E}\Big[(\hat{y}-\mathbb{E}(\hat{y}))(\overbrace{\mathbb{E}(\hat{y})-y}^{\begin{smallmatrix} \text{This is} \\  \text{a constant,} \\ \text{so it can be} \\  \text{pulled out.} \end{smallmatrix}}) \,\Big] + \mathbb{E}\Big[\,\overbrace{\left(\mathbb{E}(\hat{y})-y\right)^2}^{\begin{smallmatrix} \text{This is a} \\  \text{constant, so its} \\  \text{expected value} \\  \text{is itself.} \end{smallmatrix}}\,\Big]
+\\ &amp;amp; = \mathbb{E}\left[\left(\hat{y}-\mathbb{E}(\hat{y})\right)^2\right]+2\underbrace{\mathbb{E}(\hat{y}-\mathbb{E}(\hat{y}))}_{=\mathbb{E}(\hat{y})-\mathbb{E}(\hat{y})=0}(\mathbb{E}(\hat{y})-y)+\left(\mathbb{E}(\hat{y})-y\right)^2
+\\ &amp;amp; = \mathbb{E}\left[\left(\hat{y}-\mathbb{E}(\hat{y})\right)^2\right]+\left(\mathbb{E}(\hat{y})-y\right)^2
+\\ &amp;amp; = \operatorname{Var}(\hat{y})+ \operatorname{Bias}(\hat{y},y)^2
+\end{align}
+
+$$
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# En résumé
+![underfit - overfit](/assets/04/underfit_overfit.png)
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# En résumé
+Pour réduire l'erreur quadratique, il faut minimiser à la fois le **biais** et la **variance**.
+
+* Biais important &amp;lt;-&amp;gt; sous estimation - Underfitting
+    * le modele n'est pas bon
+    * On obtient de mauvais score
+
+* Variance importante &amp;lt;-&amp;gt; Overfitting
+    * Le modele est trop **sensible** au training dataset
+    * pouvoir d'extrapolation faible, mauvaises performances sur des nouvelles données.
+
+Mais comment détecter l'overfit ?
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Underftiing
+
+
+* Ajouter des predicteurs
+* Rendre le modele plus complexe
+* Attenuer la regularisation.
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+# Overfitting
+
+* Reduire le nombre de predicteurs
+* Utiliser plus de données d'apprentissage
+* Accroitre la reguilarisation
+* Moyenner plusieurs modèles
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt;
+IV: K-fold cross validation
+&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# split: train vs test dataset
+
+* On entraine le modele sur un **dataset de training**
+* Mais le but est d'avoir un modele capable de traiter des **données nouvelles**, données qu'il n'a pas vu auparavant
+* et on veut surtout éviter **l'Overfit**: *Le modele est trop **sensible** au training dataset*
+
+Donc on va mettre de coté  une partie des données comme données nouvelles: dataset de test.
+
+Typiquement : une répartition  80/20 ou 70/30
+
+&amp;lt;img src=/assets/04/split_train_test.png style='width: 500px;  margin:auto; ' &amp;gt;
+
+Et c'est en évaluant le modele sur les données de test que l'on va pouvoir détecter l'overfit
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right;&quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    [scikit example 1](http://scikit-learn.org/stable/modules/learning_curve.html#learning-curve)
+
+    [scikit example 2](http://scikit-learn.org/stable/auto_examples/model_selection/plot_learning_curve.html#example-model-selection-plot-learning-curve-py)
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div style=&quot;float:left; width:70%&quot;&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
+
+# Comment détecter l'overfit ?
+### Courbes d'apprentissages - Learning curves
+
+* On met de coté un set d'apprentissage (20% des données)
+* on entraine le modele sur un nombre croissant d'echantillons (10%, 20%, ...)
+* Pour chaque réalisation on calcule
+    * l'erreur sur le set d'apprentissage
+    * l'erreur sur le set de test
+
+* En accroissant le set d'apprentissage, le modele a de plus en plus d'info, le modele apprends le set d'apprentissage. On espere que ca va lui permettre de traiter aussi les données sur le set de test.
+
+Ce que l'on observe:
+* avec un set d'apprentissage petit, les 2 erreurs sont grandes
+* avec plus de données, l'erreur d'apprentissage décroit
+    * si l'erreur sur le set de test ne décroit pas: **overfit**!
+
+Si l'erreur sur le set de test ne décroit pas, alors cela veut dire que le modele n'est pas capable d'extrapoler sur des nouvelles données
+
+Note: si l'erreur ne décroit pas sur le set de training en premier lieu, alors cela veut dire que le modele est mauvais, que l'erreur de biais est forte.
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Validation croisée
+Si on a peu de données, le split train - test *gaspille* des données pour le test. Données qui pourraient etre utile pour l'apprentissage du modele.
+
+=&amp;gt; on va alterner le découpage train - test, 80% - 20%,
+
+C'est la validation croisée et plus particulièrement **K-FOLD cross validation**
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# K-fold cross-validation
+
+&amp;lt;img src=/assets/04/k-fold-cross-validation.png style='width: 600px;  margin:auto; float:right;' &amp;gt;
+
+1. Mélanger le dataset
+2. Puis découper le dataset en K (5) parties
+3. Faire K (5) experiences:
+    * apprentissage sur 1,2,3,4 et evaluation sur 5
+    * apprentissage sur 1,2,3,**5** et evaluation sur **4**
+    * ...
+    * apprentissage sur 2,3,4,5 et evaluation sur **1**
+
+La moyenne des scores obtenus ainsi est plus robuste qu'un score obtenu sur un unique découpage.
+
+[K-fold cross validation - scikit-learn](http://scikit-learn.org/stable/modules/classes.html#module-sklearn.cross_validation)
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Autres méthodes de validation croisée
+
+* **Stratified K-Fold**: (classification) Chaque subset conserve la distribution des classes. Utile lorsque la repartition des classes est déséquilibrée.
+* **Leave one out**:  Chaque échantillon est utilisé à son tour comme echantillon de test. Tous les autres sont laissé dans le set d'apprentissage.
+* **Shuffle cross validation**: Decoupage aléatoire avec remise en place. rien n'oblige à fixer le découpage au début.
+
+
+### scikit-learn
+* [cross_val_score](http://scikit-learn.org/stable/auto_examples/exercises/plot_cv_digits.html#example-exercises-plot-cv-digits-py)
+* [cross validation](http://scikit-learn.org/stable/modules/classes.html#module-sklearn.cross_validation)
+
+
+&lt;/section&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+# Overfit - Biais - Variance SGD
+
+Demo sur cars avec SGD
+
+&lt;/section&gt;
+
+&lt;hr /&gt;
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt;
+III: Gradient, Stochastique
+&amp;lt;/p&amp;gt;
+&amp;lt;p class=mitop&amp;gt;
+Stochastic Gradient Descent
+&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:35%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:50%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Methode du gradient
+
+Soit une function \\(  f \\) dont on souhaite trouver le minimum.
+
+Pour \\(  \alpha \\)  assez petit et si f est dérivable
+
+alors
+
+$$  {\bf w}_{t+1} = {\bf w}_t - \alpha_t \hat{\nabla} f({\bf x}_t) $$
+
+\\( {\bf w}_t  \\) converge vers le minima de \\(f\\)
+
+On a
+
+$$ f(\mathbf {w}\_{0})\geq f(\mathbf {w}\_{1}) \geq f(\mathbf {w}\_{2})\geq \cdots , $$
+
+
+=&amp;gt; *fastest  decrease obtained for the direction of the negative gradient of f*
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;img src=/assets/04/700px-Gradient_descent.svg.png width=350px&amp;gt;
+&amp;lt;img src=/assets/04/700px-Gradient_ascent_contour.png width=350px&amp;gt;
+&amp;lt;img src=/assets/04/Gradient_ascent_surface.png width=350px&amp;gt;
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# En python
+
+On veut trouver le minimum de la fonction  \\( f(x) =   \\)
+
+    cur_x       = 6 # The algorithm starts at x=6
+    gamma       = 0.01 # step size multiplier
+    max_iters   = 10000 # maximum number of iterations
+    iters       = 0 #iteration counter
+    precision   = 0.00001
+    previous_step_size = 1
+
+    # dérivée de la fonction à minimiser
+
+    fct = lambda x: 4 * x**3 - 9 * x**2
+    x = []
+    while (previous_step_size &amp;gt; precision) &amp;amp; (iters &amp;lt; max_iters):
+        x.append(cur_x)
+        prev_x = cur_x
+        cur_x -= gamma * fct(prev_x)
+        print(cur_x, previous_step_size)
+        previous_step_size = abs(cur_x - prev_x)
+        iters+=1
+
+    print(&quot;Le minimum est {:.4f}&quot;, cur_x)
+
+    print(&quot;En x = {:.4f}, la valeur de la fonction est {:.4f}  &quot;.format(cur_x, fct(cur_x)) )
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Stochastic Gradient
+
+The general idea is to aproximate an unknown function through iterations of **unbiased estimates of the function's gradient.**
+
+Knowing that the expectation of the gradient estimates equal the gradient.
+
+On va prendre les erreurs successives entre les vraies valeurs et leur estimée comme estimation du gradient!
+
+Cela marche parce que dans notre contexte: E(gradient) = gradient
+
+&amp;lt;img src=/assets/04/robins_monroe_1951.png style='width: 500px; margin: auto; float:right; '&amp;gt;
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Fonction de cout, forme générale
+
+On cherche a minimiser la fonction \\( f(x) = w^T x + b   \\)
+
+$$ E(w,b) = \frac{1}{n}\sum_{i=1}^{n} L(y_i, f(x_i)) + \alpha R(w) $$
+
+where
+
+* \\(L\\) is a loss function that measures model (mis)fit
+* \\(R\\) is a regularization term  that penalizes model complexity
+* \\(\alpha\\) is a non-negative hyperparameter.
+
+En fonction du choix de \\(L\\) et de \\(R\\) on obtient différent algorithmes
+
+=&amp;gt; http://scikit-learn.org/stable/modules/sgd.html
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Gradient stochastique
+&amp;lt;img src=/assets/04/gradient_ball.png height=300px&amp;gt;
+
+* low on computation,
+* has good convergence behavior
+* The SGD is implemented in a wide variety of languages (python, R, Java, scala, matlab, ...) and platforms (weka, rapidminer, ...) as well as online services big (Amazon ML, Google, Azure) and small (Dataiku, ....)
+
+
+The literature related to the SGD algorithm is abundant. With the resurgence of deep learning and neural networks, no less than 6000 academic papers about Stochastic Gradient Descent were published in 2016 according to google scholar (from around a few 100s in the early 2000s).
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# SGD
+
+* learning rate
+    * tuning
+    * fixe
+    * adaptif
+
+* epoch and shuffling
+
+## Mini-Batch Gradient Descent (MB-GD)
+milieu entre le GD et le SGD
+On utilise K echantillons pour estimer le gradient a chaque iteration
+
+Accroitre K entraine
+
+* on converge plus vite et plus directement. moins de zig zag
+* on converge moins profondement. le biais est plus important.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+
+
+Instead, we update the weights after each training sample:
+
+et on passe plusieurs fois sur le dataset en shufflant le dataset a chaque fois (epoch)
+
+“stochastic” comes from the fact that the gradient based on a single training sample is a “stochastic approximation” of the “true” cost gradient
+
+it has been shown that SGD almost surely converges to the global cost minimum if the cost function is convex (or pseudo-convex)
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+</description>
+        <pubDate>Sat, 06 Jan 2018 00:00:00 +0000</pubDate>
+        <link>http://localhost:4000/4bis-biais-variance-gradient-stochastique</link>
+        <guid isPermaLink="true">http://localhost:4000/4bis-biais-variance-gradient-stochastique</guid>
         
         
       </item>
@@ -4610,459 +5326,6 @@ http://scikit-learn.org/stable/auto_examples/text/document_clustering.html
         <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
         <link>http://localhost:4000/13-nlp.html</link>
         <guid isPermaLink="true">http://localhost:4000/13-nlp.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Lesson 12 - SVM - Decision Trees - Random forests</title>
-        <description>&lt;section data-background-color=&quot;#000&quot;&gt;
-    &lt;h1 class=&quot;white&quot; style=&quot;border-top: thin solid #DDD;border-bottom: thin solid #DDD;&quot;&gt;
-        &lt;img src=&quot;assets/ga_logo_black.png&quot; style=&quot;float:left;top:0px;&quot; /&gt;
-        General Assembly
-    &lt;/h1&gt;
-    &lt;p class=&quot;big_title&quot;&gt;12. Support Vector Machines, Decision trees, Random Forests&lt;/p&gt;
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Lesson 12
-## LEARNING OBJECTIVES
-
-* SVM
-* Decision Trees
-* Random Forests
-
-
-* Project 2 - Caravan Dataset =&amp;gt; Tuesday 8/2
-
-* [Final Project part 2 and 3](https://github.com/alexperrier/gads/blob/master/final_project/Final%20Project%20-%20Design%20Writeup%20and%20Data%20Exploration.md) - Design Writeup and Exploratory Data Analysis
-For =&amp;gt; Tuesday 8/9
-
-&lt;/section&gt;
-
-&lt;!-- Prework and review --&gt;
-&lt;section data-background-color=&quot;#DA0A13&quot;&gt;
-    &lt;h1&gt;Lesson #12&lt;/h1&gt;
-    &lt;p class=&quot;big_title&quot;&gt;Review of Lesson 11&lt;/p&gt;
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Last Lesson Review
-
-* Accuracy Paradox
-* Imbalanced datasets strategies
-    * 3 strategies we saw?
-
-&lt;/section&gt;
-
-&lt;!-- Today --&gt;
-&lt;section data-background-color=&quot;#22c8c6&quot;&gt;
-    &lt;h1&gt;Today&lt;/h1&gt;
-    &lt;p class=&quot;big_title&quot;&gt;Part I Support Vector Machines&lt;/p&gt;
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Hyperplane
-
-Classification separating an hyperplane
-
-* 1D =&amp;gt; point
-* 2D =&amp;gt; line
-* 3D =&amp;gt; surface
-* etc ...
-
-A hyperplane in 2 dimension is defined by a line equation \\( \beta_0 + \beta_1 X_1 + \beta_2 X_2 = 0  \\)
-
-
-In **p dimensions** a hyperplane is defined by a **linear** equation $$\beta_0 + \beta_1 X_1 + ... + \beta_p X_p = 0 \qquad  p \gt 0 $$
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-
-# Linearly separable
-
-We have n samples in p dimensions/features  \\( X = \\{ x_{i}  \\}  \quad i \in [1,n]  \\).
-
-These observations belong to two classes \\( y_i \in \\{-1, +1 \\} \\)
-
-The classes are **linearly separable**: there is an  hyperplane that fully separates the points according to their classes.
-
-* All \\( x\_i  \\) such that \\( \qquad \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j}  &amp;lt; 0  \qquad \\) belong to class -1
-* All \\( x\_i^\prime  \\) such that  \\( \qquad \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j}^\prime  &amp;gt; 0  \qquad \\) belong to class +1
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Linear decision boundary
-We predict the class of a new point \\( x \\)
-
-by calculating
-$$ f(x) = \beta\_0+ \sum\_{j=1}^{n} \beta\_j x\_{j}  $$
-
-* if \\( f(x) &amp;gt;0 =&amp;gt; +1 \\)
-* if \\( f(x) &amp;lt;0 =&amp;gt; -1 \\)
-
-A classifier that is based on a separating hyperplane has a **linear decision boundary**.
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# One line
-
-Note that since \\( y\_i \\) and  \\( \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j}  \\) have the same sign:
-
-$$ y\_i ( \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j} ) &amp;gt; 0 $$
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Infinity of Hyperplanes
-
-If our data is linearly separable then there exists an infinity of hyperplanes that can separate it
-
-![](assets/11/hyperplane-classification.png)
-
-
-=&amp;gt; We need to introduce a margin to separate the classes
-
-Fig from [Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/getbook.html)
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Maximal Margin Classifier
-
-We want to find the Hyperplane that will maximise the distance to all the points.
-Best separation of the classes
-
-![Maximal Margin Classifier](assets/11/Maximal_Margin_Classifier.png)
-
-Fig from [Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/getbook.html)
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Maximal Margin Classifier
-
-Fnding a simple linear boundary is equivalent to solving
-$$ y\_i ( \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j} ) &amp;gt; 0 \quad \forall i \in [1,..,n] $$
-
-Finding **the largest margin** that separates the classes is equivalent to solving
-
-$$ \max\_{\beta\_i} M \quad \text{such that} \quad y\_i ( \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j} ) &amp;gt; M \quad \forall i \in [1,..,n] $$
-
-with \\( \sum\_{j=0}^{p}  \beta^2\_j = 1\\)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Support Vectors
-
-* The observations that are on the margin lines are called **support vectors**
-
-* They *support* the maximal margin hyperplane in the sense that if these points were moved slightly then the **maximal margin hyperplane** would move as well.
-
-* The maximal margin hyperplane depends directly on the support vectors, but not on the other observations.
-    A movement to any of the other observations would not affect the separating hyperplane, provided that the observation’s movement does not cause it to cross the boundary set by the margin.
-
-A change in the support vector impacts the margin a lot =&amp;gt; **over fitting**
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Support Vector Classifier
-
-What if we allow some points to be either wrongly classified or at least within the margin boundaries?
-
-### Non linearly separable
-This is the case when the classes are not separable, we still want the best margin possible. But some points will be on the wrong side
-
-Add a tuning parameter C that dictates the *severity of the violation* of the margin.
-
-The bigger C is the more points are **within the margin** or **misclassified**. C is some budget for violation of the margin which is determined during cross validation.
-
-
-=&amp;gt; Even in the case of linearly separable classes adding some flexibility to the margin will make the classfier more robust, more flexible (less overfitting)
-
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Support Vector Classifier
-
-\\( C\\) is a non negative tuning parameter
-
-$$ \max\_{\beta\_i, \epsilon\_i} M \quad \text{such that} \quad y\_i ( \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j} ) &amp;gt; M - \epsilon\_i \quad \forall i \in [1,..,n]  $$
-with
-
-* \\( \sum\_j  \beta^2\_j = 1 \\)
-* \\(   \epsilon\_i &amp;gt; 0 \\)
-* \\( \sum\_{i} \epsilon\_i \leq C  \\)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# LAB SVC
-
-[L12 N1 Support Vector Classifier - Linear Case.py](https://github.com/alexperrier/gads/blob/master/12_decision_trees/py/L12%20Support%20Vector%20Classifier%20-%20Linear.ipynb)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Support Vector Machine
-
-What if the data is not even close to be linearly separable?
-
-![](assets/11/non_linearly_separable.png)
-
-Fig from [Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/getbook.html)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Introducing Kernels
-
-The optimization equation for the linear support vector classifier can be rewritten as such
-
-$$ f(x) =  \beta\_0 + \sum\_{i=1}^{n} \alpha\_i \langle x, x\_i \rangle   $$
-$$ f(x) =  \beta\_0 + \sum\_{i=1}^{n} \alpha\_i K(x,x\_i)    $$
-
-with \\( K(x,x\_i) = \langle x, x\_i \rangle \\) the vector dot product.
-
-But we could use a different Kernel function
-
-
-**Note**:This involves \\(p * \frac{n(n-1)}{2} \\) multiplications! However only the support vectors are useful. So we can limit the sum to \\(S\\) support vectors.
-
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Kernels
-
-Here are some classic Kernel functions
-
-* Linear Kernel \\( \quad K(x,x_i) = \langle x, x_i \rangle\\)
-* Polynomial Kernel (d): \\( \quad K(x,x\_i) =  (1 + \sum\_{j=1}^{p} x\_{j}x\_{i,j} )^d   \\)
-* Radial Kernel \\( \quad K(x,x\_i) =   \exp(-\gamma    \sum\_{j=1}^{p} (x\_{j} - x\_{i,j})^2 )   \\)
-
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-# SVM Lab
-[L12 N2 Support Vector Classifier - Non-Linear Case.py](https://github.com/alexperrier/gads/blob/master/12_decision_trees/py/L12%20Support%20Vector%20Machines.ipynb)
-
-&lt;/section&gt;
-
-&lt;section data-background-color=&quot;#22c8c6&quot;&gt;
-    &lt;h1&gt;Today&lt;/h1&gt;
-    &lt;p class=&quot;big_title&quot;&gt;Part II Decision Tree&lt;/p&gt;
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Decision Trees
-
-Decision Trees (DTs) are a non-parametric supervised learning method used for classification and regression. The goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features.
-
-Rule based models
-
-        if x &amp;lt; a
-            if y &amp;lt; c
-                ...
-            else
-                ...
-        elif x &amp;gt; a &amp;amp; a &amp;lt; b
-            ...
-        else
-            if z &amp;lt; d
-                ...
-            else
-                0
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Iris dataset
-
-![](assets/12/L12-tree-iris.png)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Decision Trees
-
-* Simple to understand and to interpret. Trees can be visualised.
-* Requires little data preparation. (missing values, scaling, dummy variables, ...)
-* Low  cost for prediction \\( O(log(n)) \\) with n number of data points used to train the tree.
-* Can handle both numerical and categorical data.
-* Uses a white box model. An observed situation can simply be explained by boolean logic.
-* Possible to validate a model using statistical tests.
-* Performs well even if its assumptions are somewhat violated by the true model from which the data were generated.
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Decision Trees
-
-
-* high overfitting for over-complex trees that do not generalise the data well.
-* Decision trees can be unstable because small variations in the data might result in a completely different tree being generated.
-* no globally optimal decision tree
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Lab: Controlling the tree
-
-Set these params to control the tree complexity
-
-* max_depth
-* min_samples_split
-* min_samples_leaf
-* max_features
-
-
-Lab: [Simple Decision tree](https://github.com/alexperrier/gads/blob/master/12_decision_trees/py/L12%20Simple%20Decision%20Tree%20-%20Iris%20dataset.ipynb)
-
-Weak Learner: What if we forcefully prune the tree?
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Classification vs Regression
-
-Different Metric
-
-* MSE
-
-* Gini
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Bootstrap aggregation aka Bagging
-
-We used Boostrapping to estimate the mean of a sample.
-
-Sampling with replacement.
-
-The idea is the same with trees or any other classifier.
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Bagging for trees
-
-* Generate B different bootstrapped training data sets.
-* Train a new tree on each training set
-
-The predictions of all the trees are averaged
-
-=&amp;gt; significantly reduces over fitting
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Out Of Bag - OOB
-
-When boostrapping, in each experiment will use only approx. 2/3rd of the available samples.
-
-Which leaves 1/3rd that we can use to estimate the validation error of each tree.
-
-This is called OOB Out of Bag error.
-
-It can be shown that with B sufficiently large, OOB error is virtually equivalent to leave-one-out cross-validation error.
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Feature importance
-
-* When the *max_features &amp;lt; total number of features*.
-
-    =&amp;gt; Some features are left out of the splitting decision in each node.
-
-* Relative Feature importance can be deduced from the delta in MSE associated to the features included vs left out.
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Bagging in scikit
-
-Use the [Bagging Classifier](http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.BaggingClassifier.html)
-
-A Bagging classifier is an ensemble meta-estimator that fits base classifiers each on random subsets of the original dataset and then aggregate their individual predictions (either by voting or by averaging) to form a final prediction.
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Bagging in scikit
-Very flexible
-
-        bagging = BaggingClassifier(DecisionTreeClassifier(),  boostrap = True)
-
-
-class sklearn.ensemble.BaggingClassifier
-
-* base_estimator: The base estimator, decision tree by default
-* n_estimators: How many estimators will be ensembled
-* max_samples: The number of samples to draw from X to train each base estimator
-* max_features: The number of features to draw from X to train each base estimator
-* bootstrap: True / False
-* bootstrap_features: True / False
-* oob_score: True / False
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Bagging in scikit
-
-[Lab - bagging with Tree - regression](https://github.com/alexperrier/gads/blob/master/12_decision_trees/py/L12%20Bagging.ipynb)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Random Forests
-
-Extension of the bootstrapping to features
-
-* In random forests, each tree in the ensemble is built from a sample drawn with replacement (i.e., a bootstrap sample) from the training set.
-
-* In addition, when splitting a node during the construction of the tree, the split that is picked is the best split among **a random subset of the features**.
-
-=&amp;gt; The bias of the forest usually slightly increases (with respect to the bias of a single non-random tree) but, due to averaging, its variance also decreases, usually more than compensating for the increase in bias, hence yielding an overall better model.
-
-(see RandomForestClassifier and RandomForestRegressor classes),
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Random Forest Lab
-
-[Random Forests Lab](https://github.com/alexperrier/gads/blob/master/12_decision_trees/py/L12%20Random%20Forests.ipynb)
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-# Recap
-
-* Support Vector Classifiers
-* Decision Trees
-* Bagging
-* Random Forests
-
-
-* Project 2 for next Tuesday
-* Final Project part 2 and 3 for 8/9
-
-
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-# Questions
-
-### Questions?
-
-&lt;/section&gt;
-</description>
-        <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-        <link>http://localhost:4000/12-decision-trees-random-forests.html</link>
-        <guid isPermaLink="true">http://localhost:4000/12-decision-trees-random-forests.html</guid>
         
         
       </item>
