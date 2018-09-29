@@ -87,13 +87,6 @@ MathJax.Hub.Config({
 </div>
 </section>
 
-<section>
-<div style="float:right;">
-    <div data-markdown="">
-    &lt;img src=/assets/04/logo-scikit.png style='width:300px;'&gt;
-    </div>
-</div>
-
 <section data-markdown="">
 &lt;div class=centerbox&gt;
 &lt;p class=top&gt;
@@ -102,8 +95,7 @@ I: Rapide Rappel Scikit-learn
 &lt;/div&gt;
 </section>
 
-
-
+<section>
 <div data-markdown="">
 # scikit-learn API
 Simple et cohérente
@@ -152,9 +144,156 @@ Simple et cohérente
 </div>
 </section>
 
-<hr />
-<hr />
-<hr />
+<section>
+<div style="float:right; width:35%;  ">
+    <div data-markdown="">
+    </div>
+</div>
+<hr class="vline" />
+<div style="float:left; width:50%;  ">
+    <div data-markdown="">
+# Methode du gradient
+
+Soit une function \\(  f \\) dont on souhaite trouver le minimum.
+
+Pour \\(  \alpha \\)  assez petit et si f est dérivable
+
+alors
+
+$$  {\bf w}_{t+1} = {\bf w}_t - \alpha_t \hat{\nabla} f({\bf w}_t) $$
+
+\\( {\bf w}_t  \\) converge vers le minima de \\(f\\)
+
+On a
+
+$$ f(\mathbf {w}\_{0})\geq f(\mathbf {w}\_{1}) \geq f(\mathbf {w}\_{2})\geq \cdots , $$
+
+
+=&gt; *fastest  decrease obtained for the direction of the negative gradient of f*
+    </div>
+</div>
+</section>
+
+<section data-markdown="">
+&lt;img src=/assets/04/700px-Gradient_descent.svg.png width=350px&gt;
+&lt;img src=/assets/04/700px-Gradient_ascent_contour.png width=350px&gt;
+&lt;img src=/assets/04/Gradient_ascent_surface.png width=350px&gt;
+
+</section>
+
+<section data-markdown="">
+# En python
+
+On veut trouver le minimum de la fonction  \\( f(x) =   \\)
+
+    cur_x       = 6 # The algorithm starts at x=6
+    gamma       = 0.01 # step size multiplier
+    max_iters   = 10000 # maximum number of iterations
+    iters       = 0 #iteration counter
+    precision   = 0.00001
+    previous_step_size = 1
+
+    # dérivée de la fonction à minimiser
+
+    fct = lambda x: 4 * x**3 - 9 * x**2
+    x = []
+    while (previous_step_size &gt; precision) &amp; (iters &lt; max_iters):
+        x.append(cur_x)
+        prev_x = cur_x
+        cur_x -= gamma * fct(prev_x)
+        print(cur_x, previous_step_size)
+        previous_step_size = abs(cur_x - prev_x)
+        iters+=1
+
+    print("Le minimum est {:.4f}", cur_x)
+
+    print("En x = {:.4f}, la valeur de la fonction est {:.4f}  ".format(cur_x, fct(cur_x)) )
+
+
+</section>
+
+<section data-markdown="">
+# Stochastic Gradient
+
+The general idea is to aproximate an unknown function through iterations of **unbiased estimates of the function's gradient.**
+
+Knowing that the expectation of the gradient estimates equal the gradient.
+
+On va prendre les erreurs successives entre les vraies valeurs et leur estimée comme estimation du gradient!
+
+Cela marche parce que dans notre contexte: E(gradient) = gradient
+
+&lt;img src=/assets/04/robins_monroe_1951.png style='width: 500px; margin: auto; float:right; '&gt;
+
+</section>
+
+<section data-markdown="">
+# Fonction de cout, forme générale
+
+On cherche a minimiser la fonction \\( f(x) = w^T x + b   \\)
+
+$$ E(w,b) = \frac{1}{n}\sum_{i=1}^{n} L(y_i, f(x_i)) + \alpha R(w) $$
+
+where
+
+* \\(L\\) is a loss function that measures model (mis)fit
+* \\(R\\) is a regularization term  that penalizes model complexity
+* \\(\alpha\\) is a non-negative hyperparameter.
+
+En fonction du choix de \\(L\\) et de \\(R\\) on obtient différent algorithmes
+
+=&gt; http://scikit-learn.org/stable/modules/sgd.html
+
+</section>
+
+<section data-markdown="">
+# Gradient stochastique
+&lt;img src=/assets/04/gradient_ball.png height=300px&gt;
+
+* low on computation,
+* has good convergence behavior
+* The SGD is implemented in a wide variety of languages (python, R, Java, scala, matlab, ...) and platforms (weka, rapidminer, ...) as well as online services big (Amazon ML, Google, Azure) and small (Dataiku, ....)
+
+
+The literature related to the SGD algorithm is abundant. With the resurgence of deep learning and neural networks, no less than 6000 academic papers about Stochastic Gradient Descent were published in 2016 according to google scholar (from around a few 100s in the early 2000s).
+
+
+</section>
+
+<section data-markdown="">
+# SGD
+
+* learning rate
+    * tuning
+    * fixe
+    * adaptif
+
+* epoch and shuffling
+
+## Mini-Batch Gradient Descent (MB-GD)
+milieu entre le GD et le SGD
+On utilise K echantillons pour estimer le gradient a chaque iteration
+
+Accroitre K entraine
+
+* on converge plus vite et plus directement. moins de zig zag
+* on converge moins profondement. le biais est plus important.
+
+</section>
+
+<section data-markdown="">
+
+
+
+Instead, we update the weights after each training sample:
+
+et on passe plusieurs fois sur le dataset en shufflant le dataset a chaque fois (epoch)
+
+“stochastic” comes from the fact that the gradient based on a single training sample is a “stochastic approximation” of the “true” cost gradient
+
+it has been shown that SGD almost surely converges to the global cost minimum if the cost function is convex (or pseudo-convex)
+
+</section>
 
 <section data-markdown="">
 &lt;div class=centerbox&gt;
@@ -397,6 +536,7 @@ La moyenne des scores obtenus ainsi est plus robuste qu'un score obtenu sur un u
 
 
 </section>
+
 <section data-markdown="">
 # Overfit - Biais - Variance SGD
 
@@ -404,7 +544,6 @@ Demo sur cars avec SGD
 
 </section>
 
-<hr />
 <section data-markdown="">
 &lt;div class=centerbox&gt;
 &lt;p class=top&gt;
@@ -414,157 +553,6 @@ III: Gradient, Stochastique
 Stochastic Gradient Descent
 &lt;/p&gt;
 &lt;/div&gt;
-</section>
-
-<section>
-<div style="float:right; width:35%;  ">
-    <div data-markdown="">
-    </div>
-</div>
-<hr class="vline" />
-<div style="float:left; width:50%;  ">
-    <div data-markdown="">
-# Methode du gradient
-
-Soit une function \\(  f \\) dont on souhaite trouver le minimum.
-
-Pour \\(  \alpha \\)  assez petit et si f est dérivable
-
-alors
-
-$$  {\bf w}_{t+1} = {\bf w}_t - \alpha_t \hat{\nabla} f({\bf x}_t) $$
-
-\\( {\bf w}_t  \\) converge vers le minima de \\(f\\)
-
-On a
-
-$$ f(\mathbf {w}\_{0})\geq f(\mathbf {w}\_{1}) \geq f(\mathbf {w}\_{2})\geq \cdots , $$
-
-
-=&gt; *fastest  decrease obtained for the direction of the negative gradient of f*
-    </div>
-</div>
-</section>
-
-<section data-markdown="">
-&lt;img src=/assets/04/700px-Gradient_descent.svg.png width=350px&gt;
-&lt;img src=/assets/04/700px-Gradient_ascent_contour.png width=350px&gt;
-&lt;img src=/assets/04/Gradient_ascent_surface.png width=350px&gt;
-
-</section>
-
-<section data-markdown="">
-# En python
-
-On veut trouver le minimum de la fonction  \\( f(x) =   \\)
-
-    cur_x       = 6 # The algorithm starts at x=6
-    gamma       = 0.01 # step size multiplier
-    max_iters   = 10000 # maximum number of iterations
-    iters       = 0 #iteration counter
-    precision   = 0.00001
-    previous_step_size = 1
-
-    # dérivée de la fonction à minimiser
-
-    fct = lambda x: 4 * x**3 - 9 * x**2
-    x = []
-    while (previous_step_size &gt; precision) &amp; (iters &lt; max_iters):
-        x.append(cur_x)
-        prev_x = cur_x
-        cur_x -= gamma * fct(prev_x)
-        print(cur_x, previous_step_size)
-        previous_step_size = abs(cur_x - prev_x)
-        iters+=1
-
-    print("Le minimum est {:.4f}", cur_x)
-
-    print("En x = {:.4f}, la valeur de la fonction est {:.4f}  ".format(cur_x, fct(cur_x)) )
-
-
-</section>
-
-<section data-markdown="">
-# Stochastic Gradient
-
-The general idea is to aproximate an unknown function through iterations of **unbiased estimates of the function's gradient.**
-
-Knowing that the expectation of the gradient estimates equal the gradient.
-
-On va prendre les erreurs successives entre les vraies valeurs et leur estimée comme estimation du gradient!
-
-Cela marche parce que dans notre contexte: E(gradient) = gradient
-
-&lt;img src=/assets/04/robins_monroe_1951.png style='width: 500px; margin: auto; float:right; '&gt;
-
-</section>
-
-<section data-markdown="">
-# Fonction de cout, forme générale
-
-On cherche a minimiser la fonction \\( f(x) = w^T x + b   \\)
-
-$$ E(w,b) = \frac{1}{n}\sum_{i=1}^{n} L(y_i, f(x_i)) + \alpha R(w) $$
-
-where
-
-* \\(L\\) is a loss function that measures model (mis)fit
-* \\(R\\) is a regularization term  that penalizes model complexity
-* \\(\alpha\\) is a non-negative hyperparameter.
-
-En fonction du choix de \\(L\\) et de \\(R\\) on obtient différent algorithmes
-
-=&gt; http://scikit-learn.org/stable/modules/sgd.html
-
-</section>
-
-<section data-markdown="">
-# Gradient stochastique
-&lt;img src=/assets/04/gradient_ball.png height=300px&gt;
-
-* low on computation,
-* has good convergence behavior
-* The SGD is implemented in a wide variety of languages (python, R, Java, scala, matlab, ...) and platforms (weka, rapidminer, ...) as well as online services big (Amazon ML, Google, Azure) and small (Dataiku, ....)
-
-
-The literature related to the SGD algorithm is abundant. With the resurgence of deep learning and neural networks, no less than 6000 academic papers about Stochastic Gradient Descent were published in 2016 according to google scholar (from around a few 100s in the early 2000s).
-
-
-</section>
-
-<section data-markdown="">
-# SGD
-
-* learning rate
-    * tuning
-    * fixe
-    * adaptif
-
-* epoch and shuffling
-
-## Mini-Batch Gradient Descent (MB-GD)
-milieu entre le GD et le SGD
-On utilise K echantillons pour estimer le gradient a chaque iteration
-
-Accroitre K entraine
-
-* on converge plus vite et plus directement. moins de zig zag
-* on converge moins profondement. le biais est plus important.
-
-</section>
-
-<section data-markdown="">
-
-
-
-Instead, we update the weights after each training sample:
-
-et on passe plusieurs fois sur le dataset en shufflant le dataset a chaque fois (epoch)
-
-“stochastic” comes from the fact that the gradient based on a single training sample is a “stochastic approximation” of the “true” cost gradient
-
-it has been shown that SGD almost surely converges to the global cost minimum if the cost function is convex (or pseudo-convex)
-
 </section>
 
 <section>

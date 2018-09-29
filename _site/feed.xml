@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 28 Sep 2018 07:44:14 +0100</pubDate>
-    <lastBuildDate>Fri, 28 Sep 2018 07:44:14 +0100</lastBuildDate>
+    <pubDate>Sat, 29 Sep 2018 14:22:03 +0100</pubDate>
+    <lastBuildDate>Sat, 29 Sep 2018 14:22:03 +0100</lastBuildDate>
     <generator>Jekyll v3.7.2</generator>
     
       <item>
@@ -2936,13 +2936,6 @@ https://towardsdatascience.com/predicting-housing-prices-using-advanced-regressi
 &lt;/div&gt;
 &lt;/section&gt;
 
-&lt;section&gt;
-&lt;div style=&quot;float:right;&quot;&gt;
-    &lt;div data-markdown=&quot;&quot;&gt;
-    &amp;lt;img src=/assets/04/logo-scikit.png style='width:300px;'&amp;gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-
 &lt;section data-markdown=&quot;&quot;&gt;
 &amp;lt;div class=centerbox&amp;gt;
 &amp;lt;p class=top&amp;gt;
@@ -2951,8 +2944,7 @@ I: Rapide Rappel Scikit-learn
 &amp;lt;/div&amp;gt;
 &lt;/section&gt;
 
-
-
+&lt;section&gt;
 &lt;div data-markdown=&quot;&quot;&gt;
 # scikit-learn API
 Simple et cohérente
@@ -3001,9 +2993,156 @@ Simple et cohérente
 &lt;/div&gt;
 &lt;/section&gt;
 
-&lt;hr /&gt;
-&lt;hr /&gt;
-&lt;hr /&gt;
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:35%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:50%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Methode du gradient
+
+Soit une function \\(  f \\) dont on souhaite trouver le minimum.
+
+Pour \\(  \alpha \\)  assez petit et si f est dérivable
+
+alors
+
+$$  {\bf w}_{t+1} = {\bf w}_t - \alpha_t \hat{\nabla} f({\bf w}_t) $$
+
+\\( {\bf w}_t  \\) converge vers le minima de \\(f\\)
+
+On a
+
+$$ f(\mathbf {w}\_{0})\geq f(\mathbf {w}\_{1}) \geq f(\mathbf {w}\_{2})\geq \cdots , $$
+
+
+=&amp;gt; *fastest  decrease obtained for the direction of the negative gradient of f*
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;img src=/assets/04/700px-Gradient_descent.svg.png width=350px&amp;gt;
+&amp;lt;img src=/assets/04/700px-Gradient_ascent_contour.png width=350px&amp;gt;
+&amp;lt;img src=/assets/04/Gradient_ascent_surface.png width=350px&amp;gt;
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# En python
+
+On veut trouver le minimum de la fonction  \\( f(x) =   \\)
+
+    cur_x       = 6 # The algorithm starts at x=6
+    gamma       = 0.01 # step size multiplier
+    max_iters   = 10000 # maximum number of iterations
+    iters       = 0 #iteration counter
+    precision   = 0.00001
+    previous_step_size = 1
+
+    # dérivée de la fonction à minimiser
+
+    fct = lambda x: 4 * x**3 - 9 * x**2
+    x = []
+    while (previous_step_size &amp;gt; precision) &amp;amp; (iters &amp;lt; max_iters):
+        x.append(cur_x)
+        prev_x = cur_x
+        cur_x -= gamma * fct(prev_x)
+        print(cur_x, previous_step_size)
+        previous_step_size = abs(cur_x - prev_x)
+        iters+=1
+
+    print(&quot;Le minimum est {:.4f}&quot;, cur_x)
+
+    print(&quot;En x = {:.4f}, la valeur de la fonction est {:.4f}  &quot;.format(cur_x, fct(cur_x)) )
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Stochastic Gradient
+
+The general idea is to aproximate an unknown function through iterations of **unbiased estimates of the function's gradient.**
+
+Knowing that the expectation of the gradient estimates equal the gradient.
+
+On va prendre les erreurs successives entre les vraies valeurs et leur estimée comme estimation du gradient!
+
+Cela marche parce que dans notre contexte: E(gradient) = gradient
+
+&amp;lt;img src=/assets/04/robins_monroe_1951.png style='width: 500px; margin: auto; float:right; '&amp;gt;
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Fonction de cout, forme générale
+
+On cherche a minimiser la fonction \\( f(x) = w^T x + b   \\)
+
+$$ E(w,b) = \frac{1}{n}\sum_{i=1}^{n} L(y_i, f(x_i)) + \alpha R(w) $$
+
+where
+
+* \\(L\\) is a loss function that measures model (mis)fit
+* \\(R\\) is a regularization term  that penalizes model complexity
+* \\(\alpha\\) is a non-negative hyperparameter.
+
+En fonction du choix de \\(L\\) et de \\(R\\) on obtient différent algorithmes
+
+=&amp;gt; http://scikit-learn.org/stable/modules/sgd.html
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Gradient stochastique
+&amp;lt;img src=/assets/04/gradient_ball.png height=300px&amp;gt;
+
+* low on computation,
+* has good convergence behavior
+* The SGD is implemented in a wide variety of languages (python, R, Java, scala, matlab, ...) and platforms (weka, rapidminer, ...) as well as online services big (Amazon ML, Google, Azure) and small (Dataiku, ....)
+
+
+The literature related to the SGD algorithm is abundant. With the resurgence of deep learning and neural networks, no less than 6000 academic papers about Stochastic Gradient Descent were published in 2016 according to google scholar (from around a few 100s in the early 2000s).
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# SGD
+
+* learning rate
+    * tuning
+    * fixe
+    * adaptif
+
+* epoch and shuffling
+
+## Mini-Batch Gradient Descent (MB-GD)
+milieu entre le GD et le SGD
+On utilise K echantillons pour estimer le gradient a chaque iteration
+
+Accroitre K entraine
+
+* on converge plus vite et plus directement. moins de zig zag
+* on converge moins profondement. le biais est plus important.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+
+
+Instead, we update the weights after each training sample:
+
+et on passe plusieurs fois sur le dataset en shufflant le dataset a chaque fois (epoch)
+
+“stochastic” comes from the fact that the gradient based on a single training sample is a “stochastic approximation” of the “true” cost gradient
+
+it has been shown that SGD almost surely converges to the global cost minimum if the cost function is convex (or pseudo-convex)
+
+&lt;/section&gt;
 
 &lt;section data-markdown=&quot;&quot;&gt;
 &amp;lt;div class=centerbox&amp;gt;
@@ -3246,6 +3385,7 @@ La moyenne des scores obtenus ainsi est plus robuste qu'un score obtenu sur un u
 
 
 &lt;/section&gt;
+
 &lt;section data-markdown=&quot;&quot;&gt;
 # Overfit - Biais - Variance SGD
 
@@ -3253,7 +3393,6 @@ Demo sur cars avec SGD
 
 &lt;/section&gt;
 
-&lt;hr /&gt;
 &lt;section data-markdown=&quot;&quot;&gt;
 &amp;lt;div class=centerbox&amp;gt;
 &amp;lt;p class=top&amp;gt;
@@ -3263,157 +3402,6 @@ III: Gradient, Stochastique
 Stochastic Gradient Descent
 &amp;lt;/p&amp;gt;
 &amp;lt;/div&amp;gt;
-&lt;/section&gt;
-
-&lt;section&gt;
-&lt;div style=&quot;float:right; width:35%;  &quot;&gt;
-    &lt;div data-markdown=&quot;&quot;&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;hr class=&quot;vline&quot; /&gt;
-&lt;div style=&quot;float:left; width:50%;  &quot;&gt;
-    &lt;div data-markdown=&quot;&quot;&gt;
-# Methode du gradient
-
-Soit une function \\(  f \\) dont on souhaite trouver le minimum.
-
-Pour \\(  \alpha \\)  assez petit et si f est dérivable
-
-alors
-
-$$  {\bf w}_{t+1} = {\bf w}_t - \alpha_t \hat{\nabla} f({\bf x}_t) $$
-
-\\( {\bf w}_t  \\) converge vers le minima de \\(f\\)
-
-On a
-
-$$ f(\mathbf {w}\_{0})\geq f(\mathbf {w}\_{1}) \geq f(\mathbf {w}\_{2})\geq \cdots , $$
-
-
-=&amp;gt; *fastest  decrease obtained for the direction of the negative gradient of f*
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-&amp;lt;img src=/assets/04/700px-Gradient_descent.svg.png width=350px&amp;gt;
-&amp;lt;img src=/assets/04/700px-Gradient_ascent_contour.png width=350px&amp;gt;
-&amp;lt;img src=/assets/04/Gradient_ascent_surface.png width=350px&amp;gt;
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# En python
-
-On veut trouver le minimum de la fonction  \\( f(x) =   \\)
-
-    cur_x       = 6 # The algorithm starts at x=6
-    gamma       = 0.01 # step size multiplier
-    max_iters   = 10000 # maximum number of iterations
-    iters       = 0 #iteration counter
-    precision   = 0.00001
-    previous_step_size = 1
-
-    # dérivée de la fonction à minimiser
-
-    fct = lambda x: 4 * x**3 - 9 * x**2
-    x = []
-    while (previous_step_size &amp;gt; precision) &amp;amp; (iters &amp;lt; max_iters):
-        x.append(cur_x)
-        prev_x = cur_x
-        cur_x -= gamma * fct(prev_x)
-        print(cur_x, previous_step_size)
-        previous_step_size = abs(cur_x - prev_x)
-        iters+=1
-
-    print(&quot;Le minimum est {:.4f}&quot;, cur_x)
-
-    print(&quot;En x = {:.4f}, la valeur de la fonction est {:.4f}  &quot;.format(cur_x, fct(cur_x)) )
-
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Stochastic Gradient
-
-The general idea is to aproximate an unknown function through iterations of **unbiased estimates of the function's gradient.**
-
-Knowing that the expectation of the gradient estimates equal the gradient.
-
-On va prendre les erreurs successives entre les vraies valeurs et leur estimée comme estimation du gradient!
-
-Cela marche parce que dans notre contexte: E(gradient) = gradient
-
-&amp;lt;img src=/assets/04/robins_monroe_1951.png style='width: 500px; margin: auto; float:right; '&amp;gt;
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Fonction de cout, forme générale
-
-On cherche a minimiser la fonction \\( f(x) = w^T x + b   \\)
-
-$$ E(w,b) = \frac{1}{n}\sum_{i=1}^{n} L(y_i, f(x_i)) + \alpha R(w) $$
-
-where
-
-* \\(L\\) is a loss function that measures model (mis)fit
-* \\(R\\) is a regularization term  that penalizes model complexity
-* \\(\alpha\\) is a non-negative hyperparameter.
-
-En fonction du choix de \\(L\\) et de \\(R\\) on obtient différent algorithmes
-
-=&amp;gt; http://scikit-learn.org/stable/modules/sgd.html
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Gradient stochastique
-&amp;lt;img src=/assets/04/gradient_ball.png height=300px&amp;gt;
-
-* low on computation,
-* has good convergence behavior
-* The SGD is implemented in a wide variety of languages (python, R, Java, scala, matlab, ...) and platforms (weka, rapidminer, ...) as well as online services big (Amazon ML, Google, Azure) and small (Dataiku, ....)
-
-
-The literature related to the SGD algorithm is abundant. With the resurgence of deep learning and neural networks, no less than 6000 academic papers about Stochastic Gradient Descent were published in 2016 according to google scholar (from around a few 100s in the early 2000s).
-
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# SGD
-
-* learning rate
-    * tuning
-    * fixe
-    * adaptif
-
-* epoch and shuffling
-
-## Mini-Batch Gradient Descent (MB-GD)
-milieu entre le GD et le SGD
-On utilise K echantillons pour estimer le gradient a chaque iteration
-
-Accroitre K entraine
-
-* on converge plus vite et plus directement. moins de zig zag
-* on converge moins profondement. le biais est plus important.
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-
-
-
-Instead, we update the weights after each training sample:
-
-et on passe plusieurs fois sur le dataset en shufflant le dataset a chaque fois (epoch)
-
-“stochastic” comes from the fact that the gradient based on a single training sample is a “stochastic approximation” of the “true” cost gradient
-
-it has been shown that SGD almost surely converges to the global cost minimum if the cost function is convex (or pseudo-convex)
-
 &lt;/section&gt;
 
 &lt;section&gt;
@@ -3432,6 +3420,399 @@ it has been shown that SGD almost surely converges to the global cost minimum if
         <pubDate>Sat, 06 Jan 2018 00:00:00 +0000</pubDate>
         <link>http://localhost:4000/4bis-biais-variance-gradient-stochastique</link>
         <guid isPermaLink="true">http://localhost:4000/4bis-biais-variance-gradient-stochastique</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>5)  Arbres, Random Forests et XGBoost</title>
+        <description>&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt; Arbres, Random Forests et XGBoost&amp;lt;/p&amp;gt;
+&lt;p style=&quot;font-size:28px;&quot;&gt;Ensembling, Bagging, Boosting&lt;/p&gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right;&quot;&gt;
+    &lt;h1&gt;Questions ?&lt;/h1&gt;
+
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &amp;lt;img src=/assets/04/questions_04.gif&amp;gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div data-markdown=&quot;&quot;&gt;
+# Cours précédent
+* SGD
+* Biais Variance
+
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt;
+I: Arbres de décision
+&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Exemple arbre de décision sur Iris dataset
+&amp;lt;img src =/assets/05/L12-tree-iris.png width=900px&amp;gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Mais
+
+* **high overfitting** for over-complex trees that do not generalise the data well.
+* Decision trees can be **unstable** because small variations in the data might result in a completely different tree being generated.
+* no globally optimal decision tree
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Avantages
+
+Robustes, rapides et interpretables
+
+
+* Simple to understand and to interpret. Trees can be visualised.
+* Requires little data preparation. (missing values, scaling, dummy variables, ...)
+* Can handle both numerical and categorical data.
+* Possible to validate a model using statistical tests.
+* Uses a white box model. An observed situation can simply be explained by boolean logic.
+
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Biais - Variance
+
+## Deep
+
+* Low bias, high variance
+* Overfitting
+
+## Shallow (short)
+
+* High bias, low variance
+* Underfitting
+
+
+* Shallow decision trees have high bias and low variance.
+* Deep decision trees have low bias and high variance.
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Lab: Controlling the tree
+
+Lab: [Simple Decision tree](https://github.com/alexperrier/gads/blob/master/12_decision_trees/py/L12%20Simple%20Decision%20Tree%20-%20Iris%20dataset.ipynb)
+
+
+Set these params to control the tree complexity
+
+* **max_depth** (pruning): The maximum depth of the tree
+
+* **min_samples_split**: The minimum number of samples required to split an internal node
+* **min_samples_leaf**: The minimum number of samples required to be at a leaf node.
+* **max_features**: The number of features to consider when looking for the best split
+
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt;
+II: Bootstrap
+&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Example
+
+* mean de a
+
+1000 fois on sample a
+
+on tire 200 echantillons avec remplacement
+
+    a = [1,2,3,-1,-2,-3,4,-2,-2]
+
+    m = []
+    for i in range(1000):
+        m.append(np.mean(random.choice(a, size = 200, replace = True)))
+
+    plt.boxplot(m)
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Bootstrap
+
+**Echantilloner avec remplacement**
+
+N samples au total, N est petit (par ex. ~&amp;lt; 10)
+
+* Comment estimer la moyenne de ces echantillons ?
+* Est ce que la moyenne arithmetique classique est un bon estimateur ?
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Essayer sur le titanic
+
+sklearn.tree.DecisionTreeClassifier
+
+* Creer les train et test sets
+* comme baseline: arbre de decision simple, not pruned, quel accuracy sur le test set ?
+* maintenant prendre 20 arbres, en limitant la taille a 2 niveaux
+* pour chaque arbre, predire les probas des echantillons du test set
+* puis moyenner les proba et utiliser le resultat pour determiner la classe predite.
+* quel accuracy sur le test set ?
+
+=&amp;gt; 20 arbres biaisés valent mieux qu'un arbre *non contraint* qui overfit
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Bagging for trees
+
+Bagging stands for Bootstrap Aggregation,
+
+
+* Generate B different **bootstrapped** training data sets.
+* Train a new tree on each training set
+
+The predictions of all the trees are averaged
+
+=&amp;gt; significantly reduces over fitting for deep trees
+
+=&amp;gt; does it also reduce bias for shallow trees ?
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Bagging Classifier
+
+
+The key intuition of Bagging is that it reduces the variance of your model class.
+
+http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.BaggingClassifier.html#sklearn.ensemble.BaggingClassifier
+
+
+A **Bagging classifier** is an ensemble meta-estimator that fits **base classifiers** each on random subsets (bootstrapped) of the original dataset
+
+The final prediction is aggregated from the models individual predictions  to form a final prediction.
+
+* **voting**: most predicted class
+* **averaging**: average of predictions (regression) or predicted probabilities (classification)
+
+Such a meta-estimator can typically be used as a way to reduce the variance of a black-box estimator (e.g., a decision tree), by introducing randomization into its construction procedure and then making an ensemble out of it.
+
+* base_estimator: The base model, decision tree by default, could also be another simple n
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt;
+II: Random Forests
+&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Random Forests
+
+Extension of the bootstrapping to features
+
+* In random forests, each tree in the ensemble is built from a sample drawn with replacement (i.e., a bootstrap sample) from the training set.
+
+* In addition, when splitting a node during the construction of the tree, the split that is picked is the best split among **a random subset of the features**.
+
+=&amp;gt; The bias of the forest usually slightly increases (with respect to the bias of a single non-random tree) but, due to averaging, its variance also decreases, usually more than compensating for the increase in bias, hence yielding an overall better model.
+
+(see RandomForestClassifier and RandomForestRegressor classes),
+
+A Random Forest is a generalization of Bagging that is specific to DTs. At each branch in the decision tree, Random Forest training also subsamples the features in addition to the training examples. Intuitively, this process further de-correlates the individual trees, which is good for Bagging, since the main limitation of Bagging is that bootstrapping is not the same as drawing fresh samples from the true data distribution.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Out Of Bag - OOB
+
+When boostrapping, in each experiment will use only approx. 2/3rd of the available samples.
+
+Which leaves 1/3rd that we can use to estimate the validation error of each tree.
+
+This is called OOB Out of Bag error.
+
+It can be shown that with B sufficiently large, OOB error is virtually equivalent to leave-one-out cross-validation error.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Feature importance
+
+* When the *max_features &amp;lt; total number of features*.
+
+    =&amp;gt; Some features are left out of the splitting decision in each node.
+
+* Relative Feature importance can be deduced from the delta in MSE associated to the features included vs left out.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Titanic
+
+Quelles sont les variables les plus importantes ?
+
+# Cars
+
+Quelles sont les variables les plus importantes ?
+
+
+etc ...
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt;
+III: XGBoost
+&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Adaboost
+
+
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Gradient boosting
+
+Keep an overall predictor that is the (weighted) average of a bunch of models.
+Train first model on original training data, and initialize overall predictor as just this single model.
+Assess the error of the the overall predictor and modify the training data the focus on areas of high error.
+For AdaBoost, this means re-weighting the data points so that poorly modeled data points get higher weight.
+For Gradient Boosting, this means redefining the supervised prediction target to be some kind of residual between the ground truth and the overall predictor.
+Train a new model on the modified training data, and add to the overall predictor.
+Repeat Steps 3 &amp;amp; 4.
+
+A Gradient Boosting will take a different approach. It will start with a (usually) not very deep tree (sometimes a decision stump - a decision tree with only one split) and will model the original target. Then it takes the errors from the first round of predictions, and passes the errors as a new target to a second tree. The second tree will model the error from the first tree, record the new errors and pass that as a target to the third tree. And so forth. Essentially it focuses on modelling errors from previous trees. GB is one of the best algorithms available today and it’s almost always outperforming RF on most datasets I’ve tried.
+
+Notice how RF runs trees in parallel, thus making it possible to parallelize jobs on a multiprocessor machine. GB instead uses a sequential approach.
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+
+Random forests bags models, while boosting iteratively averages them with respect to error. XGBoost extends boosting by imposing regression penalties similar to elastic net.
+
+
+One can interpret boosting as trying to minimize the bias of the overall predictor. So when you use boosting, you’re incentivized to use shallow decision trees because they have low variance and high bias. Using high variance base models in boosting runs a much higher risk of overfitting than approaches like Bagging.
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+</description>
+        <pubDate>Fri, 05 Jan 2018 00:00:00 +0000</pubDate>
+        <link>http://localhost:4000/5-arbres-random-forest-xgboost</link>
+        <guid isPermaLink="true">http://localhost:4000/5-arbres-random-forest-xgboost</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>6) Texte &amp; Word2Vec</title>
+        <description>&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt; Arbres, Random Forests et XGBoost&amp;lt;/p&amp;gt;
+&lt;p style=&quot;font-size:28px;&quot;&gt;Ensembling, Bagging, Boosting&lt;/p&gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right;&quot;&gt;
+    &lt;h1&gt;Questions ?&lt;/h1&gt;
+
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &amp;lt;img src=/assets/04/questions_04.gif&amp;gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div data-markdown=&quot;&quot;&gt;
+# Cours précédent
+* SGD
+* Biais Variance
+
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt;
+I: Arbres de décision
+&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+</description>
+        <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
+        <link>http://localhost:4000/6-text-classification</link>
+        <guid isPermaLink="true">http://localhost:4000/6-text-classification</guid>
         
         
       </item>
@@ -4556,776 +4937,6 @@ Others:
         <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
         <link>http://localhost:4000/16-time-series.html</link>
         <guid isPermaLink="true">http://localhost:4000/16-time-series.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Lesson 14 -15  - NLP - Latent Models</title>
-        <description>&lt;section data-background-color=&quot;#000&quot;&gt;
-    &lt;h1 class=&quot;white&quot; style=&quot;border-top: thin solid #DDD;border-bottom: thin solid #DDD;&quot;&gt;
-        &lt;img src=&quot;assets/ga_logo_black.png&quot; style=&quot;float:left;top:0px;&quot; /&gt;
-        General Assembly
-    &lt;/h1&gt;
-    &lt;p class=&quot;big_title&quot;&gt;14. Topic Modeling&lt;/p&gt;
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Lesson 14
-## LEARNING OBJECTIVES
-
-
-* Topic Modeling
-* Latent Semantic Analysis
-* Latent Dirichlet Allocation
-
-&lt;/section&gt;
-
-&lt;!-- Prework and review --&gt;
-&lt;section data-background-color=&quot;#DA0A13&quot;&gt;
-    &lt;h1&gt;Lesson #14&lt;/h1&gt;
-    &lt;p class=&quot;big_title&quot;&gt;Review of Lesson 13&lt;/p&gt;
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Last Lesson Review
-
-* Feature extraction from documents
-* Bag of words
-* TF-Idf
-* CountVectorizer, Tf-Idf Vectorizer, HashingVectorizer
-* Scikit Pipeline
-
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-# Lab Review
-
-[Text Classification - Lab 20 mn](https://github.com/alexperrier/gads/blob/master/13-nlp/py/L13%20N3%20Text%20Classification.ipynb)
-
-&lt;/section&gt;
-
-&lt;!-- Today --&gt;
-&lt;section data-background-color=&quot;#22c8c6&quot;&gt;
-    &lt;h1&gt;Today&lt;/h1&gt;
-    &lt;p class=&quot;big_title&quot;&gt;Latent Variable Models - Topic Modeling&lt;/p&gt;
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Latent variable models
-
-Attempting to uncover structure or organization inherent in the text.
-
-
-Unsupervised learning techniques
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Application
-
-### Topic Modeling
-
-These techniques are commonly used for recommending news articles or mining large troves of data data and trying to find commonalities.
-
-Topic modeling, is used in the [NY times recommendation engine](http://open.blogs.nytimes.com/2015/08/11/building-the-next-new-york-times-recommendation-engine/) by mapping the NYT articles to a **latent space of topics**.
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# latent space of topics
- ![](assets/14/topic_modeling_goal.png)
-
-* Documents are about several topics at the same time. Topics are associated with different words.
-* Topics in the documents are expressed through the words that are used
-
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-# Goal of Topic Modeling
-Fast and easy birds eye view of the large datasets.
-
-* What are the documents about?
-* What are the key themes?
-
-Very powerful when coupled with different covariates:  year of publication, author...
-
-* Longitudinal analysis: How the key themes change over time?
-* Focus of discussion: Who is focussing on one topic
-
-Examples:
-
-* [Topic Modeling in Presidential Debates](http://alexperrier.github.io/stm-visualization/index.html)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Mixture Model
- ![](assets/14/lda-mixture-graphic.jpg)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Techniques
-
-Vector-based techniques:
-
-* Latent Semantic Analysis (LSA) (a.k.a Latent Semantic Indexing - LSI)
-
-Probabilistic techniques
-
-* Probabilistic Latent Semantic Analysis (pLSA)
-* Latent Dirichlet Allocation (LDA)
-    * Many LDA extensions
-    * [Hierachical Dirichlet Process](https://en.wikipedia.org/wiki/Hierarchical_Dirichlet_process)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Latent Semantic Analysis (LSA)
-
-This is our corpus
-
-* D1: *modem the steering linux. modem, linux the modem. steering the modem. linux!*
-* D2: *linux; the linux. the linux modem linux. the modem, clutch the modem. petrol.*
-* D3: *petrol! clutch the steering, steering, linux. the steering clutch petrol. clutch the petrol; the clutch.*
-* D4: *the the the. clutch clutch clutch! steering petrol; steering petrol petrol; steering petrol!!!!*
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Preprocessed
-
-* D1: *modem the steering linux modem linux the modem steering the modem linux*
-* D2: *linux the linux the linux modem linux the modem clutch the modem petrol*
-* D3: *petrol clutch the steering steering linux the steering clutch petrol clutch the petrol the clutch*
-* D4: *the the the clutch clutch clutch steering petrol steering petrol petrol steering petrol*
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Document Term Matrix
-
-![](assets/14/document_term_matrix.png)
-
-This matrix can be huge
-
-How can we reduce it and at the same time uncover the topics?
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Latent Semantic Analysis
-
-Singular value decomposition (SVD) of the document-term matrix:
-
-Find three matrices \\( U, \Sigma, V \\)  so that:  \\( X = U \Sigma V^t \\)
-
-![](assets/14/lsa_decomposition.png)
-
-* [Cool Linear Algebra: Singular Value Decomposition](http://andrew.gibiansky.com/blog/mathematics/cool-linear-algebra-singular-value-decomposition/)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Latent Semantic Analysis
-
-### Dimension reduction
-
-For example with 5 topics, 1000 documents and 1000 word vocabulary
-
-* Original Document Term matrix: \\(1000 \times 1000 = 10^6 \\)
-* LSA representation: \\(5 \times 1000 + 5 + 5 \times 1000 ~ 10^4 \\)
-    * -&amp;gt; 100 times less space
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Latent Semantic Analysis
-
-![](assets/14/lsa_decomposition_example_01.png)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Latent Semantic Analysis
-
-Keep the 2 most important Eigenvalues (i.e topic importance)
-
-![](assets/14/lsa_decomposition_example_02.png)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Latent Semantic Analysis
-
-![](assets/14/lsa_decomposition_example_03.png)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Lab LSA
-
-### LSA with scikit
-
-[Latent Semantic Analysis - LAB](https://github.com/alexperrier/gads/blob/master/14_topic_modeling/py/lsa_topic_modeling.py)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Probabilistic LSA
-
-What is a topic?
-
-A list of probabilities for each of the possible words in a vocabulary.
-
-Example topic:
-
-* dog: 5%
-* cat: 5%
-* hamster: 3%
-* turtle: 1%
-* calculus: 0.000001%
-* analytics: 0.000001%
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Probabilistic LSA
-
-![](assets/14/probabilistic_topic.png)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Probabilistic LSA
-
-Instead of finding lower-ranked matrix representation, we can try to find a **mixture** of
-*word -&amp;gt; topic* &amp;amp; *topic -&amp;gt; documents* distributions that are most likely given the observed documents.
-
-* We define a statistical model of how the documents are being made (generated).
-* Then we try to find parameters of that model that best fit the observed data
-
-This is called a **generative process** in topic modeling terminology.
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Generative Process
-
-We received a 50 word long document by our reporter John Doe.
-He is allowed to write only about one of the 6 possible topics, using only 6 words.
-
-* For the first word, he throws a dice that tells him what is the topic of the first word. Say it is topic 1 (IT)
-* Then he throws another dice to pick which word to use to describe topic 1. Say it is word 1 (linux)
-* The process is repeated for all 50 words in the document.
-* Dices are weighted!!!
-    * The first dice for picking topics puts more weight on IT topic that on the other 5 topics.
-    * Also, dice for IT topic, puts more weight on words 'linux' and 'modem'.
-    * Likewise dice for topic 2 (cars) puts more weight on word 'petrol' and 'steering'
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Generative Process
-
-![](assets/14/generative_process_plsa.png)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Probabilistic LSA decomposition
-
-![](assets/14/probabilistic_plsa_decomposition.png)
-
-\\( P(word/document) = \sum\_{topics} p(topic/document) . p(word/topic) \\)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# LDA: an extension to pLSA
-
-* pLSA: Binomial distribution
-
-* LDA: [Dirichlet distribution](https://en.wikipedia.org/wiki/Dirichlet_distribution)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# LDA Assumptions
-
-In LDA, we encode our assumptions about the data. Two important assumptions:
-
-1. On average, how many topics are per document? more or less?
-2. On average, how are words distributed across topics?
-    Are topics strongly associated with more or less words?
-
-Those assumptions are defined by two vectors α and β:
-
-* α: K dimensional vector that defines how K topics are distributed across documents.
-Smaller **αs favor fewer topics** strongly associated with each document.
-
-* β: V dimensional vector that defines how V words are associated across topics.
-**Smaller βs favor fewer words** strongly associated with each topics
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# LDA
-
-We set K the number of topics
-
-We work backwards from the documents to the find the \\(\alpha\\) and \\(\beta\\)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Topic Modeling librairies
-
-Please install
-
-* gensim
-* pickle
-* NLTK
-    * nltk.download()
-* pyLDAVis
-
-and optional
-
-* feedparser
-
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# LDA Lab
-
-
-[Latent Dirichlet Allocation - Gensim](https://github.com/alexperrier/gads/blob/master/14_topic_modeling/py/lda_gensim_topic_modeling.py)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Hot Technology Topics
-
-https://github.com/alexperrier/gads/blob/master/14_topic_modeling/py/Hot%20Tech%20Topic%20Modeling.ipynb
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Links
-
-* [Building the Next New York Times Recommendation Engine](http://open.blogs.nytimes.com/2015/08/11/building-the-next-new-york-times-recommendation-engine/)
-
-* [Topic Modeling in historical Newspapers](http://dl.acm.org/citation.cfm?id=2107649)
-
-* [Dissecting the Presidential Debates with an NLP Scalpel](https://www.opendatascience.com/blog/dissecting-the-presidential-debates-with-an-nlp-scalpel/)
-
-* [Clustering text documents using k-means](http://scikit-learn.org/stable/auto_examples/text/document_clustering.html)
-
-* [Topic Modeling of Twitter Followers](http://alexperrier.github.io/jekyll/update/2015/09/04/topic-modeling-of-twitter-followers.html)
-
-* [Dirichlet Distribution](https://www.youtube.com/watch?v=nfBNOWv1pgE)
-
-* [Topic Modeling in historical Newspapers](http://dl.acm.org/citation.cfm?id=2107649)
-* [Topic Modeling for the Social Sciences](http://vis.stanford.edu/files/2009-TopicModels-NIPS-Workshop.pdf)
-
-
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Caravan
-
-* Feature engineering
-* Metric: [Kappa](http://scikit-learn.org/dev/modules/generated/sklearn.metrics.cohen_kappa_score.html)
-* Models: Random Forests, Naive Bayes, ...
-* Sampling: Under sampling, over sampling, Smote, ...
-* Feature Importance
-* Feature Reduction (PCA)
-
-
-
-&lt;/section&gt;
-
-</description>
-        <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-        <link>http://localhost:4000/14-nlp-latent-models.html</link>
-        <guid isPermaLink="true">http://localhost:4000/14-nlp-latent-models.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Lesson 13 - Natural Language Processing</title>
-        <description>&lt;section data-background-color=&quot;#000&quot;&gt;
-    &lt;h1 class=&quot;white&quot; style=&quot;border-top: thin solid #DDD;border-bottom: thin solid #DDD;&quot;&gt;
-        &lt;img src=&quot;assets/ga_logo_black.png&quot; style=&quot;float:left;top:0px;&quot; /&gt;
-        General Assembly
-    &lt;/h1&gt;
-    &lt;p class=&quot;big_title&quot;&gt;13. Natural Language Processing&lt;/p&gt;
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Lesson 13
-## LEARNING OBJECTIVES
-
-
-* NLP Processing
-* Feature extraction
-* Pipeline in scikit
-* Hashing Trick
-
-&lt;/section&gt;
-
-&lt;!-- Prework and review --&gt;
-&lt;section data-background-color=&quot;#DA0A13&quot;&gt;
-    &lt;h1&gt;Lesson #13&lt;/h1&gt;
-    &lt;p class=&quot;big_title&quot;&gt;Review of Lesson 12&lt;/p&gt;
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-# Last Lesson Review
-
-* Random Forests
-* SVM
-
-&lt;/section&gt;
-
-&lt;!-- Today --&gt;
-&lt;section data-background-color=&quot;#22c8c6&quot;&gt;
-    &lt;h1&gt;Today&lt;/h1&gt;
-    &lt;p class=&quot;big_title&quot;&gt;NLP&lt;/p&gt;
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-
-# HUGE DOMAIN
-
-* Classify documents,
-* Detect (depression, ...)
-* Translate, Summarize, ....
-* Named entity recognition
-* Survey analysis
-* Automatic Speech Recognition (Siri, Alexa, ...)
-* Unsupervised: infer sentiment or topics, find associations and links, summarize
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Feature Extraction
-
-From raw text (html) to vectors used by ML libraries
-
-
-* Tokenization
-* Counting occurences of words / frequencies
-* Numerical representation of documents
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Tokenize
-
-### Tokens
-Tokenization is the process of breaking a stream of text up into syllables, letters, words, n-grams, phrases, symbols, or other meaningful elements called tokens. The list of tokens becomes input for further processing such as parsing or text mining.
-
-
-### n-grams
-
-Contiguous sequence of n items from a given sequence of text or speech
-
-* unigram
-* bigram
-* n-gram
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Vectorizing text
-
-First we need to transform the raw text into vectors of numerical values
-
-Extract numerical features from text
-
-* tokenizing strings and giving an integer id for each possible token, for instance by using white-spaces and punctuation as token separators.
-* counting the occurrences of tokens in each document.
-* weighting with diminishing importance tokens that occur in the majority of samples / documents.
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Text feature extraction
-
-Features and samples are defined as follows:
-
-* each individual token occurrence frequency is treated as a feature.
-* the vector of all the token frequencies for a given document is considered a multivariate sample.
-* A corpus of documents can thus be represented by
-    * a matrix with one row per document
-    * one column per token (e.g. word) occurring in the corpus.
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Bag of Words
-
-Documents are described by word occurrences while completely ignoring the relative position information of the words in the document.
-
-This approach (tokenization, counting and normalization) is called the **Bag of Words
-or Bag of n-grams representation**.
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# NLP Vocabulary
-
-* **Corpus**: ensemble of documents
-* **Token**: the element, the word, the atom
-* **Unigrams, bi-grams, n-grams**: sequence of 1, 2 or n words taken as the basic element
-* **Stopwords**: small words that are discarded as not meaningful: *a, an, the, my, get, ...*
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Lemmatization and Stemming
-
-Lemmatization and stemming are special cases of normalization.
-They identify a canonical representative for a set of related word forms. The purpose of both stemming and lemmatization is to reduce morphological variation
-
-'to walk' may appear as 'walk', 'walked', 'walks', 'walking'.
-
-### Stemming
-
-Crude direct approach that chops off the endings of the word to limit variations
-
-'walk', 'walked', 'walks', 'walking' =&amp;gt; walk
-
-[NLTK Stemmer](http://textanalysisonline.com/nltk-snowball-stemmer)
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-
-# Lemmatization
-
-Returns the closest meaningful *root* word.
-
-In [NLTK](http://textminingonline.com/dive-into-nltk-part-iv-stemming-and-lemmatization)
-
-        wordnet_lemmatizer.lemmatize(‘is’, pos=’v’)
-        ’be’
-        wordnet_lemmatizer.lemmatize(‘are’, pos=’v’)
-        ’be’
-
-        wordnet_lemmatizer.lemmatize(‘are’, pos=’n’)
-        ’are’
-
-[NLTK Lemmatizer](http://textanalysisonline.com/nltk-wordnet-lemmatizer)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# POS - Tagging
-
-Given a text, assigns roles to each word: noun, verb, article, adjective, preposition, pronoun, adverb, conjunction, and interjection.
-
-[Demo](http://parts-of-speech.info/)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Libraries
-
-* [NLTK](http://www.nltk.org/)
-* [Spacy](spacy.io/) (POS)
-* [Gensim](https://radimrehurek.com/gensim/) (Latent Dirichlet Allocation - Topic Modeling)
-
-and
-* [Scikit](http://scikit-learn.org/stable/tutorial/text_analytics/working_with_text_data.html)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Demo 1: Vectorizing a text
-
-[Vectoring a text](https://github.com/alexperrier/gads/blob/master/13-nlp/py/L13%20N1%20Feature%20Extraction.ipynb)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Normalizing: TF-IDF
-
-What if you have several documents and a word is very frequent in just one of them.
-It's relative frequency should not be important.
-
-TF-IDF: term frequency–inverse document frequency
-
-### TF:
-* Boolean *frequency*: \\(f\_{t,d} = 1\\) if t occurs in d and 0 otherwise;
-* Logarithmically scaled frequency: \\( f\_{t,d} = 1 + log f\_{t,d}\\), or zero if \\(f\_{t,d} = 0\\)  is zero;
-* Agmented frequency, to prevent a bias towards longer documents, e.g. raw frequency divided by the maximum raw frequency of any term in the document:
-$$ \mathrm{tf} (t,d)=0.5+0.5\cdot {\frac {f\_{t,d}}{\max\{f\_{t',d}:t'\in d\}}} $$
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# TF-IDF
-### IDF
-**inverse document frequency** is a measure of how much information the word provides, that is, whether the term is common or rare across all documents
-
-IDF = the total number of documents divided by the number of documents containing the term, and then taking the logarithm of that quotient.
-
-$$  \mathrm{idf}(t, D) =  \log \frac{N}{ 1+ |\{d \in D: t \in d\}|}$$
-
-* N: total number of documents in the corpus \\( N={|D|}\\)
-* \\( |\{d\in D:t\in d\}| \\)  : number of documents with term \\( t \\qquad \mathrm {tf} (t,d)\neq 0\\).
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# TF-IDF
-Then tf–idf is calculated as
-$$ \mathrm{tf-idf}(t,d,D)=\mathrm{tf} (t,d) \cdot \mathrm{idf}(t,D) $$
-
-### in Scikit
-[TfidfVectorizer](http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Hashing Trick
-
-* Documents don't have the same length
-* You may not have all the documents available (streaming)
-* Too many words =&amp;gt; too many dimensions
-* highly dimensional very sparse input matrix.
-
-=&amp;gt; Dimensionality reduction with **The Hashing Trick**
-
-
-
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-# Hashing Trick
-Ex: Transform any sentences into value 0 to 99
-
-Simple Hash function:
-
-* *a* to 1, *b* to 2, *c* to 3 and so on, up to *z* being 26
-* result modulo 100
-
-
-Sentence: &quot;Beware the hobby that eats&quot;
-
-        * (beware) 2 + 5 + 23 + 1 + 18 + 5 +
-        * (the) 20 + 8 + 5 +
-        * (hobby) 8 + 15 + 2 + 2 + 25 +
-        * (that) 20 + 8 + 1 + 20 +
-        * (eats) 5 + 1 + 20 + 19
-        * = 233
-
-result = 33
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-# Hashing Trick
-
-Good hash function
-
-* Uniformity: translate your input into each number in its output range with same probability
-* Cascading: a small change in your input data will cause a big change in the output
-
-=&amp;gt; limit collisions
-=&amp;gt; lose interpretability
-
-* [How do you build a language model with a million dimensions?](http://blog.someben.com/2013/01/hashing-lang/)
-* [HashingVectorizer](http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.HashingVectorizer.html)
-
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Install a few things
-
-* conda install BeautifulSoup4
-* nltk
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# 1st Lab predicting sentiment
-
-
-[N2 Imdb Reviews](https://github.com/alexperrier/gads/blob/master/13-nlp/py/L13%20N2%20Sentiment%20Prediction.ipynb)
-
-* Get the data
-* Clean up the text: remove punctuation, html markup, numbers, stop words, tokenize
-    and return one long paragraph per document
-* Process all the reviews, store into an array
-* Train a RF
-* Assess on the test set
-* AUC curve
-
-Use scikit CountVectorizer and Try to improve the score
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Pipeline in scikit
-
-The ability to chain operations
-
-For instance:
-* HashingVectorizer
-* Classifier
-
-Sequentially apply a list of transforms and a final estimator. Intermediate steps of the pipeline must be ‘transforms’, that is, they must implement fit and transform methods. The final estimator only needs to implement fit.
-
-[Example](http://scikit-learn.org/stable/auto_examples/plot_digits_pipe.html)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# 2nd lab: classification
-
-[Classification on the twenty Newsgroup dataset](https://github.com/alexperrier/gads/blob/master/13-nlp/py/L13%20N3%20Text%20Classification.ipynb)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Similarity between documents
-
-### Cosine similarity
-
-Given two vectors of attributes, A and B, the cosine similarity, cos(θ), is represented using a dot product and magnitude as
-
-![](assets/13/cosine_similarity.png)
-
-[ex in scikit learn](http://blog.christianperone.com/2013/09/machine-learning-cosine-similarity-for-vector-space-models-part-iii/)
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-#  Clustering
-* with HashingVectorizer
-* Silhouette Coefficient
-
-http://scikit-learn.org/stable/auto_examples/text/document_clustering.html
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Links
-
-* [Standford NLP Group](http://nlp.stanford.edu/)
-* [Kaggle - Bag of Words](https://www.kaggle.com/c/word2vec-nlp-tutorial/details/part-1-for-beginners-bag-of-words)
-* [How do you build a language model with a million dimensions?](http://blog.someben.com/2013/01/hashing-lang/)
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Questions
-
-
-&lt;/section&gt;
-</description>
-        <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-        <link>http://localhost:4000/13-nlp.html</link>
-        <guid isPermaLink="true">http://localhost:4000/13-nlp.html</guid>
         
         
       </item>
