@@ -193,7 +193,7 @@ https://spacy.io/usage/vectors-similarity
     print(model.similarity('apple', 'orange'))
     print(model.similarity('car', 'orange'))
 
-
+see word2vec_demo.py
     </div>
 </div>
 <hr class='vline' />

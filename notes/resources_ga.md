@@ -391,6 +391,10 @@ https://github.com/alexisperrier/gads/blob/master/12_decision_trees/py/L12%20Bag
 --------------------------------------------------------------------
 # Day 8: SVM
 --------------------------------------------------------------------
+
+=> excellent sur la loss function https://stats.stackexchange.com/questions/74499/what-is-the-loss-function-of-hard-margin-svm
+
+
 ## Cours
 * SVM
     * http://127.0.0.1:4000/11-svm-unbalanced.html#/5

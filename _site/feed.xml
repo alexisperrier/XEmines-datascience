@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 30 Sep 2018 05:19:28 +0100</pubDate>
-    <lastBuildDate>Sun, 30 Sep 2018 05:19:28 +0100</lastBuildDate>
+    <pubDate>Sun, 30 Sep 2018 09:09:01 +0100</pubDate>
+    <lastBuildDate>Sun, 30 Sep 2018 09:09:01 +0100</lastBuildDate>
     <generator>Jekyll v3.7.2</generator>
     
       <item>
@@ -3948,7 +3948,7 @@ https://spacy.io/usage/vectors-similarity
     print(model.similarity('apple', 'orange'))
     print(model.similarity('car', 'orange'))
 
-
+see word2vec_demo.py
     &lt;/div&gt;
 &lt;/div&gt;
 &lt;hr class=&quot;vline&quot; /&gt;
@@ -4055,10 +4055,10 @@ II: Lab : text classification sur bbc dataset
       </item>
     
       <item>
-        <title>7) SVM and Imbalanced</title>
+        <title>7) Support Vector Machines, Imbalanced datasets</title>
         <description>&lt;section data-markdown=&quot;&quot;&gt;
 &amp;lt;div class=centerbox&amp;gt;
-&amp;lt;p class=top&amp;gt; SVM&amp;lt;/p&amp;gt;
+&amp;lt;p class=top&amp;gt;Support Vector Machines&amp;lt;/p&amp;gt;
 &lt;p style=&quot;font-size:28px;&quot;&gt;Imbalanced datasets&lt;/p&gt;
 &amp;lt;/div&amp;gt;
 &lt;/section&gt;
@@ -4074,9 +4074,364 @@ II: Lab : text classification sur bbc dataset
 
 &lt;div data-markdown=&quot;&quot;&gt;
 # Cours précédent
+
 &lt;/div&gt;
 &lt;/section&gt;
 
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt;
+I: Support Vector Machines
+&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+# Linearly separable
+
+We have n samples in p dimensions  $$ X = \\{ x_{i}  \\}  \quad i \in [1,n]  $$
+
+which belong to two classes \\( y_i \in \\{-1, +1 \\} \\)
+
+
+**Def:** The classes are **linearly separable** \\( \iff \\) there is an  hyperplane that fully separates the points according to their classes.
+
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+## Hyperplane &amp;amp; classification
+
+A hyperplane in 2 dimension is defined by a line equation \\( \beta_0 + \beta_1 X_1 + \beta_2 X_2 = 0  \\)
+
+&amp;lt;img src=/assets/07/hyperplane_3d.png width=300&amp;gt;
+
+In **p dimensions** a hyperplane is defined by: $$\beta_0 + \beta_1 X_1 + ... + \beta_p X_p = 0 \qquad  p \gt 0 $$
+
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Linear decision boundary
+A classifier that is based on a separating hyperplane leads to a **linear decision boundary**.
+
+
+
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# New point
+We predict the class of a new point \\( x^{\prime} \\)
+
+by calculating
+$$ f(x^{\prime}) = \beta\_0+ \sum\_{j=1}^{n} \beta\_j x\_{j}^{\prime}  $$
+
+All points \\( x_i \\) such that
+
+* \\( f(x^{\prime})   &amp;lt; 0 \\) belong to **class -1**
+* \\( f(x^{\prime})  &amp;gt; 0 \\) belong to **class +1**
+
+## sign
+
+Note that since both \\( y\_i \\) and \\( \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j}  \\) have the same sign:
+
+$$ y\_i ( \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j} ) &amp;gt; 0 $$
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+# Maximal Margin Classifier
+
+We want to find the Hyperplane that will maximise the distance to all the points.
+Best separation of the classes
+
+
+Finding the largest margin \\(M\\) that separates the classes is equivalent to solving:
+
+$$ \max\_{\beta\_i} M \quad  \quad y\_i ( \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j} ) &amp;gt; M \quad \forall i \in [1,..,n] $$
+
+with a constraint on the coefficients \\( \sum\_{j=0}^{p}  \beta^2\_j = 1\\)
+
+## M exists
+
+since for all points
+
+$$ y\_i ( \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j} ) &amp;gt; 0 $$
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+# Infinity of Hyperplanes
+
+If our data is linearly separable then there exists an infinity of hyperplanes that can separate it
+
+&amp;lt;img src=/assets/07/hyperplane-classification.png height=200&amp;gt;
+
+
+=&amp;gt; We need to introduce a margin to separate the classes
+
+&amp;lt;img src=/assets/07/Maximal_Margin_Classifier.png height=250&amp;gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Only the support vectors
+Interestingly, the maximal margin hyperplane depends directly on the support vectors, but not on the other observations.
+
+**A movement to any of the other observations would not affect the separating hyperplane**, provided that the observation’s movement does not cause it to cross the boundary set by the margin.
+
+However changing an observation which is on one of the support vectors impacts the margin a lot =&amp;gt; **over fitting**
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+# Support Vectors
+
+The observations that are on the margin lines are called **support vectors**
+
+They *support* the maximal margin hyperplane in the sense that if these points were moved slightly then the maximal margin hyper- plane would move as well.
+
+&amp;lt;img src=/assets/07/support_vectors.png&amp;gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+* \\( C\\) is a non negative tuning parameter
+
+$$ \max\_{\beta\_i, \epsilon\_i} M \quad  y\_i ( \beta\_0 + \sum\_{j=1}^{n} \beta\_j x\_{i,j} ) &amp;gt; M - \epsilon\_i  $$
+with
+
+* \\( \sum\_{i} \epsilon\_i \leq C  \\)
+
+* \\( \sum\_j  \beta^2\_j = 1 \\)
+* \\(   \epsilon\_i &amp;gt; 0 \\)
+
+&amp;lt;img src=/assets/07/simple-svm.gif&amp;gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+# Support Vector Classifier
+
+We allow some points to be either i) wrongly classified or ii) within the margin boundaries?
+
+Add a tuning parameter C that dictates the **severity of the violation of the margin**. The larger C is the more points are within the margin or misclassified
+
+Adding flexibility to the margin makes the classifier less likely to overfit.
+
+We are now able to address datasets that are not **linearly separable**.
+
+&amp;lt;img src=/assets/07/non_linearly_separable.png&amp;gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Demo
+
+07_svm_demo.py
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+&amp;lt;img src=/assets/07/sgd_loss_svm_hinge.png width=600&amp;gt;
+
+* see scikit-learn doc: [1.5.7. SGD - Mathematical formulation](http://scikit-learn.org/stable/modules/sgd.html#mathematical-formulation)
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# loss functions
+
+### Hinge loss function
+
+$$ L(y_i, x_i) = max(0,1−y_i(w^Tx_i+b) $$
+
+### SGD loss function
+
+$$ E(w,b) = \frac{1}{n}\sum_{i=1}^{n} L(y_i, f(x_i)) + \alpha R(w) $$
+
+### soft margin SVM tries to minimize
+
+$$ E(w,b) = \frac{1}{n}\sum_{i=1}^{n}  max(0,1−y_i(w^Tx_i+b) + \alpha ||w||^2_2 $$
+
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Kernels
+
+Here are some classic Kernel functions
+
+* Linear Kernel \\( \quad K(x,x_i) = \langle x, x_i \rangle\\)
+* Polynomial Kernel (d): \\( \quad K(x,x\_i) =  (1 + \sum\_{j=1}^{p} x\_{j}x\_{i,j} )^d   \\)
+* Radial Kernel \\( \quad K(x,x\_i) =   \exp(-\gamma    \sum\_{j=1}^{p} (x\_{j} - x\_{i,j})^2 )   \\)
+
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Introducing Kernels
+
+The optimization equation for the linear support vector classifier can be rewritten as such
+
+$$ f(x) =  \beta\_0 + \sum\_{i=1}^{n} \alpha\_i \langle x, x\_i \rangle   $$
+$$ f(x) =  \beta\_0 + \sum\_{i=1}^{n} \alpha\_i K(x,x\_i)    $$
+
+with \\( K(x,x\_i) = \langle x, x\_i \rangle \\) the vector dot product.
+
+But we could use a different Kernel function
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt;
+II: Imbalanced datasets
+&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+# Strategies
+
+* Collect more data
+* Accuracy is not always the best metric
+    * Cohen's Kappa
+    * F1 score
+    * AUC
+* Oversample or Undersample
+* SMOTE
+* Penalized Models
+* Decision trees often perform well on imbalanced datasets
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Cas classique: Caravan
+
+[Caravan dataset on kaggle](https://www.kaggle.com/uciml/caravan-insurance-challenge)
+
+Can you predict who would be interested in buying a caravan insurance policy and give an explanation why?
+
+* Identify potential purchasers of caravan insurance policies
+* 86 variables
+* Highly imbalanced
+    * No     5474
+    * Yes     348
+
+### simplest classifier
+
+* No one buys
+* accuracy = 5474 / (5474+348) = 94% !
+
+Setting all predictions to No gives you a 94% prediction rate!
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+# SMOTE:
+Oversampling method that creates new samples as interpolations of the minority class.
+
+* Paper [Synthetic Minority Over-sampling Technique](http://www.jair.org/papers/paper953.html)
+* [SMOTE in python](https://github.com/scikit-learn-contrib/imbalanced-learn)
+
+&amp;lt;img src=/assets/07/SMOTE_R_visualisation_2.png&amp;gt;
+&amp;lt;img src=/assets/07/SMOTE_R_visualisation_3.png&amp;gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Oversampling - subsampling
+The idea is to balance the ratio of minority \\(n\_{min}\\) vs majority \\(n\_{maj}\\) samples.
+
+$$  \frac{ n\_{min} }{n\_{maj}} \ll 1 $$
+
+becomes
+
+$$  \frac{ n\_{min} }{n\_{maj}} \simeq 1 $$
+
+### Subsampling
+
+* Randomly sub sample the majority class.
+
+### Oversampling
+
+* Bootstrap the minority class \\(K\\) times such that \\( K*n\_{min}  \simeq n\_{maj}\\)
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- ------------------------------------------ --&gt;
+&lt;!-- ------------------------------------------ --&gt;
+&lt;!-- ------------------------------------------ --&gt;
 &lt;section&gt;
 &lt;div style=&quot;float:right; width:45%;  &quot;&gt;
     &lt;div data-markdown=&quot;&quot;&gt;
@@ -4091,8 +4446,8 @@ II: Lab : text classification sur bbc dataset
 &lt;/section&gt;
 </description>
         <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
-        <link>http://localhost:4000/7-svm-imbalanced</link>
-        <guid isPermaLink="true">http://localhost:4000/7-svm-imbalanced</guid>
+        <link>http://localhost:4000/7-support-vector-machines</link>
+        <guid isPermaLink="true">http://localhost:4000/7-support-vector-machines</guid>
         
         
       </item>
