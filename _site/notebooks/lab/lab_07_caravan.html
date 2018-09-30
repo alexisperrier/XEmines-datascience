@@ -1,0 +1,69 @@
+<h1 id="lab-svm-on-caravan">Lab SVM on Caravan</h1>
+
+<p>Vous allez travailler sur le dataset Caravan</p>
+
+<p><a href="https://www.kaggle.com/uciml/caravan-insurance-challenge">Caravan dataset on kaggle</a></p>
+
+<ul>
+  <li>86 variables</li>
+  <li>Fortement déséquilibré
+    <ul>
+      <li>No     5474</li>
+      <li>Yes     348</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Le but est de prédire si une personne va acheter une poce d’assurance pour une caravane en fonction de son profil.</p>
+
+<p>Les 86 variables sont expliquées sur <a href="https://www.kaggle.com/uciml/caravan-insurance-challenge/home">cette page</a>.</p>
+
+<p>Nous n’allons pas rentrer dans le détail des variables.</p>
+
+<p>Le but de ce lab est d’appliquer les techniques de subsampling et oversampling pour améliorer le score. Nous comparerons aussi différentes métriques de scoring: AUC, F1-score et <a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.cohen_kappa_score.html">Cohen’s Kappa</a></p>
+
+<h2 id="1-data-processing">1) Data Processing</h2>
+
+<ul>
+  <li>Chargez le dataset dans une dataframe pandas</li>
+  <li>Convertissez les variables categorielles en numerique avec LabelEncoder</li>
+  <li>Extraire les subset de train et test en veillant bien  a melanger (shuffle) le dataset et à stratifier les classes de façon a éviter que les train ou test subset ne contienne que peu ou pas assez de la classe minoritaire.</li>
+</ul>
+
+<h2 id="2-modelisation">2) Modelisation</h2>
+
+<p>En considerant le dataset original déséquilibré, prendre le classifier support vector machine  <a href="http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html">SVC</a>,</p>
+
+<p>Pour un SVC, calculer les scores (AUC, F1-score et Cohen’s Kappa ) sur les training et testing subsets. Comparez differents kernel et differentes valeurs pour C et Gamma.</p>
+
+<p>Est-on en presence d’un bon classifier en terme de biais / underfitting et de variance / overfitting ?</p>
+
+<h2 id="3-grid-search-cross-validation">3) Grid search cross validation</h2>
+<p>En utilisant <a href="http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html">Grid Search CV</a> et en définissant une série de parametres</p>
+<ul>
+  <li>C</li>
+  <li>gamma</li>
+  <li>kernel: linear, rbf, …</li>
+</ul>
+
+<p>Trouvez le meilleur SVC.</p>
+
+<p>Observez vous une amélioration significative par rapport a vos modeles de l’etape 2) ?</p>
+
+<h2 id="4-undersampling">4) undersampling</h2>
+
+<p>Nous allons essayer d’améliorer la performance du classifier en sous échantillonnant la classe majoritaire.</p>
+
+<p>Construisez X et y de facon a ce que \(n_{Maj} \simeq K n_{Min} \) avec \( K \in [1,2] \).</p>
+
+<p>Trouvez le meilleur classifier avec la methode Grid Search CV et calculer les scores AUC, F1 et Kappa.</p>
+
+<h2 id="5-oversampling">5) oversampling</h2>
+
+<p>En utilisant la technique du bootstrap, sur échantilloner la class minoritaire.</p>
+
+<p>Construisez X et y de facon a ce que \(n_{Min} \simeq  n_{Maj} / K \) avec \( K \in [1,3] \).</p>
+
+<p>Trouvez le meilleur classifier avec la methode Grid Search CV et calculer les scores AUC, F1 et Kappa.</p>
+
+<p>Si on fait varier K, le rapport entre le nombre d’échantillons par classe, observe t on une valeur seuil de K pour laquelle les performances du classifier sont significativement meilleures.</p>
