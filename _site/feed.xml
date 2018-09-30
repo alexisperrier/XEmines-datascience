@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 30 Sep 2018 09:43:19 +0100</pubDate>
-    <lastBuildDate>Sun, 30 Sep 2018 09:43:19 +0100</lastBuildDate>
+    <pubDate>Sun, 30 Sep 2018 18:01:01 +0100</pubDate>
+    <lastBuildDate>Sun, 30 Sep 2018 18:01:01 +0100</lastBuildDate>
     <generator>Jekyll v3.7.2</generator>
     
       <item>
@@ -4453,6 +4453,397 @@ $$  \frac{ n\_{min} }{n\_{maj}} \simeq 1 $$
       </item>
     
       <item>
+        <title>8) Time series</title>
+        <description>&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt;Time series&amp;lt;/p&amp;gt;
+&lt;p style=&quot;font-size:28px;&quot;&gt;&lt;/p&gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right;&quot;&gt;
+    &lt;h1&gt;Questions ?&lt;/h1&gt;
+
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &amp;lt;img src=/assets/04/questions_04.gif&amp;gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div data-markdown=&quot;&quot;&gt;
+# Cours précédent
+
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt;
+I: Time series, intro
+&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+# Today
+* Metrics
+* Simple, MA, EWMA
+* Forecasting, train, test
+* Stationnarity, definition, Dickey Fuller test
+* Decomposition: Trend, cycle, seasonality
+* Differencing
+* ARIMA
+    * autocorrelation et partial autocorrelation
+* residuals
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Domaines d'application
+
+* **IoT**
+* **econometrics**
+* mathematical finance / trading / markets
+* intelligent transport and trajectory forecasting
+* weather forecasting and Climate change research
+* earthquake prediction, astronomy
+* electroencephalography, control engineering, communications
+* **signal processing**
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+# Time Series [TS]
+
+* A time series is a series of data points listed in time order.
+* A sequence taken at successive equally spaced points in time.
+* A sequence of **discrete-time data**.
+
+=&amp;gt; The **time interval** is key
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Ts metrics
+
+Forecasting error: \\( e\_i=y\_i−\hat{y}\_i \\)
+
+
+Metrics to compare TS techniques
+
+* Mean Absolute Error: \\( MAE=mean(|e\_i|) \\)
+* [Mean Absolute Deviation](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.mad.html): \\( MAD = \frac{1}{n} \sum\_{i=1}^{n}  | e\_i |  \\)
+* Root mean squared error: \\( RMSE = \sqrt{  mean(e\_i^2)  } \\)
+* Mean absolute percentage error: \\( MAPE = \frac{100}{n} \sum\_{i=1}^{n} \frac{ | e\_i | }{ y\_i } \\)
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Simplissime
+
+$$ \hat{Y}_{n+1} = Y_{n} $$
+
+* Il fera le meme temps qu'hier
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt;
+II: Modelisation
+&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Exponential Weighted Moving Average
+Introduce a Decay
+
+The EWMA for a series Y may be calculated recursively:
+
+* \\( S\_{1}=Y\_{1} \\)
+* \\(      t&amp;gt;1, \ \ S\_{t}=\alpha \cdot Y\_{t}+(1-\alpha )\cdot S\_{t-1} \\)
+
+
+Where:
+
+* The coefficient α represents the degree of weighting decrease, a constant smoothing factor between 0 and 1. A higher α discounts older observations faster.
+* Yt is the value at a time period t.
+* St is the value of the EWMA at any time period t.
+
+http://pandas.pydata.org/pandas-docs/version/0.17.0/generated/pandas.ewma.html
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Moving Average
+
+$$ \begin{aligned} SMA = \frac{p\_{M} + p\_{M-1}+ \cdots +p\_{M-(n-1)}}{n} = \frac{1}{n} \sum\_{i=0}^{n-1}p\_{M-i}
+\end{aligned} $$
+
+and center
+
+$$ \begin{aligned} SMA = \frac{p\_{M+n/2} + \cdots +   p\_{M+1} +   p\_{M} + p\_{M-1}+ \cdots +p\_{M-(n/2)}}{n} = \frac{1}{n} \sum\_{i=-\frac{n}{2}}^{\frac{n}{2}}p\_{M+i}
+\end{aligned} $$
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Auto Regressive
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# ARIMA
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+&amp;lt;div class=centerbox&amp;gt;
+&amp;lt;p class=top&amp;gt;
+II: Stationarity
+&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Interpretation
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Autocorrelation ACF
+
+as
+
+$$  \hat{R}(k)  = \frac{1}{ (n-k) \sigma^{2} } \sum_{t=1}^{n-k} ( X\_t - \mu )
+( X\_{t+k} - \mu ) $$
+
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Interpretation
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Partial Autocorrelation PACF
+
+The partial autocorrelation at lag k is the correlation that results after removing the effect of any correlations due to the terms at shorter lags
+
+Given a time series  the partial autocorrelation of lag k, denoted \\( \alpha(k) \\), is the autocorrelation between \\( z\_{t} \\) and  \\( z\_{t+k} \\) with all the linear dependence of \\( z\_{t} \\) on \\( z\_{t+1}, ....,  z\_{t+k -1} \\) removed;
+
+$$ \alpha(1)= \hat{R} (z\_{t+1},z\_{t}) $$
+
+
+$$ \alpha(k) = \hat{R} ( z\_{t+k}-P\_{t,k}(z\_{t+k} ) , z\_{t} - P\_{t,k}(z\_{t} ) )$$
+
+where \\( P\_{t,k}(x) \\) denotes the projection of \\(x\\) onto the space spanned by \\( x\_{t+1},\dots ,x\_{t+k-1} \\)   &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+&amp;lt;img src=/assets/08/Mean_nonstationary.png height=150&amp;gt;
+
+&amp;lt;img src=/assets/08/Var_nonstationary.png height=150&amp;gt;
+
+&amp;lt;img src=/assets/08/Cov_nonstationary.png height=150&amp;gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+# Stationarity
+Key concept for time series
+
+Do the caracteristics of the TS evolve over time ?
+
+* Trend
+* Cycles, Seasonality
+
+A time serie is said to be stationnary if
+
+* **Constant mean**: The mean of the series should be constant with respect to time.
+
+* **Constant variance**: Homoscedasticity: The variance of the series constant with respect to time.
+
+* **Fix lagged covariance**: The covariance of the \\(i^{th}\\) term and the \\( (i+m)^{th}\\) term should only depend on m and not i.
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# PACF - stationnarity
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# ACF - stationnarity
+
+https://machinelearningmastery.com/gentle-introduction-autocorrelation-partial-autocorrelation/
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+# KPSS
+
+# Test random walk
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Test for stationarity
+
+## Dickey Fuller test
+
+* Here the null hypothesis is that the TS is non-stationary.
+
+* The test results comprise of a Test Statistic and some Critical Values for difference confidence levels.
+
+https://datamarket.com/data/set/22ox/monthly-milk-production-pounds-per-cow-jan-62-dec-75#!ds=22ox&amp;amp;display=line
+
+## Augmented Dickey Fuller test
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Transform - Stationary
+
+* difference
+* log
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Decomposition
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- ------------------------------------------ --&gt;
+&lt;!-- ------------------------------------------ --&gt;
+&lt;!-- ------------------------------------------ --&gt;
+&lt;section&gt;
+
+* Autocorrelation function
+https://analysights.wordpress.com/tag/box-pierce-test/
+
+* Test est ce un random noise / walk
+&lt;/section&gt;
+
+&lt;!-- ------------------------------------------ --&gt;
+&lt;!-- ------------------------------------------ --&gt;
+&lt;!-- ------------------------------------------ --&gt;
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+</description>
+        <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
+        <link>http://localhost:4000/8-time-series</link>
+        <guid isPermaLink="true">http://localhost:4000/8-time-series</guid>
+        
+        
+      </item>
+    
+      <item>
         <title>Lesson 18 - R &amp; AWS ML</title>
         <description>&lt;section data-background-color=&quot;#000&quot;&gt;
     &lt;h1 class=&quot;white&quot; style=&quot;border-top: thin solid #DDD;border-bottom: thin solid #DDD;&quot;&gt;
@@ -4608,484 +4999,6 @@ https://console.aws.amazon.com/
         <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
         <link>http://localhost:4000/18-r-and-aws-ml.html</link>
         <guid isPermaLink="true">http://localhost:4000/18-r-and-aws-ml.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Lesson 17 - Time Series Modeling</title>
-        <description>&lt;section data-background-color=&quot;#000&quot;&gt;
-    &lt;h1 class=&quot;white&quot; style=&quot;border-top: thin solid #DDD;border-bottom: thin solid #DDD;&quot;&gt;
-        &lt;img src=&quot;assets/ga_logo_black.png&quot; style=&quot;float:left;top:0px;&quot; /&gt;
-        General Assembly
-    &lt;/h1&gt;
-    &lt;p class=&quot;big_title&quot;&gt;17. Time Series Modeling and Forecasting&lt;/p&gt;
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Previously
-
-* Time series
-* Smoothing
-* Trending and seasonality
-* Stationarity, Dickey-Fuller test
-* Autocorrelation, partial auto correlation
-* Forecasting 101 &amp;amp; Metrics
-
-### Today
-
-* ARMA Modeling
-* ARMA Modeling
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Types of TS
-
-[Different types of TS](/assets/17/stationary_time_series.png)
-
-
-* White noise
-
-* Trend
-
-* Seasonality
-
-* Cycle
-
-* **Seasonality != Cycle**
-
-*Some cases can be confusing — a time series with cyclic behaviour (but not trend or seasonality) is NOT stationary. That is because the cycles are not of fixed length, so before we observe the series we cannot be sure where the peaks and troughs of the cycles will be.*
-
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Stationarity
-
-Required for most models.
-
-* Mean is constant \\(  \ \ \ \operatorname{E}[Y\_{t}]  = \mu \\)
-* Variance is constant  \\(  \ \ \ \operatorname{Var}(Y\_t) = \operatorname{E}[ (Y\_{t} - \mu)^2 ]  = \sigma^2 \\)
-* Autocorrelation is lag dependent
-
-$$  R(\tau) = \frac {\operatorname{E} [ (Y\_{t}-\mu )(Y\_{t+\tau }-\mu )]} {\sigma ^{2}} $$
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Testing for stationarity
-
-### Dickey-Fuller test
-
-**Null hypothesis**: TS is NOT stationary
-
-[Demo in Notebook](https://github.com/alexperrier/gads/blob/master/17_ts2/py/L17%20Time%20Series%20Demo.ipynb)
-
-* Dickey Fuller test does not test for seasonality stationarity
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# (Partial) Autocorrelation
-
-### ACF
-Correlation between \\( Y\_t \\) and  \\( Y\_{t-s} \\)
-
-### PACF
-
-Correlation between \\( Y\_t \\) and  \\( Y\_{t-s} \\)
-
-*  without the cumulative correlation between \\( Y\_t \\) and \\( Y\_{t-1} \cdots Y\_{t-s+1}  \\)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Simple Forecasting
-
-* next sample = last sample
-$$ \hat{Y}\_{t+1} = Y\_{t} $$
-* Moving average $$ \hat{Y}\_{t+1} = \frac{1}{n} \sum^{n}\_{i = 0} Y\_{t-1-i}  $$
-* EWMA $$ \ \ \ \ \hat{Y}\_{t}= \alpha \cdot Y\_{t}+(1-\alpha )\cdot \hat{Y}\_{t-1} $$
-* Linear Regression OLS
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Today
-
-* Transform TS  into a Stationary TS
-* Test is the TS predictable? Is it **white noise**?
-* Decomposition: Trend, Seasonality, Residuals
-* Is my forecast reliable?
-* Is the Dow Jones a **Random Walk**?
-* AutoRegressive modeling (AR) and Moving Average (MA)
-
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-# Differencing
-
-Create a new TS by taking the difference shifted by 1
-
-$$  X\_t =  Y\_t - Y\_{t-1} $$
-
-! [Try it out](https://github.com/alexperrier/gads/blob/master/17_ts2/py/L17%20Time%20Series%20Demo.ipynb) on the milk production ts
-
-What happens to the seasonality? to the trend?
-
-What is the result of the Dickey Fuller test on the difference?
-Is the difference series stationary?
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# White noise
-
-### What is white noise?
-
-Time series data that shows **no auto correlation** is called **white noise**.
-
-Formally, \\( X(t) \\) is a white noise process if
-
-* \\( E[X(t)]=0 \\)
-* \\( E[X(t)^2]=\sigma^2  \\)
-* and  \\( E[X(t)X(h)]=0 \ \  \text{for} \ \ t \neq h \\)
-
-The autocorrelation matrix of a white noise TS is a diagonal matrix
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# How to detect white noise
-
-### 1. ACF and PACF
-
-Rule of thumb:
-
-* A Time series is white noise if 95% of the spikes in the Auto-correlation Function lie within  \\( \pm \frac{2}{ \sqrt{N} } \\) with N the length of the time series.
-
-=&amp;gt; Plot the PACF for the milk volume and difference TS and the tree rings series
-
-Which one is a white noise?
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Testing for white noise: the Ljung-Box test
-
-The Ljung–Box test may be defined as:
-
-* H0: The data are independently distributed
-* Ha: The data are not independently distributed; they exhibit serial correlation.
-
-The test statistic is
-
-$$ Q = n (n+2) \sum\_{k=1}^{h} \frac{ \hat{\rho }\_{k}^{2}}{n-k} $$
-
-where
-
-* n is the sample size,
-* \\( \hat{\rho }\_{k} \\) is the sample autocorrelation at lag k,
-* **h** is the number of lags being tested.
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-# Testing for white noise: the Ljung-Box test
-
-[Rule of thumb](http://robjhyndman.com/hyndsight/ljung-box-test/) for h
-
-* h = 10 for non-seasonal data
-* h = 2m for seasonal data, where m is the period of seasonality.
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Residual diagnostics on forecasting
-A good forecasting method will yield residuals with the following properties:
-
-* The residuals are uncorrelated: *If there are correlations between residuals, then there is information left in the residuals which should be used in computing forecasts.*
-
-* The residuals have zero mean : *If the residuals have a mean other than zero, then the forecasts are biased.*
-
-It is useful to also have the following two properties which make the calculation of prediction intervals easier
-
-* The residuals have constant variance.
-* The residuals are normally distributed.
-
-These two properties make the calculation of **prediction intervals** easier
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Prediction Intervals
-
-95% prediction interval: \\( \ \ \ \hat{Y\_{t}}  \pm 1.96 \sigma^2 \ \ \ \\)  with \\(\sigma \\)  an estimate of the standard deviation of the forecast distribution.
-
-When the residuals are **normally distributed and uncorrelated** and when **forecasting one-step ahead**
-
-=&amp;gt;  the standard deviation of the *forecast distribution* is almost the same as the standard deviation of the *residuals*.
-
-When conditions are not met, there are more complex ways to estimate confidence intervals
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# TS Decomposition
-
-### Additive Model
-$$ Y\_t = S\_t + T\_t + E\_t $$
-
-where  \\( S\_t \\)  is the seasonal component,   \\( S\_t \\) is the trend-cycle component and  \\( E\_t \\) is the residual
-
-
-        import statsmodels.api as sm
-        res = sm.tsa.seasonal_decompose(milk_prod.volume, model = 'additive')
-        resplot = res.plot()
-
-### Multiplicative Model
-$$ Y\_t=S\_t \cdot T\_t \cdot E\_t $$
-
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-
-# Forecast with decomposition
-
-* forecast seasonality, trend and residuals separately
-* add back together
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# LAB:  IBM dataset
-Consider the daily closing IBM stock prices (data set ibmclose).
-
-https://datamarket.com/data/set/2322/ibm-common-stock-closing-prices-daily-17th-may-1961-2nd-november-1962#!ds=2322&amp;amp;display=line
-
-* Produce some plots of the data in order to become familiar with it.
-* Split the data into a training set of 300 observations and a test set of 69 observations.
-* Try various simple methods to forecast the training set and compare the results on the test set.
-* Which method did best?
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# LAB: House sales
-https://datamarket.com/data/set/22q8/monthly-sales-of-new-one-family-houses-sold-in-th-e-usa-since-1973#!ds=22q8&amp;amp;display=line
-
-Consider the sales of new one-family houses in the USA, Jan 1973 – Nov 1995 (data set hsales).
-
-* Produce some plots of the data in order to become familiar with it.
-* Split the data into a training set of 300 observations and a test set of 69 observations.
-* Try various simple methods to forecast the training set and compare the results on the test set.
-* Which method did best?
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Break 5mn
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Next session
-
-* R
-* SQL
-* AWS Machine Learning
-* ?
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# LAB Is the DJ a random walk?
-Why you cannot beat the market
-
-$$ \$\$\$ $$
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# What's a Random Walk
-When the differenced series is white noise, the model for the original series can be written as
-
-\\( y\_t−y\_{t−1}=e\_t \ \ \
-or  \ \ \  y\_t= y\_{t−1}+e\_t \\)
-
-A random walk model is very widely used for non-stationary data, particularly finance and economic data. Random walks typically have:
-
-* long periods of apparent trends up or down
-* sudden and unpredictable changes in direction.
-
-
-http://python-for-signal-processing.blogspot.com/2014/04/random-walks-and-stumbles.html
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-
-# Notebook: The Dow Jones is a random walk
-http://www.johnwittenauer.net/a-simple-time-series-analysis-of-the-sp-500-index/
-
-* plot DJ
-* plot diff
-* transform with log
-* plot rolling variance original + log
-* plot diff of log =&amp;gt; stationary time series model of daily changes to the S&amp;amp;P 500 index
-* lag variables scatter plot =&amp;gt; all centered and normal
-* acf and pacf =&amp;gt; no correlation =&amp;gt; increment is white noise =&amp;gt; we have a random walk
-* decomposition of diff =&amp;gt; look at the residuals white noise ?
-* AR model, look at the residuals =&amp;gt; much smaler values predicted than actual changes
-
-
-* look at histogram of residuals
-    * skewed =&amp;gt; not great for confidence intervals
-* autocorrelation plot of residuals
-* test with Ljung-Box
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# AR(p) model
-In an autoregression model, we forecast the variable of interest using a linear combination of past values of the variable.
-
-
-$$ AR(1): \ \ \  X\_{t}= c + \varphi X\_{t-1} + \varepsilon\_{t} $$
-$$ AR(p): \ \ \  X\_{t}= c + \sum\_{i=1}^{p} \varphi\_{i}X\_{t-i} + \varepsilon\_{t} $$
-
-
-where
-* \\( \varphi\_{i} \\) are the parameters of the model
-* \\(  \varepsilon\_{t} \\) is a white noise process with zero mean and constant variance \\( \sigma\_{\varepsilon }^{2}\\)
-* c is a constant
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Special cases
-For an AR(1) model:
-
-* When  \\( \varphi\_1 = 0, \ \ X\_t  \\) is equivalent to white noise.
-* When  \\( \varphi\_1 = 1, \ \ X\_t  \\) is equivalent to a random walk.
-* When  \\( \varphi\_1 = 0, c \neq 0 \ \ X\_t  \\)  is equivalent to a random walk with drift
-* When \\( \varphi\_1 \lt 0 \ \ X\_t \\)  tends to oscillate between positive and negative values.
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# MA(q) models
-Rather than use past values of the forecast variable in a regression, a moving average model uses past forecast errors in a regression-like model.
-
-Moving Average model of order q:
-
-$$   X\_{t}=\mu + \varepsilon\_{t}+\theta\_{1}\varepsilon\_{t-1}+\cdots +\theta\_{q}\varepsilon\_{t-q} $$
-
-where
-
-* \\(\mu \\) is the mean of the series
-*  \\(\theta\_{1} \cdots \theta\_{q}\\) are the parameters of the model
-* \\( \varepsilon\_{t} \cdots \varepsilon\_{t-q} \\) are white noise error terms
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# ARIMA(p,d,q) model
-
-We combine the AR(p) and the MA(q) and add i^th differencing
-
-$$   X\_{t}=c + \sum\_{i=1}^{p} \varphi\_{i}X\_{t-i} + \varepsilon\_{t}+\theta\_{1}\varepsilon\_{t-1}+\cdots +\theta\_{q}\varepsilon\_{t-q} $$
-
-
-We call this an ARIMA(p,d,q) model, where
-
-* p: order of the autoregressive part;
-* d: degree of first differencing involved;
-* q: order of the moving average part.
-
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Estimating p, d, q
-
-The *squirrel* approach
-
-http://people.duke.edu/~rnau/411arim3.htm
-
-The ML approach: Brute Force and Grid Search
-
-&lt;/section&gt;
-&lt;section data-markdown=&quot;&quot;&gt;
-# Criteria for model selection
-
-* Akaike Information Criterion (AIC)
-* Schwarz Bayesian Information Criterion (BIC)
-* Hannan-Quinn Information Criterion (HQIC)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# White Noise - Normality test
-### The Durbin Watson test
-
-The Durbin-Watson statistic ranges in value from 0 to 4.
-
-* A value near 2 indicates non-autocorrelation;
-
-* A value toward 0 indicates positive autocorrelation;
-
-* A value toward 4 indicates negative autocorrelation.
-
-### Agostino and Pearson for normality
-
-Null hypothesis: the sample comes from a normal distribution
-
-        scipy.stats.normaltest(ts)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Lab on sunspots
-
-[Wolf's Sunspot Numbers. 1700 – 1988](https://datamarket.com/data/set/22wg/wolfs-sunspot-numbers-1700-1988#!ds=22wg&amp;amp;display=line)
-
-from https://bicorner.com/2015/11/16/time-series-analysis-using-ipython/
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Time Series Classification and Clustering
-
-[Time Series Classification and Clustering](http://nbviewer.jupyter.org/github/alexminnaar/time-series-classification-and-clustering/blob/master/Time%20Series%20Classification%20and%20Clustering.ipynb)
-
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-
-### Dickey Fuller test
-
-http://stats.stackexchange.com/questions/44647/which-dickey-fuller-test-should-i-apply-to-a-time-series-with-an-underlying-mode
-http://stats.stackexchange.com/questions/225087/seasonal-data-deemed-stationary-by-adf-and-kpss-tests
-
-
-
-### Random Walk
-
-http://python-for-signal-processing.blogspot.com/2014/04/random-walks-and-stumbles.html
-http://fedc.wiwi.hu-berlin.de/xplore/tutorials/xegbohtmlnode39.html
-
-### Ljung-Box test
-[Thoughts on the Ljung-Box test](http://robjhyndman.com/hyndsight/ljung-box-test/)
-http://stats.stackexchange.com/questions/18135/testing-normality-and-independence-of-time-series-residuals
-
-https://www.otexts.org/fpp/2/6
-&lt;/section&gt;
-
-&lt;section data-markdown=&quot;&quot;&gt;
-# Train Test and Cross validation
-https://www.otexts.org/fpp/2/5
-
-&lt;/section&gt;
-</description>
-        <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-        <link>http://localhost:4000/17-time-series-forecast.html</link>
-        <guid isPermaLink="true">http://localhost:4000/17-time-series-forecast.html</guid>
         
         
       </item>
