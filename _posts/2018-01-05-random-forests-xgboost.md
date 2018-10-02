@@ -226,7 +226,7 @@ Such a meta-estimator can typically be used as a way to reduce the variance of a
 <section data-markdown>
 <div class=centerbox>
 <p class=top>
-II: Random Forests
+III: Random Forests
 </p>
 </div>
 </section>
@@ -235,17 +235,23 @@ II: Random Forests
 <section data-markdown>
 # Random Forests
 
-Extension of the bootstrapping to features
+Extension of bootstrapping to features
 
 * In random forests, each tree in the ensemble is built from a sample drawn with replacement (i.e., a bootstrap sample) from the training set.
 
 * In addition, when splitting a node during the construction of the tree, the split that is picked is the best split among **a random subset of the features**.
 
-=> The bias of the forest usually slightly increases (with respect to the bias of a single non-random tree) but, due to averaging, its variance also decreases, usually more than compensating for the increase in bias, hence yielding an overall better model.
+=> The **bias slightly increases** compared to the bias of a single non-random tree
 
-(see RandomForestClassifier and RandomForestRegressor classes),
+=> but, due to averaging, **its variance decreases**,
 
-A Random Forest is a generalization of Bagging that is specific to DTs. At each branch in the decision tree, Random Forest training also subsamples the features in addition to the training examples. Intuitively, this process further de-correlates the individual trees, which is good for Bagging, since the main limitation of Bagging is that bootstrapping is not the same as drawing fresh samples from the true data distribution.
+usually more than compensating for the increase in bias, hence yielding an overall better model.
+
+A **Random Forest is a generalization of Bagging that is specific to Decision Trees**.
+
+At each branch in the decision tree, Random Forest training also subsamples the features in addition to the training examples.
+
+Intuitively, this process further de-correlates the individual trees, which is good for Bagging.
 
 </section>
 
@@ -294,7 +300,7 @@ etc ...
 <section data-markdown>
 <div class=centerbox>
 <p class=top>
-III: XGBoost
+IV: XGBoost
 </p>
 </div>
 </section>
@@ -305,7 +311,26 @@ III: XGBoost
 <section data-markdown>
 # Adaboost
 
+https://en.wikipedia.org/wiki/AdaBoost
 
+Training
+AdaBoost refers to a particular method of training a boosted classifier. A boost classifier is a classifier in the form
+
+$$ F\_T(x) = \sum_{t=1}^T f\_t(x) $$
+
+
+where each \\( f_{t} \\) is a weak learner that takes an object  \\(x\\) as input and returns a value indicating the class of the object.
+
+Each weak learner produces an output hypothesis,  \\(h(x_i)\\), for each sample in the training set. At each iteration \\(t\\), a weak learner is selected and assigned a coefficient \\(\alpha\_t \\) such that the sum training error \\( E_{t}\\) of the resulting  \\(t\\)-stage boost classifier is minimized.
+
+$$ E\_t = \sum\_i E[F\_{t-1}(x\_i) + \alpha\_t h(x\_i)] $$
+
+Here \\( F\_{t-1}(x)\\) is the boosted classifier, \\(E(F)\\) is some error function and \\( f\_t(x) = \alpha\_t h(x) \\) is the new weak learner.
+
+### Weighting
+At each iteration of the training process, a weight {\displaystyle w_{t}} w_{t} is assigned to each sample in the training set equal to the current error {\displaystyle E(F_{t-1}(x_{i}))} E(F_{t-1}(x_i)) on that sample. These weights can be used to inform the training of the weak learner, for instance, decision trees can be grown that favor splitting sets of samples with high weights.
+
+Derivation
 
 </section>
 
