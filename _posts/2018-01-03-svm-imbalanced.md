@@ -15,20 +15,6 @@ theme: white
 </div>
 </section>
 
-<section>
-<div style='float:right;'>
-    <h1>Questions ?</h1>
-
-    <div data-markdown>
-    <img src=/assets/04/questions_04.gif>
-    </div>
-</div>
-
-<div data-markdown>
-# Cours précédent
-
-</div>
-</section>
 
 <section data-markdown>
 <div class=centerbox>
@@ -38,6 +24,25 @@ I: Support Vector Machines
 </div>
 </section>
 
+<section>
+<div style='float:right; width:40%'>
+
+    <div data-markdown>
+<img src=/assets/07/vladimir-vapnik-500x435.jpg>
+    </div>
+</div>
+
+<div style='float:left; width:40%'>
+<div data-markdown>
+#  Владимир Наумович Вапник
+
+Vladimir Naumovich Vapnik (Russian: Владимир Наумович Вапник; born 6 December 1936) is one of the main developers of the Vapnik–Chervonenkis theory of statistical learning, and the co-inventor of the support vector machine method (1998).
+
+
+
+</div>
+</div>
+</section>
 
 
 <section>

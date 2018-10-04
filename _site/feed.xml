@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 01 Oct 2018 17:35:10 +0100</pubDate>
-    <lastBuildDate>Mon, 01 Oct 2018 17:35:10 +0100</lastBuildDate>
+    <pubDate>Wed, 03 Oct 2018 21:38:32 +0100</pubDate>
+    <lastBuildDate>Wed, 03 Oct 2018 21:38:32 +0100</lastBuildDate>
     <generator>Jekyll v3.7.2</generator>
     
       <item>
@@ -3856,10 +3856,9 @@ Avancée: productive
 
 voir les nouvelles fonctionnalités de gmail
 
-Optimiste (aka fumeuse): interpretation
+Interpretative
 
 *  Sentiment analysis
-
 
     &lt;/div&gt;
 &lt;/div&gt;
@@ -3901,6 +3900,47 @@ Nombreuses librairies open source en R, Java, ...
 
     &lt;/div&gt;
 &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+
+&lt;div style=&quot;float:right; width:30%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Chomsky
+&amp;lt;img src=/assets/06/Syntactic_Structures_Noam_Chomsky_cover.jpg&amp;gt;
+
+1957
+    &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div style=&quot;float:left; width:30%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Ferdinand de Saussure
+&amp;lt;img src=/assets/06/saussure.jpg&amp;gt;
+
+1916
+
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div style=&quot;float:right; width:30%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+# Benveniste
+&amp;lt;img src=/assets/06/Benveniste-Emile-Problemes-De-Linguistique-Generale-Livre-684848349_L.jpg&amp;gt;
+1966
+
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;section data-markdown=&quot;&quot;&gt;
+# Text generation
+
+* https://ml5js.org/docs/lstm-interactive-example
+
 &lt;/section&gt;
 
 &lt;section&gt;
@@ -4005,21 +4045,17 @@ see word2vec_demo.py
 # Word2vec
 Word2vec is not a single algorithm but a combination of two techniques – CBOW(Continuous bag of words) and Skip-gram model.
 
-* CBOW work is that it tends to predict the probability of a word given a context
 * Skip – gram : to predict the context given a word
+* CBOW tends to predict the probability of a word given a context
+* word2vec is a &quot;predictive&quot; model, predict word / context + context / word
 
 http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/
 
-# vs Glove
+http://mccormickml.com/assets/word2vec/Alex_Minnaar_Word2Vec_Tutorial_Part_II_The_Continuous_Bag-of-Words_Model.pdf
 
-https://www.quora.com/How-is-GloVe-different-from-word2vec
+### see also Glove
 
-* word2vec is a &quot;predictive&quot; model, predict word / context + context / word
-
-
-* GloVe is a &quot;count-based&quot; model.
-
-dimensionality reduction on the co-occurrence counts matrix.
+GloVe is a &quot;count-based&quot; model :Dimensionality reduction on the co-occurrence counts matrix.
 
     &lt;/div&gt;
 &lt;/div&gt;
@@ -4088,27 +4124,32 @@ II: Lab : text classification sur bbc dataset
 &amp;lt;/div&amp;gt;
 &lt;/section&gt;
 
-&lt;section&gt;
-&lt;div style=&quot;float:right;&quot;&gt;
-    &lt;h1&gt;Questions ?&lt;/h1&gt;
-
-    &lt;div data-markdown=&quot;&quot;&gt;
-    &amp;lt;img src=/assets/04/questions_04.gif&amp;gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div data-markdown=&quot;&quot;&gt;
-# Cours précédent
-
-&lt;/div&gt;
-&lt;/section&gt;
-
 &lt;section data-markdown=&quot;&quot;&gt;
 &amp;lt;div class=centerbox&amp;gt;
 &amp;lt;p class=top&amp;gt;
 I: Support Vector Machines
 &amp;lt;/p&amp;gt;
 &amp;lt;/div&amp;gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:40%&quot;&gt;
+
+    &lt;div data-markdown=&quot;&quot;&gt;
+&amp;lt;img src=/assets/07/vladimir-vapnik-500x435.jpg&amp;gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div style=&quot;float:left; width:40%&quot;&gt;
+&lt;div data-markdown=&quot;&quot;&gt;
+#  Владимир Наумович Вапник
+
+Vladimir Naumovich Vapnik (Russian: Владимир Наумович Вапник; born 6 December 1936) is one of the main developers of the Vapnik–Chervonenkis theory of statistical learning, and the co-inventor of the support vector machine method (1998).
+
+
+
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;/section&gt;
 
 &lt;section&gt;
@@ -4512,6 +4553,7 @@ I: Time series, intro
 &lt;section&gt;
 &lt;div style=&quot;float:right; width:45%;  &quot;&gt;
     &lt;div data-markdown=&quot;&quot;&gt;
+&amp;lt;img src=/assets/08/time-series-analysis.png&amp;gt;
     &lt;/div&gt;
 &lt;/div&gt;
 &lt;hr class=&quot;vline&quot; /&gt;
@@ -4567,28 +4609,61 @@ I: Time series, intro
 &lt;section&gt;
 &lt;div style=&quot;float:right; width:45%;  &quot;&gt;
     &lt;div data-markdown=&quot;&quot;&gt;
-# Ts metrics
+&amp;lt;img src=/assets/08/monthly_milk_production.png&amp;gt;
 
-Forecasting error: \\( e\_i=y\_i−\hat{y}\_i \\)
-
-
-Metrics to compare TS techniques
-
-* Mean Absolute Error: \\( MAE=mean(|e\_i|) \\)
-* [Mean Absolute Deviation](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.mad.html): \\( MAD = \frac{1}{n} \sum\_{i=1}^{n}  | e\_i |  \\)
-* Root mean squared error: \\( RMSE = \sqrt{  mean(e\_i^2)  } \\)
-* Mean absolute percentage error: \\( MAPE = \frac{100}{n} \sum\_{i=1}^{n} \frac{ | e\_i | }{ y\_i } \\)
+&amp;lt;img src=/assets/08/prediction_with_prophet_01.png&amp;gt;
 
     &lt;/div&gt;
 &lt;/div&gt;
 &lt;hr class=&quot;vline&quot; /&gt;
 &lt;div style=&quot;float:left; width:45%;  &quot;&gt;
     &lt;div data-markdown=&quot;&quot;&gt;
-# Simplissime
+&amp;lt;img src=/assets/08/ts-cheese.png&amp;gt;
 
-$$ \hat{Y}_{n+1} = Y_{n} $$
+&amp;lt;img src=/assets/08/TimeSeriesChart_1.jpg&amp;gt;
 
-* Il fera le meme temps qu'hier
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Ts metrics
+
+
+Metrics to compare TS techniques
+
+* Mean Absolute Error:
+
+\\( MAE=mean(|e\_i|) \\)
+
+* [Mean Absolute Deviation](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.mad.html):
+
+\\( MAD = \frac{1}{n} \sum\_{i=1}^{n}  | e\_i |  \\)
+
+* Root mean squared error:
+
+\\( RMSE = \sqrt{  mean(e\_i^2)  } \\)
+
+* Mean absolute percentage error:
+
+\\( MAPE = \frac{1}{n} \sum\_{i=1}^{n} \frac{ | e\_i | }{ y\_i } \\)
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Prévision la plus simple
+
+* Il fera aujourd'hui le meme temps qu'hier
+
+$$ \hat{y}\_{n+1} = y\_{n} $$
+
+## Forecasting error
+
+$$ e\_i=y\_i−\hat{y}\_i $$
 
     &lt;/div&gt;
 &lt;/div&gt;
@@ -4597,7 +4672,7 @@ $$ \hat{Y}_{n+1} = Y_{n} $$
 &lt;section data-markdown=&quot;&quot;&gt;
 &amp;lt;div class=centerbox&amp;gt;
 &amp;lt;p class=top&amp;gt;
-II: Modelisation
+II: Modélisation
 &amp;lt;/p&amp;gt;
 &amp;lt;/div&amp;gt;
 &lt;/section&gt;
@@ -4605,22 +4680,8 @@ II: Modelisation
 &lt;section&gt;
 &lt;div style=&quot;float:right; width:45%;  &quot;&gt;
     &lt;div data-markdown=&quot;&quot;&gt;
-# Exponential Weighted Moving Average
-Introduce a Decay
-
-The EWMA for a series Y may be calculated recursively:
-
-* \\( S\_{1}=Y\_{1} \\)
-* \\(      t&amp;gt;1, \ \ S\_{t}=\alpha \cdot Y\_{t}+(1-\alpha )\cdot S\_{t-1} \\)
-
-
-Where:
-
-* The coefficient α represents the degree of weighting decrease, a constant smoothing factor between 0 and 1. A higher α discounts older observations faster.
-* Yt is the value at a time period t.
-* St is the value of the EWMA at any time period t.
-
-http://pandas.pydata.org/pandas-docs/version/0.17.0/generated/pandas.ewma.html
+# Smoothing
+&amp;lt;img src=/assets/08/moving-avg-2.png&amp;gt;
 
     &lt;/div&gt;
 &lt;/div&gt;
@@ -4629,13 +4690,19 @@ http://pandas.pydata.org/pandas-docs/version/0.17.0/generated/pandas.ewma.html
     &lt;div data-markdown=&quot;&quot;&gt;
 # Moving Average
 
-$$ \begin{aligned} SMA = \frac{p\_{M} + p\_{M-1}+ \cdots +p\_{M-(n-1)}}{n} = \frac{1}{n} \sum\_{i=0}^{n-1}p\_{M-i}
-\end{aligned} $$
+Simple smoothing, moyenne sur fenetre
 
-and center
+$$  \hat{y}\_{t +1 }   = \frac{1}{n} \sum\_{i=0}^{n-1}y\_{t-i}
+= \frac{1}{n} ( y\_{t} + y\_{t-1}+ \cdots + y\_{t-(n-1)}  )
+$$
 
-$$ \begin{aligned} SMA = \frac{p\_{M+n/2} + \cdots +   p\_{M+1} +   p\_{M} + p\_{M-1}+ \cdots +p\_{M-(n/2)}}{n} = \frac{1}{n} \sum\_{i=-\frac{n}{2}}^{\frac{n}{2}}p\_{M+i}
-\end{aligned} $$
+
+## Avec coefficients
+
+Modèle MA(q): Moving Average d'ordre q
+
+$$  \hat{y}\_{t +1 }   =  \sum\_{i=0}^{q-1} \beta\_{i}  y\_{t-i} $$
+
 
     &lt;/div&gt;
 &lt;/div&gt;
@@ -4644,12 +4711,35 @@ $$ \begin{aligned} SMA = \frac{p\_{M+n/2} + \cdots +   p\_{M+1} +   p\_{M} + p\_
 &lt;section&gt;
 &lt;div style=&quot;float:right; width:45%;  &quot;&gt;
     &lt;div data-markdown=&quot;&quot;&gt;
+
+&amp;lt;img src=/assets/08/exponential_moving_averages.gif&amp;gt;
+
     &lt;/div&gt;
 &lt;/div&gt;
 &lt;hr class=&quot;vline&quot; /&gt;
 &lt;div style=&quot;float:left; width:45%;  &quot;&gt;
     &lt;div data-markdown=&quot;&quot;&gt;
-# Auto Regressive
+
+# Exponential Weighted Moving Average
+Introduce a Decay
+
+The EWMA for a series Y may be calculated recursively:
+
+* \\( S\_{1}=Y\_{1} \\)
+* \\(  S\_{t}=\alpha  Y\_{t}+(1-\alpha ) S\_{t-1}  \ \ \ \  t&amp;gt;1 \\)
+
+
+Where:
+
+* The coefficient α represents the degree of weighting decrease, a constant smoothing factor between 0 and 1.
+* \\(Y\_t\\) is the value at a time period t.
+* \\(S\_t\\) is the value of the EWMA at any time period t.
+
+A higher \\( \alpha \\) discounts older observations faster.
+
+http://pandas.pydata.org/pandas-docs/version/0.17.0/generated/pandas.ewma.html
+
+
     &lt;/div&gt;
 &lt;/div&gt;
 &lt;/section&gt;
@@ -4657,12 +4747,84 @@ $$ \begin{aligned} SMA = \frac{p\_{M+n/2} + \cdots +   p\_{M+1} +   p\_{M} + p\_
 &lt;section&gt;
 &lt;div style=&quot;float:right; width:45%;  &quot;&gt;
     &lt;div data-markdown=&quot;&quot;&gt;
+
+# ARMA(p,q) model
+The notation ARMA(p, q) refers to the model with p autoregressive terms and q moving-average terms. This model contains the AR(p) and MA(q) models,
+
+$$ X\_{t}= c + \varepsilon\_{t} + \sum\_{i=1}^{p} \varphi\_{i} X\_{t-i} + \sum\_{i=1}^{q} \theta\_{i} \varepsilon\_{t-i} $$
+
+# ARIMA(p,d,q)
+
+Difference entre evenements successifs.
+
+On considère le processus différencié (d=1):
+
+$$ y\_{t}'=y\_{t}-y\_{t-1} $$
+
+ou second order differencing (d=2):
+
+$$ \begin{aligned}
+y\_{t}^{\*} &amp;amp; = y\_{t}'-y\_{t-1}' \\\
+y\_{t}^{\*} &amp;amp; = (y\_{t}-y\_{t-1})-(y\_{t-1}-y\_{t-2}) \\\
+y\_{t}^{\*} &amp;amp; = y\_{t} - 2y\_{t-1} + y\_{t-2}
+\end{aligned} $$
+
     &lt;/div&gt;
 &lt;/div&gt;
 &lt;hr class=&quot;vline&quot; /&gt;
 &lt;div style=&quot;float:left; width:45%;  &quot;&gt;
     &lt;div data-markdown=&quot;&quot;&gt;
-# ARIMA
+
+
+# Autoregressive model
+
+The notation AR(p) refers to the autoregressive model of order p. The AR(p) model is written
+
+$$ X\_{t}=c + \sum\_{i=1}^{p} \varphi\_{i}X\_{t-i} + \varepsilon\_{t} $$
+
+## polynome associé
+
+$$ AR(z) =  z^{p} - \sum\_{i=1}^{p} \varphi\_{i}z^{p-i} $$
+
+
+
+# Moving-average model
+
+The notation MA(q) refers to the moving average model of order q:
+
+$$ X\_{t}=\mu +\varepsilon\_{t}+\sum\_{i=1}^{q}\theta\_{i}\varepsilon\_{t-i} $$
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;div style=&quot;float:right; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+
+* An ARIMA(0,1,0) model (or I(1) model) is given by \\( X\_{t}=X\_{t-1} + \varepsilon\_{t} \\)  which is simply a random walk.
+
+* An ARIMA(0,1,0) with a constant, given by  \\( X\_{t}=X\_{t-1} + c + \varepsilon\_{t} \\) — which is a random walk with drift.
+
+* An ARIMA(0,0,0) model is a white noise model.
+
+* An ARIMA(0,1,1) model without constant is a basic exponential smoothing model
+
+* An ARIMA(0,2,2) model is given by
+
+$$ X\_{t} = 2X\_{t-1} - X\_{t-2} + ( \alpha + \beta -2) \varepsilon\_{t-1} + (1 - \alpha ) \varepsilon\_{t-2} + \varepsilon\_{t} $$
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr class=&quot;vline&quot; /&gt;
+&lt;div style=&quot;float:left; width:45%;  &quot;&gt;
+    &lt;div data-markdown=&quot;&quot;&gt;
+# Stationnarité
+
+* Comment determiner p,d,q
+
+* Quel modelisation appliquer
+
     &lt;/div&gt;
 &lt;/div&gt;
 &lt;/section&gt;
