@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>
+      
+        8) Time series (GA) | Emines - UM6P - Data Science
+      
+    </title>
+
+    <meta name="author" content="" />
+
+    <!-- Description -->
+    
+      <meta name="description" content="none" />
+    
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="/reveal.js/css/reveal.css"/>
+    
+      <link rel="stylesheet" href="/reveal.js/css/theme/white.css" id="theme"/>
+    
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="/reveal.js/lib/css/zenburn.css"/>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '/reveal.js/css/print/pdf.css' : '/reveal.js/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link rel="canonical" href="http://localhost:4000/8bis-time-series">
+
+    <script src="https://cdn.mathjax.org/mathjax/2.4-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-color="#000">
+    <h1 class="white" style="border-top: thin solid #DDD;border-bottom: thin solid #DDD;">
+        <img src="assets/ga_logo_black.png" style="float:left;top:0px;" />
+        General Assembly
+    </h1>
+    <p class="big_title">17. Time Series Modeling and Forecasting</p>
+</section>
+
+<section data-markdown="">
+# Previously
+
+* Time series
+* Smoothing
+* Trending and seasonality
+* Stationarity, Dickey-Fuller test
+* Autocorrelation, partial auto correlation
+* Forecasting 101 &amp; Metrics
+
+### Today
+
+* ARMA Modeling
+* ARMA Modeling
+
+</section>
+
+<section data-markdown="">
+# Types of TS
+
+[Different types of TS](/assets/17/stationary_time_series.png)
+
+
+* White noise
+
+* Trend
+
+* Seasonality
+
+* Cycle
+
+* **Seasonality != Cycle**
+
+*Some cases can be confusing — a time series with cyclic behaviour (but not trend or seasonality) is NOT stationary. That is because the cycles are not of fixed length, so before we observe the series we cannot be sure where the peaks and troughs of the cycles will be.*
+
+
+</section>
+
+<section data-markdown="">
+# Stationarity
+
+Required for most models.
+
+* Mean is constant \\(  \ \ \ \operatorname{E}[Y\_{t}]  = \mu \\)
+* Variance is constant  \\(  \ \ \ \operatorname{Var}(Y\_t) = \operatorname{E}[ (Y\_{t} - \mu)^2 ]  = \sigma^2 \\)
+* Autocorrelation is lag dependent
+
+$$  R(\tau) = \frac {\operatorname{E} [ (Y\_{t}-\mu )(Y\_{t+\tau }-\mu )]} {\sigma ^{2}} $$
+
+</section>
+
+<section data-markdown="">
+# Testing for stationarity
+
+### Dickey-Fuller test
+
+**Null hypothesis**: TS is NOT stationary
+
+[Demo in Notebook](https://github.com/alexperrier/gads/blob/master/17_ts2/py/L17%20Time%20Series%20Demo.ipynb)
+
+* Dickey Fuller test does not test for seasonality stationarity
+
+</section>
+
+<section data-markdown="">
+# (Partial) Autocorrelation
+
+### ACF
+Correlation between \\( Y\_t \\) and  \\( Y\_{t-s} \\)
+
+### PACF
+
+Correlation between \\( Y\_t \\) and  \\( Y\_{t-s} \\)
+
+*  without the cumulative correlation between \\( Y\_t \\) and \\( Y\_{t-1} \cdots Y\_{t-s+1}  \\)
+
+</section>
+
+<section data-markdown="">
+# Simple Forecasting
+
+* next sample = last sample
+$$ \hat{Y}\_{t+1} = Y\_{t} $$
+* Moving average $$ \hat{Y}\_{t+1} = \frac{1}{n} \sum^{n}\_{i = 0} Y\_{t-1-i}  $$
+* EWMA $$ \ \ \ \ \hat{Y}\_{t}= \alpha \cdot Y\_{t}+(1-\alpha )\cdot \hat{Y}\_{t-1} $$
+* Linear Regression OLS
+
+</section>
+
+<section data-markdown="">
+# Today
+
+* Transform TS  into a Stationary TS
+* Test is the TS predictable? Is it **white noise**?
+* Decomposition: Trend, Seasonality, Residuals
+* Is my forecast reliable?
+* Is the Dow Jones a **Random Walk**?
+* AutoRegressive modeling (AR) and Moving Average (MA)
+
+</section>
+<section data-markdown="">
+# Differencing
+
+Create a new TS by taking the difference shifted by 1
+
+$$  X\_t =  Y\_t - Y\_{t-1} $$
+
+! [Try it out](https://github.com/alexperrier/gads/blob/master/17_ts2/py/L17%20Time%20Series%20Demo.ipynb) on the milk production ts
+
+What happens to the seasonality? to the trend?
+
+What is the result of the Dickey Fuller test on the difference?
+Is the difference series stationary?
+</section>
+
+<section data-markdown="">
+# White noise
+
+### What is white noise?
+
+Time series data that shows **no auto correlation** is called **white noise**.
+
+Formally, \\( X(t) \\) is a white noise process if
+
+* \\( E[X(t)]=0 \\)
+* \\( E[X(t)^2]=\sigma^2  \\)
+* and  \\( E[X(t)X(h)]=0 \ \  \text{for} \ \ t \neq h \\)
+
+The autocorrelation matrix of a white noise TS is a diagonal matrix
+
+</section>
+
+<section data-markdown="">
+# How to detect white noise
+
+### 1. ACF and PACF
+
+Rule of thumb:
+
+* A Time series is white noise if 95% of the spikes in the Auto-correlation Function lie within  \\( \pm \frac{2}{ \sqrt{N} } \\) with N the length of the time series.
+
+=&gt; Plot the PACF for the milk volume and difference TS and the tree rings series
+
+Which one is a white noise?
+
+</section>
+
+<section data-markdown="">
+# Testing for white noise: the Ljung-Box test
+
+The Ljung–Box test may be defined as:
+
+* H0: The data are independently distributed
+* Ha: The data are not independently distributed; they exhibit serial correlation.
+
+The test statistic is
+
+$$ Q = n (n+2) \sum\_{k=1}^{h} \frac{ \hat{\rho }\_{k}^{2}}{n-k} $$
+
+where
+
+* n is the sample size,
+* \\( \hat{\rho }\_{k} \\) is the sample autocorrelation at lag k,
+* **h** is the number of lags being tested.
+</section>
+<section data-markdown="">
+# Testing for white noise: the Ljung-Box test
+
+[Rule of thumb](http://robjhyndman.com/hyndsight/ljung-box-test/) for h
+
+* h = 10 for non-seasonal data
+* h = 2m for seasonal data, where m is the period of seasonality.
+</section>
+
+<section data-markdown="">
+# Residual diagnostics on forecasting
+A good forecasting method will yield residuals with the following properties:
+
+* The residuals are uncorrelated: *If there are correlations between residuals, then there is information left in the residuals which should be used in computing forecasts.*
+
+* The residuals have zero mean : *If the residuals have a mean other than zero, then the forecasts are biased.*
+
+It is useful to also have the following two properties which make the calculation of prediction intervals easier
+
+* The residuals have constant variance.
+* The residuals are normally distributed.
+
+These two properties make the calculation of **prediction intervals** easier
+
+</section>
+
+<section data-markdown="">
+# Prediction Intervals
+
+95% prediction interval: \\( \ \ \ \hat{Y\_{t}}  \pm 1.96 \sigma^2 \ \ \ \\)  with \\(\sigma \\)  an estimate of the standard deviation of the forecast distribution.
+
+When the residuals are **normally distributed and uncorrelated** and when **forecasting one-step ahead**
+
+=&gt;  the standard deviation of the *forecast distribution* is almost the same as the standard deviation of the *residuals*.
+
+When conditions are not met, there are more complex ways to estimate confidence intervals
+
+</section>
+
+<section data-markdown="">
+# TS Decomposition
+
+### Additive Model
+$$ Y\_t = S\_t + T\_t + E\_t $$
+
+where  \\( S\_t \\)  is the seasonal component,   \\( S\_t \\) is the trend-cycle component and  \\( E\_t \\) is the residual
+
+
+        import statsmodels.api as sm
+        res = sm.tsa.seasonal_decompose(milk_prod.volume, model = 'additive')
+        resplot = res.plot()
+
+### Multiplicative Model
+$$ Y\_t=S\_t \cdot T\_t \cdot E\_t $$
+
+
+</section>
+
+<section data-markdown="">
+
+# Forecast with decomposition
+
+* forecast seasonality, trend and residuals separately
+* add back together
+
+</section>
+
+<section data-markdown="">
+# LAB:  IBM dataset
+Consider the daily closing IBM stock prices (data set ibmclose).
+
+https://datamarket.com/data/set/2322/ibm-common-stock-closing-prices-daily-17th-may-1961-2nd-november-1962#!ds=2322&amp;display=line
+
+* Produce some plots of the data in order to become familiar with it.
+* Split the data into a training set of 300 observations and a test set of 69 observations.
+* Try various simple methods to forecast the training set and compare the results on the test set.
+* Which method did best?
+
+</section>
+
+<section data-markdown="">
+# LAB: House sales
+https://datamarket.com/data/set/22q8/monthly-sales-of-new-one-family-houses-sold-in-th-e-usa-since-1973#!ds=22q8&amp;display=line
+
+Consider the sales of new one-family houses in the USA, Jan 1973 – Nov 1995 (data set hsales).
+
+* Produce some plots of the data in order to become familiar with it.
+* Split the data into a training set of 300 observations and a test set of 69 observations.
+* Try various simple methods to forecast the training set and compare the results on the test set.
+* Which method did best?
+
+</section>
+
+<section data-markdown="">
+# Break 5mn
+</section>
+
+<section data-markdown="">
+# Next session
+
+* R
+* SQL
+* AWS Machine Learning
+* ?
+
+</section>
+
+<section data-markdown="">
+# LAB Is the DJ a random walk?
+Why you cannot beat the market
+
+$$ \$\$\$ $$
+
+</section>
+
+<section data-markdown="">
+# What's a Random Walk
+When the differenced series is white noise, the model for the original series can be written as
+
+\\( y\_t−y\_{t−1}=e\_t \ \ \
+or  \ \ \  y\_t= y\_{t−1}+e\_t \\)
+
+A random walk model is very widely used for non-stationary data, particularly finance and economic data. Random walks typically have:
+
+* long periods of apparent trends up or down
+* sudden and unpredictable changes in direction.
+
+
+http://python-for-signal-processing.blogspot.com/2014/04/random-walks-and-stumbles.html
+
+</section>
+
+<section data-markdown="">
+
+# Notebook: The Dow Jones is a random walk
+http://www.johnwittenauer.net/a-simple-time-series-analysis-of-the-sp-500-index/
+
+* plot DJ
+* plot diff
+* transform with log
+* plot rolling variance original + log
+* plot diff of log =&gt; stationary time series model of daily changes to the S&amp;P 500 index
+* lag variables scatter plot =&gt; all centered and normal
+* acf and pacf =&gt; no correlation =&gt; increment is white noise =&gt; we have a random walk
+* decomposition of diff =&gt; look at the residuals white noise ?
+* AR model, look at the residuals =&gt; much smaler values predicted than actual changes
+
+
+* look at histogram of residuals
+    * skewed =&gt; not great for confidence intervals
+* autocorrelation plot of residuals
+* test with Ljung-Box
+
+</section>
+
+<section data-markdown="">
+# AR(p) model
+In an autoregression model, we forecast the variable of interest using a linear combination of past values of the variable.
+
+
+$$ AR(1): \ \ \  X\_{t}= c + \varphi X\_{t-1} + \varepsilon\_{t} $$
+$$ AR(p): \ \ \  X\_{t}= c + \sum\_{i=1}^{p} \varphi\_{i}X\_{t-i} + \varepsilon\_{t} $$
+
+
+where
+* \\( \varphi\_{i} \\) are the parameters of the model
+* \\(  \varepsilon\_{t} \\) is a white noise process with zero mean and constant variance \\( \sigma\_{\varepsilon }^{2}\\)
+* c is a constant
+
+</section>
+
+<section data-markdown="">
+# Special cases
+For an AR(1) model:
+
+* When  \\( \varphi\_1 = 0, \ \ X\_t  \\) is equivalent to white noise.
+* When  \\( \varphi\_1 = 1, \ \ X\_t  \\) is equivalent to a random walk.
+* When  \\( \varphi\_1 = 0, c \neq 0 \ \ X\_t  \\)  is equivalent to a random walk with drift
+* When \\( \varphi\_1 \lt 0 \ \ X\_t \\)  tends to oscillate between positive and negative values.
+
+</section>
+
+<section data-markdown="">
+# MA(q) models
+Rather than use past values of the forecast variable in a regression, a moving average model uses past forecast errors in a regression-like model.
+
+Moving Average model of order q:
+
+$$   X\_{t}=\mu + \varepsilon\_{t}+\theta\_{1}\varepsilon\_{t-1}+\cdots +\theta\_{q}\varepsilon\_{t-q} $$
+
+where
+
+* \\(\mu \\) is the mean of the series
+*  \\(\theta\_{1} \cdots \theta\_{q}\\) are the parameters of the model
+* \\( \varepsilon\_{t} \cdots \varepsilon\_{t-q} \\) are white noise error terms
+
+</section>
+
+<section data-markdown="">
+# ARIMA(p,d,q) model
+
+We combine the AR(p) and the MA(q) and add i^th differencing
+
+$$   X\_{t}=c + \sum\_{i=1}^{p} \varphi\_{i}X\_{t-i} + \varepsilon\_{t}+\theta\_{1}\varepsilon\_{t-1}+\cdots +\theta\_{q}\varepsilon\_{t-q} $$
+
+
+We call this an ARIMA(p,d,q) model, where
+
+* p: order of the autoregressive part;
+* d: degree of first differencing involved;
+* q: order of the moving average part.
+
+
+</section>
+
+<section data-markdown="">
+# Estimating p, d, q
+
+The *squirrel* approach
+
+http://people.duke.edu/~rnau/411arim3.htm
+
+The ML approach: Brute Force and Grid Search
+
+</section>
+<section data-markdown="">
+# Criteria for model selection
+
+* Akaike Information Criterion (AIC)
+* Schwarz Bayesian Information Criterion (BIC)
+* Hannan-Quinn Information Criterion (HQIC)
+
+</section>
+
+<section data-markdown="">
+# White Noise - Normality test
+### The Durbin Watson test
+
+The Durbin-Watson statistic ranges in value from 0 to 4.
+
+* A value near 2 indicates non-autocorrelation;
+
+* A value toward 0 indicates positive autocorrelation;
+
+* A value toward 4 indicates negative autocorrelation.
+
+### Agostino and Pearson for normality
+
+Null hypothesis: the sample comes from a normal distribution
+
+        scipy.stats.normaltest(ts)
+
+</section>
+
+<section data-markdown="">
+# Lab on sunspots
+
+[Wolf's Sunspot Numbers. 1700 – 1988](https://datamarket.com/data/set/22wg/wolfs-sunspot-numbers-1700-1988#!ds=22wg&amp;display=line)
+
+from https://bicorner.com/2015/11/16/time-series-analysis-using-ipython/
+</section>
+
+<section data-markdown="">
+# Time Series Classification and Clustering
+
+[Time Series Classification and Clustering](http://nbviewer.jupyter.org/github/alexminnaar/time-series-classification-and-clustering/blob/master/Time%20Series%20Classification%20and%20Clustering.ipynb)
+
+</section>
+
+<section data-markdown="">
+
+### Dickey Fuller test
+
+http://stats.stackexchange.com/questions/44647/which-dickey-fuller-test-should-i-apply-to-a-time-series-with-an-underlying-mode
+http://stats.stackexchange.com/questions/225087/seasonal-data-deemed-stationary-by-adf-and-kpss-tests
+
+
+
+### Random Walk
+
+http://python-for-signal-processing.blogspot.com/2014/04/random-walks-and-stumbles.html
+http://fedc.wiwi.hu-berlin.de/xplore/tutorials/xegbohtmlnode39.html
+
+### Ljung-Box test
+[Thoughts on the Ljung-Box test](http://robjhyndman.com/hyndsight/ljung-box-test/)
+http://stats.stackexchange.com/questions/18135/testing-normality-and-independence-of-time-series-residuals
+
+https://www.otexts.org/fpp/2/6
+</section>
+
+<section data-markdown="">
+# Train Test and Cross validation
+https://www.otexts.org/fpp/2/5
+
+</section>
+
+      </div>
+    </div>
+
+    <script src="/reveal.js/lib/js/head.min.js"></script>
+    <script src="/reveal.js/js/reveal.js"></script>
+    <script>
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        width: 1200,
+        controls: true,
+        progress: true,
+        history: true,
+        center: false,
+        slideNumber: true,
+        
+          transition: 'slide',
+        
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '/reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '/reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: '/reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>

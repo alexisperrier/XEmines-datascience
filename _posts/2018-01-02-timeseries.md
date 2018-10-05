@@ -71,12 +71,19 @@ I: Time series, intro
 
 * **IoT**
 * **econometrics**
-* mathematical finance / trading / markets
-* intelligent transport and trajectory forecasting
-* weather forecasting and Climate change research
-* earthquake prediction, astronomy
-* electroencephalography, control engineering, communications
-* **signal processing**
+* mathematical finance / trading / markets, intelligent transport and trajectory forecasting, weather forecasting and Climate change research
+* earthquake prediction, astronomy, electroencephalography, control engineering, communications
+
+
+## questions
+
+* How to transform TS into a **Stationary** TS?
+* Test is the TS predictable?
+* Is it white noise?
+* Decomposition: Trend, Seasonality, Residuals
+* Is my forecast reliable?
+* Is the Dow Jones a Random Walk?
+* AutoRegressive modeling (AR) and Moving Average (MA)
 
     </div>
 </div>
@@ -91,9 +98,15 @@ I: Time series, intro
 * A sequence of **discrete-time data**.
 
 => The **time interval** is key
+
+En language mathematique : Processus Stochastique
+
+**signal processing**
+
     </div>
 </div>
 </section>
+
 
 <section>
 <div style='float:right; width:45%;  '>
@@ -121,7 +134,6 @@ I: Time series, intro
 <div style='float:right; width:45%;  '>
     <div data-markdown>
 # Ts metrics
-
 
 Metrics to compare TS techniques
 
@@ -156,16 +168,209 @@ $$ \hat{y}\_{n+1} = y\_{n} $$
 
 $$ e\_i=y\_i−\hat{y}\_i $$
 
+Essayons sur une TS simple
+
+* milk production
+
+! [Try it out](https://github.com/alexperrier/gads/blob/master/17_ts2/py/L17%20Time%20Series%20Demo.ipynb) on the milk production ts
+
+What happens to the seasonality? to the trend?
+
+What is the result of the Dickey Fuller test on the difference?
+Is the difference series stationary?
+
+
     </div>
 </div>
 </section>
 
+<section data-markdown>
+# White noise
+
+### What is white noise?
+
+Time series data that shows **no auto correlation** is called **white noise**.
+
+Formally, \\( X(t) \\) is a white noise process if
+
+* \\( E[X(t)]=0 \\)
+* \\( E[X(t)^2]=\sigma^2  \\)
+* and  \\( E[X(t)X(h)]=0 \ \  \text{for} \ \ t \neq h \\)
+
+The autocorrelation matrix of a white noise TS is a diagonal matrix
+
+</section>
+
+<section data-markdown>
+# How to detect white noise
+
+### 1. ACF and PACF
+
+Rule of thumb:
+
+* A Time series is white noise if 95% of the spikes in the Auto-correlation Function lie within  \\( \pm \frac{2}{ \sqrt{N} } \\) with N the length of the time series.
+
+=> Plot the PACF for the milk volume and difference TS and the tree rings series
+
+Which one is a white noise?
+
+</section>
+
+<section data-markdown>
+# Testing for white noise: the Ljung-Box test
+
+The Ljung–Box test may be defined as:
+
+* H0: The data are independently distributed
+* Ha: The data are not independently distributed; they exhibit serial correlation.
+
+The test statistic is
+
+$$ Q = n (n+2) \sum\_{k=1}^{h} \frac{ \hat{\rho }\_{k}^{2}}{n-k} $$
+
+where
+
+* n is the sample size,
+* \\( \hat{\rho }\_{k} \\) is the sample autocorrelation at lag k,
+* **h** is the number of lags being tested.
+</section>
+<section data-markdown>
+# Testing for white noise: the Ljung-Box test
+
+[Rule of thumb](http://robjhyndman.com/hyndsight/ljung-box-test/) for h
+
+* h = 10 for non-seasonal data
+* h = 2m for seasonal data, where m is the period of seasonality.
+</section>
+
+
+<section data-markdown>
+# Residual diagnostics on forecasting
+A good forecasting method will yield residuals with the following properties:
+
+* The residuals are uncorrelated: *If there are correlations between residuals, then there is information left in the residuals which should be used in computing forecasts.*
+
+* The residuals have zero mean : *If the residuals have a mean other than zero, then the forecasts are biased.*
+
+It is useful to also have the following two properties which make the calculation of prediction intervals easier
+
+* The residuals have constant variance.
+* The residuals are normally distributed.
+
+These two properties make the calculation of **prediction intervals** easier
+
+</section>
+
+<section data-markdown>
+# Prediction Intervals
+
+95% prediction interval: \\( \ \ \ \hat{Y\_{t}}  \pm 1.96 \sigma^2 \ \ \ \\)  with \\(\sigma \\)  an estimate of the standard deviation of the forecast distribution.
+
+When the residuals are **normally distributed and uncorrelated** and when **forecasting one-step ahead**
+
+=>  the standard deviation of the *forecast distribution* is almost the same as the standard deviation of the *residuals*.
+
+When conditions are not met, there are more complex ways to estimate confidence intervals
+
+</section>
+
+
+<section data-markdown>
+# TS Decomposition
+
+### Additive Model
+$$ Y\_t = S\_t + T\_t + E\_t $$
+
+where  \\( S\_t \\)  is the seasonal component,   \\( S\_t \\) is the trend-cycle component and  \\( E\_t \\) is the residual
+
+
+        import statsmodels.api as sm
+        res = sm.tsa.seasonal_decompose(milk_prod.volume, model = 'additive')
+        resplot = res.plot()
+
+### Multiplicative Model
+$$ Y\_t=S\_t \cdot T\_t \cdot E\_t $$
+
+
+</section>
+
+<section data-markdown>
+
+# Forecast with decomposition
+
+* forecast seasonality, trend and residuals separately
+* add back together
+
+</section>
+<section data-markdown>
+# LAB:  IBM dataset
+Consider the daily closing IBM stock prices (data set ibmclose).
+
+https://datamarket.com/data/set/2322/ibm-common-stock-closing-prices-daily-17th-may-1961-2nd-november-1962#!ds=2322&display=line
+
+* Produce some plots of the data in order to become familiar with it.
+* Split the data into a training set of 300 observations and a test set of 69 observations.
+* Try various simple methods to forecast the training set and compare the results on the test set.
+* Which method did best?
+
+</section>
+<section data-markdown>
+# LAB: House sales
+https://datamarket.com/data/set/22q8/monthly-sales-of-new-one-family-houses-sold-in-th-e-usa-since-1973#!ds=22q8&display=line
+
+Consider the sales of new one-family houses in the USA, Jan 1973 – Nov 1995 (data set hsales).
+
+* Produce some plots of the data in order to become familiar with it.
+* Split the data into a training set of 300 observations and a test set of 69 observations.
+* Try various simple methods to forecast the training set and compare the results on the test set.
+* Which method did best?
+
+</section>
+
+<section data-markdown>
+# What's a Random Walk
+When the differenced series is white noise, the model for the original series can be written as
+
+\\( y\_t−y\_{t−1}=e\_t \ \ \
+or  \ \ \  y\_t= y\_{t−1}+e\_t \\)
+
+A random walk model is very widely used for non-stationary data, particularly finance and economic data. Random walks typically have:
+
+* long periods of apparent trends up or down
+* sudden and unpredictable changes in direction.
+
+
+http://python-for-signal-processing.blogspot.com/2014/04/random-walks-and-stumbles.html
+
+</section>
+<section data-markdown>
+
+# Notebook: The Dow Jones is a random walk
+http://www.johnwittenauer.net/a-simple-time-series-analysis-of-the-sp-500-index/
+
+* plot DJ
+* plot diff
+* transform with log
+* plot rolling variance original + log
+* plot diff of log => stationary time series model of daily changes to the S&P 500 index
+* lag variables scatter plot => all centered and normal
+* acf and pacf => no correlation => increment is white noise => we have a random walk
+* decomposition of diff => look at the residuals white noise ?
+* AR model, look at the residuals => much smaler values predicted than actual changes
+
+
+* look at histogram of residuals
+    * skewed => not great for confidence intervals
+* autocorrelation plot of residuals
+* test with Ljung-Box
+
+</section>
 
 
 <section data-markdown>
 <div class=centerbox>
 <p class=top>
-II: Modélisation
+II: ARIMA Modélisation
 </p>
 </div>
 </section>
@@ -183,18 +388,19 @@ II: Modélisation
     <div data-markdown>
 # Moving Average
 
-Simple smoothing, moyenne sur fenetre
+Simple prediction, moyenne sur fenetre
 
 $$  \hat{y}\_{t +1 }   = \frac{1}{n} \sum\_{i=0}^{n-1}y\_{t-i}
 = \frac{1}{n} ( y\_{t} + y\_{t-1}+ \cdots + y\_{t-(n-1)}  )
 $$
 
 
-## Avec coefficients
+<!-- ## Avec coefficients
 
 Modèle MA(q): Moving Average d'ordre q
 
 $$  \hat{y}\_{t +1 }   =  \sum\_{i=0}^{q-1} \beta\_{i}  y\_{t-i} $$
+ -->
 
 
     </div>
@@ -232,7 +438,7 @@ A higher \\( \alpha \\) discounts older observations faster.
 
 http://pandas.pydata.org/pandas-docs/version/0.17.0/generated/pandas.ewma.html
 
-
+=> http://localhost:8888/notebooks/notebooks/ts/IBM.ipynb
     </div>
 </div>
 </section>
@@ -278,7 +484,6 @@ $$ X\_{t}=c + \sum\_{i=1}^{p} \varphi\_{i}X\_{t-i} + \varepsilon\_{t} $$
 ## polynome associé
 
 $$ AR(z) =  z^{p} - \sum\_{i=1}^{p} \varphi\_{i}z^{p-i} $$
-
 
 
 # Moving-average model
@@ -452,7 +657,7 @@ https://machinelearningmastery.com/gentle-introduction-autocorrelation-partial-a
 
 * The test results comprise of a Test Statistic and some Critical Values for difference confidence levels.
 
-https://datamarket.com/data/set/22ox/monthly-milk-production-pounds-per-cow-jan-62-dec-75#!ds=22ox&display=line
+Dickey Fuller test does not test for seasonality stationarity
 
 ## Augmented Dickey Fuller test
 
@@ -486,7 +691,7 @@ https://datamarket.com/data/set/22ox/monthly-milk-production-pounds-per-cow-jan-
 <div style='float:left; width:45%;  '>
     <div data-markdown>
 # Decomposition
-
+<img src=/assets/08/Seasonal_Decompose.png>
     </div>
 </div>
 </section>
